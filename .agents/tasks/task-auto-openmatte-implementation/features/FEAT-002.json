@@ -2,7 +2,7 @@
   "id": "FEAT-002",
   "type": "feat",
   "description": "Source Inspection and HDR Detection - Implement the complete metadata inspection system using ffprobe, including automatic HDR detection, stream selection, and source role identification (which file is HDR master vs Open Matte). This covers spec sections 1-2.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Create src/auto_openmatte/analysis/__init__.py",
     "Create src/auto_openmatte/analysis/inspect.py implementing: (a) run_ffprobe(filepath) - executes ffprobe with JSON output format, selects video stream only (-select_streams v), returns parsed dict. (b) extract_source_info(ffprobe_data) - extracts all fields from spec section 1: container, codec, profile, level, width, height, fps, nominal_fps, vfr/cfr, duration, frame_count, pixel_format, bit_depth, chroma_subsampling, color_range, color_primaries, transfer_characteristics, matrix_coefficients, mastering_display_metadata, MaxCLL, MaxFALL, HDR10, HDR10+, Dolby Vision detection. Returns SourceInfo dataclass.",
@@ -28,5 +28,5 @@
     "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && ruff check src/auto_openmatte/analysis/' and confirm no linting errors"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "All 27 inspection tests pass. SourceInfo model extended with container, profile, level, nominal_fps, vfr_cfr, chroma_subsampling, color_range, transfer_characteristics, matrix_coefficients, mastering_display, max_cll, max_fall. Legacy aliases (color_space, color_transfer, aspect_ratio) preserved with defaults for backward compatibility. Environment confirmed: ffprobe/ffmpeg not available in sandbox, numpy/scipy/cv2 not installable (PyPI blocked). Production code uses real subprocess calls; tests use mocks and JSON fixtures. ruff import sorting required blank line removal between __future__ and third-party imports."
 }
