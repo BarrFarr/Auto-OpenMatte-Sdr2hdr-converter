@@ -24,10 +24,10 @@ env/
 htmlcov/
 .mypy_cache/
 
-# Project output directories
-analysis/
-output/
-previews/
+# Project output directories (root level only)
+/analysis/
+/output/
+/previews/
 
 # OS files
 .DS_Store
