@@ -1,236 +1,150 @@
-"""HDR format detection and source role identification."""
+"""HDR detection and source role assignment.
+
+Determines which source is HDR and which is Open Matte.
+Refuses to guess if ambiguous.
+"""
 
 from __future__ import annotations
 
-from auto_openmatte.core.config import SUPPORTED_HDR_FORMATS
-from auto_openmatte.core.exceptions import InvalidSourceError, UnsupportedHDRFormatError
-from auto_openmatte.core.models import SourceInfo
-
-# PQ (Perceptual Quantizer) transfer characteristic identifiers
-_PQ_TRANSFERS = {"smpte2084", "smpte-st-2084", "smpte st 2084"}
-
-# HLG transfer characteristic identifiers
-_HLG_TRANSFERS = {"arib-std-b67", "arib std b67", "arib-std-b67"}
-
-# BT.2020 primaries identifiers
-_BT2020_PRIMARIES = {"bt2020", "bt.2020"}
-
-# SDR transfer characteristics
-_SDR_TRANSFERS = {"bt709", "bt.709", "iec61966-2-1", "srgb", "unknown"}
-
-# SDR primaries
-_SDR_PRIMARIES = {"bt709", "bt.709", "unknown"}
+from auto_openmatte.core.exceptions import HDRDetectionError, UnsupportedHDRError
+from auto_openmatte.core.models import (
+    HDRFormat,
+    SourceInfo,
+    SourceRole,
+    TransferFunction,
+    VideoStreamInfo,
+)
 
 
-def _normalize(value: str) -> str:
-    """Normalize a color metadata string for comparison."""
-    return value.lower().strip().replace(" ", "").replace("_", "").replace("-", "").replace(".", "")
+def _hdr_score(source: SourceInfo) -> int:
+    """Compute an HDR confidence score for a source.
 
-
-def _is_pq(transfer: str) -> bool:
-    """Check if transfer characteristics indicate PQ (HDR10/HDR10+)."""
-    normalized = _normalize(transfer)
-    return normalized in {"smpte2084", "smptst2084", "smptest2084", "smpte2084"}
-
-
-def _is_hlg(transfer: str) -> bool:
-    """Check if transfer characteristics indicate HLG."""
-    normalized = _normalize(transfer)
-    return normalized in {"aribstdb67", "aribstdb67", "hlg"}
-
-
-def _is_bt2020(primaries: str) -> bool:
-    """Check if color primaries indicate BT.2020."""
-    normalized = _normalize(primaries)
-    return normalized in {"bt2020", "bt2020"}
-
-
-def _is_sdr_transfer(transfer: str) -> bool:
-    """Check if transfer characteristics indicate SDR."""
-    normalized = _normalize(transfer)
-    return normalized in {"bt709", "iec6196621", "srgb", "unknown", ""}
-
-
-def _is_sdr_primaries(primaries: str) -> bool:
-    """Check if primaries indicate SDR (BT.709)."""
-    normalized = _normalize(primaries)
-    return normalized in {"bt709", "unknown", ""}
-
-
-def detect_hdr_standard(source_info: SourceInfo) -> str:
-    """Determine the HDR format of a source from its metadata.
-
-    Detection logic:
-    - HDR10: PQ transfer (smpte2084) + BT.2020 primaries + mastering display metadata
-    - HDR10+: HDR10 + dynamic metadata (detected from side_data)
-    - HLG: arib-std-b67 transfer characteristic
-    - Dolby Vision: Detected from side_data type containing "Dolby Vision"
-    - SDR: bt709 transfer or default/unknown gamma
-
-    Args:
-        source_info: SourceInfo dataclass with color metadata populated.
-
-    Returns:
-        One of: 'HDR10', 'HDR10+', 'HLG', 'Dolby Vision', 'SDR'
+    Higher score = more likely to be HDR.
+    Returns 0 for clear SDR, high values for clear HDR.
     """
-    transfer = source_info.transfer_characteristics
-    primaries = source_info.color_primaries
+    score = 0
+    stream = source.selected_stream
+    if not stream:
+        return 0
 
-    # Check for HLG first (simpler check)
-    if _is_hlg(transfer):
-        return "HLG"
+    # Transfer function is the primary indicator
+    if stream.transfer == TransferFunction.PQ:
+        score += 100
+    elif stream.transfer == TransferFunction.HLG:
+        score += 90
 
-    # Check for PQ-based formats (HDR10, HDR10+, Dolby Vision)
-    if _is_pq(transfer):
-        # Check if mastering display metadata indicates Dolby Vision
-        # (In practice, DV is detected via side_data in the stream)
-        mastering = source_info.mastering_display
+    # Color primaries
+    if stream.color_primaries.value == "bt2020":
+        score += 30
 
-        # HDR10 requires PQ + BT.2020 + mastering display metadata
-        if _is_bt2020(primaries) and mastering:
-            return "HDR10"
+    # Bit depth
+    if stream.bit_depth >= 10:
+        score += 10
 
-        # PQ without mastering display - still likely HDR10 without
-        # static metadata (less common but valid)
-        if _is_bt2020(primaries):
-            return "HDR10"
+    # HDR metadata presence
+    if source.hdr_metadata.mastering_display:
+        score += 20
+    if source.hdr_metadata.max_cll is not None:
+        score += 10
+    if source.hdr_metadata.format != HDRFormat.SDR:
+        score += 50
 
-        # PQ with non-BT.2020 primaries is unusual
-        return "HDR10"
-
-    # SDR detection
-    if _is_sdr_transfer(transfer) or _is_sdr_primaries(primaries):
-        return "SDR"
-
-    # Default to SDR if we cannot determine
-    return "SDR"
+    return score
 
 
-def detect_hdr_standard_from_side_data(
-    source_info: SourceInfo,
-    side_data: dict[str, str] | None = None,
-) -> str:
-    """Extended detection that also considers side_data information.
-
-    This is the full detection that includes HDR10+ and Dolby Vision
-    which require checking side_data_list entries.
-
-    Args:
-        source_info: SourceInfo with color metadata.
-        side_data: Optional dict of extracted side_data flags
-            (keys: 'dolby_vision', 'hdr10plus', 'mastering_display').
-
-    Returns:
-        One of: 'HDR10', 'HDR10+', 'HLG', 'Dolby Vision', 'SDR'
-    """
-    if side_data:
-        # Dolby Vision takes priority
-        if side_data.get("dolby_vision"):
-            return "Dolby Vision"
-
-        # HDR10+ is HDR10 with dynamic metadata
-        if side_data.get("hdr10plus"):
-            base = detect_hdr_standard(source_info)
-            if base == "HDR10":
-                return "HDR10+"
-
-    return detect_hdr_standard(source_info)
-
-
-def _is_hdr_source(source_info: SourceInfo) -> bool:
-    """Determine if a source is HDR (PQ or HLG)."""
-    transfer = source_info.transfer_characteristics
-    return _is_pq(transfer) or _is_hlg(transfer)
-
-
-def _is_sdr_source(source_info: SourceInfo) -> bool:
-    """Determine if a source is SDR."""
-    transfer = source_info.transfer_characteristics
-    primaries = source_info.color_primaries
-    return _is_sdr_transfer(transfer) or (
-        _is_sdr_primaries(primaries) and not _is_pq(transfer) and not _is_hlg(transfer)
-    )
-
-
-def identify_roles(
-    source_a_info: SourceInfo,
-    source_b_info: SourceInfo,
-) -> tuple[SourceInfo, SourceInfo]:
+def assign_roles(source_a: SourceInfo, source_b: SourceInfo) -> tuple[SourceInfo, SourceInfo]:
     """Determine which source is HDR reference and which is Open Matte.
 
-    The function works regardless of argument order: it inspects the
-    transfer characteristics and color primaries to identify roles.
-
-    Logic:
-    - If A is HDR (PQ/HLG) and B is SDR (BT.709): A=HDR, B=Open Matte
-    - If B is HDR and A is SDR: swap so HDR is first
-    - If both are HDR or both are SDR: raise InvalidSourceError
-
     Args:
-        source_a_info: First source's metadata.
-        source_b_info: Second source's metadata.
+        source_a: First source (as provided by user, may be in any order).
+        source_b: Second source.
 
     Returns:
-        Tuple of (hdr_info, om_info) where hdr_info is the HDR reference
-        and om_info is the Open Matte source.
+        Tuple of (hdr_source, openmatte_source) with roles assigned.
 
     Raises:
-        InvalidSourceError: If both sources are HDR, both are SDR, or
-            roles cannot be determined.
+        HDRDetectionError: If roles cannot be determined unambiguously.
+        UnsupportedHDRError: If HDR format is detected but not supported.
     """
-    a_is_hdr = _is_hdr_source(source_a_info)
-    b_is_hdr = _is_hdr_source(source_b_info)
-    a_is_sdr = _is_sdr_source(source_a_info)
-    b_is_sdr = _is_sdr_source(source_b_info)
+    score_a = _hdr_score(source_a)
+    score_b = _hdr_score(source_b)
 
-    if a_is_hdr and b_is_sdr:
-        return (source_a_info, source_b_info)
+    # Check for unsupported HDR formats
+    for source, label in [(source_a, "Source A"), (source_b, "Source B")]:
+        if source.hdr_metadata.format == HDRFormat.DOLBY_VISION:
+            raise UnsupportedHDRError(
+                f"{label} ({source.path.name}) contains Dolby Vision. "
+                "Detected HDR format is not supported by the current processing pipeline."
+            )
 
-    if b_is_hdr and a_is_sdr:
-        return (source_b_info, source_a_info)
-
-    if a_is_hdr and b_is_hdr:
-        raise InvalidSourceError(
-            "Both sources appear to be HDR. Cannot determine roles. "
-            f"Source A ({source_a_info.path}): transfer={source_a_info.transfer_characteristics}, "
-            f"primaries={source_a_info.color_primaries}. "
-            f"Source B ({source_b_info.path}): transfer={source_b_info.transfer_characteristics}, "
-            f"primaries={source_b_info.color_primaries}. "
-            "Please provide one HDR source and one SDR Open Matte source."
+    # Need clear separation
+    if score_a == score_b:
+        raise HDRDetectionError(
+            f"Cannot determine HDR roles. Both sources have equal HDR score ({score_a}).\n"
+            f"  Source A: {source_a.path.name} — "
+            f"transfer={source_a.selected_stream.transfer.value if source_a.selected_stream else 'N/A'}\n"
+            f"  Source B: {source_b.path.name} — "
+            f"transfer={source_b.selected_stream.transfer.value if source_b.selected_stream else 'N/A'}\n"
+            "Please verify your input files."
         )
 
-    if a_is_sdr and b_is_sdr:
-        raise InvalidSourceError(
-            "Both sources appear to be SDR. Cannot determine HDR reference. "
-            f"Source A ({source_a_info.path}): transfer={source_a_info.transfer_characteristics}, "
-            f"primaries={source_a_info.color_primaries}. "
-            f"Source B ({source_b_info.path}): transfer={source_b_info.transfer_characteristics}, "
-            f"primaries={source_b_info.color_primaries}. "
-            "Please provide one HDR source and one SDR Open Matte source."
+    if score_a == 0 and score_b == 0:
+        raise HDRDetectionError(
+            "Neither source appears to be HDR.\n"
+            f"  Source A: {source_a.path.name}\n"
+            f"  Source B: {source_b.path.name}\n"
+            "At least one source must be HDR (PQ or HLG transfer)."
         )
 
-    # Ambiguous case
-    raise InvalidSourceError(
-        "Cannot determine source roles. "
-        f"Source A ({source_a_info.path}): transfer={source_a_info.transfer_characteristics}, "
-        f"primaries={source_a_info.color_primaries}. "
-        f"Source B ({source_b_info.path}): transfer={source_b_info.transfer_characteristics}, "
-        f"primaries={source_b_info.color_primaries}."
-    )
+    # Minimum threshold for HDR identification
+    max_score = max(score_a, score_b)
+    min_score = min(score_a, score_b)
 
-
-def validate_hdr_support(hdr_standard: str) -> None:
-    """Check if the detected HDR format is supported by the pipeline.
-
-    Args:
-        hdr_standard: The detected HDR standard string.
-
-    Raises:
-        UnsupportedHDRFormatError: If the format is not in
-            SUPPORTED_HDR_FORMATS config list.
-    """
-    if hdr_standard not in SUPPORTED_HDR_FORMATS:
-        raise UnsupportedHDRFormatError(
-            f"HDR format '{hdr_standard}' is not currently supported. "
-            f"Supported formats: {', '.join(SUPPORTED_HDR_FORMATS)}"
+    if max_score < 50:
+        raise HDRDetectionError(
+            "No source has confident HDR indicators (score < 50).\n"
+            f"  Source A: {source_a.path.name} — HDR score = {score_a}\n"
+            f"  Source B: {source_b.path.name} — HDR score = {score_b}\n"
+            "Expected: PQ/HLG transfer function with BT.2020 primaries."
         )
+
+    # The source with the highest score difference is HDR
+    if abs(score_a - score_b) < 20:
+        raise HDRDetectionError(
+            "Ambiguous HDR detection — scores too close.\n"
+            f"  Source A: {source_a.path.name} — HDR score = {score_a}\n"
+            f"  Source B: {source_b.path.name} — HDR score = {score_b}\n"
+            "Cannot reliably determine roles. Please check your sources."
+        )
+
+    if score_a > score_b:
+        hdr_source = source_a
+        om_source = source_b
+    else:
+        hdr_source = source_b
+        om_source = source_a
+
+    # Assign roles
+    hdr_source.role = SourceRole.HDR_REFERENCE
+    om_source.role = SourceRole.OPEN_MATTE
+
+    # Classify HDR format on the HDR source
+    if hdr_source.selected_stream:
+        from auto_openmatte.analysis.inspect import _classify_hdr_format
+        hdr_source.hdr_metadata.format = _classify_hdr_format(
+            hdr_source.selected_stream, hdr_source.hdr_metadata
+        )
+
+    # Verify the HDR format is supported
+    supported = {HDRFormat.HDR10, HDRFormat.HDR10_PLUS, HDRFormat.HLG}
+    if hdr_source.hdr_metadata.format not in supported:
+        if hdr_source.hdr_metadata.format == HDRFormat.SDR:
+            raise HDRDetectionError(
+                "HDR source classified as SDR after detailed analysis. Check metadata."
+            )
+        raise UnsupportedHDRError(
+            f"Detected HDR format '{hdr_source.hdr_metadata.format.value}' "
+            "is not supported by the current processing pipeline."
+        )
+
+    return hdr_source, om_source

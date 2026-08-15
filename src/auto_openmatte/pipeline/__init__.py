@@ -1,1 +1,1 @@
-"""Pipeline orchestration module."""
+"""Pipeline module — orchestration, composition, preview, render."""

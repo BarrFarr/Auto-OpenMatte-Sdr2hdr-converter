@@ -1,11 +1,12 @@
 # Python
-*.pyc
-*.pyo
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
 *.egg-info/
-*.egg
 dist/
 build/
+.eggs/
 
 # Virtual environments
 .venv/
@@ -13,8 +14,8 @@ venv/
 env/
 
 # IDE
-.vscode/
 .idea/
+.vscode/
 *.swp
 *.swo
 
@@ -24,11 +25,12 @@ env/
 htmlcov/
 .mypy_cache/
 
-# Project output directories (root level only)
-/analysis/
-/output/
-/previews/
+# Ruff
+.ruff_cache/
 
-# OS files
-.DS_Store
-Thumbs.db
+# Project artifacts (generated during processing)
+analysis/
+transforms/
+previews/
+output/
+project.json

@@ -1,101 +1,92 @@
-"""Tests for CLI argument parsing."""
+"""Tests for CLI interface."""
 
-import pytest
+from __future__ import annotations
 
-from auto_openmatte.cli import create_parser, main
+import subprocess
+import sys
 
 
-class TestCLIParser:
-    """Test CLI argument parser configuration."""
+class TestCLI:
+    """Tests for CLI entry points."""
 
-    def test_parser_creation(self):
-        """Parser is created without errors."""
-        parser = create_parser()
-        assert parser is not None
+    def test_version(self) -> None:
+        """--version should print version."""
+        result = subprocess.run(
+            [sys.executable, "-m", "auto_openmatte", "--version"],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 0
+        assert "0.1.0" in result.stdout
 
-    def test_version_flag(self, capsys):
-        """--version prints version and exits."""
-        with pytest.raises(SystemExit) as exc_info:
-            main(["--version"])
-        assert exc_info.value.code == 0
-        captured = capsys.readouterr()
-        assert "0.1.0" in captured.out
+    def test_help(self) -> None:
+        """--help should print usage."""
+        result = subprocess.run(
+            [sys.executable, "-m", "auto_openmatte", "--help"],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 0
+        assert "auto_openmatte" in result.stdout
+        assert "analyze" in result.stdout
+        assert "extend" in result.stdout
+        assert "convert-hdr" in result.stdout
 
-    def test_no_command_shows_help(self, capsys):
-        """Running with no subcommand shows help."""
-        result = main([])
-        assert result == 0
+    def test_analyze_help(self) -> None:
+        """analyze --help should show options."""
+        result = subprocess.run(
+            [sys.executable, "-m", "auto_openmatte", "analyze", "--help"],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 0
+        assert "--hdr" in result.stdout
+        assert "--openmatte" in result.stdout
+        assert "--sync-search" in result.stdout
+        assert "--debug-sync" in result.stdout
 
-    def test_analyze_requires_hdr(self):
-        """analyze subcommand requires --hdr argument."""
-        with pytest.raises(SystemExit) as exc_info:
-            main(["analyze", "--openmatte", "om.mkv"])
-        assert exc_info.value.code == 2
+    def test_extend_help(self) -> None:
+        """extend --help should show options."""
+        result = subprocess.run(
+            [sys.executable, "-m", "auto_openmatte", "extend", "--help"],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 0
+        assert "--project" in result.stdout
+        assert "--output" in result.stdout
 
-    def test_analyze_requires_openmatte(self):
-        """analyze subcommand requires --openmatte argument."""
-        with pytest.raises(SystemExit) as exc_info:
-            main(["analyze", "--hdr", "hdr.mkv"])
-        assert exc_info.value.code == 2
+    def test_convert_hdr_help(self) -> None:
+        """convert-hdr --help should show options."""
+        result = subprocess.run(
+            [sys.executable, "-m", "auto_openmatte", "convert-hdr", "--help"],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 0
+        assert "--input" in result.stdout
+        assert "--reference" in result.stdout
+        assert "--output" in result.stdout
 
-    def test_analyze_all_args(self):
-        """analyze subcommand parses all arguments correctly."""
-        result = main([
-            "analyze",
-            "--hdr", "hdr.mkv",
-            "--openmatte", "om.mkv",
-            "--sync-search", "200",
-            "--samples-per-shot", "50",
-            "--alignment-confidence", "0.98",
-            "--color-confidence", "0.85",
-            "--debug",
-            "--debug-sync",
-        ])
-        assert result == 0
+    def test_no_command(self) -> None:
+        """Running without command should show help and exit with 1."""
+        result = subprocess.run(
+            [sys.executable, "-m", "auto_openmatte"],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 1
 
-    def test_analyze_defaults(self):
-        """analyze subcommand uses correct defaults."""
-        parser = create_parser()
-        args = parser.parse_args([
-            "analyze",
-            "--hdr", "hdr.mkv",
-            "--openmatte", "om.mkv",
-        ])
-        assert args.sync_search == 120
-        assert args.samples_per_shot == 30
-        assert args.alignment_confidence == 0.95
-        assert args.color_confidence == 0.90
-        assert args.debug is False
-        assert args.debug_sync is False
-
-    def test_preview_requires_project(self):
-        """preview subcommand requires --project argument."""
-        with pytest.raises(SystemExit) as exc_info:
-            main(["preview"])
-        assert exc_info.value.code == 2
-
-    def test_preview_parses_project(self):
-        """preview subcommand parses --project correctly."""
-        result = main(["preview", "--project", "analysis.json"])
-        assert result == 0
-
-    def test_render_requires_project(self):
-        """render subcommand requires --project argument."""
-        with pytest.raises(SystemExit) as exc_info:
-            main(["render", "--output", "out.mkv"])
-        assert exc_info.value.code == 2
-
-    def test_render_requires_output(self):
-        """render subcommand requires --output argument."""
-        with pytest.raises(SystemExit) as exc_info:
-            main(["render", "--project", "analysis.json"])
-        assert exc_info.value.code == 2
-
-    def test_render_all_args(self):
-        """render subcommand parses all arguments correctly."""
-        result = main([
-            "render",
-            "--project", "analysis.json",
-            "--output", "output.mkv",
-        ])
-        assert result == 0
+    def test_analyze_missing_file(self) -> None:
+        """analyze with nonexistent file should report error."""
+        result = subprocess.run(
+            [
+                sys.executable, "-m", "auto_openmatte", "analyze",
+                "--hdr", "/nonexistent/hdr.mkv",
+                "--openmatte", "/nonexistent/om.mkv",
+            ],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 1
+        assert "not found" in result.stderr.lower() or "error" in result.stderr.lower()

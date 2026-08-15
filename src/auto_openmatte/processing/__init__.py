@@ -1,1 +1,1 @@
-"""Processing modules: geometry, luminance, color, and composition."""
+"""Processing module — luminance mapping, color matching, transforms."""

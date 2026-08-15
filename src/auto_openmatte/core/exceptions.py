@@ -1,21 +1,57 @@
-"""Custom exceptions for the Auto Open-Matte pipeline."""
+"""Custom exception hierarchy for Auto OpenMatte."""
 
 
-class PipelineError(Exception):
-    """Base exception for pipeline errors."""
+class AutoOpenMatteError(Exception):
+    """Base exception for all Auto OpenMatte errors."""
 
 
-class SyncFailedError(PipelineError):
-    """Raised when temporal synchronization fails."""
+class InspectionError(AutoOpenMatteError):
+    """Error during source inspection / ffprobe."""
 
 
-class LowConfidenceError(PipelineError):
-    """Raised when a pipeline step produces results below confidence threshold."""
+class HDRDetectionError(AutoOpenMatteError):
+    """Cannot determine HDR status of a source."""
 
 
-class UnsupportedHDRFormatError(PipelineError):
-    """Raised when an unsupported HDR format is encountered."""
+class StreamSelectionError(AutoOpenMatteError):
+    """Cannot select appropriate video stream."""
 
 
-class InvalidSourceError(PipelineError):
-    """Raised when a source video is invalid or cannot be processed."""
+class SynchronizationError(AutoOpenMatteError):
+    """Synchronization failed or confidence too low."""
+
+
+class SyncDriftError(SynchronizationError):
+    """Frame offset drifts across the timeline."""
+
+
+class ShotDetectionError(AutoOpenMatteError):
+    """Error during shot boundary detection."""
+
+
+class GeometryError(AutoOpenMatteError):
+    """Error during geometric alignment."""
+
+
+class LuminanceError(AutoOpenMatteError):
+    """Error during luminance mapping estimation."""
+
+
+class ColorError(AutoOpenMatteError):
+    """Error during color correction estimation."""
+
+
+class CompositionError(AutoOpenMatteError):
+    """Error during final composition."""
+
+
+class RenderError(AutoOpenMatteError):
+    """Error during video rendering."""
+
+
+class ProjectError(AutoOpenMatteError):
+    """Error reading/writing project file."""
+
+
+class UnsupportedHDRError(AutoOpenMatteError):
+    """Detected HDR format is not supported by the current processing pipeline."""
