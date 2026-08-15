@@ -1,0 +1,70 @@
+{
+    "streams": [
+        {
+            "index": 0,
+            "codec_name": "hevc",
+            "codec_long_name": "H.265 / HEVC (High Efficiency Video Coding)",
+            "profile": "Main 10",
+            "codec_type": "video",
+            "codec_tag_string": "hvc1",
+            "width": 3840,
+            "height": 2160,
+            "coded_width": 3840,
+            "coded_height": 2160,
+            "closed_captions": 0,
+            "has_b_frames": 1,
+            "pix_fmt": "yuv420p10le",
+            "level": 150,
+            "color_range": "tv",
+            "color_space": "bt709",
+            "color_transfer": "bt709",
+            "color_primaries": "bt709",
+            "chroma_location": "topleft",
+            "refs": 1,
+            "r_frame_rate": "24000/1001",
+            "avg_frame_rate": "24000/1001",
+            "time_base": "1/24000",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 4004000,
+            "duration": "166.833333",
+            "bit_rate": "35000000",
+            "bits_per_raw_sample": "10",
+            "nb_frames": "4004",
+            "disposition": {
+                "default": 1,
+                "dub": 0,
+                "original": 0,
+                "comment": 0,
+                "lyrics": 0,
+                "karaoke": 0,
+                "forced": 0,
+                "hearing_impaired": 0,
+                "visual_impaired": 0,
+                "clean_effects": 0,
+                "attached_pic": 0,
+                "timed_thumbnails": 0
+            },
+            "tags": {
+                "language": "eng",
+                "handler_name": "VideoHandler"
+            }
+        }
+    ],
+    "format": {
+        "filename": "/media/movies/sample_openmatte.mkv",
+        "nb_streams": 2,
+        "nb_programs": 0,
+        "format_name": "matroska,webm",
+        "format_long_name": "Matroska / WebM",
+        "start_time": "0.000000",
+        "duration": "166.833333",
+        "size": "729895069",
+        "bit_rate": "35000000",
+        "probe_score": 100,
+        "tags": {
+            "encoder": "libebml v1.4.2 + libmatroska v1.6.4",
+            "creation_time": "2023-01-15T12:00:00.000000Z"
+        }
+    }
+}

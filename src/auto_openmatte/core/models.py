@@ -11,18 +11,32 @@ class SourceInfo:
     """Video source metadata extracted from ffprobe/mediainfo."""
 
     path: str
+    container: str
+    codec: str
+    profile: str
+    level: str
     width: int
     height: int
     fps: float
+    nominal_fps: str
+    vfr_cfr: Literal["VFR", "CFR", "unknown"]
     duration: float
     frame_count: int
-    codec: str
-    bit_depth: int
-    color_space: str
-    color_transfer: str
-    color_primaries: str
     pixel_format: str
-    aspect_ratio: str
+    bit_depth: int
+    chroma_subsampling: str
+    color_range: str
+    color_primaries: str
+    transfer_characteristics: str
+    matrix_coefficients: str
+    # HDR metadata (may be empty/None for SDR sources)
+    mastering_display: str
+    max_cll: int
+    max_fall: int
+    # Legacy aliases for backward compatibility
+    aspect_ratio: str = ""
+    color_space: str = ""
+    color_transfer: str = ""
 
 
 @dataclass

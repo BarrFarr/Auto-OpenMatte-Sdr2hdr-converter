@@ -1,0 +1,67 @@
+{
+    "streams": [
+        {
+            "index": 0,
+            "codec_name": "hevc",
+            "codec_long_name": "H.265 / HEVC (High Efficiency Video Coding)",
+            "profile": "Main 10",
+            "codec_type": "video",
+            "codec_tag_string": "hvc1",
+            "width": 3840,
+            "height": 2160,
+            "coded_width": 3840,
+            "coded_height": 2160,
+            "closed_captions": 0,
+            "has_b_frames": 1,
+            "pix_fmt": "yuv420p10le",
+            "level": 150,
+            "color_range": "tv",
+            "color_space": "bt2020nc",
+            "color_transfer": "arib-std-b67",
+            "color_primaries": "bt2020",
+            "chroma_location": "topleft",
+            "refs": 1,
+            "r_frame_rate": "50/1",
+            "avg_frame_rate": "50/1",
+            "time_base": "1/50",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 15000,
+            "duration": "300.000000",
+            "bit_rate": "25000000",
+            "bits_per_raw_sample": "10",
+            "nb_frames": "15000",
+            "disposition": {
+                "default": 1,
+                "dub": 0,
+                "original": 0,
+                "comment": 0,
+                "lyrics": 0,
+                "karaoke": 0,
+                "forced": 0,
+                "hearing_impaired": 0,
+                "visual_impaired": 0,
+                "clean_effects": 0,
+                "attached_pic": 0,
+                "timed_thumbnails": 0
+            },
+            "tags": {
+                "language": "eng",
+                "handler_name": "VideoHandler"
+            }
+        }
+    ],
+    "format": {
+        "filename": "/media/broadcast/sample_hlg.ts",
+        "nb_streams": 2,
+        "nb_programs": 1,
+        "format_name": "mpegts",
+        "format_long_name": "MPEG-TS (MPEG-2 Transport Stream)",
+        "start_time": "0.000000",
+        "duration": "300.000000",
+        "size": "937500000",
+        "bit_rate": "25000000",
+        "probe_score": 50,
+        "tags": {}
+    }
+}
