@@ -205,6 +205,12 @@ def _detect_hdr_metadata(probe_data: dict[str, Any]) -> HDRMetadata:
                 metadata.max_cll = sd.get("max_content")
                 metadata.max_fall = sd.get("max_average")
 
+            if "Dolby Vision" in sd_type:
+                metadata.format = HDRFormat.DOLBY_VISION
+
+            if "HDR10+" in sd_type or "HDR Dynamic" in sd_type:
+                metadata.format = HDRFormat.HDR10_PLUS
+
     # Check frame-level side data
     frames = probe_data.get("frames", [])
     for frame in frames:
