@@ -2,7 +2,7 @@
   "id": "FEAT-001",
   "type": "chore",
   "description": "Project scaffolding - Create the complete Python package structure with pyproject.toml, modular source layout, CLI entry point, and test infrastructure. This establishes the foundation for all subsequent features.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Create pyproject.toml with project metadata, dependencies (numpy, scipy, opencv-python, Pillow as required; pytest, ruff, mypy as dev deps), entry point console_scripts pointing to auto_openmatte.cli:main, and Python 3.10+ requirement",
     "Create src/auto_openmatte/__init__.py with __version__ = '0.1.0'",
@@ -32,5 +32,5 @@
     "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && PYTHONPATH=src python -m auto_openmatte --help' and confirm it shows subcommands"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "Environment verified: numpy/scipy/cv2/ffmpeg are NOT available and NOT installable in sandbox (PyPI blocked 403, dnf repos blocked). pip is available but cannot reach registries. venv creation works. Pre-installed: pytest 9.1.1, ruff 0.16.1, mypy 2.3.0, black 26.5.1, isort 8.0.1. The .gitignore needed /analysis/ and /output/ prefix to avoid ignoring source packages. All tests use only stdlib - no heavy deps required for CLI parsing tests."
 }
