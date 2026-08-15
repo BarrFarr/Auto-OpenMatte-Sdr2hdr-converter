@@ -98,6 +98,9 @@ class HDRMetadata:
     mastering_display: str | None = None
     max_cll: int | None = None
     max_fall: int | None = None
+    # Parsed mastering display luminance (nits / cd/m²)
+    mastering_min_nits: float | None = None
+    mastering_max_nits: float | None = None
     # Raw side data from ffprobe
     side_data: list[dict[str, Any]] = field(default_factory=list)
 

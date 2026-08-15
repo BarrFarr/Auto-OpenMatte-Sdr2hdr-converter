@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -136,3 +137,210 @@ def compute_edge_map(frame: NDArray[np.floating]) -> NDArray[np.floating]:
     if max_val > 0:
         magnitude = magnitude / max_val
     return magnitude
+
+
+def extract_segment_grayscale(
+    file_path: Path,
+    start_frame: int,
+    n_frames: int,
+    stream_index: int = 0,
+    width: int = 480,
+    timeout: int = 300,
+) -> list[NDArray[np.floating] | None]:
+    """Extract a contiguous segment of frames as grayscale arrays using a SINGLE FFmpeg process.
+
+    This is dramatically faster than per-frame extraction because FFmpeg only
+    opens and seeks the file once, then decodes frames sequentially.
+
+    The output is a list of float64 arrays normalized to [0, 1], or None for
+    frames that could not be decoded.
+
+    Args:
+        file_path: Path to video file.
+        start_frame: First frame index (0-based).
+        n_frames: Number of consecutive frames to extract.
+        stream_index: Video stream index.
+        width: Target width (height auto-computed by aspect ratio).
+        timeout: Maximum time in seconds for the FFmpeg process.
+
+    Returns:
+        List of length n_frames. Each element is either a float64 array
+        of shape (H, W) normalized to [0,1], or None if that frame failed.
+    """
+    if n_frames <= 0:
+        return []
+
+    # Build FFmpeg command that:
+    # 1. Seeks to start_frame via select filter
+    # 2. Outputs n_frames of gray16le raw video at target width
+    # 3. Pipes all frames as a single contiguous byte stream
+    vf_parts = [
+        f"select='gte(n\\,{start_frame})*lte(n\\,{start_frame + n_frames - 1})'",
+        f"scale={width}:-1",
+    ]
+
+    cmd = [
+        "ffmpeg",
+        "-v", "quiet",
+        "-nostdin",
+        "-i", str(file_path),
+        "-map", f"0:v:{stream_index}",
+        "-vf", ",".join(vf_parts),
+        "-vsync", "passthrough",
+        "-frames:v", str(n_frames),
+        "-pix_fmt", "gray16le",
+        "-f", "rawvideo",
+        "pipe:1",
+    ]
+
+    try:
+        result = subprocess.run(
+            cmd, capture_output=True, timeout=timeout, check=False
+        )
+        if result.returncode != 0:
+            return [None] * n_frames
+        raw = result.stdout
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        return [None] * n_frames
+
+    if not raw:
+        return [None] * n_frames
+
+    # Determine frame dimensions from total byte count
+    bytes_per_pixel = 2  # gray16le
+    total_pixels = len(raw) // bytes_per_pixel
+
+    # We know width; compute height from first frame
+    # All frames have the same dimensions
+    if total_pixels < width:
+        return [None] * n_frames
+
+    # height = total_pixels / (width * actual_n_frames)
+    # But we may have gotten fewer frames than requested
+    # Try to find height by dividing total pixels by width and n_frames
+    pixels_per_frame = total_pixels // n_frames if n_frames > 0 else 0
+    if pixels_per_frame < width:
+        # Fewer frames decoded than expected — recompute
+        # Assume all decoded frames have same height
+        # Try height = total_pixels / (width * actual_frames)
+        # Start by guessing height from aspect ratio of common resolutions
+        height = pixels_per_frame // width if width > 0 else 0
+        if height <= 0:
+            return [None] * n_frames
+    else:
+        height = pixels_per_frame // width
+
+    if height <= 0:
+        return [None] * n_frames
+
+    frame_bytes = width * height * bytes_per_pixel
+    actual_frames = len(raw) // frame_bytes
+
+    frames: list[NDArray[np.floating] | None] = []
+    for i in range(n_frames):
+        if i < actual_frames:
+            offset = i * frame_bytes
+            frame_data = raw[offset: offset + frame_bytes]
+            if len(frame_data) == frame_bytes:
+                arr = np.frombuffer(frame_data, dtype=np.uint16)
+                arr = arr.reshape(height, width).astype(np.float64) / 65535.0
+                frames.append(arr)
+            else:
+                frames.append(None)
+        else:
+            frames.append(None)
+
+    return frames
+
+
+def extract_segment_at_time_grayscale(
+    file_path: Path,
+    start_seconds: float,
+    n_frames: int,
+    stream_index: int = 0,
+    width: int = 480,
+    timeout: int = 300,
+) -> list[NDArray[np.floating] | None]:
+    """Extract a contiguous segment starting at a timestamp using a SINGLE FFmpeg process.
+
+    Uses input seeking (-ss before -i) for fast seeking, then decodes n_frames
+    sequentially. Much faster than per-frame extraction.
+
+    Args:
+        file_path: Path to video file.
+        start_seconds: Start timestamp in seconds.
+        n_frames: Number of consecutive frames to extract.
+        stream_index: Video stream index.
+        width: Target width.
+        timeout: Maximum time in seconds for the FFmpeg process.
+
+    Returns:
+        List of length n_frames with grayscale float64 arrays or None.
+    """
+    if n_frames <= 0:
+        return []
+
+    cmd = [
+        "ffmpeg",
+        "-v", "quiet",
+        "-nostdin",
+        "-ss", f"{start_seconds:.6f}",
+        "-i", str(file_path),
+        "-map", f"0:v:{stream_index}",
+        "-vf", f"scale={width}:-1",
+        "-frames:v", str(n_frames),
+        "-pix_fmt", "gray16le",
+        "-f", "rawvideo",
+        "pipe:1",
+    ]
+
+    try:
+        result = subprocess.run(
+            cmd, capture_output=True, timeout=timeout, check=False
+        )
+        if result.returncode != 0:
+            return [None] * n_frames
+        raw = result.stdout
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        return [None] * n_frames
+
+    if not raw:
+        return [None] * n_frames
+
+    bytes_per_pixel = 2
+    total_pixels = len(raw) // bytes_per_pixel
+
+    if total_pixels < width:
+        return [None] * n_frames
+
+    pixels_per_frame = total_pixels // n_frames if n_frames > 0 else 0
+    if pixels_per_frame < width:
+        height = total_pixels // width
+        if height <= 0:
+            return [None] * n_frames
+        # Recompute actual frame count
+        pixels_per_frame = width * height
+    else:
+        height = pixels_per_frame // width
+
+    if height <= 0:
+        return [None] * n_frames
+
+    frame_bytes = width * height * bytes_per_pixel
+    actual_frames = len(raw) // frame_bytes
+
+    frames: list[NDArray[np.floating] | None] = []
+    for i in range(n_frames):
+        if i < actual_frames:
+            offset = i * frame_bytes
+            frame_data = raw[offset: offset + frame_bytes]
+            if len(frame_data) == frame_bytes:
+                arr = np.frombuffer(frame_data, dtype=np.uint16)
+                arr = arr.reshape(height, width).astype(np.float64) / 65535.0
+                frames.append(arr)
+            else:
+                frames.append(None)
+        else:
+            frames.append(None)
+
+    return frames

@@ -29,8 +29,9 @@ htmlcov/
 .ruff_cache/
 
 # Project artifacts (generated during processing)
-analysis/
-transforms/
-previews/
-output/
-project.json
+# Use anchored patterns to avoid matching src/auto_openmatte/analysis/ etc.
+/analysis/
+/transforms/
+/previews/
+/output/
+/project.json

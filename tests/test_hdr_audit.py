@@ -307,14 +307,17 @@ class TestPQEOTFCorrectness:
 
     def test_known_pq_values(self) -> None:
         """Test against known reference PQ values from the standard."""
-        # These are well-known anchor points in PQ
+        # These are well-known anchor points in PQ (SMPTE ST 2084)
+        # Verified against direct computation of the ST 2084 formula:
+        #   E' = ((c1 + c2*Y^m1) / (1 + c3*Y^m1))^m2
+        # where Y = L / 10000
         test_cases = [
             # (nits, approx_pq_signal)
             (0.0, 0.0),
-            (1.0, 0.1259),    # ~1 nit → PQ ≈ 0.126
-            (100.0, 0.5079),  # 100 nit (SDR white)
-            (1000.0, 0.7519), # 1000 nit
-            (4000.0, 0.9009), # 4000 nit
+            (1.0, 0.1499),    # ~1 nit → PQ ≈ 0.150
+            (100.0, 0.5081),  # 100 nit (SDR white)
+            (1000.0, 0.7518), # 1000 nit
+            (4000.0, 0.9026), # 4000 nit
             (10000.0, 1.0),   # Peak
         ]
         for nits, expected_pq in test_cases:
@@ -367,7 +370,9 @@ class TestPQRoundTrip:
         signal = np.linspace(0.0, 1.0, 10000)
         luminance = pq_eotf(signal)
         reconstructed = pq_oetf(luminance)
-        np.testing.assert_allclose(reconstructed, signal, atol=1e-7)
+        # Note: PQ formula has a known non-zero minimum at signal=0
+        # (c1^m2 ≈ 7.3e-7), so tolerance must accommodate this edge case.
+        np.testing.assert_allclose(reconstructed, signal, atol=1e-6)
 
     def test_luminance_round_trip(self) -> None:
         """Luminance → signal → luminance should be identity."""
@@ -508,15 +513,17 @@ class TestColorSpaceHandling:
         assert linear[0] == pytest.approx(expected, rel=1e-4)
 
     def test_luminance_weights_in_transform(self) -> None:
-        """Verify Rec.709 luminance weights are used for SDR processing."""
+        """Verify BT.2020 luminance weights are used after gamut conversion."""
         import inspect
 
         from auto_openmatte.processing.transform import apply_shot_transform
         source = inspect.getsource(apply_shot_transform)
-        # Should use Rec.709 weights: 0.2126, 0.7152, 0.0722
-        assert "0.2126" in source
-        assert "0.7152" in source
-        assert "0.0722" in source
+        # After BT.709→BT.2020 gamut conversion, should use BT.2020 weights
+        assert "0.2627" in source or "_LUM_R_2020" in source
+        assert "0.6780" in source or "_LUM_G_2020" in source
+        assert "0.0593" in source or "_LUM_B_2020" in source
+        # Must include gamut conversion
+        assert "709_TO_2020" in source or "M_709" in source
 
 
 # ============================================================

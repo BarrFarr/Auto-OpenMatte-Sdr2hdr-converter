@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import re
 from pathlib import Path
 from typing import Any
 
@@ -13,11 +12,10 @@ from auto_openmatte.core.models import (
     HDRFormat,
     HDRMetadata,
     SourceInfo,
-    SourceRole,
     TransferFunction,
     VideoStreamInfo,
 )
-from auto_openmatte.utils.ffmpeg import run_ffprobe, run_ffprobe_streams_only
+from auto_openmatte.utils.ffmpeg import run_ffprobe
 
 
 def _parse_fps(stream: dict[str, Any]) -> tuple[float, str]:
@@ -177,6 +175,44 @@ def _parse_stream(stream: dict[str, Any]) -> VideoStreamInfo:
     )
 
 
+def _parse_rational(value: str | int | float) -> float | None:
+    """Parse a rational number string like '40000000/10000' to float."""
+    if isinstance(value, (int, float)):
+        return float(value)
+    if isinstance(value, str):
+        parts = value.split("/")
+        if len(parts) == 2:
+            try:
+                return int(parts[0]) / int(parts[1])
+            except (ValueError, ZeroDivisionError):
+                return None
+        try:
+            return float(value)
+        except ValueError:
+            return None
+    return None
+
+
+def _parse_mastering_luminance(sd: dict[str, Any], metadata: HDRMetadata) -> None:
+    """Parse min/max luminance from mastering display side_data dict.
+
+    ffprobe reports luminance as rational strings: e.g. "50/10000" for 0.005 nits,
+    "40000000/10000" for 4000 nits.
+    """
+    min_lum = sd.get("min_luminance")
+    max_lum = sd.get("max_luminance")
+
+    if min_lum is not None and metadata.mastering_min_nits is None:
+        parsed = _parse_rational(min_lum)
+        if parsed is not None:
+            metadata.mastering_min_nits = parsed
+
+    if max_lum is not None and metadata.mastering_max_nits is None:
+        parsed = _parse_rational(max_lum)
+        if parsed is not None:
+            metadata.mastering_max_nits = parsed
+
+
 def _detect_hdr_metadata(probe_data: dict[str, Any]) -> HDRMetadata:
     """Detect HDR metadata from ffprobe output (including frame side data)."""
     metadata = HDRMetadata()
@@ -200,6 +236,8 @@ def _detect_hdr_metadata(probe_data: dict[str, Any]) -> HDRMetadata:
                         parts.append(f"{key}={sd[key]}")
                 if parts:
                     metadata.mastering_display = "; ".join(parts)
+                # Parse luminance values (nits)
+                _parse_mastering_luminance(sd, metadata)
 
             if "Content light level" in sd_type:
                 metadata.max_cll = sd.get("max_content")
@@ -226,6 +264,9 @@ def _detect_hdr_metadata(probe_data: dict[str, Any]) -> HDRMetadata:
                         parts.append(f"{key}={sd[key]}")
                 if parts:
                     metadata.mastering_display = "; ".join(parts)
+                # Parse luminance from frame-level if not already set
+                if metadata.mastering_min_nits is None:
+                    _parse_mastering_luminance(sd, metadata)
 
             if "Content light level" in sd_type:
                 if metadata.max_cll is None:
