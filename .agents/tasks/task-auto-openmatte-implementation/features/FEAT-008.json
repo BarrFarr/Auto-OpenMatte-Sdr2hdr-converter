@@ -1,0 +1,33 @@
+{
+  "id": "FEAT-008",
+  "type": "feat",
+  "description": "Pipeline Orchestrator and CLI Integration - Wire all modules together into the complete pipeline orchestrator with proper ordering (sync BEFORE shots), project.json serialization/deserialization, confidence gating, CLI subcommand handlers, and end-to-end flow. This covers spec sections 18-20, 26, 28-29.",
+  "status": "pending",
+  "steps": [
+    "Create src/auto_openmatte/pipeline/__init__.py",
+    "Create src/auto_openmatte/pipeline/orchestrator.py implementing: (a) class Pipeline with run_analyze(hdr_path, om_path, options) - executes the FULL analysis pipeline in EXACT order from spec: 1.inspect files, 2.identify streams, 3.synchronize, 4.verify sync, 5.detect HDR shots, 6.map shots to OM, 7.align geometry, 8.analyze common area, 9.estimate luminance mapping, 10.estimate color mapping, 11.generate per-shot transforms, 12.validate transforms. Stops with error if any step fails confidence threshold. (b) run_preview(project_path) - loads project.json, generates preview video and contact sheet. (c) run_render(project_path, output_path) - loads project.json, executes full render. (d) Each step logs progress and can be individually re-run.",
+    "Create src/auto_openmatte/pipeline/project.py implementing: (a) class ProjectFile with save(path) and load(path) classmethods. Contains: source_metadata for both files, sync_model, shot_list with mappings, geometry_per_shot, transforms_per_shot, validation_results, status. (b) validate_project(project) - checks all required fields are present and valid. (c) create_output_directories(base_path) - creates analysis/, analysis/source/, analysis/sync/, analysis/shots/, analysis/geometry/, analysis/color/, analysis/reports/, transforms/, previews/, output/ per spec section 20.",
+    "Update src/auto_openmatte/cli.py to wire subcommands to Pipeline methods: (a) analyze subcommand calls Pipeline.run_analyze, prints formatted report per spec section 28 (source info, sync results, shot detection, geometry, color analysis, project status). (b) preview subcommand calls Pipeline.run_preview. (c) render subcommand calls Pipeline.run_render. (d) All CLI output is formatted clearly with section headers.",
+    "Create src/auto_openmatte/pipeline/confidence.py implementing: (a) check_sync_confidence(sync_result, threshold) - gates pipeline if sync confidence too low. (b) check_alignment_confidence(geometry_results, threshold) - gates pipeline if alignment is poor. (c) check_color_confidence(color_results, threshold) - identifies and reports low-confidence shots without stopping. (d) generate_quality_warnings(project) - collects all potential issues for the final report.",
+    "Create tests/test_pipeline.py with tests: (a) test_pipeline_step_ordering (verify sync runs before shot detection), (b) test_pipeline_stops_on_low_sync_confidence, (c) test_pipeline_continues_with_low_color_confidence_warning, (d) test_project_json_serialization_roundtrip, (e) test_project_json_contains_all_required_fields, (f) test_output_directory_creation, (g) test_cli_analyze_argument_parsing, (h) test_cli_preview_requires_project, (i) test_cli_render_requires_project_and_output, (j) test_formatted_report_output_matches_spec",
+    "Create tests/test_project_file.py with tests: (a) test_save_and_load_roundtrip, (b) test_project_validation_missing_sync, (c) test_project_validation_missing_shots, (d) test_project_contains_source_metadata, (e) test_project_contains_transforms"
+  ],
+  "acceptance_criteria": [
+    "Pipeline enforces strict ordering: inspect -> sync -> verify sync -> shots -> map shots -> geometry -> luminance -> color -> transforms -> validate",
+    "Pipeline stops with clear error message if sync confidence is below threshold",
+    "Pipeline stops with clear error message if detected HDR format is unsupported",
+    "project.json serialization/deserialization roundtrip preserves all data",
+    "project.json contains all fields from spec section 19",
+    "CLI 'analyze' prints formatted report matching spec section 28 format",
+    "CLI 'preview' and 'render' load existing project.json without re-analyzing",
+    "Output directory structure matches spec section 20",
+    "All tests pass with 'pytest tests/test_pipeline.py tests/test_project_file.py -v'"
+  ],
+  "verification": [
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && eval \"$(pyenv init -)\" && pyenv shell 3.11.15 && PYTHONPATH=src python -m pytest tests/test_pipeline.py tests/test_project_file.py -v' and confirm all tests pass",
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && eval \"$(pyenv init -)\" && pyenv shell 3.11.15 && PYTHONPATH=src python -m auto_openmatte --help' and confirm all subcommands listed",
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && eval \"$(pyenv init -)\" && pyenv shell 3.11.15 && ruff check src/ tests/' and confirm no linting errors"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

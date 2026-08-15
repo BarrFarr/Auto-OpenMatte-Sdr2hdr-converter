@@ -1,0 +1,28 @@
+{
+  "id": "FEAT-004",
+  "type": "feat",
+  "description": "Shot Detection and Timeline Mapping - Implement HDR-first shot boundary detection (hard cuts, fades, dissolves) and mapping of detected shots to Open Matte timeline using the synchronization model. This covers spec sections 4.1-4.2. Shot detection happens ONLY after synchronization passes.",
+  "status": "pending",
+  "steps": [
+    "Create src/auto_openmatte/analysis/shots.py implementing: (a) detect_shots(video_path, method='combined') - detects shot boundaries in HDR using combination of histogram difference, luminance difference, edge difference, and perceptual difference. Returns list of ShotInfo objects with shot_id, start, end, duration, transition_type (hard_cut/fade/dissolve). (b) compute_frame_difference(frame_a, frame_b) - computes multi-metric difference score between consecutive frames. (c) classify_transition(scores, window) - classifies transition type: hard_cut (sudden large difference in 1-2 frames), fade (gradual change over many frames to/from black), dissolve (gradual change between two different scenes). (d) adaptive_threshold(scores) - computes adaptive threshold for shot detection rather than fixed value.",
+    "Create src/auto_openmatte/analysis/shot_mapping.py implementing: (a) map_shots_to_openmatte(shots, sync_model) - takes HDR shot list and sync model, produces mapped shot list with both HDR and Open Matte timestamps. Uses map_time_hdr_to_om for each boundary. (b) validate_shot_mapping(mapped_shots, om_path) - optional validation that verifies mapped boundaries actually correspond to cuts in Open Matte (sanity check). (c) ShotMap dataclass containing: shot_id, hdr_start, hdr_end, om_start, om_end, duration, transition_type.",
+    "Create src/auto_openmatte/analysis/shot_debug.py implementing: (a) save_shot_report(shots, mapped_shots, output_dir) - writes analysis/shots/ directory with shots.json listing all detected shots and their mappings. (b) generate_shot_thumbnails(video_path, shots, output_dir, max_shots=50) - generates representative frame thumbnails for each shot (first frame after cut).",
+    "Create tests/test_shots.py with tests: (a) test_hard_cut_detection with synthetic frame sequence containing sudden change, (b) test_fade_detection with synthetic gradual-to-black sequence, (c) test_dissolve_detection with synthetic cross-fade, (d) test_adaptive_threshold_computation, (e) test_shot_mapping_with_offset (verify correct timestamp conversion), (f) test_shot_mapping_with_scale, (g) test_shot_mapping_with_local_segments, (h) test_no_false_positives_on_static_scene, (i) test_shot_report_json_format",
+    "Create tests/fixtures/shots/ with synthetic frame difference arrays simulating: static scene, hard cut, fade to black, dissolve between scenes"
+  ],
+  "acceptance_criteria": [
+    "detect_shots correctly identifies hard cuts in synthetic data (precision > 0.9)",
+    "detect_shots correctly identifies fades in synthetic data",
+    "detect_shots does not produce false positives on smooth camera motion",
+    "map_shots_to_openmatte correctly converts all timestamps using sync model",
+    "Shot report JSON contains all required fields: shot_id, start, end, duration, transition_type, om_start, om_end",
+    "Shot detection works on HDR-first principle - the function takes HDR video path",
+    "All tests pass with 'pytest tests/test_shots.py -v'"
+  ],
+  "verification": [
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && python -m pytest tests/test_shots.py -v' and confirm all tests pass",
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && ruff check src/auto_openmatte/analysis/' and confirm no linting errors"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

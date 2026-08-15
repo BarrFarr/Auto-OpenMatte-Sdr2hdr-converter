@@ -1,0 +1,32 @@
+{
+  "id": "FEAT-006",
+  "type": "feat",
+  "description": "Luminance and Color Mapping Engine - Implement the core luminance transfer (monotonic, robust, per-shot) and color matching system. HDR is always the reference. The mapping learned from the common area is applied to extend Open Matte areas. This covers spec sections 7-12.",
+  "status": "pending",
+  "steps": [
+    "Create src/auto_openmatte/processing/transfer_functions.py implementing: (a) pq_eotf(signal) - PQ (ST 2084) electro-optical transfer function, converts PQ signal to linear luminance (cd/m2). (b) pq_oetf(luminance) - inverse PQ, converts linear luminance to PQ signal. (c) hlg_eotf(signal) - HLG transfer function. (d) hlg_oetf(luminance) - inverse HLG. (e) bt709_eotf(signal) - BT.709 gamma to linear. (f) bt709_oetf(luminance) - linear to BT.709 gamma. (g) get_transfer_functions(transfer_name) - returns appropriate EOTF/OETF pair based on detected transfer characteristics string. These are for ANALYSIS ONLY - the final HDR master is never re-encoded through these.",
+    "Create src/auto_openmatte/processing/luminance.py implementing: (a) estimate_luminance_mapping(hdr_samples, om_samples, method='robust_spline') - takes paired luminance samples from common area, estimates monotonic mapping Y_om -> Y_hdr. Methods: percentile_matching (fast), robust_regression (RANSAC-based), monotonic_spline (scipy interpolation with monotonicity constraint). (b) apply_luminance_mapping(om_luminance, mapping_curve) - applies estimated mapping to Open Matte luminance values. (c) validate_monotonicity(curve) - ensures mapping never inverts ordering. (d) LuminanceMappingResult with: curve_params, method, residual_error, confidence, is_monotonic.",
+    "Create src/auto_openmatte/processing/color.py implementing: (a) estimate_color_transform(hdr_pixels, om_pixels, luminance_mapping) - after luminance is matched, estimates residual color correction. Priority order: neutral balance, chroma adjustment, saturation, gentle 3x3 matrix. (b) compute_whitepoint_correction(hdr_pixels, om_pixels) - estimates white balance difference. (c) compute_color_matrix(hdr_pixels, om_pixels) - estimates 3x3 color correction matrix using least squares with outlier rejection. (d) apply_color_transform(om_frame, color_transform) - applies the complete color transform to Open Matte frame. (e) ColorTransformResult with: whitepoint_shift, color_matrix, saturation_factor, confidence.",
+    "Create src/auto_openmatte/processing/per_shot.py implementing: (a) analyze_shot(hdr_path, om_path, shot_map_entry, geometry, config) - analyzes one shot: samples 20-50 representative frames, computes pixel pairs from common area, estimates luminance mapping and color transform, returns stable per-shot ShotTransform. (b) stabilize_transform(frame_transforms) - given per-frame estimates within a shot, computes single stable transform (robust median/mean). Prevents frame-to-frame flickering. (c) interpolate_shot_transitions(transforms, transition_info) - for dissolves/fades, smoothly interpolates between adjacent shot transforms. For hard cuts, no interpolation. (d) validate_transform(transform) - checks confidence, monotonicity, reasonable parameter ranges.",
+    "Create src/auto_openmatte/processing/outlier_rejection.py implementing: (a) reject_outliers_ransac(x, y, threshold=3.0) - RANSAC-based outlier rejection for regression. (b) reject_clipped_pixels(samples, min_val=0.01, max_val=0.99) - removes samples near black/white clip. (c) reject_high_motion(frame_diff, threshold) - identifies high-motion areas to exclude from analysis. (d) combined_quality_filter(hdr_samples, om_samples, masks) - applies all rejection criteria and returns clean sample pairs.",
+    "Create tests/test_luminance.py with tests: (a) test_pq_eotf_roundtrip (PQ encode then decode recovers original), (b) test_bt709_eotf_roundtrip, (c) test_luminance_mapping_linear_relationship (if SDR is just scaled version of HDR, should find linear map), (d) test_luminance_mapping_monotonicity (output must be monotonic), (e) test_luminance_mapping_with_outliers (RANSAC should handle them), (f) test_luminance_mapping_preserves_order, (g) test_color_matrix_identity (identical colors should give identity matrix), (h) test_color_matrix_whitepoint_shift, (i) test_per_shot_stabilization_reduces_variance, (j) test_hard_cut_no_interpolation, (k) test_dissolve_interpolation, (l) test_outlier_rejection_removes_clipped, (m) test_combined_quality_filter"
+  ],
+  "acceptance_criteria": [
+    "PQ EOTF/OETF roundtrip has error < 1e-6",
+    "BT.709 EOTF/OETF roundtrip has error < 1e-6",
+    "Luminance mapping is guaranteed monotonic",
+    "Luminance mapping correctly handles outliers via RANSAC",
+    "Color matrix estimation works for identity case (no color shift)",
+    "Per-shot stabilization produces single transform from multiple frame samples",
+    "Hard cuts get no interpolation between shot transforms",
+    "Dissolves get smooth interpolation",
+    "Outlier rejection correctly removes clipped/extreme pixels",
+    "All tests pass with 'pytest tests/test_luminance.py -v'"
+  ],
+  "verification": [
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && python -m pytest tests/test_luminance.py -v' and confirm all tests pass",
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && ruff check src/auto_openmatte/processing/' and confirm no linting errors"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

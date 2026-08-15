@@ -1,0 +1,40 @@
+{
+  "project_type": "Python CLI application - video processing pipeline for HDR/Open Matte compositing",
+  "language": "Python 3.11.15 (via pyenv)",
+  "build_system": "pyproject.toml with setuptools, pyenv for version management. Use 'eval \"$(pyenv init -)\" && pyenv shell 3.11.15' before all python commands.",
+  "test_framework": "pytest 9.1.1 (pre-installed in pyenv 3.11.15), with conftest.py fixtures",
+  "build_command": "eval \"$(pyenv init -)\" && pyenv shell 3.11.15 && PYTHONPATH=src python -m py_compile src/auto_openmatte/cli.py",
+  "test_command": "eval \"$(pyenv init -)\" && pyenv shell 3.11.15 && PYTHONPATH=src python -m pytest tests/ -v",
+  "verification_instructions": "1. Run test_command to execute all unit tests. 2. Run 'eval \"$(pyenv init -)\" && pyenv shell 3.11.15 && PYTHONPATH=src ruff check src/ tests/' for linting. 3. Run 'eval \"$(pyenv init -)\" && pyenv shell 3.11.15 && PYTHONPATH=src python -m auto_openmatte --help' to verify CLI entry point.",
+  "snapshot_or_generated_files": null,
+  "setup_instructions": "eval \"$(pyenv init -)\" && pyenv shell 3.11.15 is required before any python command. No venv needed since pytest/ruff/mypy are pre-installed in this pyenv version. PYTHONPATH=src needed for imports since pip install -e is not possible without network.",
+  "environment_constraints": "INTEGRATIONS_ONLY network. PyPI is blocked (403 Forbidden). dnf/apt not available. Python 3.11.15 has pre-installed: pytest 9.1.1, ruff 0.16.1, mypy 2.3.0, black 26.5.1, isort 8.0.1, pyright 1.1.411. NOT available and NOT installable: numpy, scipy, opencv-python, ffmpeg, ffprobe, mediainfo. Subprocess execution works. venv creation works. Strategy: Write production code using real libraries (numpy, scipy, cv2). Unit tests that validate math/logic use Python stdlib (math module, lists). Integration tests that need numpy/cv2/ffmpeg use pytest.mark.skipif to skip gracefully. The code is intended to run on user machines where all deps ARE available.",
+  "contribution_requirements": "N/A - greenfield project",
+  "key_patterns": "Modular pipeline architecture. Each pipeline stage is an independent module. CLI uses subcommands (analyze, preview, render). JSON project file stores all analysis state. HDR is always the master reference. Audio is completely excluded. All ffmpeg commands explicitly select video stream. Transfer functions use proper math (PQ ST.2084, HLG, BT.709). Luminance mapping must be monotonic. Per-shot transforms, not per-frame.",
+  "relevant_files": [
+    "src/auto_openmatte/__init__.py",
+    "src/auto_openmatte/cli.py",
+    "src/auto_openmatte/core/models.py",
+    "src/auto_openmatte/core/config.py",
+    "src/auto_openmatte/core/exceptions.py",
+    "src/auto_openmatte/analysis/inspect.py",
+    "src/auto_openmatte/analysis/sync.py",
+    "src/auto_openmatte/analysis/shots.py",
+    "src/auto_openmatte/processing/luminance.py",
+    "src/auto_openmatte/processing/color.py",
+    "src/auto_openmatte/processing/geometry.py",
+    "src/auto_openmatte/processing/composition.py",
+    "src/auto_openmatte/pipeline/orchestrator.py",
+    "src/auto_openmatte/output/preview.py",
+    "src/auto_openmatte/output/render.py",
+    "pyproject.toml",
+    "tests/conftest.py",
+    "README.md"
+  ],
+  "directory_structure": "src/auto_openmatte/ - main package. core/ - models, config, exceptions. analysis/ - inspect, sync, shots, proxy. processing/ - geometry, luminance, color, transfer_functions, composition, per_shot, outlier_rejection. pipeline/ - orchestrator. output/ - preview, render. tests/ mirrors src.",
+  "dependency_status": {
+    "available": ["pytest 9.1.1", "ruff 0.16.1", "mypy 2.3.0", "black 26.5.1", "isort 8.0.1", "pyright 1.1.411", "Python stdlib (json, math, statistics, dataclasses, typing, subprocess, pathlib, etc.)"],
+    "not_installable_in_sandbox": ["numpy", "scipy", "opencv-python (cv2)", "scikit-image", "ffmpeg", "ffprobe", "mediainfo"],
+    "available_on_target_user_machine": ["numpy", "scipy", "opencv-python", "scikit-image", "ffmpeg", "ffprobe", "Pillow"]
+  }
+}

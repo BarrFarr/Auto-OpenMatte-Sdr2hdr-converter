@@ -1,0 +1,36 @@
+{
+  "id": "FEAT-001",
+  "type": "chore",
+  "description": "Project scaffolding - Create the complete Python package structure with pyproject.toml, modular source layout, CLI entry point, and test infrastructure. This establishes the foundation for all subsequent features.",
+  "status": "in_progress",
+  "steps": [
+    "Create pyproject.toml with project metadata, dependencies (numpy, scipy, opencv-python, Pillow as required; pytest, ruff, mypy as dev deps), entry point console_scripts pointing to auto_openmatte.cli:main, and Python 3.10+ requirement",
+    "Create src/auto_openmatte/__init__.py with __version__ = '0.1.0'",
+    "Create src/auto_openmatte/cli.py with argparse-based CLI supporting subcommands: analyze (--hdr, --openmatte, --sync-search, --samples-per-shot, --alignment-confidence, --color-confidence, --debug, --debug-sync), preview (--project), render (--project, --output). Include --version flag.",
+    "Create src/auto_openmatte/core/__init__.py",
+    "Create src/auto_openmatte/core/models.py with dataclasses/TypedDict definitions for: SourceInfo, HDRMetadata, SyncResult, ShotInfo, GeometryAlignment, LuminanceCurve, ColorTransform, ShotTransform, ProjectFile. These are the data structures used throughout the pipeline.",
+    "Create src/auto_openmatte/core/config.py with pipeline configuration constants and defaults (SYNC_SEARCH_RANGE=120, SAMPLES_PER_SHOT=30, ALIGNMENT_CONFIDENCE_THRESHOLD=0.95, COLOR_CONFIDENCE_THRESHOLD=0.90, BLEND_WIDTH_DEFAULT=4, etc.)",
+    "Create src/auto_openmatte/core/exceptions.py with custom exceptions: SyncFailedError, LowConfidenceError, UnsupportedHDRFormatError, InvalidSourceError, PipelineError",
+    "Create directory stubs (empty __init__.py files) for: src/auto_openmatte/analysis/, src/auto_openmatte/pipeline/, src/auto_openmatte/processing/, src/auto_openmatte/output/",
+    "Create tests/__init__.py, tests/conftest.py with shared fixtures (mock video metadata, mock frame data, temp directory fixtures)",
+    "Create tests/test_cli.py with tests verifying CLI argument parsing for all three subcommands and --version flag",
+    "Create README.md with project overview, installation instructions, usage examples (analyze, preview, render commands), pipeline description, and technology stack",
+    "Create .gitignore for Python projects (*.pyc, __pycache__, .venv, *.egg-info, dist/, build/, analysis/, output/, previews/)",
+    "Create a Makefile with targets: test (pytest), lint (ruff check), typecheck (mypy), format (ruff format), all (lint typecheck test)"
+  ],
+  "acceptance_criteria": [
+    "Running 'python -m pytest tests/test_cli.py -v' passes all CLI parsing tests",
+    "Running 'python -c \"from auto_openmatte.core.models import SourceInfo, ProjectFile\"' succeeds after path setup",
+    "Running 'python -m auto_openmatte --help' shows analyze/preview/render subcommands",
+    "Running 'python -m auto_openmatte --version' shows version 0.1.0",
+    "Running 'ruff check src/ tests/' passes with no errors",
+    "All model dataclasses are importable and instantiable"
+  ],
+  "verification": [
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && python -m pytest tests/ -v' and confirm all tests pass",
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && ruff check src/ tests/' and confirm no linting errors",
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && PYTHONPATH=src python -m auto_openmatte --help' and confirm it shows subcommands"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

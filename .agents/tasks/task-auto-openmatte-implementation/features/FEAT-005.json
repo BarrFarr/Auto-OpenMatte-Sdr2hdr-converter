@@ -1,0 +1,29 @@
+{
+  "id": "FEAT-005",
+  "type": "feat",
+  "description": "Geometry Alignment and Common Area Analysis - Implement automatic geometric alignment between HDR (21:9) and Open Matte (16:9), detecting scale, offset, and crop. Identify the common overlap region for color/luminance analysis. This covers spec sections 5-6.",
+  "status": "pending",
+  "steps": [
+    "Create src/auto_openmatte/processing/__init__.py",
+    "Create src/auto_openmatte/processing/geometry.py implementing: (a) align_geometry(hdr_frame, om_frame) - finds the geometric transformation that maps Open Matte pixels to HDR coordinate space. Detects scale factor, x_offset, y_offset. Uses feature matching (ORB/SIFT), phase correlation, or edge matching. HDR geometry is NEVER changed. (b) compute_alignment_per_shot(hdr_path, om_path, shot_map, samples_per_shot=5) - computes alignment for each shot using multiple sample frames, returns robust median alignment. (c) GeometryResult dataclass with: scale_x, scale_y, offset_x, offset_y, crop_top, crop_bottom, crop_left, crop_right, confidence. (d) validate_alignment(geometry, hdr_info, om_info) - sanity check that computed geometry makes physical sense (e.g., Open Matte 16:9 should fully contain HDR 21:9 content).",
+    "Create src/auto_openmatte/processing/common_area.py implementing: (a) extract_common_region(hdr_frame, om_frame, geometry) - given alignment, extracts the pixel region from both sources that overlap. This is used for luminance/color analysis. (b) create_quality_mask(common_hdr, common_om) - creates a mask that excludes: black bars, letterbox regions, clipped pixels (near 0 or near max), likely subtitle/logo areas (bottom 10% with high contrast text patterns), extreme motion areas. (c) sample_pixel_pairs(common_hdr, common_om, quality_mask, n_samples=10000) - samples valid pixel pairs from the common region for regression analysis.",
+    "Create tests/test_geometry.py with tests: (a) test_alignment_identity (identical frames should give scale=1, offset=0), (b) test_alignment_with_known_scale (synthetically scaled frame), (c) test_alignment_with_known_offset (synthetically shifted frame), (d) test_alignment_16_9_contains_21_9 (verify physical sense check), (e) test_common_region_extraction, (f) test_quality_mask_excludes_black_bars, (g) test_quality_mask_excludes_clipped_pixels, (h) test_pixel_pair_sampling_respects_mask, (i) test_alignment_per_shot_uses_median",
+    "Create tests/fixtures/geometry/ with small synthetic frames (numpy arrays) representing: 21:9 content within 16:9 frame, with known scale/offset relationships"
+  ],
+  "acceptance_criteria": [
+    "align_geometry correctly detects scale and offset for synthetically transformed frames",
+    "align_geometry never modifies HDR geometry - only finds where HDR maps within Open Matte",
+    "validate_alignment rejects physically impossible alignments",
+    "extract_common_region returns only the overlapping pixel area",
+    "create_quality_mask correctly excludes black bars and clipped regions",
+    "sample_pixel_pairs only returns pixels within the quality mask",
+    "Per-shot alignment uses robust median across sample frames",
+    "All tests pass with 'pytest tests/test_geometry.py -v'"
+  ],
+  "verification": [
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && python -m pytest tests/test_geometry.py -v' and confirm all tests pass",
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && ruff check src/auto_openmatte/processing/' and confirm no linting errors"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

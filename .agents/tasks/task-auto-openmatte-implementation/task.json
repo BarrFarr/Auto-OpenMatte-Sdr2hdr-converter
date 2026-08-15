@@ -1,0 +1,7 @@
+{
+  "task_id": "task-auto-openmatte-implementation",
+  "task_description": "Implement a Python CLI application (auto_openmatte) that automatically combines HDR 21:9 reference video with SDR 16:9 Open Matte video to produce a full 16:9 HDR output. The pipeline includes source inspection, image-based synchronization, shot detection, geometry alignment, luminance/color mapping, and composition. HDR is always the master - Open Matte is adapted to match HDR, never the reverse.",
+  "status": "in_progress",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003", "FEAT-004", "FEAT-005", "FEAT-006", "FEAT-007", "FEAT-008"],
+  "blocked_reason": null
+}

@@ -1,0 +1,32 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Source Inspection and HDR Detection - Implement the complete metadata inspection system using ffprobe, including automatic HDR detection, stream selection, and source role identification (which file is HDR master vs Open Matte). This covers spec sections 1-2.",
+  "status": "pending",
+  "steps": [
+    "Create src/auto_openmatte/analysis/__init__.py",
+    "Create src/auto_openmatte/analysis/inspect.py implementing: (a) run_ffprobe(filepath) - executes ffprobe with JSON output format, selects video stream only (-select_streams v), returns parsed dict. (b) extract_source_info(ffprobe_data) - extracts all fields from spec section 1: container, codec, profile, level, width, height, fps, nominal_fps, vfr/cfr, duration, frame_count, pixel_format, bit_depth, chroma_subsampling, color_range, color_primaries, transfer_characteristics, matrix_coefficients, mastering_display_metadata, MaxCLL, MaxFALL, HDR10, HDR10+, Dolby Vision detection. Returns SourceInfo dataclass.",
+    "Create src/auto_openmatte/analysis/stream_select.py implementing: (a) select_best_video_stream(ffprobe_data) - when container has multiple video streams, selects based on: resolution (highest), HDR metadata presence, bit depth (highest), default disposition. Returns stream index. (b) list_video_streams(ffprobe_data) - returns summary of all video streams for user display.",
+    "Create src/auto_openmatte/analysis/hdr_detect.py implementing: (a) detect_hdr_standard(source_info) - determines HDR format: HDR10, HDR10+, Dolby Vision, HLG, or SDR based on transfer_characteristics, color_primaries, and side_data. (b) identify_roles(source_a_info, source_b_info) - determines which source is HDR reference and which is Open Matte. Logic: check transfer (PQ/HLG vs BT.709/gamma), primaries (BT.2020 vs BT.709), bit depth. If ambiguous, raise InvalidSourceError with diagnostics. (c) validate_hdr_support(hdr_standard) - checks if detected HDR format is supported by pipeline, raises UnsupportedHDRFormatError if not.",
+    "Update src/auto_openmatte/core/models.py to ensure SourceInfo contains all required fields and HDRMetadata captures mastering display, MaxCLL, MaxFALL, HDR standard type",
+    "Create tests/test_inspection.py with tests: (a) test parsing real ffprobe JSON output (use fixture with sample ffprobe output for HDR10 HEVC file), (b) test parsing SDR file metadata, (c) test HDR detection for PQ/BT.2020, (d) test HDR detection for HLG, (e) test SDR detection for BT.709, (f) test role identification when HDR is first arg, (g) test role identification when HDR is second arg (swap detection), (h) test ambiguous sources raises error, (i) test multiple stream selection logic, (j) test unsupported HDR format raises error",
+    "Create tests/fixtures/ directory with sample ffprobe JSON outputs: tests/fixtures/ffprobe_hdr10.json (HDR10 HEVC 4K), tests/fixtures/ffprobe_sdr_openmatte.json (SDR HEVC 4K 16:9), tests/fixtures/ffprobe_hlg.json (HLG source), tests/fixtures/ffprobe_multi_stream.json (multiple video streams)"
+  ],
+  "acceptance_criteria": [
+    "extract_source_info correctly parses all metadata fields from ffprobe JSON fixtures",
+    "detect_hdr_standard returns 'HDR10' for PQ+BT.2020+mastering display metadata",
+    "detect_hdr_standard returns 'HLG' for HLG transfer",
+    "detect_hdr_standard returns 'SDR' for BT.709 gamma",
+    "identify_roles correctly assigns HDR and Open Matte roles regardless of argument order",
+    "identify_roles raises InvalidSourceError when both sources appear to be HDR or both SDR",
+    "select_best_video_stream chooses highest quality HDR stream from multi-stream container",
+    "All tests pass with 'pytest tests/test_inspection.py -v'",
+    "validate_hdr_support raises UnsupportedHDRFormatError for Dolby Vision (not yet supported)"
+  ],
+  "verification": [
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && python -m pytest tests/test_inspection.py -v' and confirm all tests pass",
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && ruff check src/auto_openmatte/analysis/' and confirm no linting errors"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

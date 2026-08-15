@@ -1,0 +1,32 @@
+{
+  "id": "FEAT-003",
+  "type": "feat",
+  "description": "Synchronization Engine - Implement the complete image-based temporal synchronization system including proxy generation, global offset detection, FPS/timebase verification, local time mapping, and synchronization validation. This covers spec sections 3.1-3.9. Synchronization MUST come before shot detection.",
+  "status": "pending",
+  "steps": [
+    "Create src/auto_openmatte/analysis/proxy.py implementing: (a) generate_sync_proxy(input_path, output_path, width=480) - uses ffmpeg to generate low-resolution grayscale proxy video for synchronization analysis. Extracts luminance only, ignores transfer function differences by working on edge/gradient representations. (b) extract_proxy_frames(proxy_path, timestamps) - extracts specific frames at given timestamps as numpy arrays. (c) compute_edge_map(frame) - applies Sobel/Canny edge detection for structure-based comparison that is transfer-function agnostic.",
+    "Create src/auto_openmatte/analysis/sync.py implementing the main synchronization engine: (a) find_global_offset(hdr_path, om_path, search_range=120, sample_points=11) - samples frames at 0%, 10%, 20%...100% of HDR duration, for each computes structural similarity against Open Matte frames at various offsets within search_range. Uses phase correlation and perceptual hashing on edge maps. Returns best offset and confidence. (b) compute_structural_similarity(frame_a, frame_b) - computes similarity using edge structure, gradient histograms, NOT raw RGB. (c) verify_sync_global(hdr_path, om_path, offset, scale=1.0, checkpoints=10) - verifies offset at multiple points, returns mean/max error in frames. (d) detect_fps_mismatch(hdr_info, om_info, offset_samples) - checks if constant offset or linear drift (different FPS). Estimates time_scale if needed. (e) build_sync_model(offset, scale, confidence, errors) - creates SyncResult model.",
+    "Create src/auto_openmatte/analysis/sync_local.py implementing: (a) detect_local_anomalies(hdr_path, om_path, sync_model, window_size=30) - scans for segments where global model breaks (extra intro, missing scene, different edit). (b) build_local_time_map(hdr_path, om_path, anomalies) - creates segment-based time mapping when global model is insufficient. Uses sequence matching to handle insertions/deletions. (c) map_time_hdr_to_om(hdr_time, sync_model) - converts HDR timestamp to Open Matte timestamp using sync model (global or local).",
+    "Create src/auto_openmatte/analysis/sync_debug.py implementing: (a) generate_sync_debug(hdr_path, om_path, sync_result, output_dir) - generates debug artifacts: similarity vs offset plot data, error graph data, checkpoint frame pairs, synchronization.json. (b) save_sync_report(sync_result, output_path) - writes analysis/synchronization.json with all fields from spec section 3.8.",
+    "Create tests/test_sync.py with comprehensive tests: (a) test_structural_similarity_identical_frames returns 1.0, (b) test_structural_similarity_different_frames returns low score, (c) test_structural_similarity_same_scene_different_transfer (simulated PQ vs gamma of same scene) returns high score, (d) test_global_offset_detection with synthetic frame sequences that have known offset, (e) test_fps_mismatch_detection with 24.000 vs 23.976, (f) test_sync_verification_pass with stable offset, (g) test_sync_verification_fail with unstable offset, (h) test_time_mapping_simple_offset, (i) test_time_mapping_with_scale, (j) test_local_anomaly_detection with synthetic sequence containing insertion, (k) test_sync_model_serialization to JSON",
+    "Create tests/fixtures/sync/ directory with: synthetic frame arrays (small numpy arrays representing edge maps) that simulate known temporal relationships for deterministic testing without actual video files"
+  ],
+  "acceptance_criteria": [
+    "compute_structural_similarity returns high score (>0.9) for structurally identical frames regardless of transfer function",
+    "compute_structural_similarity returns low score (<0.3) for completely different frames",
+    "find_global_offset correctly identifies known offset in synthetic test data",
+    "detect_fps_mismatch correctly identifies when time_scale != 1.0",
+    "verify_sync_global returns PASS status when offset is stable across checkpoints",
+    "verify_sync_global returns FAIL status when offset drifts",
+    "map_time_hdr_to_om correctly applies offset and scale: om_time = hdr_time * scale + offset",
+    "Local time map correctly handles segment-based mapping",
+    "sync_report JSON output matches spec section 3.8 format exactly",
+    "All tests pass with 'pytest tests/test_sync.py -v'"
+  ],
+  "verification": [
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && python -m pytest tests/test_sync.py -v' and confirm all tests pass",
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && ruff check src/auto_openmatte/analysis/' and confirm no linting errors"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

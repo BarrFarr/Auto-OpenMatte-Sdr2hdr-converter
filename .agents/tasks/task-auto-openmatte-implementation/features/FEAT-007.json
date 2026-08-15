@@ -1,0 +1,29 @@
+{
+  "id": "FEAT-007",
+  "type": "feat",
+  "description": "Composition Engine and Output - Implement the final compositing (HDR center + transformed Open Matte borders with feathered blend), preview generation (contact sheets, before/after), final render pipeline via ffmpeg, and HTML report generation. This covers spec sections 13-17.",
+  "status": "pending",
+  "steps": [
+    "Create src/auto_openmatte/processing/composition.py implementing: (a) compose_frame(hdr_frame, om_frame, geometry, transform, blend_width=4) - composites a single output frame: HDR pixels in center 21:9 region are kept UNTOUCHED, transformed Open Matte fills top/bottom bands, feathered blend at boundary (2-10px configurable). Returns 16:9 frame. (b) create_blend_mask(height, width, hdr_region, blend_width) - creates smooth alpha gradient at HDR/OM boundary for seamless transition. (c) apply_full_transform(om_frame, geometry, luminance_mapping, color_transform) - applies geometry warp, luminance mapping, and color correction to Open Matte frame in correct order. (d) validate_composition(composed_frame, hdr_frame, hdr_region) - verifies that HDR pixels in the center are EXACTLY unchanged (pixel-perfect preservation).",
+    "Create src/auto_openmatte/output/__init__.py",
+    "Create src/auto_openmatte/output/preview.py implementing: (a) generate_preview_video(project, output_path, duration=30, start=None) - renders short preview clip using ffmpeg pipe. (b) generate_contact_sheet(project, output_dir, shots_per_page=6) - for each selected shot, generates before/after comparison: HDR 21:9 frame, Open Matte 16:9 frame, final composed 16:9 frame, with border visualization overlay. (c) generate_comparison_frames(hdr_frame, om_frame, composed_frame, shot_id) - creates side-by-side comparison image showing the blend boundary.",
+    "Create src/auto_openmatte/output/render.py implementing: (a) render_final(project, output_path, encoder_settings=None) - orchestrates full render: iterates shots, for each shot applies stored transform to Open Matte frames, composites with HDR, pipes to ffmpeg for encoding. (b) build_ffmpeg_command(output_path, hdr_info, settings) - constructs ffmpeg encode command preserving HDR metadata (color primaries, transfer, matrix, mastering display, MaxCLL). No audio streams. (c) get_default_encoder_settings(hdr_info) - returns sensible defaults for HDR encoding (HEVC 10-bit, appropriate CRF).",
+    "Create src/auto_openmatte/output/report.py implementing: (a) generate_html_report(project, output_path) - generates report.html with all information from spec section 16: source info, synchronization results, shot detection stats, geometry alignment, color analysis, quality metrics, potential problems list. (b) format_source_summary(source_info) - formats source info for display. (c) format_sync_summary(sync_result) - formats sync results. (d) format_quality_assessment(project) - identifies and lists potential problems (low confidence shots, outliers).",
+    "Create tests/test_composition.py with tests: (a) test_compose_preserves_hdr_center (verify HDR pixels are pixel-perfect unchanged after composition), (b) test_blend_mask_smooth_gradient (no hard edges), (c) test_blend_mask_correct_dimensions, (d) test_full_transform_applies_in_order (geometry first, then luminance, then color), (e) test_composition_16_9_output_dimensions, (f) test_ffmpeg_command_includes_hdr_metadata, (g) test_ffmpeg_command_no_audio_streams, (h) test_html_report_contains_required_sections, (i) test_contact_sheet_generation_structure"
+  ],
+  "acceptance_criteria": [
+    "compose_frame produces 16:9 output with untouched HDR center pixels",
+    "Blend mask creates smooth gradient of configurable width at HDR/OM boundary",
+    "validate_composition confirms HDR pixels are bit-for-bit identical in output",
+    "FFmpeg render command preserves all HDR metadata flags",
+    "FFmpeg commands never include audio streams (-an or -map 0:v:0)",
+    "HTML report contains all sections from spec section 16",
+    "All tests pass with 'pytest tests/test_composition.py -v'"
+  ],
+  "verification": [
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && eval \"$(pyenv init -)\" && pyenv shell 3.11.15 && PYTHONPATH=src python -m pytest tests/test_composition.py -v' and confirm all tests pass",
+    "Run 'cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && eval \"$(pyenv init -)\" && pyenv shell 3.11.15 && ruff check src/auto_openmatte/processing/composition.py src/auto_openmatte/output/' and confirm no linting errors"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}
