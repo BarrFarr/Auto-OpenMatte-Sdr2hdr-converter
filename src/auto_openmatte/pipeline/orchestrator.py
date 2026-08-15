@@ -3,14 +3,18 @@
 Executes the pipeline in the correct order:
 1. Inspect sources
 2. Identify streams and HDR
-3. Synchronize (frame offset)
+3. Synchronize (frame offset) — uses cache if available
 4. Validate sync (drift check)
-5. Detect shots on HDR
-6. Map shots to Open Matte
-7. Estimate geometry
+5. Build range spec (map HDR range → OM range)
+6. Detect shots on HDR (within range + context)
+7. Estimate geometry (within range)
 8. Estimate luminance + color per shot
 9. Validate transforms
 10. Save project.json
+
+When a range is specified, detailed processing (shots, geometry, color)
+is limited to the selected range + context window. Synchronization
+remains global (but lightweight and cached).
 """
 
 from __future__ import annotations
@@ -28,6 +32,8 @@ from auto_openmatte.analysis.sync_debug import write_sync_debug
 from auto_openmatte.core.config import PipelineConfig
 from auto_openmatte.core.models import ProjectData, SyncStatus
 from auto_openmatte.core.project import save_project
+from auto_openmatte.core.range_spec import RangeSpec, build_range_spec
+from auto_openmatte.core.sync_cache import load_sync_cache, save_sync_cache
 from auto_openmatte.output.console import print_analysis_report
 
 logger = logging.getLogger(__name__)
@@ -37,13 +43,30 @@ def run_analysis(
     hdr_path: Path,
     openmatte_path: Path,
     config: PipelineConfig | None = None,
+    range_spec: RangeSpec | None = None,
+    start_seconds: float | None = None,
+    end_seconds: float | None = None,
+    duration_seconds: float | None = None,
+    context_seconds: float = 2.0,
 ) -> ProjectData:
-    """Run the complete analysis pipeline.
+    """Run the analysis pipeline, optionally limited to a time range.
+
+    All time arguments refer to the HDR timeline exclusively.
+    The Open Matte range is derived automatically from the sync model.
+
+    Order of operations:
+    1. Inspect → 2. HDR detect → 3. Sync (cached) → 4. Validate
+    5. Build range → 6. Shots (in range) → 7. Geometry → 8. Save
 
     Args:
-        hdr_path: Path to HDR source (or either source — will auto-detect roles).
+        hdr_path: Path to HDR source (or either source — will auto-detect).
         openmatte_path: Path to Open Matte source.
         config: Pipeline configuration.
+        range_spec: Pre-built RangeSpec (overrides start/end/duration).
+        start_seconds: Start time on HDR timeline (seconds).
+        end_seconds: End time on HDR timeline (seconds).
+        duration_seconds: Duration in seconds (alternative to end_seconds).
+        context_seconds: Context window for range processing (default 2.0s).
 
     Returns:
         ProjectData with all analysis results.
@@ -100,25 +123,42 @@ def run_analysis(
     if hdr_source.selected_stream and hdr_source.selected_stream.frame_rate_type.value == "VFR":
         project.warnings.append("HDR source appears to be VFR. Frame-locked sync may drift.")
     if om_source.selected_stream and om_source.selected_stream.frame_rate_type.value == "VFR":
-        project.warnings.append("Open Matte source appears to be VFR. Frame-locked sync may drift.")
+        project.warnings.append(
+            "Open Matte source appears to be VFR. Frame-locked sync may drift."
+        )
 
-    # ===== STAGE 3: SYNCHRONIZATION =====
+    # ===== STAGE 3: SYNCHRONIZATION (with cache) =====
     logger.info("=" * 60)
     logger.info("STAGE 3: Frame-Offset Synchronization")
     logger.info("=" * 60)
 
-    sync_model = find_global_offset(hdr_source, om_source, config=config.sync)
-    logger.info(
-        f"Initial offset found: {sync_model.frame_offset} frames "
-        f"({sync_model.offset_seconds:.3f}s), score={sync_model.confidence:.4f}"
-    )
+    # Try loading from cache first
+    cached_sync = load_sync_cache(output_dir, hdr_source, om_source)
 
-    # ===== STAGE 4: SYNC VALIDATION =====
-    logger.info("=" * 60)
-    logger.info("STAGE 4: Synchronization Validation (Drift Check)")
-    logger.info("=" * 60)
+    if cached_sync is not None:
+        sync_model = cached_sync
+        logger.info(
+            f"Using cached sync: offset={sync_model.frame_offset} frames, "
+            f"confidence={sync_model.confidence:.4f}"
+        )
+    else:
+        sync_model = find_global_offset(hdr_source, om_source, config=config.sync)
+        logger.info(
+            f"Initial offset found: {sync_model.frame_offset} frames "
+            f"({sync_model.offset_seconds:.3f}s), score={sync_model.confidence:.4f}"
+        )
 
-    sync_model = validate_sync(hdr_source, om_source, sync_model, config=config.sync)
+        # ===== STAGE 4: SYNC VALIDATION =====
+        logger.info("=" * 60)
+        logger.info("STAGE 4: Synchronization Validation (Drift Check)")
+        logger.info("=" * 60)
+
+        sync_model = validate_sync(hdr_source, om_source, sync_model, config=config.sync)
+
+        # Save to cache if successful
+        if sync_model.status == SyncStatus.LOCKED:
+            save_sync_cache(output_dir, hdr_source, om_source, sync_model)
+
     project.sync_model = sync_model
 
     if config.debug_sync:
@@ -135,16 +175,68 @@ def run_analysis(
         f"confidence={sync_model.confidence:.4f}, drift={sync_model.drift_frames:.3f}"
     )
 
-    # ===== STAGE 5: SHOT DETECTION =====
+    # ===== STAGE 5: BUILD RANGE SPEC =====
+    # Sync is now locked — we can map HDR frames to OM frames
+    hdr_stream = hdr_source.selected_stream
+    total_frames = 0
+    total_duration = 0.0
+    if hdr_stream:
+        total_frames = hdr_stream.frame_count or int(
+            hdr_stream.duration_seconds * hdr_stream.fps
+        )
+        total_duration = hdr_stream.duration_seconds
+
+    if range_spec is None:
+        # Build from time arguments (or full range if none specified)
+        range_spec = build_range_spec(
+            start=start_seconds,
+            end=end_seconds,
+            duration=duration_seconds,
+            context=context_seconds,
+            fps=hdr_fps,
+            total_frames=total_frames,
+            total_duration=total_duration,
+            frame_offset=sync_model.frame_offset,
+        )
+
+    project.range_spec = range_spec.to_dict()
+
+    if not range_spec.is_full_range:
+        logger.info("=" * 60)
+        logger.info("RANGE MODE: Processing limited to selected range")
+        logger.info("=" * 60)
+        logger.info(
+            f"  HDR range: {range_spec.start_seconds:.3f}s — "
+            f"{range_spec.end_seconds:.3f}s "
+            f"(frames {range_spec.start_frame}–{range_spec.end_frame})"
+        )
+        logger.info(
+            f"  Analysis range (with context): "
+            f"{range_spec.analysis_start_seconds:.3f}s — "
+            f"{range_spec.analysis_end_seconds:.3f}s "
+            f"(frames {range_spec.analysis_start_frame}–{range_spec.analysis_end_frame})"
+        )
+        logger.info(
+            f"  OM range: frames {range_spec.om_start_frame}–{range_spec.om_end_frame}"
+        )
+
+    # ===== STAGE 6: SHOT DETECTION (within range) =====
     logger.info("=" * 60)
     logger.info("STAGE 5: Shot Detection (on HDR timeline)")
     logger.info("=" * 60)
 
-    shots = detect_shots(hdr_source, sync_model, config=config.shots)
+    # If range mode, limit shot detection to analysis range (includes context)
+    shot_frame_range = None
+    if not range_spec.is_full_range:
+        shot_frame_range = (range_spec.analysis_start_frame, range_spec.analysis_end_frame)
+
+    shots = detect_shots(
+        hdr_source, sync_model, config=config.shots, frame_range=shot_frame_range
+    )
     project.shots = shots
     logger.info(f"Detected {len(shots)} shots")
 
-    # ===== STAGE 6: GEOMETRY =====
+    # ===== STAGE 7: GEOMETRY (within range) =====
     logger.info("=" * 60)
     logger.info("STAGE 6: Geometric Alignment")
     logger.info("=" * 60)
@@ -157,11 +249,7 @@ def run_analysis(
         f"confidence={geometry.confidence:.4f}"
     )
 
-    # ===== STAGE 7-8: LUMINANCE + COLOR (placeholder for full implementation) =====
-    # The full luminance and color estimation requires frame extraction in bulk.
-    # For now, mark the project as analysis-complete up to geometry.
-    # Full transform estimation will be implemented in the render stage.
-
+    # ===== STAGE 8: LUMINANCE + COLOR =====
     logger.info("=" * 60)
     logger.info("STAGE 7-8: Transform Estimation (per-shot)")
     logger.info("=" * 60)

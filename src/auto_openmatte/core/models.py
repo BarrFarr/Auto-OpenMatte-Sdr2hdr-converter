@@ -226,3 +226,5 @@ class ProjectData:
     ready_for_render: bool = False
     # Warnings and issues
     warnings: list[str] = field(default_factory=list)
+    # Processing range (None = full source)
+    range_spec: dict[str, Any] | None = None

@@ -158,4 +158,5 @@ def load_project(path: Path) -> ProjectData:
     project.analysis_complete = data.get("analysis_complete", False)
     project.ready_for_render = data.get("ready_for_render", False)
     project.warnings = data.get("warnings", [])
+    project.range_spec = data.get("range_spec")
     return project
