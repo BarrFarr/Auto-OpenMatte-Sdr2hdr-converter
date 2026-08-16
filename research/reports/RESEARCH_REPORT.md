@@ -1,528 +1,214 @@
 # Scene-Based SDR-to-HDR Reshaping: Research Report
 
-**Date:** 2026-08-16
-**Module:** reshaping_research
-**Methodology:** Synthetic scene testing with controlled ground truth
-**Image Size:** 256x256 pixels (6 scenes, 7 models)
-**Peak Luminance:** 4000 nits
+**Generated:** 2026-08-16 23:40:14
+**Total runtime:** 114.0s
+**Image dimensions:** HDR 1920x1600, SDR OM 1920x2160
+**Overlap region:** SDR rows 280:1880
 
----
+## A. Project Audit: What Existing Code Does Right
 
-## A. Current Project Audit
+The production codebase (`src/auto_openmatte/`) already implements:
 
-### Production Pipeline Architecture
+1. **PQ EOTF/OETF** - correct ST 2084 transfer functions with LUT acceleration
+2. **BT.709/BT.2020 color matrices** - proper 3x3 gamut conversion
+3. **Luminance extraction** - BT.2020 weighted luminance computation
+4. **Frame geometry** - correct identification of open matte overlap regions
+5. **Pipeline structure** - modular processing chain with proper data flow
 
-The existing Auto-OpenMatte SDR-to-HDR converter implements:
+These components are technically sound and reusable in the improved pipeline.
 
-| Component | Status | Notes |
-|-----------|--------|-------|
-| Transfer Functions (PQ, HLG, BT.1886) | Complete | Well-tested, benchmarked (P2.16) |
-| Sync/Alignment | Complete | Frame-level SDR/HDR synchronization |
-| Shot Detection | Complete | Scene boundary identification |
-| Geometry/Crop | Complete | Open matte framing calculation |
-| Luminance LUT (65k, PCHIP) | Complete | Benchmarked (P2.14, P2.15) |
-| Color Correction (3x3 + regularization) | Complete | Identity-regularized matrix |
-| Per-shot Transform | Complete | Luminance curve + color matrix + saturation |
-| Full Production Render | Partial | Pipeline exists but needs integration testing |
-| Real-data Validation | Incomplete | Only synthetic/controlled tests so far |
+## B. Conceptual Problems
 
-### What Works Well
+The current approach treats SDR-to-HDR as an **inverse tone mapping** problem,
+applying a fixed expansion curve without reference data. The fundamental issues:
 
-1. **Transfer function math** is correct and fast (sqrt-LUT with 16-bit lerp, P2.16)
-2. **Luminance curve fitting** uses PCHIP with 65k-entry LUT for sub-0.0001 nits accuracy (P2.14)
-3. **Per-shot stability** through shot detection prevents temporal artifacts
-4. **Overlap-only estimation** correctly constrains the problem
+1. **No ground truth** - without HDR reference in the overlap region, any expansion
+   is guesswork. The same SDR value could map to vastly different HDR values
+   depending on the original scene content.
+2. **Scene-independent parameters** - a single curve cannot handle the diversity of
+   real content (dark scenes vs bright scenes, saturated vs neutral).
+3. **Chroma handling** - simple luminance scaling distorts color relationships.
+   Saturated highlights require different treatment than neutral midtones.
+4. **Temporal coherence** - frame-by-frame processing without parameter continuity
+   causes flicker and instability.
 
-### What Is Incomplete
+The correct framing: **reference-guided reshaping** using the overlap region where
+both SDR and HDR data exist to estimate scene-specific transform parameters.
 
-1. Full end-to-end production render pipeline integration testing
-2. Real camera footage validation (current tests are synthetic only)
-3. Optimal model selection based on quality vs. complexity tradeoff
-4. Extension region quality verification beyond the overlap boundary
+## C. Research Background
 
-## B. Conceptual Redesign
+### Dolby Backward Reshaping (US Patent 9,613,407)
+- Polynomial mapping with per-scene coefficients stored in metadata
+- 3-channel piecewise polynomial, typically degree 1-3 per piece
+- Designed for reconstruction from single-layer (SDR) encoding
 
-### The Core Insight
+### CDF-Based Transfer (Histogram Specification)
+- Match cumulative distribution functions between SDR and HDR luminance
+- Non-parametric: stores full transfer LUT (~64-256 points)
+- Guaranteed monotonic, preserves relative ordering
 
-The problem is **NOT** "SDR to HDR conversion" (which would be hallucination/inference).
+### Multi-Modal Regression (MMR)
+- Multiple regression channels for different luminance ranges
+- 3x3 matrix per luminance segment for color correction
+- Dolby Vision Profile 7 uses 3-pivot MMR
 
-The problem IS: **reference-guided scene transform estimation.**
-
-- The HDR center crop is the **grading reference** (not the target to hallucinate)
-- The transform is derived **ONLY from intersection(SDR, HDR)** - the overlap region
-- That same transform is then **applied to the full Open Matte frame**
-- The result: one stable transform per shot, not per frame
-
-### Why This Matters
-
-1. **No AI/ML needed** - this is a constrained optimization problem with ground truth
-2. **Deterministic** - same input always produces same output
-3. **Auditable** - the transform parameters are interpretable (gain, curve, matrix)
-4. **Fast** - fit once per shot, apply via LUT per frame
-5. **Bounded error** - error is measurable against the HDR reference in the overlap
-
-### Problem Formulation
-
-Given:
-- `SDR_wide`: Full open matte frame (e.g., 16:9) in gamma BT.709
-- `HDR_center`: Narrower center crop (e.g., 2.39:1) in PQ/linear BT.2020
-
-Find transform `T_scene` such that:
-- `T_scene(linearize(SDR_wide[overlap]))` closely matches `HDR_center`
-- `T_scene(linearize(SDR_wide[extension]))` continues smoothly beyond boundaries
-- `T_scene` has minimal parameters (10-30) for stability and interpretability
-- `T_scene` is constant within a shot (temporal stability)
-
-## C. Research: Techniques Analyzed
-
-### Patent-Derived Approaches
-
-#### 1. Dolby Backward Reshaping (US11341624B2)
-- **BLUT optimization**: Backward-looking LUT computed from forward reshaping metadata
-- **Separate darks/highlights handling**: Different curve segments for shadow/highlight regions
-- **Slope adjustment**: Ensures no banding by maintaining minimum slope
-- **Brightness preservation polynomial**: Maintains overall brightness relationships
-- **Banding risk estimation**: Quantize-aware curve design
-- **Key insight**: The reshaping function generator receives BOTH SDR and reference HDR
-
-#### 2. CDF-Based Histogram Matching (Patent Family)
-- **Empirical CDFs**: Build cumulative distribution from both signals
-- **Monotonic mapping**: CDF ratio naturally produces monotonic functions
-- **Scene-based**: One mapping per scene/shot
-- **Limitation**: Can be noisy without regularization
-
-#### 3. Segment-Based Reshaping (US10757428B2)
-- **Piecewise functions**: Divide luminance range into segments
-- **Luma/chroma separation**: Independent paths for luminance and color
-- **Knot optimization**: Place breakpoints where the curve changes most
-
-#### 4. MMR - Multivariate Multiple Regression
-- **3x3 matrix**: Predict HDR RGB from SDR RGB
-- **Chroma prediction from luminance**: Cross-channel correlation modeling
-- **Production-proven**: Used in Dolby Vision metadata generation
-
-#### 5. Iterative Optimization (US20230164366A1)
-- **Progressive refinement**: Start coarse, refine iteratively
-- **Error-driven**: Focus parameters where error is largest
-- **Convergence guarantee**: Monotonically decreasing error
-
-### Classical Alternatives Considered
-
-| Technique | Description | Pros | Cons |
-|-----------|-------------|------|------|
-| Isotonic Regression | Monotonic function fitting | Guaranteed monotonic | Overfits, many params |
-| Monotonic Splines | PCHIP/cubic splines through control points | Smooth, few params | Needs good knot placement |
-| Reinhard Operator | Simple global tone mapping | 2 params | Too simple for grading differences |
-| Power-law Mapping | Y' = a * Y^gamma | 2 params | Cannot capture complex curves |
-| Polynomial Regression | Higher-order polynomial fit | Flexible | Not monotonic, oscillates |
-| Multi-segment Linear | Piecewise linear with breakpoints | Simple, interpretable | Discontinuous derivatives |
-
-### Key Insight from Patent Literature
-
-The backward reshaping function generator in Dolby patents receives **BOTH** the SDR
-signal and the reference HDR signal, then optimizes the mapping to minimize reconstruction
-error. This is **exactly our scenario**: we have the SDR Open Matte and the HDR center crop,
-and we need to find the best mapping from one to the other using only the overlap region.
+### Piecewise Techniques
+- Knot-based splines with monotonicity constraints
+- Sigmoid/logistic shoulder functions for highlight rolloff
+- Separate shadow lift for dark region reconstruction
 
 ## D. Proposed Architecture
 
-### Pipeline Diagram
-
 ```
-SDR Open Matte (gamma BT.709)
-        |
-        v
-[BT.1886 EOTF] --> linearize
-        |
-        v
-[BT.709 -> BT.2020] --> gamut conversion
-        |
-        v
-[Overlap Extraction] --> identify center region
-        |                         |
-        v                         v
-[T_scene Estimation]    [HDR Reference (linear BT.2020)]
-  (fit on overlap)              |
-        |                       |
-        v                       v
-[Full-Frame Application]  [Ground Truth Comparison]
-        |
-        v
-[PQ OETF Encoding] --> final HDR output
+SDR Open Matte (BT.709 gamma)
+    |
+    v
+[1] Gamma decode (power 2.4)
+    |
+    v
+[2] BT.709 -> BT.2020 linear (3x3 matrix)
+    |
+    +---> Extract overlap region (rows 280:1880)
+    |         |
+    |         v
+    |     [3] Fit model params (SDR_linear vs HDR_linear)
+    |         |
+    v         v
+[4] Apply fitted model to FULL SDR Open Matte
+    |
+    v
+[5] Apply PQ OETF -> HDR10 output (BT.2020 + PQ)
 ```
 
-### Separation of Concerns
+## E. Candidate Models
 
-| Layer | Purpose | Parameters |
-|-------|---------|------------|
-| **Technical** | EOTF/gamut conversion | Fixed (standards-defined) |
-| **Luminance** | Tone/grading transfer for Y | 6-10 (curve control points) |
-| **Chroma** | Color correction | 9-12 (matrix + saturation) |
-| **Refinement** | Shadow/highlight/hue correction | 3-8 (optional) |
-
-### Design Principles
-
-1. **Estimate once per shot** - temporal stability by construction
-2. **Monotonic luminance** - no tonal inversions
-3. **Identity-regularized color** - prevents color shifts when no correction needed
-4. **Smooth at boundaries** - extension region continues seamlessly
-5. **Bounded parameters** - interpretable and constrained to physical ranges
-
-## E. Candidate Models (A-G)
-
-| ID | Model Name | Parameters | Description |
-|----|-----------|-----------|-------------|
-| A | Model A: Linear Gain | 2 | Constant luminance gain + constant chroma gain. Simplest baseline. |
-| B | Model B: Piecewise Linear | 10 | Piecewise linear luminance (8 segments) + chroma gain per segment. |
-| C | Model C: Monotonic Polynomial | 8 |  |
-| D | Model D: CDF Matching | 65 | Empirical CDF-based histogram matching (non-parametric). |
-| E | Model E: CDF + Regularization | 12 |  |
-| F | Model F: Luma + Chroma Regression | 18 | Optimized piecewise luma + 3x3 color correction matrix. |
-| G | Model G: Hybrid | 29 | Multi-component: CDF luma + highlight shoulder + shadow lift + sat + matrix + hue. |
+| Model | Name | Parameters | Description |
+|-------|------|-----------|-------------|
+| A | Linear Gain | 2 | Y'=a*Y, C'=b*C |
+| B | Piecewise Linear | 10 | 8 luma knots + chroma |
+| C | Monotonic Polynomial | 8 | Degree 4 luma + degree 2 sat |
+| D | CDF Matching | 65 | 64-pt histogram transfer LUT |
+| E | CDF + Regularized | 12 | Smooth 12-pt optimized curve |
+| F | Luma + Chroma Matrix | 18 | Degree 4 poly + 3x3 matrix |
+| G | Hybrid | 29 | Percentile + shoulder/shadow + matrix + hue |
 
 ## F. Synthetic Test Results
 
-### Luminance RMSE (nits) - Lower is Better
-
-| Scene | Model A | Model B | Model C | Model D | Model E | Model F | Model G |
-|-------|------|------|------|------|------|------|------|
-| colorful | 122.5 | 60.001 | 51.853 | 50.447 | 50.114 | 51.982 | 56.014 |
-| difficult | 975.9 | 621.4 | 611.0 | 1661.3 | 788.9 | 587.7 | 606.8 |
-| high_key | 10.252 | 27.317 | 2.311 | 3.970 | 3.948 | 13.681 | 27.985 |
-| low_key | 0.000 | 11.813 | 0.000 | 0.077 | 0.077 | 7.850 | 8.116 |
-| mixed | 4.793 | 20.106 | 3.669 | 3.120 | 3.119 | 12.844 | 17.096 |
-| neutral | 0.000 | 4.250 | 0.000 | 0.011 | 0.011 | 1.874 | 4.929 |
-
-### DeltaE 2000 (Mean) - Lower is Better
-
-| Scene | Model A | Model B | Model C | Model D | Model E | Model F | Model G |
-|-------|------|------|------|------|------|------|------|
-| colorful | 1.649 | 1.226 | 1.086 | 1.124 | 1.149 | 1.046 | 1.008 |
-| difficult | 1.605 | 2.029 | 2.672 | 2.577 | 3.106 | 1.307 | 1.493 |
-| high_key | 0.385 | 0.585 | 0.820 | 0.389 | 0.817 | 0.786 | 1.094 |
-| low_key | 0.000 | 0.355 | 0.000 | 0.009 | 0.009 | 0.669 | 0.257 |
-| mixed | 0.000 | 0.291 | 0.204 | 0.152 | 0.210 | 0.180 | 0.300 |
-| neutral | 0.000 | 0.388 | 0.000 | 0.000 | 0.000 | 0.090 | 0.302 |
-
-### DeltaE ICtCp (Mean) - Lower is Better
-
-| Scene | Model A | Model B | Model C | Model D | Model E | Model F | Model G |
-|-------|------|------|------|------|------|------|------|
-| colorful | 0.054 | 0.057 | 0.049 | 0.048 | 0.052 | 0.047 | 0.053 |
-| difficult | 0.016 | 0.027 | 0.044 | 0.018 | 0.065 | 0.016 | 0.019 |
-| high_key | 0.001 | 0.002 | 0.003 | 0.001 | 0.003 | 0.003 | 0.004 |
-| low_key | 0.000 | 0.002 | 0.000 | 0.000 | 0.000 | 0.006 | 0.002 |
-| mixed | 0.004 | 0.005 | 0.004 | 0.004 | 0.004 | 0.004 | 0.005 |
-| neutral | 0.000 | 0.002 | 0.000 | 0.000 | 0.000 | 0.001 | 0.002 |
-
-### Seam Quality (Continuity Score, 0-1) - Higher is Better
-
-| Scene | Model A | Model B | Model C | Model D | Model E | Model F | Model G |
-|-------|------|------|------|------|------|------|------|
-| colorful | 0.063 | 0.065 | 0.060 | 0.061 | 0.060 | 0.060 | 0.056 |
-| difficult | 0.045 | 0.030 | 0.217 | 0.043 | 0.053 | 0.046 | 0.036 |
-| high_key | 0.016 | 0.016 | 0.016 | 0.017 | 0.017 | 0.016 | 0.018 |
-| low_key | 0.253 | 0.284 | 0.253 | 0.283 | 0.283 | 0.253 | 0.307 |
-| mixed | 0.009 | 0.008 | 0.009 | 0.009 | 0.009 | 0.009 | 0.008 |
-| neutral | 0.061 | 0.071 | 0.061 | 0.062 | 0.062 | 0.066 | 0.058 |
-
-## G. Parameter Count vs. Quality
-
-### Average Luminance RMSE by Model (across all scenes)
-
-| Model | Parameters | Avg RMSE (nits) | Avg Quality Score | Quality/Param |
-|-------|-----------|----------------|-------------------|---------------|
-| Model A: Linear Gain | 2 | 185.58 | 0.7189 | 0.35946 |
-| Model C: Monotonic Polynomial | 8 | 111.48 | 0.7319 | 0.09148 |
-| Model B: Piecewise Linear | 10 | 124.15 | 0.7172 | 0.07172 |
-| Model E: CDF + Regularization | 12 | 141.03 | 0.7249 | 0.06041 |
-| Model F: Luma + Chroma Regression | 18 | 112.65 | 0.7230 | 0.04017 |
-| Model G: Hybrid | 29 | 120.16 | 0.7198 | 0.02482 |
-| Model D: CDF Matching | 65 | 286.49 | 0.7271 | 0.01119 |
-
-### Analysis
-
-- **Best absolute quality:** Model C: Monotonic Polynomial (RMSE = 111.48 nits)
-- **Simplest model within 5% of best:** Model C: Monotonic Polynomial (8 params)
-- **Diminishing returns** observed above ~18-20 parameters
-- Models A-C (2-12 params) show clear quality limitations
-- Models D-G (15-29 params) cluster in a quality plateau
-
-## H. Quality Metrics Detail (Top 3 Models)
-
-### Model C: Monotonic Polynomial
-
-| Scene | Lum MAE | Lum RMSE | dE2000 | dE ICtCp | Seam Top | Seam Bot | Ext Smooth | Overall |
-|-------|---------|----------|--------|----------|----------|----------|-----------|---------|
-| neutral | 0.00 | 0.00 | 0.00 | 0.0000 | 0.069 | 0.054 | 0.994 | 0.8117 |
-| high_key | 1.22 | 2.31 | 0.82 | 0.0026 | 0.000 | 0.033 | 0.954 | 0.7845 |
-| low_key | 0.00 | 0.00 | 0.00 | 0.0000 | 0.253 | 0.254 | 0.996 | 0.8503 |
-| colorful | 30.40 | 51.85 | 1.09 | 0.0489 | 0.115 | 0.005 | 0.926 | 0.7468 |
-| mixed | 2.67 | 3.67 | 0.20 | 0.0044 | 0.005 | 0.013 | 0.989 | 0.7947 |
-| difficult | 317.26 | 611.03 | 2.67 | 0.0441 | 0.428 | 0.006 | 0.998 | 0.4031 |
-
-**Averages:** RMSE=111.48 nits, dE2000=0.80, Seam Continuity=0.103
-
-### Model D: CDF Matching
-
-| Scene | Lum MAE | Lum RMSE | dE2000 | dE ICtCp | Seam Top | Seam Bot | Ext Smooth | Overall |
-|-------|---------|----------|--------|----------|----------|----------|-----------|---------|
-| neutral | 0.00 | 0.01 | 0.00 | 0.0000 | 0.069 | 0.054 | 0.994 | 0.8117 |
-| high_key | 0.25 | 3.97 | 0.39 | 0.0011 | 0.000 | 0.033 | 0.908 | 0.7850 |
-| low_key | 0.01 | 0.08 | 0.01 | 0.0001 | 0.283 | 0.283 | 0.998 | 0.8561 |
-| colorful | 26.71 | 50.45 | 1.12 | 0.0481 | 0.117 | 0.005 | 0.896 | 0.7446 |
-| mixed | 1.84 | 3.12 | 0.15 | 0.0041 | 0.005 | 0.013 | 0.988 | 0.7959 |
-| difficult | 749.40 | 1661.30 | 2.58 | 0.0177 | 0.081 | 0.006 | 0.993 | 0.3693 |
-
-**Averages:** RMSE=286.49 nits, dE2000=0.71, Seam Continuity=0.079
-
-### Model E: CDF + Regularization
-
-| Scene | Lum MAE | Lum RMSE | dE2000 | dE ICtCp | Seam Top | Seam Bot | Ext Smooth | Overall |
-|-------|---------|----------|--------|----------|----------|----------|-----------|---------|
-| neutral | 0.00 | 0.01 | 0.00 | 0.0000 | 0.069 | 0.054 | 0.994 | 0.8117 |
-| high_key | 0.42 | 3.95 | 0.82 | 0.0028 | 0.000 | 0.033 | 0.908 | 0.7786 |
-| low_key | 0.01 | 0.08 | 0.01 | 0.0001 | 0.283 | 0.283 | 0.998 | 0.8561 |
-| colorful | 27.91 | 50.11 | 1.15 | 0.0525 | 0.116 | 0.005 | 0.899 | 0.7447 |
-| mixed | 1.88 | 3.12 | 0.21 | 0.0044 | 0.005 | 0.013 | 0.988 | 0.7950 |
-| difficult | 449.56 | 788.90 | 3.11 | 0.0652 | 0.100 | 0.005 | 0.996 | 0.3635 |
-
-**Averages:** RMSE=141.03 nits, dE2000=0.88, Seam Continuity=0.080
-
-
-## I. Performance (CPU Timing)
-
-Measured on 256x256 images. Times are averages across all 6 scenes.
-
-| Model | Params | Avg Fit (ms) | Avg Apply (ms) | Total (ms) | Fit/Apply Ratio |
-|-------|--------|-------------|---------------|------------|-----------------|
-| Model A: Linear Gain | 2 | 5.7 | 2.4 | 8.1 | 2.3x |
-| Model B: Piecewise Linear | 10 | 7.7 | 3.2 | 10.9 | 2.4x |
-| Model C: Monotonic Polynomial | 8 | 144.8 | 12.1 | 156.8 | 12.0x |
-| Model D: CDF Matching | 65 | 5.9 | 3.3 | 9.2 | 1.8x |
-| Model E: CDF + Regularization | 12 | 164.9 | 4.3 | 169.2 | 38.4x |
-| Model F: Luma + Chroma Regression | 18 | 13.4 | 8.7 | 22.1 | 1.5x |
-| Model G: Hybrid | 29 | 28.6 | 8.0 | 36.6 | 3.6x |
-
-### Notes
-
-- Fit time dominates for optimization-based models (D, E, F, G)
-- Apply time is similar across all models (dominated by array operations)
-- For production: fit once per shot (~1000 frames), apply per frame
-- At 256x256, all models complete in well under 1 second
-- For 4K frames, apply time scales ~256x but remains sub-second with LUT optimization
-
-## J. Experiment Results
-
-### J.1 Strategy Comparison: All Pixels (A) vs. Representative Subsampling (B)
-
-| Scene | Strategy A RMSE | Strategy B RMSE | A Fit (ms) | B Fit (ms) | Speedup |
-|-------|----------------|----------------|-----------|-----------|---------|
-| neutral | 4.93 | 5.38 | 26.7 | 12.6 | 2.12x |
-| high_key | 27.99 | 21.59 | 28.2 | 12.4 | 2.27x |
-| low_key | 8.12 | 9.83 | 28.3 | 14.0 | 2.03x |
-| colorful | 56.01 | 70.39 | 26.0 | 12.5 | 2.08x |
-| mixed | 17.10 | 26.82 | 26.8 | 12.1 | 2.21x |
-| difficult | 606.80 | 627.12 | 27.2 | 13.4 | 2.02x |
-
-**Finding:** Strategy B achieves 5.6% worse quality with significantly fewer samples, enabling faster fitting.
-
-### J.2 Luma-Only (Model B) vs. Full RGB Regression (Model F)
-
-| Scene | Model B RMSE | Model F RMSE | Quality Ratio (B/F) |
-|-------|-------------|-------------|-------------------|
-| neutral | 4.25 | 1.87 | 2.27x |
-| high_key | 27.32 | 13.68 | 2.00x |
-| low_key | 11.81 | 7.85 | 1.50x |
-| colorful | 60.00 | 51.98 | 1.15x |
-| mixed | 20.11 | 12.84 | 1.57x |
-| difficult | 621.40 | 587.67 | 1.06x |
-
-**Finding:** Model F (full RGB) is on average 1.59x better than luma-only Model B. The 3x3 color matrix provides measurable improvement, especially on colorful content.
-
-### J.3 Hue Correction Necessity
-
-| Scene | With Hue RMSE | Without Hue RMSE | Hue Shift (deg) | Improvement |
-|-------|--------------|-----------------|-----------------|-------------|
-| neutral | 4.93 | 4.93 | 0.002 | 0.0% |
-| high_key | 27.99 | 27.99 | 0.000 | 0.0% |
-| low_key | 8.12 | 8.12 | 0.001 | 0.0% |
-| colorful | 56.01 | 56.05 | 0.477 | 0.1% |
-| mixed | 17.10 | 17.10 | 0.000 | -0.0% |
-| difficult | 606.80 | 606.80 | 0.000 | -0.0% |
-
-**Finding:** Hue correction provides 0.0% average improvement. Mean hue shift detected: 0.080 degrees. Marginal benefit - can be omitted for simpler model.
-
-### J.4 Temporal Stability (noise sigma = 0.01)
-
-| Model | Scene | Param CV | RMSE Std | Flicker Risk |
-|-------|-------|----------|----------|-------------|
-| Model G: Hybrid | neutral | 0.0006 | 0.06 | 0.000 |
-| Model F: Luma + Chroma Regression | neutral | 0.0019 | 0.03 | 0.000 |
-| Model B: Piecewise Linear | neutral | 0.0006 | 0.03 | 0.000 |
-| Model G: Hybrid | mixed | 0.0009 | 0.22 | 0.000 |
-| Model F: Luma + Chroma Regression | mixed | 0.0032 | 0.08 | 0.000 |
-| Model B: Piecewise Linear | mixed | 0.0010 | 0.09 | 0.000 |
-| Model G: Hybrid | difficult | 0.0011 | 2.35 | 0.000 |
-| Model F: Luma + Chroma Regression | difficult | 0.0028 | 0.87 | 0.000 |
-| Model B: Piecewise Linear | difficult | 0.0011 | 1.23 | 0.000 |
-
-**Finding:** Average parameter coefficient of variation = 0.0015. Average flicker risk = 0.000. All models show excellent temporal stability under small noise perturbations, confirming the per-shot fitting approach prevents frame-to-frame flicker.
-
-### J.5 Robustness to Sample Count
-
-| Scene | 100 samples | 1000 | 5000 | 20000 | 100000 | Converged At |
-|-------|------------|------|------|-------|--------|-------------|
-| neutral | 4.74 | 4.18 | 4.70 | 4.92 | 4.93 | 1000 |
-| mixed | 12.94 | 17.43 | 17.69 | 16.21 | 17.08 | 100 |
-| difficult | 708.05 | 621.42 | 613.85 | 601.78 | 605.20 | 1000 |
-
-**Finding:** Quality converges at approximately 700 samples. Beyond 5000 samples, marginal improvements are minimal (<5%). This confirms that representative subsampling is viable for production speed.
-
-### J.6 Parameter Reduction Sweep (Model G variants)
-
-**Scene: neutral**
-
-| Configuration | Params | RMSE (nits) | Relative to Full |
-|--------------|--------|-------------|-----------------|
-| Full G (29p) | 29 | 4.93 | 1.000x |
-| No hue (26p) | 26 | 4.93 | 1.000x |
-| No shadow (27p) | 27 | 6.27 | 1.272x |
-| 6 luma pts (25p) | 25 | 5.66 | 1.149x |
-| No hue+shadow (24p) | 24 | 6.27 | 1.272x |
-| 6 luma no hue (22p) * | 22 | 5.66 | 1.149x |
-| Minimal (18p) | 20 | 8.49 | 1.723x |
-
-Best quality-per-parameter: **6 luma no hue (22p)**
-
-**Scene: mixed**
-
-| Configuration | Params | RMSE (nits) | Relative to Full |
-|--------------|--------|-------------|-----------------|
-| Full G (29p) | 29 | 17.08 | 1.000x |
-| No hue (26p) | 26 | 17.08 | 1.000x |
-| No shadow (27p) | 27 | 17.18 | 1.006x |
-| 6 luma pts (25p) | 25 | 48.53 | 2.841x |
-| No hue+shadow (24p) * | 24 | 17.18 | 1.006x |
-| 6 luma no hue (22p) | 22 | 48.53 | 2.841x |
-| Minimal (18p) | 20 | 48.72 | 2.852x |
-
-Best quality-per-parameter: **No hue+shadow (24p)**
-
-**Scene: difficult**
-
-| Configuration | Params | RMSE (nits) | Relative to Full |
-|--------------|--------|-------------|-----------------|
-| Full G (29p) | 29 | 605.20 | 1.000x |
-| No hue (26p) | 26 | 605.20 | 1.000x |
-| No shadow (27p) | 27 | 605.21 | 1.000x |
-| 6 luma pts (25p) | 25 | 689.70 | 1.140x |
-| No hue+shadow (24p) | 24 | 605.21 | 1.000x |
-| 6 luma no hue (22p) | 22 | 689.70 | 1.140x |
-| Minimal (18p) * | 20 | 689.73 | 1.140x |
-
-Best quality-per-parameter: **Minimal (18p)**
-
-
-## K. Recommendation
-
-### Model Selection
-
-**Best absolute quality:** Model C: Monotonic Polynomial
-- Average overall quality score: 0.7319
-- Average luminance RMSE: 111.48 nits
-- Parameter count: 8
-
-**Recommended for production:** Model C: Monotonic Polynomial
-- Average overall quality score: 0.7319
-- Average luminance RMSE: 111.48 nits
-- Parameter count: 8
-- Achieves 100.0% of best RMSE quality
-
-### Justification
-
-1. **Quality threshold met:** The recommended model achieves luminance RMSE within 10% of the best model across all synthetic test scenes.
-
-2. **Parameter efficiency:** Fewer parameters mean:
-   - More stable fitting (less overfitting risk)
-   - Faster optimization
-   - Better temporal stability (fewer degrees of freedom to vary)
-   - Simpler implementation and debugging
-
-3. **Production considerations:**
-   - Per-shot fitting: model parameters computed once per shot
-   - Per-frame application: LUT-based application at full resolution
-   - The production pipeline already implements PCHIP + 65k LUT for luminance
-   - 3x3 matrix color correction is already implemented and tested
-
-### Production Integration Path
-
-1. Use the existing `luminance_curve + color_matrix + saturation` pipeline structure
-2. Replace the fitting algorithm with the recommended model's approach
-3. Maintain the 65k LUT for luminance application (P2.14/P2.15 validated)
-4. Keep regularization toward identity for the color matrix
-5. Validate on real camera footage before deployment
-
-## L. Answer to Key Research Question
-
-### Question
-
-> Can we take SDR Open Matte + HDR reference, analyze only the overlap region, > derive approximately 10-30 parameters, and produce HDR Open Matte that matches > the reference in the center and continues the grading smoothly in the extensions?
-
-### Answer: **YES**
-
-**Confidence:** MODERATE
-
-### Evidence
-
-1. **Center region accuracy:** Best model (Model C: Monotonic Polynomial, 8 params) achieves 111.48 nits RMSE in the overlap region, demonstrating that the transform estimated from the overlap closely reconstructs the HDR reference.
-
-2. **Seam continuity:** Average seam continuity score = 0.103 (0=discontinuous, 1=perfectly smooth). The fitted transform transitions smoothly at boundaries.
-
-3. **Extension quality:** Average extension smoothness = 0.976. The transform applied beyond the overlap produces plausible content without artifacts or clipping.
-
-4. **Parameter count:** Effective results achieved with 18-29 parameters, well within the 10-30 target range.
-
-5. **Temporal stability:** Flicker risk = 0.000 under frame noise. Per-shot fitting provides excellent frame-to-frame consistency.
-
-### Caveats
-
-1. **Synthetic data only:** These results use controlled synthetic scenes. Real camera footage may present additional challenges (noise, compression artifacts, more complex grading decisions).
-
-2. **Tone mapping known:** The SDR was generated from HDR with a known tone mapping operator. Real-world SDR may have more complex/artistic grading that is harder to invert.
-
-3. **Extension assumption:** The extension region quality depends on the assumption that the grading intent extends linearly beyond the crop boundary. Artistic vignetting or edge-specific grading would violate this assumption.
-
-### Next Steps
-
-1. Validate on real camera footage from production workflows
-2. Test with real HDR grading (not synthetic tone mapping)
-3. Evaluate edge cases: dissolves, rapid lighting changes, chromatic aberration
-4. Benchmark at full 4K resolution for production timing validation
-5. A/B test against existing production pipeline output
+### RMSE (nits) by Model and Scene
+
+| Model | colorful | difficult | high_key | low_key | mixed | neutral | Avg |
+|---|---|---|---|---|---|---|---|
+| A: Linear Gain | 488.4 | 1158.5 | 1057.5 | 16.5 | 323.6 | 93.9 | 523.1 |
+| B: Piecewise Linear | 185.6 | 385.9 | 365.4 | 46.3 | 67.0 | 24.2 | 179.1 |
+| C: Monotonic Polynomial | 169.1 | 378.7 | 764.3 | 0.0 | 4.4 | 0.0 | 219.4 |
+| D: CDF Matching | 181.0 | 964.9 | 1918.8 | 0.1 | 3.2 | 0.0 | 511.3 |
+| E: CDF + Regularized | 170.0 | 389.7 | 591.0 | 3.2 | 6.1 | 2.7 | 193.8 |
+| F: Luma + Chroma Matrix | 170.4 | 378.7 | 762.9 | 0.0 | 4.4 | 0.0 | 219.4 |
+| G: Hybrid | 172.6 | 352.9 | 380.1 | 35.0 | 12.7 | 17.7 | 161.8 |
+
+### MAE (nits) by Model and Scene
+
+| Model | colorful | difficult | high_key | low_key | mixed | neutral | Avg |
+|---|---|---|---|---|---|---|---|
+| A: Linear Gain | 252.4 | 540.3 | 572.2 | 1.3 | 165.9 | 71.0 | 267.2 |
+| B: Piecewise Linear | 115.5 | 178.4 | 185.3 | 5.7 | 42.6 | 15.1 | 90.4 |
+| C: Monotonic Polynomial | 100.3 | 176.1 | 569.1 | 0.0 | 3.2 | 0.0 | 141.5 |
+| D: CDF Matching | 97.8 | 334.1 | 853.9 | 0.0 | 1.6 | 0.0 | 214.6 |
+| E: CDF + Regularized | 99.9 | 162.9 | 302.9 | 1.7 | 4.1 | 1.5 | 95.5 |
+| F: Luma + Chroma Matrix | 99.9 | 175.9 | 567.0 | 0.0 | 3.2 | 0.0 | 141.0 |
+| G: Hybrid | 104.4 | 142.2 | 147.7 | 5.2 | 8.8 | 9.6 | 69.7 |
+
+### Delta E 2000 by Model and Scene
+
+| Model | colorful | difficult | high_key | low_key | mixed | neutral | Avg |
+|---|---|---|---|---|---|---|---|
+| A: Linear Gain | 5.69 | 4.58 | 4.11 | 0.03 | 2.53 | 1.08 | 3.00 |
+| B: Piecewise Linear | 5.59 | 2.08 | 1.84 | 0.18 | 1.33 | 0.28 | 1.88 |
+| C: Monotonic Polynomial | 3.95 | 1.83 | 7.93 | 0.00 | 0.47 | 0.00 | 2.36 |
+| D: CDF Matching | 5.52 | 2.08 | 3.79 | 0.01 | 1.16 | 0.08 | 2.11 |
+| E: CDF + Regularized | 5.10 | 1.39 | 1.54 | 0.10 | 0.47 | 0.02 | 1.44 |
+| F: Luma + Chroma Matrix | 5.37 | 2.11 | 8.47 | 0.01 | 1.30 | 0.09 | 2.89 |
+| G: Hybrid | 4.02 | 1.44 | 1.22 | 0.15 | 0.61 | 0.18 | 1.27 |
+
+### Seam Error (nits) by Model and Scene
+
+| Model | colorful | difficult | high_key | low_key | mixed | neutral | Avg |
+|---|---|---|---|---|---|---|---|
+| A: Linear Gain | 2.4 | 1.0 | 17.6 | 0.0 | 10.3 | 3.0 | 5.7 |
+| B: Piecewise Linear | 3.0 | 1.3 | 120.1 | 0.0 | 0.2 | 4.5 | 21.5 |
+| C: Monotonic Polynomial | 3.1 | 1.7 | 175.8 | 0.0 | 27.6 | 4.1 | 35.4 |
+| D: CDF Matching | 3.3 | 1.1 | 159.0 | 0.0 | 10.7 | 4.1 | 29.7 |
+| E: CDF + Regularized | 3.1 | 1.2 | 107.6 | 0.0 | 8.1 | 4.1 | 20.7 |
+| F: Luma + Chroma Matrix | 3.1 | 1.7 | 175.8 | 0.0 | 27.6 | 4.1 | 35.4 |
+| G: Hybrid | 3.3 | 1.0 | 165.3 | 0.0 | 18.9 | 4.2 | 32.1 |
+
+## G. Stability Results
+
+Coefficient of variation across 5 refits with additive Gaussian noise (sigma=0.005):
+
+| Model | CV Score | Rating |
+|-------|----------|--------|
+| A: Linear Gain | 0.0002 | Excellent |
+| B: Piecewise Linear | 0.0002 | Excellent |
+| C: Monotonic Polynomial | 0.7446 | Poor |
+| D: CDF Matching | 0.0040 | Excellent |
+| E: CDF + Regularized | 0.0045 | Excellent |
+| F: Luma + Chroma Matrix | 0.3473 | Poor |
+| G: Hybrid | 0.0007 | Excellent |
+
+Lower CV = more temporally stable parameters (less flicker risk).
+
+## H. Parameter Reduction Curve
+
+Model E (CDF + Regularized) tested with varying control point counts:
+
+| Control Points | RMSE (nits) |
+|---------------|-------------|
+| 4 | 27.0 |
+| 6 | 10.3 |
+| 8 | 5.7 |
+| 12 | 2.7 |
+| 16 | 1.6 |
+| 24 | 0.9 |
+| 32 | 0.7 |
+
+Diminishing returns visible above 12 control points for typical content.
+
+## I. Recommendation
+
+**Best overall RMSE:** G: Hybrid (161.8 nits avg)
+**Best overall Delta E:** G: Hybrid (1.27 avg)
+
+### Selection Criteria
+
+The recommended model balances:
+1. Reconstruction accuracy (low RMSE and Delta E)
+2. Parameter efficiency (fewer params = easier metadata, faster fitting)
+3. Temporal stability (low CV = no flicker)
+4. Seam quality (smooth transitions at overlap boundaries)
+
+### Final Recommendation
+
+**Recommended model: G: Hybrid**
+
+Rationale:
+- Average RMSE: 161.8 nits
+- Average Delta E: 1.27
+- Stability CV: 0.0007
+- Parameter count: 29
+
+This model provides the best trade-off between accuracy, stability, and simplicity
+for production integration. The overlap region provides sufficient constraint data
+to estimate scene-specific parameters on a per-shot or per-frame basis.
+
+### Integration Path
+
+1. Extract overlap region from frame geometry (already implemented)
+2. Linearize SDR overlap (gamma 2.4 decode + BT.709->BT.2020)
+3. Fit model parameters from overlap (SDR vs HDR luminance + chroma)
+4. Apply fitted model to full SDR open matte extent
+5. Encode output as PQ (ST 2084) in BT.2020 container
 
 ---
 
-## Methodology Notes
-
-- All tests use 256x256 pixel synthetic images for fast iteration
-- Random seed fixed at 42 for deterministic, reproducible results
-- Peak luminance set to 4000 nits (typical HDR mastering target)
-- DeltaE2000 computed using simplified CIEDE2000 (adequate for relative comparison)
-- DeltaE ICtCp computed in perceptual ICtCp space (better suited for HDR)
-- Extension rows: 48 pixels above and below HDR center crop
-- All models operate on linear BT.2020 RGB after standardized input processing
-
-## References
-
-1. US11341624B2 - Dolby backward reshaping with BLUT optimization
-2. US10757428B2 - Segment-based reshaping with piecewise functions
-3. US20230164366A1 - Iterative optimization of reshaping functions
-4. ITU-R BT.2100 - HDR/WCG standards (PQ and HLG)
-5. ITU-R BT.2020 - Wide colour gamut
-6. SMPTE ST 2084 - Perceptual Quantizer
-7. CIE 142-2001 - CIEDE2000 colour difference formula
-8. ITU-R BT.2124 - ICtCp colour space
-
----
-*Generated by reshaping_research module*
+*Report generated by research/run_comparison.py*
