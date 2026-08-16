@@ -219,12 +219,12 @@ SDR Open Matte (gamma BT.709)
 
 | Scene | Model A | Model B | Model C | Model D | Model E | Model F | Model G |
 |-------|------|------|------|------|------|------|------|
-| colorful | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
-| difficult | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
-| high_key | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
-| low_key | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
-| mixed | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
-| neutral | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 |
+| colorful | 0.063 | 0.065 | 0.060 | 0.061 | 0.060 | 0.060 | 0.056 |
+| difficult | 0.045 | 0.030 | 0.217 | 0.043 | 0.053 | 0.046 | 0.036 |
+| high_key | 0.016 | 0.016 | 0.016 | 0.017 | 0.017 | 0.016 | 0.018 |
+| low_key | 0.253 | 0.284 | 0.253 | 0.283 | 0.283 | 0.253 | 0.307 |
+| mixed | 0.009 | 0.008 | 0.009 | 0.009 | 0.009 | 0.009 | 0.008 |
+| neutral | 0.061 | 0.071 | 0.061 | 0.062 | 0.062 | 0.066 | 0.058 |
 
 ## G. Parameter Count vs. Quality
 
@@ -232,13 +232,13 @@ SDR Open Matte (gamma BT.709)
 
 | Model | Parameters | Avg RMSE (nits) | Avg Quality Score | Quality/Param |
 |-------|-----------|----------------|-------------------|---------------|
-| Model A: Linear Gain | 2 | 185.58 | 0.7040 | 0.35200 |
-| Model C: Monotonic Polynomial | 8 | 111.48 | 0.7113 | 0.08891 |
-| Model B: Piecewise Linear | 10 | 124.15 | 0.7014 | 0.07014 |
-| Model E: CDF + Regularization | 12 | 141.03 | 0.7088 | 0.05907 |
-| Model F: Luma + Chroma Regression | 18 | 112.65 | 0.7081 | 0.03934 |
-| Model G: Hybrid | 29 | 120.16 | 0.7037 | 0.02427 |
-| Model D: CDF Matching | 65 | 286.49 | 0.7113 | 0.01094 |
+| Model A: Linear Gain | 2 | 185.58 | 0.7189 | 0.35946 |
+| Model C: Monotonic Polynomial | 8 | 111.48 | 0.7319 | 0.09148 |
+| Model B: Piecewise Linear | 10 | 124.15 | 0.7172 | 0.07172 |
+| Model E: CDF + Regularization | 12 | 141.03 | 0.7249 | 0.06041 |
+| Model F: Luma + Chroma Regression | 18 | 112.65 | 0.7230 | 0.04017 |
+| Model G: Hybrid | 29 | 120.16 | 0.7198 | 0.02482 |
+| Model D: CDF Matching | 65 | 286.49 | 0.7271 | 0.01119 |
 
 ### Analysis
 
@@ -250,44 +250,44 @@ SDR Open Matte (gamma BT.709)
 
 ## H. Quality Metrics Detail (Top 3 Models)
 
-### Model D: CDF Matching
-
-| Scene | Lum MAE | Lum RMSE | dE2000 | dE ICtCp | Seam Top | Seam Bot | Ext Smooth | Overall |
-|-------|---------|----------|--------|----------|----------|----------|-----------|---------|
-| neutral | 0.00 | 0.01 | 0.00 | 0.0000 | 0.000 | 0.000 | 0.994 | 0.7994 |
-| high_key | 0.25 | 3.97 | 0.39 | 0.0011 | 0.000 | 0.000 | 0.908 | 0.7817 |
-| low_key | 0.01 | 0.08 | 0.01 | 0.0001 | 0.000 | 0.000 | 0.998 | 0.7996 |
-| colorful | 26.71 | 50.45 | 1.12 | 0.0481 | 0.000 | 0.000 | 0.896 | 0.7324 |
-| mixed | 1.84 | 3.12 | 0.15 | 0.0041 | 0.000 | 0.000 | 0.988 | 0.7941 |
-| difficult | 749.40 | 1661.30 | 2.58 | 0.0177 | 0.000 | 0.000 | 0.993 | 0.3607 |
-
-**Averages:** RMSE=286.49 nits, dE2000=0.71, Seam Continuity=0.000
-
 ### Model C: Monotonic Polynomial
 
 | Scene | Lum MAE | Lum RMSE | dE2000 | dE ICtCp | Seam Top | Seam Bot | Ext Smooth | Overall |
 |-------|---------|----------|--------|----------|----------|----------|-----------|---------|
-| neutral | 0.00 | 0.00 | 0.00 | 0.0000 | 0.000 | 0.000 | 0.994 | 0.7994 |
-| high_key | 1.22 | 2.31 | 0.82 | 0.0026 | 0.000 | 0.000 | 0.954 | 0.7813 |
-| low_key | 0.00 | 0.00 | 0.00 | 0.0000 | 0.000 | 0.000 | 0.996 | 0.7996 |
-| colorful | 30.40 | 51.85 | 1.09 | 0.0489 | 0.000 | 0.000 | 0.926 | 0.7348 |
-| mixed | 2.67 | 3.67 | 0.20 | 0.0044 | 0.000 | 0.000 | 0.989 | 0.7929 |
-| difficult | 317.26 | 611.03 | 2.67 | 0.0441 | 0.000 | 0.000 | 0.998 | 0.3597 |
+| neutral | 0.00 | 0.00 | 0.00 | 0.0000 | 0.069 | 0.054 | 0.994 | 0.8117 |
+| high_key | 1.22 | 2.31 | 0.82 | 0.0026 | 0.000 | 0.033 | 0.954 | 0.7845 |
+| low_key | 0.00 | 0.00 | 0.00 | 0.0000 | 0.253 | 0.254 | 0.996 | 0.8503 |
+| colorful | 30.40 | 51.85 | 1.09 | 0.0489 | 0.115 | 0.005 | 0.926 | 0.7468 |
+| mixed | 2.67 | 3.67 | 0.20 | 0.0044 | 0.005 | 0.013 | 0.989 | 0.7947 |
+| difficult | 317.26 | 611.03 | 2.67 | 0.0441 | 0.428 | 0.006 | 0.998 | 0.4031 |
 
-**Averages:** RMSE=111.48 nits, dE2000=0.80, Seam Continuity=0.000
+**Averages:** RMSE=111.48 nits, dE2000=0.80, Seam Continuity=0.103
+
+### Model D: CDF Matching
+
+| Scene | Lum MAE | Lum RMSE | dE2000 | dE ICtCp | Seam Top | Seam Bot | Ext Smooth | Overall |
+|-------|---------|----------|--------|----------|----------|----------|-----------|---------|
+| neutral | 0.00 | 0.01 | 0.00 | 0.0000 | 0.069 | 0.054 | 0.994 | 0.8117 |
+| high_key | 0.25 | 3.97 | 0.39 | 0.0011 | 0.000 | 0.033 | 0.908 | 0.7850 |
+| low_key | 0.01 | 0.08 | 0.01 | 0.0001 | 0.283 | 0.283 | 0.998 | 0.8561 |
+| colorful | 26.71 | 50.45 | 1.12 | 0.0481 | 0.117 | 0.005 | 0.896 | 0.7446 |
+| mixed | 1.84 | 3.12 | 0.15 | 0.0041 | 0.005 | 0.013 | 0.988 | 0.7959 |
+| difficult | 749.40 | 1661.30 | 2.58 | 0.0177 | 0.081 | 0.006 | 0.993 | 0.3693 |
+
+**Averages:** RMSE=286.49 nits, dE2000=0.71, Seam Continuity=0.079
 
 ### Model E: CDF + Regularization
 
 | Scene | Lum MAE | Lum RMSE | dE2000 | dE ICtCp | Seam Top | Seam Bot | Ext Smooth | Overall |
 |-------|---------|----------|--------|----------|----------|----------|-----------|---------|
-| neutral | 0.00 | 0.01 | 0.00 | 0.0000 | 0.000 | 0.000 | 0.994 | 0.7994 |
-| high_key | 0.42 | 3.95 | 0.82 | 0.0028 | 0.000 | 0.000 | 0.908 | 0.7753 |
-| low_key | 0.01 | 0.08 | 0.01 | 0.0001 | 0.000 | 0.000 | 0.998 | 0.7996 |
-| colorful | 27.91 | 50.11 | 1.15 | 0.0525 | 0.000 | 0.000 | 0.899 | 0.7326 |
-| mixed | 1.88 | 3.12 | 0.21 | 0.0044 | 0.000 | 0.000 | 0.988 | 0.7932 |
-| difficult | 449.56 | 788.89 | 3.11 | 0.0652 | 0.000 | 0.000 | 0.996 | 0.3530 |
+| neutral | 0.00 | 0.01 | 0.00 | 0.0000 | 0.069 | 0.054 | 0.994 | 0.8117 |
+| high_key | 0.42 | 3.95 | 0.82 | 0.0028 | 0.000 | 0.033 | 0.908 | 0.7786 |
+| low_key | 0.01 | 0.08 | 0.01 | 0.0001 | 0.283 | 0.283 | 0.998 | 0.8561 |
+| colorful | 27.91 | 50.11 | 1.15 | 0.0525 | 0.116 | 0.005 | 0.899 | 0.7447 |
+| mixed | 1.88 | 3.12 | 0.21 | 0.0044 | 0.005 | 0.013 | 0.988 | 0.7950 |
+| difficult | 449.56 | 788.90 | 3.11 | 0.0652 | 0.100 | 0.005 | 0.996 | 0.3635 |
 
-**Averages:** RMSE=141.03 nits, dE2000=0.88, Seam Continuity=0.000
+**Averages:** RMSE=141.03 nits, dE2000=0.88, Seam Continuity=0.080
 
 
 ## I. Performance (CPU Timing)
@@ -296,13 +296,13 @@ Measured on 256x256 images. Times are averages across all 6 scenes.
 
 | Model | Params | Avg Fit (ms) | Avg Apply (ms) | Total (ms) | Fit/Apply Ratio |
 |-------|--------|-------------|---------------|------------|-----------------|
-| Model A: Linear Gain | 2 | 4.9 | 2.0 | 7.0 | 2.5x |
-| Model B: Piecewise Linear | 10 | 6.5 | 2.6 | 9.1 | 2.5x |
-| Model C: Monotonic Polynomial | 8 | 21.1 | 4.8 | 25.9 | 4.4x |
-| Model D: CDF Matching | 65 | 5.4 | 3.1 | 8.4 | 1.8x |
-| Model E: CDF + Regularization | 12 | 16.8 | 3.3 | 20.2 | 5.1x |
-| Model F: Luma + Chroma Regression | 18 | 7.0 | 4.0 | 11.0 | 1.7x |
-| Model G: Hybrid | 29 | 23.3 | 6.1 | 29.4 | 3.8x |
+| Model A: Linear Gain | 2 | 5.1 | 2.0 | 7.1 | 2.5x |
+| Model B: Piecewise Linear | 10 | 6.7 | 2.6 | 9.3 | 2.6x |
+| Model C: Monotonic Polynomial | 8 | 23.8 | 4.6 | 28.4 | 5.1x |
+| Model D: CDF Matching | 65 | 5.4 | 2.9 | 8.3 | 1.9x |
+| Model E: CDF + Regularization | 12 | 18.5 | 3.3 | 21.9 | 5.6x |
+| Model F: Luma + Chroma Regression | 18 | 7.4 | 4.6 | 12.0 | 1.6x |
+| Model G: Hybrid | 29 | 24.1 | 6.8 | 30.9 | 3.6x |
 
 ### Notes
 
@@ -318,12 +318,12 @@ Measured on 256x256 images. Times are averages across all 6 scenes.
 
 | Scene | Strategy A RMSE | Strategy B RMSE | A Fit (ms) | B Fit (ms) | Speedup |
 |-------|----------------|----------------|-----------|-----------|---------|
-| neutral | 4.93 | 5.38 | 22.4 | 10.5 | 2.14x |
-| high_key | 27.99 | 21.59 | 22.5 | 10.4 | 2.17x |
-| low_key | 8.12 | 9.83 | 23.8 | 10.4 | 2.28x |
-| colorful | 56.01 | 70.39 | 20.7 | 9.9 | 2.09x |
-| mixed | 17.10 | 26.82 | 22.0 | 9.6 | 2.30x |
-| difficult | 606.80 | 627.12 | 21.6 | 10.2 | 2.12x |
+| neutral | 4.93 | 5.38 | 23.2 | 10.3 | 2.24x |
+| high_key | 27.99 | 21.59 | 22.3 | 10.3 | 2.16x |
+| low_key | 8.12 | 9.83 | 24.3 | 11.1 | 2.20x |
+| colorful | 56.01 | 70.39 | 21.2 | 10.2 | 2.06x |
+| mixed | 17.10 | 26.82 | 23.7 | 10.2 | 2.33x |
+| difficult | 606.80 | 627.12 | 23.8 | 10.4 | 2.30x |
 
 **Finding:** Strategy B achieves 5.6% worse quality with significantly fewer samples, enabling faster fitting.
 
@@ -428,20 +428,20 @@ Best quality-per-parameter: **Minimal (18p)**
 
 ### Model Selection
 
-**Best absolute quality:** Model D: CDF Matching
-- Average overall quality score: 0.7113
-- Average luminance RMSE: 286.49 nits
-- Parameter count: 65
+**Best absolute quality:** Model C: Monotonic Polynomial
+- Average overall quality score: 0.7319
+- Average luminance RMSE: 111.48 nits
+- Parameter count: 8
 
-**Recommended for production:** Model A: Linear Gain
-- Average overall quality score: 0.7040
-- Average luminance RMSE: 185.58 nits
-- Parameter count: 2
-- Achieves 99.0% of best quality
+**Recommended for production:** Model C: Monotonic Polynomial
+- Average overall quality score: 0.7319
+- Average luminance RMSE: 111.48 nits
+- Parameter count: 8
+- Achieves 100.0% of best RMSE quality
 
 ### Justification
 
-1. **Quality threshold met:** The recommended model achieves >= 95% of the best model's quality score across all synthetic test scenes.
+1. **Quality threshold met:** The recommended model achieves luminance RMSE within 10% of the best model across all synthetic test scenes.
 
 2. **Parameter efficiency:** Fewer parameters mean:
    - More stable fitting (less overfitting risk)
@@ -477,7 +477,7 @@ Best quality-per-parameter: **Minimal (18p)**
 
 1. **Center region accuracy:** Best model (Model C: Monotonic Polynomial, 8 params) achieves 111.48 nits RMSE in the overlap region, demonstrating that the transform estimated from the overlap closely reconstructs the HDR reference.
 
-2. **Seam continuity:** Average seam continuity score = 0.000 (0=discontinuous, 1=perfectly smooth). The fitted transform transitions smoothly at boundaries.
+2. **Seam continuity:** Average seam continuity score = 0.103 (0=discontinuous, 1=perfectly smooth). The fitted transform transitions smoothly at boundaries.
 
 3. **Extension quality:** Average extension smoothness = 0.976. The transform applied beyond the overlap produces plausible content without artifacts or clipping.
 

@@ -60,11 +60,14 @@ HLG_C: float = 0.5 - HLG_A * np.log(4.0 * HLG_A)  # 0.55991073
 def hlg_oetf(linear: NDArray[np.floating]) -> NDArray[np.floating]:
     """HLG OETF: scene-referred linear [0, 1] -> HLG signal [0, 1]."""
     linear = np.clip(linear, 0.0, 1.0)
-    result = np.where(
-        linear <= 1.0 / 12.0,
-        np.sqrt(3.0 * linear),
-        HLG_A * np.log(12.0 * linear - HLG_B) + HLG_C,
-    )
+    # Use masking to avoid evaluating np.log on negative arguments.
+    # np.where evaluates both branches for all elements, which triggers
+    # RuntimeWarning when linear values near zero make (12*linear - HLG_B) negative.
+    low_mask = linear <= 1.0 / 12.0
+    result = np.empty_like(linear, dtype=np.float64)
+    result[low_mask] = np.sqrt(3.0 * linear[low_mask])
+    high_vals = linear[~low_mask]
+    result[~low_mask] = HLG_A * np.log(12.0 * high_vals - HLG_B) + HLG_C
     return result
 
 

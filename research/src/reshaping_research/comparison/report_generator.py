@@ -626,29 +626,37 @@ def _section_j_experiment_results(experiments: ExperimentResults) -> str:
 
 
 def _section_k_recommendation(comparison: ComparisonResults, experiments: ExperimentResults) -> str:
+    """Section K: Final recommendation.
+
+    Uses average RMSE as primary quality metric (directly interpretable, not
+    subject to score compression like the composite overall_quality_score).
+    """
+    model_rmse_lists: Dict[str, List[float]] = {}
     model_scores: Dict[str, List[float]] = {}
     for r in comparison.results:
+        model_rmse_lists.setdefault(r.model_name, []).append(r.center_lum_rmse_nits)
         model_scores.setdefault(r.model_name, []).append(r.overall_quality_score)
 
+    avg_rmse = {name: float(np.mean(v)) for name, v in model_rmse_lists.items()}
     avg_scores = {name: float(np.mean(s)) for name, s in model_scores.items()}
-    best_score = max(avg_scores.values())
 
-    qualified = {
-        name: score for name, score in avg_scores.items()
-        if score >= 0.95 * best_score
-    }
+    # Best model by lowest average RMSE
+    best_name = min(avg_rmse, key=lambda x: avg_rmse[x])
+    best_rmse_val = avg_rmse[best_name]
 
+    # Model parameter counts
     model_params: Dict[str, int] = {}
     for r in comparison.results:
         model_params[r.model_name] = r.param_count
 
-    best_name = max(avg_scores, key=lambda x: avg_scores[x])
-    simplest_qualified = min(qualified, key=lambda x: model_params.get(x, 999))
+    # Qualified models: within 10% of best RMSE
+    qualified = {
+        name: rmse for name, rmse in avg_rmse.items()
+        if rmse <= best_rmse_val * 1.10
+    }
 
-    model_rmse_lists: Dict[str, List[float]] = {}
-    for r in comparison.results:
-        model_rmse_lists.setdefault(r.model_name, []).append(r.center_lum_rmse_nits)
-    avg_rmse = {name: float(np.mean(v)) for name, v in model_rmse_lists.items()}
+    # Among qualified, find simplest (fewest parameters)
+    simplest_qualified = min(qualified, key=lambda x: model_params.get(x, 999))
 
     lines = [
         "## K. Recommendation",
@@ -664,12 +672,12 @@ def _section_k_recommendation(comparison: ComparisonResults, experiments: Experi
         f"- Average overall quality score: {avg_scores[simplest_qualified]:.4f}",
         f"- Average luminance RMSE: {avg_rmse[simplest_qualified]:.2f} nits",
         f"- Parameter count: {model_params[simplest_qualified]}",
-        f"- Achieves {avg_scores[simplest_qualified]/best_score*100:.1f}% of best quality",
+        f"- Achieves {best_rmse_val/avg_rmse[simplest_qualified]*100:.1f}% of best RMSE quality",
         "",
         "### Justification",
         "",
-        "1. **Quality threshold met:** The recommended model achieves >= 95% of the "
-        "best model\'s quality score across all synthetic test scenes.",
+        "1. **Quality threshold met:** The recommended model achieves luminance RMSE "
+        "within 10% of the best model across all synthetic test scenes.",
         "",
         "2. **Parameter efficiency:** Fewer parameters mean:",
         "   - More stable fitting (less overfitting risk)",
@@ -686,7 +694,7 @@ def _section_k_recommendation(comparison: ComparisonResults, experiments: Experi
         "### Production Integration Path",
         "",
         "1. Use the existing `luminance_curve + color_matrix + saturation` pipeline structure",
-        "2. Replace the fitting algorithm with the recommended model\'s approach",
+        "2. Replace the fitting algorithm with the recommended model's approach",
         "3. Maintain the 65k LUT for luminance application (P2.14/P2.15 validated)",
         "4. Keep regularization toward identity for the color matrix",
         "5. Validate on real camera footage before deployment",

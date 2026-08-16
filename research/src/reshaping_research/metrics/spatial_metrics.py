@@ -163,9 +163,11 @@ def seam_error(
         band_lum = lum[top:bot, :]
         # Compute variance of vertical gradient within the band
         band_grad = np.diff(band_lum, axis=0)
-        grad_variance = np.var(band_grad)
-        # Score: exp(-variance) gives 1.0 for perfectly smooth, approaches 0 for rough
-        continuity = float(np.exp(-grad_variance * 100.0))
+        grad_variance = float(np.var(band_grad))
+        # Score: 1/(1 + variance * k) gives 1.0 for perfectly smooth,
+        # decays gracefully for higher variance without saturating to zero.
+        # k=0.5 provides good discrimination in the typical HDR nits range.
+        continuity = 1.0 / (1.0 + grad_variance * 0.5)
 
     return SeamMetrics(
         luminance_gradient_diff=lum_grad_diff,

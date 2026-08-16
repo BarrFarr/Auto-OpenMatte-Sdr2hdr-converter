@@ -213,7 +213,11 @@ class ModelCPolynomial:
     def _project_monotonic(
         self, coeffs: NDArray[np.floating], check_points: NDArray[np.floating]
     ) -> NDArray[np.floating]:
-        """Ensure polynomial is monotonically non-decreasing."""
+        """Ensure polynomial is monotonically non-decreasing.
+
+        If derivative is negative at check points, iteratively adjust coefficients.
+        Falls back to isotonic regression on the LUT output when violations are severe.
+        """
         deriv = self._eval_poly_derivative(check_points, coeffs)
         if np.all(deriv >= -1e-8):
             return coeffs
@@ -227,7 +231,20 @@ class ModelCPolynomial:
             if np.all(deriv_new >= -1e-8):
                 return coeffs_fixed
 
-        return coeffs
+        # Hard fallback: apply isotonic regression on the polynomial output
+        # evaluated at the check points, then refit a monotonic polynomial
+        lut_values = self._eval_poly(check_points, coeffs)
+        # Isotonic regression: enforce non-decreasing via cumulative max
+        monotonic_values = np.maximum.accumulate(lut_values)
+
+        # Refit polynomial to the corrected (monotonic) LUT values
+        try:
+            corrected_coeffs = np.polyfit(check_points, monotonic_values, len(coeffs) - 1)[::-1]
+        except (np.linalg.LinAlgError, ValueError):
+            corrected_coeffs = coeffs.copy()
+            corrected_coeffs[1] += abs(min_deriv) * 1.5
+
+        return corrected_coeffs
 
     def apply(
         self,
