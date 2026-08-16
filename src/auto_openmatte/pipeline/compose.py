@@ -26,7 +26,8 @@ def composite_extend(
     """Composite Mode A: HDR center + transformed OM extension.
 
     The HDR frame is placed in its original position (MASTER).
-    The Open Matte frame is transformed and used only in extension areas.
+    Only extension regions of the Open Matte frame are transformed (not the
+    full frame), saving ~74% computation for typical 21:9→16:9 geometry.
 
     Args:
         hdr_frame: HDR frame (hdr_h, hdr_w, 3) in signal domain [0, 1].
@@ -43,52 +44,95 @@ def composite_extend(
     """
     om_h, om_w = om_frame.shape[:2]
 
-    # Step 1: Transform entire OM frame to HDR
-    om_transformed = apply_shot_transform(
-        om_frame, transform,
-        sdr_transfer=sdr_transfer,
-        hdr_transfer=hdr_transfer,
-        peak_nits=peak_nits,
-    )
-
-    # Step 2: Create output canvas (start with transformed OM)
-    output = om_transformed.copy()
-
-    # Step 3: Place HDR in its region
-    # The HDR frame needs to be scaled to fit the overlap region
+    # Determine overlap region
     x1, y1, x2, y2 = geometry.overlap_bbox
     x1, y1 = int(round(x1)), int(round(y1))
     x2, y2 = int(round(x2)), int(round(y2))
-
-    # Clamp to valid range
     x1 = max(0, x1)
     y1 = max(0, y1)
     x2 = min(om_w, x2)
     y2 = min(om_h, y2)
 
+    # Initialize output canvas
+    output = np.zeros((om_h, om_w, 3), dtype=om_frame.dtype)
+
+    # Step 1: Transform ONLY extension regions (top + bottom)
+    # Top extension: rows 0 to y1
+    if y1 > 0:
+        top_ext = om_frame[:y1, :, :]
+        top_transformed = apply_shot_transform(
+            top_ext, transform,
+            sdr_transfer=sdr_transfer,
+            hdr_transfer=hdr_transfer,
+            peak_nits=peak_nits,
+        )
+        output[:y1, :, :] = top_transformed
+
+    # Bottom extension: rows y2 to om_h
+    if y2 < om_h:
+        bot_ext = om_frame[y2:, :, :]
+        bot_transformed = apply_shot_transform(
+            bot_ext, transform,
+            sdr_transfer=sdr_transfer,
+            hdr_transfer=hdr_transfer,
+            peak_nits=peak_nits,
+        )
+        output[y2:, :, :] = bot_transformed
+
+    # Step 2: Place HDR in overlap region
     region_h = y2 - y1
     region_w = x2 - x1
 
     if region_h > 0 and region_w > 0:
-        # Resize HDR to fit the overlap region
-        from scipy.ndimage import zoom
-
         hdr_h, hdr_w = hdr_frame.shape[:2]
-        zoom_factors = (region_h / hdr_h, region_w / hdr_w, 1.0)
-        hdr_resized = zoom(hdr_frame, zoom_factors, order=1)
 
-        # Ensure exact size match
-        hdr_resized = hdr_resized[:region_h, :region_w, :]
+        # Skip resize if scale is identity (common case: same width, matching height)
+        if hdr_h == region_h and hdr_w == region_w:
+            hdr_placed = hdr_frame
+        else:
+            from scipy.ndimage import zoom
+            zoom_factors = (region_h / hdr_h, region_w / hdr_w, 1.0)
+            hdr_placed = zoom(hdr_frame, zoom_factors, order=1)
+            hdr_placed = hdr_placed[:region_h, :region_w, :]
 
-        # Step 4: Blend using extension mask
-        # Where mask=0 → HDR pixels, where mask=1 → OM transformed pixels
+        # Step 3: Blend in overlap region using mask
+        # For the feather zone: transform OM overlap pixels too
         mask_region = extension_mask[y1:y2, x1:x2]
+        has_feather = np.any((mask_region > 0.0) & (mask_region < 1.0))
 
-        # Apply blending in the overlap region
-        for ch in range(3):
-            output[y1:y2, x1:x2, ch] = (
-                (1.0 - mask_region) * hdr_resized[:, :, ch]
-                + mask_region * om_transformed[y1:y2, x1:x2, ch]
+        if has_feather:
+            # Need transformed OM in the overlap for feather blending
+            overlap_om = om_frame[y1:y2, x1:x2, :]
+            overlap_transformed = apply_shot_transform(
+                overlap_om, transform,
+                sdr_transfer=sdr_transfer,
+                hdr_transfer=hdr_transfer,
+                peak_nits=peak_nits,
+            )
+            # Blend: (1-mask)*HDR + mask*OM_transformed
+            for ch in range(3):
+                output[y1:y2, x1:x2, ch] = (
+                    (1.0 - mask_region) * hdr_placed[:, :, ch]
+                    + mask_region * overlap_transformed[:, :, ch]
+                )
+        else:
+            # Pure HDR placement (mask is 0 everywhere in overlap)
+            output[y1:y2, x1:x2, :] = hdr_placed
+
+    # Left/right extension (if overlap doesn't span full width)
+    if x1 > 0 or x2 < om_w:
+        # Transform left/right strips if they exist
+        if x1 > 0:
+            left = om_frame[y1:y2, :x1, :]
+            output[y1:y2, :x1, :] = apply_shot_transform(
+                left, transform, sdr_transfer=sdr_transfer,
+                hdr_transfer=hdr_transfer, peak_nits=peak_nits,
+            )
+        if x2 < om_w:
+            right = om_frame[y1:y2, x2:, :]
+            output[y1:y2, x2:, :] = apply_shot_transform(
+                right, transform, sdr_transfer=sdr_transfer,
+                hdr_transfer=hdr_transfer, peak_nits=peak_nits,
             )
 
     return output
