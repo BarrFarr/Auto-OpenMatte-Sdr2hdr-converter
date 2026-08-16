@@ -296,13 +296,13 @@ Measured on 256x256 images. Times are averages across all 6 scenes.
 
 | Model | Params | Avg Fit (ms) | Avg Apply (ms) | Total (ms) | Fit/Apply Ratio |
 |-------|--------|-------------|---------------|------------|-----------------|
-| Model A: Linear Gain | 2 | 5.1 | 2.0 | 7.1 | 2.5x |
-| Model B: Piecewise Linear | 10 | 6.7 | 2.6 | 9.3 | 2.6x |
-| Model C: Monotonic Polynomial | 8 | 23.8 | 4.6 | 28.4 | 5.1x |
-| Model D: CDF Matching | 65 | 5.4 | 2.9 | 8.3 | 1.9x |
-| Model E: CDF + Regularization | 12 | 18.5 | 3.3 | 21.9 | 5.6x |
-| Model F: Luma + Chroma Regression | 18 | 7.4 | 4.6 | 12.0 | 1.6x |
-| Model G: Hybrid | 29 | 24.1 | 6.8 | 30.9 | 3.6x |
+| Model A: Linear Gain | 2 | 5.7 | 2.4 | 8.1 | 2.3x |
+| Model B: Piecewise Linear | 10 | 7.7 | 3.2 | 10.9 | 2.4x |
+| Model C: Monotonic Polynomial | 8 | 144.8 | 12.1 | 156.8 | 12.0x |
+| Model D: CDF Matching | 65 | 5.9 | 3.3 | 9.2 | 1.8x |
+| Model E: CDF + Regularization | 12 | 164.9 | 4.3 | 169.2 | 38.4x |
+| Model F: Luma + Chroma Regression | 18 | 13.4 | 8.7 | 22.1 | 1.5x |
+| Model G: Hybrid | 29 | 28.6 | 8.0 | 36.6 | 3.6x |
 
 ### Notes
 
@@ -318,12 +318,12 @@ Measured on 256x256 images. Times are averages across all 6 scenes.
 
 | Scene | Strategy A RMSE | Strategy B RMSE | A Fit (ms) | B Fit (ms) | Speedup |
 |-------|----------------|----------------|-----------|-----------|---------|
-| neutral | 4.93 | 5.38 | 23.2 | 10.3 | 2.24x |
-| high_key | 27.99 | 21.59 | 22.3 | 10.3 | 2.16x |
-| low_key | 8.12 | 9.83 | 24.3 | 11.1 | 2.20x |
-| colorful | 56.01 | 70.39 | 21.2 | 10.2 | 2.06x |
-| mixed | 17.10 | 26.82 | 23.7 | 10.2 | 2.33x |
-| difficult | 606.80 | 627.12 | 23.8 | 10.4 | 2.30x |
+| neutral | 4.93 | 5.38 | 26.7 | 12.6 | 2.12x |
+| high_key | 27.99 | 21.59 | 28.2 | 12.4 | 2.27x |
+| low_key | 8.12 | 9.83 | 28.3 | 14.0 | 2.03x |
+| colorful | 56.01 | 70.39 | 26.0 | 12.5 | 2.08x |
+| mixed | 17.10 | 26.82 | 26.8 | 12.1 | 2.21x |
+| difficult | 606.80 | 627.12 | 27.2 | 13.4 | 2.02x |
 
 **Finding:** Strategy B achieves 5.6% worse quality with significantly fewer samples, enabling faster fitting.
 
