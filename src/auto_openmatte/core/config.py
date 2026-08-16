@@ -55,7 +55,7 @@ class ColorConfig:
     min_confidence: float = 0.90
     # Percentile range for outlier rejection
     low_percentile: float = 1.0
-    high_percentile: float = 99.0
+    high_percentile: float = 99.9
     # Number of bins for luminance curve estimation
     luminance_bins: int = 512
     # Feather width in pixels for HDR/OM boundary blend

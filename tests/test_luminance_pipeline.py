@@ -299,7 +299,12 @@ class TestDiagnostics:
             hdr_luminance=data.copy(),
             n_valid_pairs=1000,
         )
-        curve = [[0.0, 0.0], [0.5, 0.5], [1.0, 1.0]]
+        # Build log-domain identity curve: log10(x*10000+eps) → log10(x*10000+eps)
+        eps = 1e-6
+        peak = 10000.0
+        pts = np.linspace(0.01, 0.99, 20)
+        log_pts = np.log10(pts * peak + eps)
+        curve = [[float(lp), float(lp)] for lp in log_pts]
         diag = compute_diagnostics(samples, curve, train_samples=samples, val_samples=samples)
         assert diag.train_mae < 0.01
         assert diag.val_mae < 0.01

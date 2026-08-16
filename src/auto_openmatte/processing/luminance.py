@@ -7,6 +7,7 @@ Key principles:
 - HDR is MASTER — we map FROM SDR TO HDR, never the reverse
 - Mapping must be monotonic (no inversions)
 - Uses robust statistics (percentile bins, outlier rejection)
+- Fitted in LOG DOMAIN for better dynamic range coverage
 - One stable transform per shot (not per frame)
 """
 
@@ -26,24 +27,31 @@ from auto_openmatte.utils.math_utils import (
 
 logger = logging.getLogger(__name__)
 
+# Peak luminance for normalization (cd/m²)
+_PEAK_NITS = 10000.0
+
+# Log-domain epsilon (stable across 1e-7 to 1e-4 per P2.5 validation)
+_LOG_EPS = 1e-6
+
 
 def estimate_luminance_curve(
     sdr_luminance: NDArray[np.floating],
     hdr_luminance: NDArray[np.floating],
     config: ColorConfig | None = None,
 ) -> list[list[float]]:
-    """Estimate the SDR → HDR luminance mapping curve.
+    """Estimate the SDR → HDR luminance mapping curve in log domain.
 
-    Uses percentile binning with robust median estimation and monotonic
-    enforcement to produce a stable, invertible mapping.
+    Fits in log10(nits + ε) space for better dynamic range coverage,
+    then stores control points in log domain. Application converts
+    back to linear.
 
     Args:
         sdr_luminance: Flattened SDR luminance values (linear, [0, 1]).
-        hdr_luminance: Corresponding HDR luminance values (linear, normalized).
+        hdr_luminance: Corresponding HDR luminance values (linear, normalized by peak_nits).
         config: Color configuration.
 
     Returns:
-        List of [sdr_value, hdr_value] control points for the mapping curve.
+        List of [sdr_log, hdr_log] control points in log10(nits+ε) domain.
         Guaranteed to be monotonically non-decreasing.
     """
     if config is None:
@@ -63,47 +71,42 @@ def estimate_luminance_curve(
 
     if len(sdr_clean) < 100:
         logger.warning("Too few valid samples for luminance estimation")
-        # Return identity-like curve
-        return [[0.0, 0.0], [0.5, 0.5], [1.0, 1.0]]
+        # Return identity-like curve in log domain
+        return [[-6.0, -6.0], [0.0, 0.0], [4.0, 4.0]]
 
-    # Step 2: Percentile clipping (exclude extreme shadows and highlights)
+    # Step 2: Transform to log domain (nits scale)
+    sdr_log = np.log10(sdr_clean * _PEAK_NITS + _LOG_EPS)
+    hdr_log = np.log10(hdr_clean * _PEAK_NITS + _LOG_EPS)
+
+    # Step 3: Percentile clipping and binning in log domain
     percentile_range = (config.low_percentile, config.high_percentile)
 
-    # Step 3: Bin and compute robust medians
     bin_centers, bin_medians = percentile_bins(
-        sdr_clean, hdr_clean,
+        sdr_log, hdr_log,
         n_bins=config.luminance_bins,
         percentile_range=percentile_range,
     )
 
     if len(bin_centers) < 5:
         logger.warning("Too few valid bins for luminance curve")
-        return [[0.0, 0.0], [0.5, 0.5], [1.0, 1.0]]
+        return [[-6.0, -6.0], [0.0, 0.0], [4.0, 4.0]]
 
     # Step 4: Enforce monotonicity
     x_mono, y_mono = fit_monotonic_spline(bin_centers, bin_medians)
 
-    # Step 5: Subsample to reasonable number of control points
-    # Keep 32-64 points for the spline (more than enough for smooth interpolation)
+    # Step 5: Subsample to 64 control points
     n_points = min(64, len(x_mono))
     indices = np.linspace(0, len(x_mono) - 1, n_points, dtype=int)
     x_final = x_mono[indices]
     y_final = y_mono[indices]
 
-    # Build control point list
+    # Build control point list (in log domain)
     curve = [[float(x), float(y)] for x, y in zip(x_final, y_final)]
 
-    # Ensure curve starts near 0 and end point is reasonable
-    if curve[0][0] > 0.01:
-        curve.insert(0, [0.0, 0.0])
-    if curve[-1][0] < 0.99:
-        # Extrapolate last point
-        curve.append([1.0, curve[-1][1] * 1.05])  # Slight extrapolation
-
     logger.info(
-        f"Luminance curve: {len(curve)} control points, "
-        f"range [{curve[0][0]:.3f}, {curve[-1][0]:.3f}] -> "
-        f"[{curve[0][1]:.3f}, {curve[-1][1]:.3f}]"
+        f"Luminance curve (log domain): {len(curve)} control points, "
+        f"SDR log range [{curve[0][0]:.3f}, {curve[-1][0]:.3f}] -> "
+        f"HDR log range [{curve[0][1]:.3f}, {curve[-1][1]:.3f}]"
     )
     return curve
 
@@ -114,14 +117,19 @@ def apply_luminance_curve(
 ) -> NDArray[np.floating]:
     """Apply a luminance mapping curve to SDR values.
 
-    Uses PCHIP (monotonic cubic) interpolation between control points.
+    The curve is stored in log10(nits+ε) domain. This function handles
+    three ranges:
+    1. TRUE BLACK (sdr ≈ 0): output = 0
+    2. LOW-END BRIDGE (0 < sdr < curve_start): linear interpolation
+       from (0, 0) to (curve_start_linear, curve_start_hdr) — no extrapolation
+    3. FITTED RANGE (sdr >= curve_start): PCHIP in log domain
 
     Args:
         sdr_luminance: Input SDR luminance values (linear, [0, 1]).
-        curve: Control points [[sdr_val, hdr_val], ...].
+        curve: Control points [[sdr_log, hdr_log], ...] in log domain.
 
     Returns:
-        Mapped HDR luminance values.
+        Mapped HDR luminance values (linear, normalized [0,1]).
     """
     if not curve or len(curve) < 2:
         return sdr_luminance.copy()
@@ -131,12 +139,54 @@ def apply_luminance_curve(
     x_points = np.array([p[0] for p in curve])
     y_points = np.array([p[1] for p in curve])
 
-    # PCHIP guarantees monotonicity between control points
-    interpolator = PchipInterpolator(x_points, y_points, extrapolate=True)
+    # Curve bounds in log domain
+    curve_x_min = x_points[0]
+    curve_x_max = x_points[-1]
 
-    result = interpolator(sdr_luminance)
-    # Clamp to non-negative
-    return np.maximum(result, 0.0)
+    # Convert curve start to linear normalized units
+    # curve_x_min = log10(sdr_nits + eps), so sdr_nits = 10^curve_x_min - eps
+    curve_start_nits = 10.0**curve_x_min - _LOG_EPS
+    curve_start_linear = curve_start_nits / _PEAK_NITS  # normalized [0,1]
+
+    # Curve start HDR value
+    curve_start_hdr_nits = 10.0**y_points[0] - _LOG_EPS
+    curve_start_hdr_linear = curve_start_hdr_nits / _PEAK_NITS
+
+    # Initialize output
+    result = np.zeros_like(sdr_luminance)
+
+    # === BRANCH A: TRUE BLACK (sdr <= 0) → 0 ===
+    # (already initialized to 0)
+
+    # === BRANCH B: LOW-END BRIDGE (0 < sdr < curve_start_linear) ===
+    # Linear interpolation from (0, 0) to (curve_start_linear, curve_start_hdr_linear)
+    bridge_mask = (sdr_luminance > 0) & (sdr_luminance < curve_start_linear)
+    if np.any(bridge_mask):
+        bridge_lum = sdr_luminance[bridge_mask]
+        # Linear ramp: output = (sdr / curve_start) * curve_start_hdr
+        result[bridge_mask] = (bridge_lum / curve_start_linear) * curve_start_hdr_linear
+
+    # === BRANCH C: FITTED RANGE (sdr >= curve_start_linear) ===
+    fitted_mask = sdr_luminance >= curve_start_linear
+    if np.any(fitted_mask):
+        fitted_lum = sdr_luminance[fitted_mask]
+        sdr_log = np.log10(fitted_lum * _PEAK_NITS + _LOG_EPS)
+
+        # Clamp upper end only (no extrapolation above curve)
+        sdr_log_clamped = np.minimum(sdr_log, curve_x_max)
+
+        # PCHIP interpolation within fitted range
+        interpolator = PchipInterpolator(x_points, y_points, extrapolate=False)
+        hdr_log = interpolator(sdr_log_clamped)
+
+        # Handle NaN edge cases
+        hdr_log = np.nan_to_num(hdr_log, nan=y_points[0])
+
+        # Convert back to linear normalized
+        hdr_nits = np.power(10.0, hdr_log) - _LOG_EPS
+        result[fitted_mask] = np.maximum(hdr_nits, 0.0) / _PEAK_NITS
+
+    return result
 
 
 def estimate_shot_luminance(

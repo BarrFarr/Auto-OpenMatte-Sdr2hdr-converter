@@ -105,19 +105,32 @@ class TestApplyLuminanceCurve:
     """Tests for curve application."""
 
     def test_identity_curve(self) -> None:
-        """Identity curve should not change values."""
-        curve = [[0.0, 0.0], [0.5, 0.5], [1.0, 1.0]]
-        input_vals = np.linspace(0, 1, 100)
-        output = apply_luminance_curve(input_vals, curve)
-        np.testing.assert_allclose(output, input_vals, atol=1e-4)
+        """Identity curve should not change values (in log domain)."""
+        # Log-domain identity: log10(x*10000+eps) → log10(x*10000+eps)
+        # Build identity curve in log space
+        import numpy as np
+        eps = 1e-6
+        peak = 10000.0
+        test_x = np.array([0.001, 0.01, 0.05, 0.1, 0.5])
+        log_x = np.log10(test_x * peak + eps)
+        curve = [[float(lx), float(lx)] for lx in log_x]  # Identity in log
+        output = apply_luminance_curve(test_x, curve)
+        np.testing.assert_allclose(output, test_x, rtol=0.01)
 
     def test_scaling_curve(self) -> None:
-        """Simple 2x scaling curve."""
-        curve = [[0.0, 0.0], [0.5, 1.0], [1.0, 2.0]]
-        input_vals = np.array([0.0, 0.25, 0.5, 0.75, 1.0])
-        output = apply_luminance_curve(input_vals, curve)
-        expected = input_vals * 2.0
-        np.testing.assert_allclose(output, expected, atol=0.01)
+        """Curve that maps to 2x luminance in log domain."""
+        import numpy as np
+        eps = 1e-6
+        peak = 10000.0
+        # Create a curve where output = 2*input in linear
+        # In log: log10(2*x*peak + eps) for output
+        test_x = np.array([0.01, 0.05, 0.1, 0.2, 0.4])
+        log_in = np.log10(test_x * peak + eps)
+        log_out = np.log10(test_x * 2.0 * peak + eps)
+        curve = [[float(li), float(lo)] for li, lo in zip(log_in, log_out)]
+        output = apply_luminance_curve(test_x, curve)
+        expected = test_x * 2.0
+        np.testing.assert_allclose(output, expected, rtol=0.02)
 
     def test_empty_curve(self) -> None:
         """Empty curve should return input unchanged."""

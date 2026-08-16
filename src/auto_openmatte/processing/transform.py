@@ -88,7 +88,9 @@ def apply_shot_transform(
         lum_mapped = apply_luminance_curve(lum, transform.luminance_curve)
 
         # Scale RGB channels by luminance ratio
-        ratio = np.where(lum > 1e-6, lum_mapped / lum, 1.0)
+        safe_mask = lum > 1e-6
+        ratio = np.ones_like(lum)
+        np.divide(lum_mapped, lum, out=ratio, where=safe_mask)
         linear = linear * ratio[..., np.newaxis]
         linear = np.maximum(linear, 0.0)
 
