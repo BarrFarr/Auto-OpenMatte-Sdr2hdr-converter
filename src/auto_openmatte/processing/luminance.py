@@ -111,18 +111,151 @@ def estimate_luminance_curve(
     return curve
 
 
+# ---------------------------------------------------------------------------
+# LUT infrastructure (P2.15)
+# ---------------------------------------------------------------------------
+
+_LUT_SIZE = 65536  # 65k entries — validated in P2.14
+
+
+def build_curve_lut(
+    curve: list[list[float]],
+    n_entries: int = _LUT_SIZE,
+) -> dict:
+    """Build a precomputed LUT for the FITTED range of a luminance curve.
+
+    The LUT replaces the expensive log10 → PCHIP → pow10 path with a
+    single array lookup.  It covers ONLY [curve_start_linear, curve_max_linear].
+    Black and low-end bridge are NOT in the LUT.
+
+    Each fitted curve (i.e. each shot) gets its own LUT.
+
+    Args:
+        curve: Control points [[sdr_log, hdr_log], ...] in log domain.
+        n_entries: Number of LUT entries (default 65536).
+
+    Returns:
+        Dictionary with:
+            - lut: ndarray of mapped HDR values (float64, n_entries)
+            - curve_start_linear: start of fitted range (normalized)
+            - curve_max_linear: end of fitted range (normalized)
+            - curve_start_hdr_linear: HDR value at curve start (for bridge)
+            - inv_range: 1/(curve_max_linear - curve_start_linear) for fast lookup
+    """
+    from scipy.interpolate import PchipInterpolator
+
+    x_points = np.array([p[0] for p in curve])
+    y_points = np.array([p[1] for p in curve])
+
+    curve_x_min = x_points[0]
+    curve_x_max = x_points[-1]
+
+    # Linear domain bounds
+    curve_start_nits = 10.0**curve_x_min - _LOG_EPS
+    curve_start_linear = curve_start_nits / _PEAK_NITS
+    curve_max_nits = 10.0**curve_x_max - _LOG_EPS
+    curve_max_linear = curve_max_nits / _PEAK_NITS
+    curve_start_hdr_nits = 10.0**y_points[0] - _LOG_EPS
+    curve_start_hdr_linear = curve_start_hdr_nits / _PEAK_NITS
+
+    # Build LUT: uniformly sample [curve_start_linear, curve_max_linear]
+    lut_input = np.linspace(curve_start_linear, curve_max_linear, n_entries)
+
+    # Compute exact PCHIP output for each sample
+    sdr_log = np.log10(lut_input * _PEAK_NITS + _LOG_EPS)
+    sdr_log_clamped = np.minimum(sdr_log, curve_x_max)
+    interpolator = PchipInterpolator(x_points, y_points, extrapolate=False)
+    hdr_log = interpolator(sdr_log_clamped)
+    hdr_log = np.nan_to_num(hdr_log, nan=y_points[0])
+    hdr_nits = np.power(10.0, hdr_log) - _LOG_EPS
+    lut_output = np.maximum(hdr_nits, 0.0) / _PEAK_NITS
+
+    inv_range = 1.0 / (curve_max_linear - curve_start_linear)
+
+    return {
+        "lut": lut_output,
+        "curve_start_linear": curve_start_linear,
+        "curve_max_linear": curve_max_linear,
+        "curve_start_hdr_linear": curve_start_hdr_linear,
+        "inv_range": inv_range,
+    }
+
+
 def apply_luminance_curve(
     sdr_luminance: NDArray[np.floating],
     curve: list[list[float]],
+    *,
+    prebuilt_lut: dict | None = None,
 ) -> NDArray[np.floating]:
-    """Apply a luminance mapping curve to SDR values.
+    """Apply a luminance mapping curve to SDR values (production LUT path).
 
     The curve is stored in log10(nits+ε) domain. This function handles
-    three ranges:
-    1. TRUE BLACK (sdr ≈ 0): output = 0
+    four ranges:
+    1. TRUE BLACK (sdr <= 0): output = 0
     2. LOW-END BRIDGE (0 < sdr < curve_start): linear interpolation
        from (0, 0) to (curve_start_linear, curve_start_hdr) — no extrapolation
-    3. FITTED RANGE (sdr >= curve_start): PCHIP in log domain
+    3. FITTED RANGE (curve_start <= sdr <= curve_max): LUT 65k lookup
+    4. TOP-END (sdr > curve_max): clamped to curve max output
+
+    If prebuilt_lut is None, the LUT is built on first call (then should
+    be cached externally for subsequent frames of the same shot).
+
+    Args:
+        sdr_luminance: Input SDR luminance values (linear, [0, 1]).
+        curve: Control points [[sdr_log, hdr_log], ...] in log domain.
+        prebuilt_lut: Optional pre-built LUT dict from build_curve_lut().
+
+    Returns:
+        Mapped HDR luminance values (linear, normalized [0,1]).
+    """
+    if not curve or len(curve) < 2:
+        return sdr_luminance.copy()
+
+    # Build or reuse LUT
+    if prebuilt_lut is None:
+        prebuilt_lut = build_curve_lut(curve)
+
+    lut = prebuilt_lut["lut"]
+    curve_start_linear = prebuilt_lut["curve_start_linear"]
+    curve_start_hdr_linear = prebuilt_lut["curve_start_hdr_linear"]
+    inv_range = prebuilt_lut["inv_range"]
+    n_entries = len(lut)
+
+    # Initialize output
+    result = np.zeros_like(sdr_luminance)
+
+    # === BRANCH A: TRUE BLACK (sdr <= 0) → 0 ===
+    # (already initialized to 0)
+
+    # === BRANCH B: LOW-END BRIDGE (0 < sdr < curve_start_linear) ===
+    bridge_mask = (sdr_luminance > 0) & (sdr_luminance < curve_start_linear)
+    if np.any(bridge_mask):
+        bridge_lum = sdr_luminance[bridge_mask]
+        result[bridge_mask] = (bridge_lum / curve_start_linear) * curve_start_hdr_linear
+
+    # === BRANCH C: FITTED RANGE (sdr >= curve_start_linear) via LUT ===
+    fitted_mask = sdr_luminance >= curve_start_linear
+    if np.any(fitted_mask):
+        fitted_lum = sdr_luminance[fitted_mask]
+        # Normalize to [0, 1] within LUT range
+        t = (fitted_lum - curve_start_linear) * inv_range
+        t = np.clip(t, 0.0, 1.0)
+        # Integer index into LUT
+        idx = (t * (n_entries - 1)).astype(np.int64)
+        idx = np.clip(idx, 0, n_entries - 1)
+        result[fitted_mask] = lut[idx]
+
+    return result
+
+
+def apply_luminance_curve_reference(
+    sdr_luminance: NDArray[np.floating],
+    curve: list[list[float]],
+) -> NDArray[np.floating]:
+    """Reference PCHIP implementation for regression testing.
+
+    This is the original P2.9.3 implementation preserved for numerical
+    validation of the LUT production path.  Not used in normal renders.
 
     Args:
         sdr_luminance: Input SDR luminance values (linear, [0, 1]).
@@ -144,9 +277,8 @@ def apply_luminance_curve(
     curve_x_max = x_points[-1]
 
     # Convert curve start to linear normalized units
-    # curve_x_min = log10(sdr_nits + eps), so sdr_nits = 10^curve_x_min - eps
     curve_start_nits = 10.0**curve_x_min - _LOG_EPS
-    curve_start_linear = curve_start_nits / _PEAK_NITS  # normalized [0,1]
+    curve_start_linear = curve_start_nits / _PEAK_NITS
 
     # Curve start HDR value
     curve_start_hdr_nits = 10.0**y_points[0] - _LOG_EPS
@@ -159,11 +291,9 @@ def apply_luminance_curve(
     # (already initialized to 0)
 
     # === BRANCH B: LOW-END BRIDGE (0 < sdr < curve_start_linear) ===
-    # Linear interpolation from (0, 0) to (curve_start_linear, curve_start_hdr_linear)
     bridge_mask = (sdr_luminance > 0) & (sdr_luminance < curve_start_linear)
     if np.any(bridge_mask):
         bridge_lum = sdr_luminance[bridge_mask]
-        # Linear ramp: output = (sdr / curve_start) * curve_start_hdr
         result[bridge_mask] = (bridge_lum / curve_start_linear) * curve_start_hdr_linear
 
     # === BRANCH C: FITTED RANGE (sdr >= curve_start_linear) ===

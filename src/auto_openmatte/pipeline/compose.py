@@ -10,6 +10,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 from auto_openmatte.core.models import GeometryModel, ShotTransform
+from auto_openmatte.processing.luminance import build_curve_lut
 from auto_openmatte.processing.transform import apply_shot_transform
 
 
@@ -22,6 +23,7 @@ def composite_extend(
     sdr_transfer: str = "bt709",
     hdr_transfer: str = "smpte2084",
     peak_nits: float = 10000.0,
+    prebuilt_lut: dict | None = None,
 ) -> NDArray[np.floating]:
     """Composite Mode A: HDR center + transformed OM extension.
 
@@ -38,11 +40,16 @@ def composite_extend(
         sdr_transfer: SDR transfer function for OM.
         hdr_transfer: HDR transfer function for output.
         peak_nits: Peak luminance.
+        prebuilt_lut: Optional pre-built LUT dict. Built once per shot.
 
     Returns:
         Composited frame (om_h, om_w, 3) in HDR signal domain [0, 1].
     """
     om_h, om_w = om_frame.shape[:2]
+
+    # Build LUT once for this composition (all apply_shot_transform calls reuse it)
+    if prebuilt_lut is None and transform.luminance_curve and len(transform.luminance_curve) >= 2:
+        prebuilt_lut = build_curve_lut(transform.luminance_curve)
 
     # Determine overlap region
     x1, y1, x2, y2 = geometry.overlap_bbox
@@ -65,6 +72,7 @@ def composite_extend(
             sdr_transfer=sdr_transfer,
             hdr_transfer=hdr_transfer,
             peak_nits=peak_nits,
+            prebuilt_lut=prebuilt_lut,
         )
         output[:y1, :, :] = top_transformed
 
@@ -76,6 +84,7 @@ def composite_extend(
             sdr_transfer=sdr_transfer,
             hdr_transfer=hdr_transfer,
             peak_nits=peak_nits,
+            prebuilt_lut=prebuilt_lut,
         )
         output[y2:, :, :] = bot_transformed
 
@@ -108,6 +117,7 @@ def composite_extend(
                 sdr_transfer=sdr_transfer,
                 hdr_transfer=hdr_transfer,
                 peak_nits=peak_nits,
+                prebuilt_lut=prebuilt_lut,
             )
             # Blend: (1-mask)*HDR + mask*OM_transformed
             for ch in range(3):
@@ -127,12 +137,14 @@ def composite_extend(
             output[y1:y2, :x1, :] = apply_shot_transform(
                 left, transform, sdr_transfer=sdr_transfer,
                 hdr_transfer=hdr_transfer, peak_nits=peak_nits,
+                prebuilt_lut=prebuilt_lut,
             )
         if x2 < om_w:
             right = om_frame[y1:y2, x2:, :]
             output[y1:y2, x2:, :] = apply_shot_transform(
                 right, transform, sdr_transfer=sdr_transfer,
                 hdr_transfer=hdr_transfer, peak_nits=peak_nits,
+                prebuilt_lut=prebuilt_lut,
             )
 
     return output
@@ -144,6 +156,7 @@ def composite_convert_hdr(
     sdr_transfer: str = "bt709",
     hdr_transfer: str = "smpte2084",
     peak_nits: float = 10000.0,
+    prebuilt_lut: dict | None = None,
 ) -> NDArray[np.floating]:
     """Mode B: Transform entire OM frame to HDR (standalone conversion).
 
@@ -155,6 +168,7 @@ def composite_convert_hdr(
         sdr_transfer: SDR transfer function.
         hdr_transfer: HDR transfer function.
         peak_nits: Peak luminance.
+        prebuilt_lut: Optional pre-built LUT dict.
 
     Returns:
         HDR frame (H, W, 3) in HDR signal domain [0, 1].
@@ -164,4 +178,5 @@ def composite_convert_hdr(
         sdr_transfer=sdr_transfer,
         hdr_transfer=hdr_transfer,
         peak_nits=peak_nits,
+        prebuilt_lut=prebuilt_lut,
     )

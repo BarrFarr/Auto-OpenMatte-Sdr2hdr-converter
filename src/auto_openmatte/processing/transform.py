@@ -20,7 +20,7 @@ from numpy.typing import NDArray
 from auto_openmatte.core.models import ShotTransform
 from auto_openmatte.core.transfer_functions import delinearize, linearize
 from auto_openmatte.processing.color import apply_color_matrix
-from auto_openmatte.processing.luminance import apply_luminance_curve
+from auto_openmatte.processing.luminance import apply_luminance_curve, build_curve_lut
 
 # BT.709 → BT.2020 linear RGB conversion matrix (ITU-R BT.2087, D65 white)
 # Same matrix as used in sampling.py for curve fitting consistency.
@@ -42,6 +42,7 @@ def apply_shot_transform(
     sdr_transfer: str = "bt709",
     hdr_transfer: str = "smpte2084",
     peak_nits: float = 10000.0,
+    prebuilt_lut: dict | None = None,
 ) -> NDArray[np.floating]:
     """Apply the complete SDR → HDR transform to an Open Matte frame.
 
@@ -61,6 +62,8 @@ def apply_shot_transform(
         sdr_transfer: SDR transfer function identifier.
         hdr_transfer: HDR transfer function identifier.
         peak_nits: Peak luminance for PQ encoding.
+        prebuilt_lut: Optional pre-built LUT dict from build_curve_lut().
+            Should be built ONCE per shot/curve and reused for all frames.
 
     Returns:
         Transformed frame in HDR signal domain [0, 1], shape (H, W, 3).
@@ -77,6 +80,10 @@ def apply_shot_transform(
     # Step 3: Apply luminance curve in BT.2020 space
     linear = linear_2020
     if transform.luminance_curve and len(transform.luminance_curve) >= 2:
+        # Build LUT if not provided (caller should cache for multi-frame reuse)
+        if prebuilt_lut is None:
+            prebuilt_lut = build_curve_lut(transform.luminance_curve)
+
         # Compute BT.2020 luminance (consistent with sampling.py)
         lum = (
             _LUM_R_2020 * linear[..., 0]
@@ -84,8 +91,10 @@ def apply_shot_transform(
             + _LUM_B_2020 * linear[..., 2]
         )
 
-        # Apply curve to luminance
-        lum_mapped = apply_luminance_curve(lum, transform.luminance_curve)
+        # Apply curve to luminance (uses LUT)
+        lum_mapped = apply_luminance_curve(
+            lum, transform.luminance_curve, prebuilt_lut=prebuilt_lut
+        )
 
         # Scale RGB channels by luminance ratio
         safe_mask = lum > 1e-6
