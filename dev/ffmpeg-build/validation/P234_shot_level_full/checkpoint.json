@@ -1,0 +1,79 @@
+{
+  "phase": "P2.34_CUDA_FULL",
+  "completed_anchor_count": 40,
+  "requested_anchor_count": 40,
+  "current_anchor": "br2049_temporal_stratum_20",
+  "completed_anchor_ids": [
+    "the_matrix_temporal_stratum_01",
+    "the_matrix_temporal_stratum_02",
+    "the_matrix_temporal_stratum_03",
+    "the_matrix_temporal_stratum_04",
+    "the_matrix_temporal_stratum_05",
+    "the_matrix_temporal_stratum_06",
+    "the_matrix_temporal_stratum_07",
+    "the_matrix_temporal_stratum_08",
+    "the_matrix_temporal_stratum_09",
+    "the_matrix_temporal_stratum_10",
+    "the_matrix_temporal_stratum_11",
+    "the_matrix_temporal_stratum_12",
+    "the_matrix_temporal_stratum_13",
+    "the_matrix_temporal_stratum_14",
+    "the_matrix_temporal_stratum_15",
+    "the_matrix_temporal_stratum_16",
+    "the_matrix_temporal_stratum_17",
+    "the_matrix_temporal_stratum_18",
+    "the_matrix_temporal_stratum_19",
+    "the_matrix_temporal_stratum_20",
+    "br2049_temporal_stratum_01",
+    "br2049_temporal_stratum_02",
+    "br2049_temporal_stratum_03",
+    "br2049_temporal_stratum_04",
+    "br2049_temporal_stratum_05",
+    "br2049_temporal_stratum_06",
+    "br2049_temporal_stratum_07",
+    "br2049_temporal_stratum_08",
+    "br2049_temporal_stratum_09",
+    "br2049_temporal_stratum_10",
+    "br2049_temporal_stratum_11",
+    "br2049_temporal_stratum_12",
+    "br2049_temporal_stratum_13",
+    "br2049_temporal_stratum_14",
+    "br2049_temporal_stratum_15",
+    "br2049_temporal_stratum_16",
+    "br2049_temporal_stratum_17",
+    "br2049_temporal_stratum_18",
+    "br2049_temporal_stratum_19",
+    "br2049_temporal_stratum_20"
+  ],
+  "elapsed_time_seconds": 631.472282900002,
+  "disk_usage_bytes": 5023281,
+  "gpu_memory_usage": {
+    "pool_used_bytes": 4949504,
+    "pool_reserved_bytes": 8879616,
+    "device_free_bytes": 9511632896,
+    "device_total_bytes": 10736893952,
+    "persistent_chunk_buffers_bytes": 4423680,
+    "model_a_lut_device_bytes": 524288,
+    "chunk_buffer_shapes": [
+      [
+        8,
+        1920,
+        3
+      ],
+      [
+        8,
+        3840,
+        3
+      ]
+    ]
+  },
+  "successful_samples": 113,
+  "failed_samples": 0,
+  "run_complete": true,
+  "hashes": {
+    "dataset_manifest_sha256": "e682ac5aba2128d6b45b2dbbc20b3300ed8df1ff5d46b02a5d0c1109aa85a7ef",
+    "dataset_metrics_sha256": "5fe61b8ea91e64a9168fcb7a41f881db5430a85dd75195388110f64e5f156e8e",
+    "protocol_config_sha256": "90dbdec019b66a8f23bf35e16d32ad52fe30a8fe30f92d880fb6c2e6f3feee78",
+    "harness_sha256": "91eeccf61a1e2b0bce7236ff8e8841bb1837ae404e44841e508e766b90e495f4"
+  }
+}

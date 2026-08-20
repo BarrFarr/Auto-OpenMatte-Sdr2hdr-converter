@@ -1,0 +1,560 @@
+{
+  "roi": {
+    "height": 560,
+    "width": 3840,
+    "pixels": 2150400
+  },
+  "measured_runs": 10,
+  "warmups": 2,
+  "stage_summary": {
+    "A_input_preparation": {
+      "median_ms": 0.0026499997147766408,
+      "min_ms": 0.0024000000848900527,
+      "max_ms": 0.016799999684735667,
+      "samples_ms": [
+        0.002599999788799323,
+        0.0024000000848900527,
+        0.0031999998100218363,
+        0.0026999996407539584,
+        0.002499999936844688,
+        0.002499999936844688,
+        0.016799999684735667,
+        0.002599999788799323,
+        0.003099999958067201,
+        0.0037999998312443495
+      ],
+      "percent_total": 0.000705899889207428
+    },
+    "B_bt1886_linearization": {
+      "median_ms": 105.45730000012554,
+      "min_ms": 96.18829999999434,
+      "max_ms": 128.20889999966312,
+      "samples_ms": [
+        111.94489999979851,
+        105.43830000005983,
+        110.66080000000511,
+        128.20889999966312,
+        98.7107000000833,
+        108.04709999956685,
+        100.0530000001163,
+        98.50470000037603,
+        105.47630000019126,
+        96.18829999999434
+      ],
+      "percent_total": 28.09143562208934
+    },
+    "C_709_to_2020_matrix": {
+      "median_ms": 17.604900000151247,
+      "min_ms": 15.866499999901862,
+      "max_ms": 21.82879999963916,
+      "samples_ms": [
+        20.617099999981292,
+        20.058899999639834,
+        20.689400000264868,
+        17.349499999909312,
+        17.39960000031715,
+        17.810199999985343,
+        15.866499999901862,
+        21.82879999963916,
+        16.352800000277057,
+        15.87070000005042
+      ],
+      "percent_total": 4.689546527238804
+    },
+    "D_bt2020_luminance": {
+      "median_ms": 19.836799999666255,
+      "min_ms": 17.27740000023914,
+      "max_ms": 23.747799999910058,
+      "samples_ms": [
+        23.747799999910058,
+        20.782800000233692,
+        23.51399999952264,
+        20.842500000071595,
+        18.890799999098817,
+        18.373099999735132,
+        17.838700000538665,
+        22.367300000041723,
+        17.27740000023914,
+        17.88750000014261
+      ],
+      "percent_total": 5.284074124202147
+    },
+    "E_luminance_curve_lut": {
+      "median_ms": 32.331800000065414,
+      "min_ms": 29.23980000014126,
+      "max_ms": 39.09879999991972,
+      "samples_ms": [
+        35.14149999955407,
+        37.3767000000953,
+        39.09879999991972,
+        31.944100000146136,
+        32.71949999998469,
+        34.6361000001707,
+        30.465300000287243,
+        29.23980000014126,
+        30.392900000151712,
+        30.12990000024729
+      ],
+      "percent_total": 8.612459054489586
+    },
+    "F_safe_ratio": {
+      "median_ms": 5.028500000207714,
+      "min_ms": 4.323699999986275,
+      "max_ms": 6.194600000526407,
+      "samples_ms": [
+        5.146600000443868,
+        5.9172000001126435,
+        6.194600000526407,
+        4.905300000245916,
+        5.05059999977675,
+        4.462300000341202,
+        4.4134999998277635,
+        5.753800000093179,
+        5.006400000638678,
+        4.323699999986275
+      ],
+      "percent_total": 1.3394784811610299
+    },
+    "G_rgb_times_ratio": {
+      "median_ms": 24.433850000150414,
+      "min_ms": 22.234600000047067,
+      "max_ms": 30.27269999984128,
+      "samples_ms": [
+        23.35880000009638,
+        26.163200000155484,
+        30.27269999984128,
+        26.084000000082597,
+        24.85329999944952,
+        24.57180000055814,
+        23.092400000678026,
+        24.295899999742687,
+        22.234600000047067,
+        22.57649999955902
+      ],
+      "percent_total": 6.508624099784423
+    },
+    "H_rgb_maximum_clamp": {
+      "median_ms": 7.344449999891367,
+      "min_ms": 6.619700000555895,
+      "max_ms": 9.041000000252097,
+      "samples_ms": [
+        8.762499999647844,
+        9.041000000252097,
+        8.079600000201026,
+        8.931200000006356,
+        6.819799999902898,
+        7.334999999329739,
+        6.8540000002030865,
+        7.353900000452995,
+        6.99229999918316,
+        6.619700000555895
+      ],
+      "percent_total": 1.9563950940461854
+    },
+    "K_other_branch_checks": {
+      "median_ms": 0.1872000002549612,
+      "min_ms": 0.1483999994889018,
+      "max_ms": 0.24890000076993601,
+      "samples_ms": [
+        0.20880000010947697,
+        0.18060000002151355,
+        0.19380000048840884,
+        0.19589999919844558,
+        0.24890000076993601,
+        0.19720000000233995,
+        0.1483999994889018,
+        0.1609999999345746,
+        0.1564999993206584,
+        0.15770000027259812
+      ],
+      "percent_total": 0.049865839117928204
+    },
+    "I_pq_oetf_sqrt_lut": {
+      "median_ms": 145.56080000011207,
+      "min_ms": 136.31859999986773,
+      "max_ms": 161.97959999954037,
+      "samples_ms": [
+        144.7570000000269,
+        156.74310000031255,
+        150.54220000001806,
+        149.3774000000485,
+        161.97959999954037,
+        146.36460000019724,
+        143.20590000079392,
+        139.10829999986163,
+        143.02980000047683,
+        136.31859999986773
+      ],
+      "percent_total": 38.774099491434946
+    },
+    "J_final_output_clip": {
+      "median_ms": 9.345999999823107,
+      "min_ms": 8.419000000685628,
+      "max_ms": 10.238399999252579,
+      "samples_ms": [
+        10.112500000104774,
+        9.687100000519422,
+        9.259299999939685,
+        8.922600000005332,
+        9.684099999503815,
+        9.245299999747658,
+        8.594400000220048,
+        9.432699999706529,
+        8.419000000685628,
+        10.238399999252579
+      ],
+      "percent_total": 2.489562669618559
+    },
+    "TOTAL": {
+      "median_ms": 375.4073000000062,
+      "min_ms": 341.66840000034426,
+      "max_ms": 400.85889999954816,
+      "samples_ms": [
+        385.42750000033266,
+        393.4097000001202,
+        400.85889999954816,
+        398.5371999997369,
+        377.9124000002412,
+        372.90219999977126,
+        351.98399999990215,
+        359.47699999996985,
+        357.10540000036417,
+        341.66840000034426
+      ],
+      "percent_total": 100.0
+    },
+    "K_residual_not_separately_isolated": {
+      "median_ms": 1.6958500000328058,
+      "min_ms": 1.3536000005842652,
+      "max_ms": 2.3504999990109354,
+      "samples_ms": [
+        1.6274000008706935,
+        2.018399998632958,
+        2.3504999990109354,
+        1.7731000007188413,
+        1.5530000018770806,
+        1.8570000002000597,
+        1.4350999981616042,
+        1.428200000191282,
+        1.7642999991949182,
+        1.3536000005842652
+      ],
+      "percent_total": 0.45173602112499617
+    }
+  },
+  "memory_run": {
+    "trace_peak_bytes": 621471282,
+    "memory": {
+      "A_input_preparation": {
+        "current_bytes": 448,
+        "peak_delta_bytes": 104,
+        "peak_bytes": 448
+      },
+      "B_bt1886_linearization": {
+        "current_bytes": 51610728,
+        "peak_delta_bytes": 103219982,
+        "peak_bytes": 103220550
+      },
+      "C_709_to_2020_matrix": {
+        "current_bytes": 103220536,
+        "peak_delta_bytes": 51609922,
+        "peak_bytes": 154830472
+      },
+      "D_bt2020_luminance": {
+        "current_bytes": 120424104,
+        "peak_delta_bytes": 200,
+        "peak_bytes": 154830672
+      },
+      "E_luminance_curve_lut": {
+        "current_bytes": 137628072,
+        "peak_delta_bytes": 55909996,
+        "peak_bytes": 210740668
+      },
+      "F_safe_ratio": {
+        "current_bytes": 156982184,
+        "peak_delta_bytes": 0,
+        "peak_bytes": 210740668
+      },
+      "G_rgb_times_ratio": {
+        "current_bytes": 208592328,
+        "peak_delta_bytes": 0,
+        "peak_bytes": 210740668
+      },
+      "H_rgb_maximum_clamp": {
+        "current_bytes": 260202112,
+        "peak_delta_bytes": 49461524,
+        "peak_bytes": 260202192
+      },
+      "K_other_branch_checks": {
+        "current_bytes": 208592824,
+        "peak_delta_bytes": 0,
+        "peak_bytes": 260202200
+      },
+      "I_pq_oetf_sqrt_lut": {
+        "current_bytes": 260203360,
+        "peak_delta_bytes": 361269082,
+        "peak_bytes": 621471282
+      },
+      "J_final_output_clip": {
+        "current_bytes": 311813544,
+        "peak_delta_bytes": 0,
+        "peak_bytes": 621471282
+      }
+    },
+    "inventory": {
+      "input": {
+        "shape": [
+          560,
+          3840,
+          3
+        ],
+        "dtype": "float64",
+        "nbytes": 51609600
+      },
+      "linear_709": {
+        "shape": [
+          560,
+          3840,
+          3
+        ],
+        "dtype": "float64",
+        "nbytes": 51609600
+      },
+      "linear_2020": {
+        "shape": [
+          560,
+          3840,
+          3
+        ],
+        "dtype": "float64",
+        "nbytes": 51609600
+      },
+      "luminance": {
+        "shape": [
+          560,
+          3840
+        ],
+        "dtype": "float64",
+        "nbytes": 17203200
+      },
+      "mapped_luminance": {
+        "shape": [
+          560,
+          3840
+        ],
+        "dtype": "float64",
+        "nbytes": 17203200
+      },
+      "safe_mask": {
+        "shape": [
+          560,
+          3840
+        ],
+        "dtype": "bool",
+        "nbytes": 2150400
+      },
+      "ratio": {
+        "shape": [
+          560,
+          3840
+        ],
+        "dtype": "float64",
+        "nbytes": 17203200
+      },
+      "linear_clamped": {
+        "shape": [
+          560,
+          3840,
+          3
+        ],
+        "dtype": "float64",
+        "nbytes": 51609600
+      },
+      "hdr_signal": {
+        "shape": [
+          560,
+          3840,
+          3
+        ],
+        "dtype": "float64",
+        "nbytes": 51609600
+      },
+      "output": {
+        "shape": [
+          560,
+          3840,
+          3
+        ],
+        "dtype": "float64",
+        "nbytes": 51609600
+      }
+    }
+  },
+  "actual_transform_timing": {
+    "median_ms": 381.43309999941266,
+    "min_ms": 353.3497999997053,
+    "max_ms": 456.27349999995204,
+    "samples_ms": [
+      357.49500000019907,
+      353.3497999997053,
+      381.1854999994466,
+      368.1001000004471,
+      381.6806999993787,
+      363.81119999987277,
+      456.27349999995204,
+      404.89919999981794,
+      439.49700000030134,
+      398.79949999976816
+    ]
+  },
+  "cpu": {
+    "wall_median_ms": 377.2564999999304,
+    "cpu_median_ms": 390.625,
+    "cpu_wall_ratio": 1.0354361024927923,
+    "wall_samples_ms": [
+      380.73939999958384,
+      385.2928999995129,
+      369.3444999998974,
+      377.2564999999304,
+      348.77940000023955
+    ],
+    "cpu_samples_ms": [
+      437.5,
+      390.625,
+      375.0,
+      375.0,
+      437.5
+    ]
+  },
+  "scaling": [
+    {
+      "height": 540,
+      "width": 960,
+      "pixels": 518400,
+      "timing": {
+        "median_ms": 81.81479999984731,
+        "min_ms": 81.28990000022895,
+        "max_ms": 85.88150000014139,
+        "samples_ms": [
+          81.40389999971376,
+          81.41039999918576,
+          81.32320000004256,
+          81.28990000022895,
+          82.35839999997552,
+          81.69660000021395,
+          85.88150000014139,
+          83.36580000013782,
+          83.96299999913026,
+          81.93299999948067
+        ]
+      },
+      "ms_per_million_pixels": 157.82175925896473
+    },
+    {
+      "height": 1080,
+      "width": 1920,
+      "pixels": 2073600,
+      "timing": {
+        "median_ms": 356.5820000003441,
+        "min_ms": 343.3171000006041,
+        "max_ms": 366.10730000029434,
+        "samples_ms": [
+          343.3171000006041,
+          345.88720000010653,
+          356.6880000007586,
+          366.10730000029434,
+          357.8333000004932,
+          356.44260000026406,
+          356.4759999999296,
+          354.36310000022786,
+          362.3708000004626,
+          360.6553999998141
+        ]
+      },
+      "ms_per_million_pixels": 171.96277006189436
+    },
+    {
+      "height": 2160,
+      "width": 3840,
+      "pixels": 8294400,
+      "timing": {
+        "median_ms": 1450.8388499998546,
+        "min_ms": 1391.6645999997854,
+        "max_ms": 1480.120799999895,
+        "samples_ms": [
+          1469.4699000001492,
+          1424.380000000383,
+          1439.8890000002211,
+          1391.6645999997854,
+          1399.202399999922,
+          1477.9494000003979,
+          1449.7936999996455,
+          1480.120799999895,
+          1451.8840000000637,
+          1462.9994999995688
+        ]
+      },
+      "ms_per_million_pixels": 174.91787832752877
+    },
+    {
+      "height": 280,
+      "width": 3840,
+      "pixels": 1075200,
+      "timing": {
+        "median_ms": 175.78770000000077,
+        "min_ms": 169.523599999593,
+        "max_ms": 180.43709999983548,
+        "samples_ms": [
+          175.7279000003109,
+          178.59189999944647,
+          172.12730000028387,
+          169.523599999593,
+          174.13519999990967,
+          174.41619999954128,
+          175.84749999969063,
+          179.37350000011065,
+          175.99020000034216,
+          180.43709999983548
+        ]
+      },
+      "ms_per_million_pixels": 163.49302455357213
+    },
+    {
+      "height": 560,
+      "width": 3840,
+      "pixels": 2150400,
+      "timing": {
+        "median_ms": 361.59970000016983,
+        "min_ms": 358.6819000001924,
+        "max_ms": 386.45720000022266,
+        "samples_ms": [
+          361.2019000001965,
+          360.96420000012586,
+          377.29659999968135,
+          385.74380000045494,
+          386.45720000022266,
+          359.6397999999681,
+          360.2147999999943,
+          361.9975000001432,
+          363.5874999999942,
+          358.6819000001924
+        ]
+      },
+      "ms_per_million_pixels": 168.15462239591233
+    }
+  ],
+  "backend": {
+    "cpu_count": 16,
+    "omp_num_threads": null,
+    "openblas_num_threads": null,
+    "numpy_config": "{\n  \"Compilers\": {\n    \"c\": {\n      \"name\": \"msvc\",\n      \"linker\": \"link\",\n      \"version\": \"19.44.35228\",\n      \"commands\": \"cl\"\n    },\n    \"cython\": {\n      \"name\": \"cython\",\n      \"linker\": \"cython\",\n      \"version\": \"3.2.9\",\n      \"commands\": \"cython\"\n    },\n    \"c++\": {\n      \"name\": \"msvc\",\n      \"linker\": \"link\",\n      \"version\": \"19.44.35228\",\n      \"commands\": \"cl\"\n    }\n  },\n  \"Machine Information\": {\n    \"host\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"windows\"\n    },\n    \"build\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"windows\"\n    }\n  },\n  \"Build Dependencies\": {\n    \"blas\": {\n      \"name\": \"scipy-openblas\",\n      \"found\": true,\n      \"version\": \"0.3.34.0.0\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"C:/Users/runneradmin/AppData/Local/Temp/cibw-run-b2ht6fnl/cp313-win_amd64/build/venv/Lib/site-packages/scipy_openblas64/include\",\n      \"lib directory\": \"C:/Users/runneradmin/AppData/Local/Temp/cibw-run-b2ht6fnl/cp313-win_amd64/build/venv/Lib/site-packages/scipy_openblas64/lib\",\n      \"openblas configuration\": \"OpenBLAS 0.3.34.0.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY SkylakeX MAX_THREADS=24\",\n      \"pc file directory\": \"D:/a/numpy-release/numpy-release/.openblas\"\n    },\n    \"lapack\": {\n      \"name\": \"scipy-openblas\",\n      \"found\": true,\n      \"version\": \"0.3.34.0.0\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"C:/Users/runneradmin/AppData/Local/Temp/cibw-run-b2ht6fnl/cp313-win_amd64/build/venv/Lib/site-packages/scipy_openblas64/include\",\n      \"lib directory\": \"C:/Users/runneradmin/AppData/Local/Temp/cibw-run-b2ht6fnl/cp313-win_amd64/build/venv/Lib/site-packages/scipy_openblas64/lib\",\n      \"openblas configuration\": \"OpenBLAS 0.3.34.0.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY SkylakeX MAX_THREADS=24\",\n      \"pc file directory\": \"D:/a/numpy-release/numpy-release/.openblas\"\n    }\n  },\n  \"Python Information\": {\n    \"path\": \"C:\\\\Users\\\\runneradmin\\\\AppData\\\\Local\\\\Temp\\\\build-env-m8lsj2zx\\\\Scripts\\\\python.exe\",\n    \"version\": \"3.13\"\n  },\n  \"SIMD Extensions\": {\n    \"baseline\": [\n      \"X86_V2\"\n    ],\n    \"found\": [\n      \"X86_V3\"\n    ]\n  }\n}\n"
+  },
+  "allocation_audit": {
+    "production_files": [
+      "src/auto_openmatte/processing/transform.py",
+      "src/auto_openmatte/core/transfer_functions.py",
+      "src/auto_openmatte/processing/luminance.py"
+    ],
+    "note": "Static audit is documented in the P2.18 report; no source was changed."
+  }
+}

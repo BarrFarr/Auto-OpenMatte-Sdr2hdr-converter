@@ -1,0 +1,103 @@
+{
+  "phase": "P2.34_CUDA_PARITY",
+  "status": "PASS",
+  "requirements": {
+    "luminance_max_limit_nits": 0.01,
+    "cpu_reference": "source_luminance_chunk",
+    "full_luminance_planes_saved": false,
+    "cpu_fallback_allowed": false
+  },
+  "hashes": {
+    "dataset_manifest_sha256": "e682ac5aba2128d6b45b2dbbc20b3300ed8df1ff5d46b02a5d0c1109aa85a7ef",
+    "dataset_metrics_sha256": "5fe61b8ea91e64a9168fcb7a41f881db5430a85dd75195388110f64e5f156e8e",
+    "protocol_config_sha256": "90dbdec019b66a8f23bf35e16d32ad52fe30a8fe30f92d880fb6c2e6f3feee78",
+    "harness_sha256": "549d9e824b72d235de1ccb26bbe49e0ed40c8d5a896e0af128f4d986453a378a"
+  },
+  "constraints": {
+    "production_files_modified": false,
+    "dataset_mutated": false,
+    "global_sync_performed": false,
+    "full_film_scan": false,
+    "render_performed": false,
+    "encode_performed": false
+  },
+  "cases": [
+    {
+      "case_id": "the_matrix_temporal_stratum_08",
+      "material": "The Matrix",
+      "hdr_frame": 73367,
+      "om_frame": 73348,
+      "offset_frames": -19,
+      "chunks": 100,
+      "samples_compared": 3072000,
+      "max_sdr_abs_error_nits": 0.00024413977189396974,
+      "max_hdr_abs_error_nits": 7.6291439654596616e-06,
+      "nonfinite_cpu": 0,
+      "nonfinite_cuda": 0,
+      "pass": true
+    },
+    {
+      "case_id": "br2049_temporal_stratum_01",
+      "material": "BR2049",
+      "hdr_frame": 11699,
+      "om_frame": 12866,
+      "offset_frames": 1167,
+      "chunks": 200,
+      "samples_compared": 12288000,
+      "max_sdr_abs_error_nits": 6.097507048252737e-05,
+      "max_hdr_abs_error_nits": 1.903431559924229e-06,
+      "nonfinite_cpu": 0,
+      "nonfinite_cuda": 0,
+      "pass": true
+    }
+  ],
+  "device": {
+    "cupy_version": "14.1.1",
+    "cuda_device_count": 1,
+    "device_id": 0,
+    "device_name": "NVIDIA GeForce RTX 3080",
+    "compute_capability": "86",
+    "cuda_runtime_version": 13020
+  },
+  "memory": {
+    "pool_used_bytes": 4425216,
+    "pool_reserved_bytes": 8234496,
+    "device_free_bytes": 9513730048,
+    "device_total_bytes": 10736893952,
+    "persistent_chunk_buffers_bytes": 4423680,
+    "model_a_lut_device_bytes": 0,
+    "chunk_buffer_shapes": [
+      [
+        8,
+        1920,
+        3
+      ],
+      [
+        8,
+        3840,
+        3
+      ]
+    ]
+  },
+  "parity_pass": true,
+  "memory_final": {
+    "pool_used_bytes": 4425216,
+    "pool_reserved_bytes": 8234496,
+    "device_free_bytes": 9513730048,
+    "device_total_bytes": 10736893952,
+    "persistent_chunk_buffers_bytes": 4423680,
+    "model_a_lut_device_bytes": 0,
+    "chunk_buffer_shapes": [
+      [
+        8,
+        1920,
+        3
+      ],
+      [
+        8,
+        3840,
+        3
+      ]
+    ]
+  }
+}

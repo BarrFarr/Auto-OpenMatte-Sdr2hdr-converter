@@ -1,0 +1,367 @@
+{
+  "selected": {
+    "constraint_family": "A_unconstrained_regularized",
+    "lambda": 0.001,
+    "matrix": [
+      [
+        0.6315911152843587,
+        0.4723791735896113,
+        -0.2566610123553688
+      ],
+      [
+        0.16441661124484283,
+        0.6947884938240748,
+        -0.037679694280059836
+      ],
+      [
+        0.2805168757513693,
+        -0.3087711914019621,
+        0.9101822280248217
+      ]
+    ],
+    "determinant": 0.3794291049052593,
+    "condition_number": 2.9777816184576213,
+    "deviation_from_identity_frobenius": 0.8534900752451925,
+    "optimizer_success": true,
+    "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+    "optimizer_iterations": 86,
+    "fit_seconds_cpu": 4.245889800000441,
+    "holdout_terms": {
+      "luma_mse_scaled": 0.01007167378287492,
+      "chroma_mse_scaled": 0.2579535108990193,
+      "hue_mse_scaled": 1.1729553334420102,
+      "deltaE_mse_scaled": 0.13584085470747023
+    },
+    "holdout_objective": 0.32439551367762176,
+    "stable": true
+  },
+  "candidates": [
+    {
+      "constraint_family": "A_unconstrained_regularized",
+      "lambda": 0.001,
+      "matrix": [
+        [
+          0.6315911152843587,
+          0.4723791735896113,
+          -0.2566610123553688
+        ],
+        [
+          0.16441661124484283,
+          0.6947884938240748,
+          -0.037679694280059836
+        ],
+        [
+          0.2805168757513693,
+          -0.3087711914019621,
+          0.9101822280248217
+        ]
+      ],
+      "determinant": 0.3794291049052593,
+      "condition_number": 2.9777816184576213,
+      "deviation_from_identity_frobenius": 0.8534900752451925,
+      "optimizer_success": true,
+      "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "optimizer_iterations": 86,
+      "fit_seconds_cpu": 4.245889800000441,
+      "holdout_terms": {
+        "luma_mse_scaled": 0.01007167378287492,
+        "chroma_mse_scaled": 0.2579535108990193,
+        "hue_mse_scaled": 1.1729553334420102,
+        "deltaE_mse_scaled": 0.13584085470747023
+      },
+      "holdout_objective": 0.32439551367762176,
+      "stable": true
+    },
+    {
+      "constraint_family": "A_unconstrained_regularized",
+      "lambda": 0.01,
+      "matrix": [
+        [
+          0.6758806590393983,
+          0.3913865409760346,
+          -0.14146415118450048
+        ],
+        [
+          0.13666330099392449,
+          0.7419714032106483,
+          0.010525541238480773
+        ],
+        [
+          0.2494573959866562,
+          -0.2765527323424634,
+          0.9785254431168958
+        ]
+      ],
+      "determinant": 0.4729007003058512,
+      "condition_number": 2.3959285167268307,
+      "deviation_from_identity_frobenius": 0.7090746378923191,
+      "optimizer_success": true,
+      "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "optimizer_iterations": 73,
+      "fit_seconds_cpu": 3.815440500000477,
+      "holdout_terms": {
+        "luma_mse_scaled": 0.010293949612790617,
+        "chroma_mse_scaled": 0.26851758630127265,
+        "hue_mse_scaled": 1.1806671917605942,
+        "deltaE_mse_scaled": 0.1351143550221009
+      },
+      "holdout_objective": 0.33224629515339654,
+      "stable": true
+    },
+    {
+      "constraint_family": "A_unconstrained_regularized",
+      "lambda": 0.1,
+      "matrix": [
+        [
+          0.9062426721927203,
+          0.13872125805592334,
+          0.031495657686674824
+        ],
+        [
+          0.07821576175420826,
+          0.9425549571309317,
+          -0.016081650126491657
+        ],
+        [
+          0.1524957223165942,
+          -0.0880395482891477,
+          1.0076797324111093
+        ]
+      ],
+      "determinant": 0.8434427044216507,
+      "condition_number": 1.3802433214897354,
+      "deviation_from_identity_frobenius": 0.26413470785345544,
+      "optimizer_success": true,
+      "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "optimizer_iterations": 39,
+      "fit_seconds_cpu": 2.0808852999998635,
+      "holdout_terms": {
+        "luma_mse_scaled": 0.011192278579799974,
+        "chroma_mse_scaled": 0.3173948580493693,
+        "hue_mse_scaled": 1.2362090061554498,
+        "deltaE_mse_scaled": 0.13808585248131575
+      },
+      "holdout_objective": 0.3561362478535058,
+      "stable": true
+    },
+    {
+      "constraint_family": "B_positive_diagonal",
+      "lambda": 0.001,
+      "matrix": [
+        [
+          0.6316167399230749,
+          0.472221024401871,
+          -0.2566443617650966
+        ],
+        [
+          0.1644628630782568,
+          0.6946130779309158,
+          -0.03765589281891862
+        ],
+        [
+          0.28054923067645404,
+          -0.3088361551409473,
+          0.91009209713913
+        ]
+      ],
+      "determinant": 0.37931821325203563,
+      "condition_number": 2.9776966018204116,
+      "deviation_from_identity_frobenius": 0.8535007293124119,
+      "optimizer_success": true,
+      "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "optimizer_iterations": 58,
+      "fit_seconds_cpu": 3.1155048000000534,
+      "holdout_terms": {
+        "luma_mse_scaled": 0.010071210986498125,
+        "chroma_mse_scaled": 0.2579441787260047,
+        "hue_mse_scaled": 1.1729726101537188,
+        "deltaE_mse_scaled": 0.13583983449714473
+      },
+      "holdout_objective": 0.3243967037404421,
+      "stable": true
+    },
+    {
+      "constraint_family": "B_positive_diagonal",
+      "lambda": 0.01,
+      "matrix": [
+        [
+          0.6758342257988459,
+          0.39142036755297566,
+          -0.14155764723827943
+        ],
+        [
+          0.13662158839854618,
+          0.7419969006338192,
+          0.010442147094522937
+        ],
+        [
+          0.24941281964881168,
+          -0.27645015094300807,
+          0.9783383170660276
+        ]
+      ],
+      "determinant": 0.4728002305600198,
+      "condition_number": 2.3957143661935527,
+      "deviation_from_identity_frobenius": 0.709064655722264,
+      "optimizer_success": true,
+      "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "optimizer_iterations": 56,
+      "fit_seconds_cpu": 2.7929033000000345,
+      "holdout_terms": {
+        "luma_mse_scaled": 0.010293531194241203,
+        "chroma_mse_scaled": 0.26851006778594777,
+        "hue_mse_scaled": 1.1806954957549731,
+        "deltaE_mse_scaled": 0.13511313661930272
+      },
+      "holdout_objective": 0.33224985964093967,
+      "stable": true
+    },
+    {
+      "constraint_family": "B_positive_diagonal",
+      "lambda": 0.1,
+      "matrix": [
+        [
+          0.906239210321251,
+          0.13868409246058627,
+          0.031514884539480585
+        ],
+        [
+          0.07821877721400185,
+          0.9425128558503577,
+          -0.016061955676562517
+        ],
+        [
+          0.15250197726554934,
+          -0.08806853357258901,
+          1.0076815876969822
+        ]
+      ],
+      "determinant": 0.8434037307000619,
+      "condition_number": 1.3802700822625735,
+      "deviation_from_identity_frobenius": 0.2641408958622309,
+      "optimizer_success": true,
+      "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "optimizer_iterations": 32,
+      "fit_seconds_cpu": 1.597381900000073,
+      "holdout_terms": {
+        "luma_mse_scaled": 0.011192014465831677,
+        "chroma_mse_scaled": 0.3173929976628655,
+        "hue_mse_scaled": 1.236205722062285,
+        "deltaE_mse_scaled": 0.13808471443463693
+      },
+      "holdout_objective": 0.3561351689034207,
+      "stable": true
+    },
+    {
+      "constraint_family": "C_limited_cross_channel",
+      "lambda": 0.001,
+      "matrix": [
+        [
+          0.6251178189896194,
+          0.25,
+          -0.15942705023241915
+        ],
+        [
+          0.1485172796982936,
+          0.5727935485386834,
+          -0.0349185140668979
+        ],
+        [
+          0.22588357001162274,
+          -0.25,
+          0.764936584522689
+        ]
+      ],
+      "determinant": 0.26461216553189776,
+      "condition_number": 2.300798518470829,
+      "deviation_from_identity_frobenius": 0.7765396755129491,
+      "optimizer_success": true,
+      "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "optimizer_iterations": 44,
+      "fit_seconds_cpu": 2.1816352999994706,
+      "holdout_terms": {
+        "luma_mse_scaled": 0.009842238642470398,
+        "chroma_mse_scaled": 0.2641932165835527,
+        "hue_mse_scaled": 1.1978033365035134,
+        "deltaE_mse_scaled": 0.13569021459885472
+      },
+      "holdout_objective": 0.3303696616596373,
+      "stable": true
+    },
+    {
+      "constraint_family": "C_limited_cross_channel",
+      "lambda": 0.01,
+      "matrix": [
+        [
+          0.7191674693023035,
+          0.25,
+          -0.07554836761558395
+        ],
+        [
+          0.13959422825229376,
+          0.7007442792474774,
+          0.0082511856781705
+        ],
+        [
+          0.2313421723815166,
+          -0.25,
+          0.9287703044749784
+        ]
+      ],
+      "determinant": 0.4524878755488914,
+      "condition_number": 2.022990540206218,
+      "deviation_from_identity_frobenius": 0.6142279327935188,
+      "optimizer_success": true,
+      "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "optimizer_iterations": 47,
+      "fit_seconds_cpu": 2.4675735000000714,
+      "holdout_terms": {
+        "luma_mse_scaled": 0.010086003867201914,
+        "chroma_mse_scaled": 0.2757439059083192,
+        "hue_mse_scaled": 1.1985852012083011,
+        "deltaE_mse_scaled": 0.1337559938608039
+      },
+      "holdout_objective": 0.3356076807762837,
+      "stable": true
+    },
+    {
+      "constraint_family": "C_limited_cross_channel",
+      "lambda": 0.1,
+      "matrix": [
+        [
+          0.9062536899481132,
+          0.13871826314472413,
+          0.031495792627041566
+        ],
+        [
+          0.07821531207110897,
+          0.9425601287247005,
+          -0.016078780250480304
+        ],
+        [
+          0.152497776873087,
+          -0.08804422191424507,
+          1.007688762628468
+        ]
+      ],
+      "determinant": 0.8434658986359436,
+      "condition_number": 1.380239734418772,
+      "deviation_from_identity_frobenius": 0.26413081454983967,
+      "optimizer_success": true,
+      "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "optimizer_iterations": 32,
+      "fit_seconds_cpu": 1.5976041999992958,
+      "holdout_terms": {
+        "luma_mse_scaled": 0.011192347361463857,
+        "chroma_mse_scaled": 0.3173950323023408,
+        "hue_mse_scaled": 1.2362091303329839,
+        "deltaE_mse_scaled": 0.13808643407594884
+      },
+      "holdout_objective": 0.35613627134204073,
+      "stable": true
+    }
+  ],
+  "training_sample_count": 4096,
+  "holdout_sample_count": 2048,
+  "objective": "0.35*luminance_MSE_scaled + 0.20*ICtCp_chroma_MSE_scaled + 0.20*nonneutral_hue_MSE_scaled + 0.25*DeltaE2000_MSE_scaled + lambda*||M-I||_F^2"
+}

@@ -1,0 +1,1779 @@
+{
+  "status": "COMPLETE",
+  "scope": "One-shot research-only Phase 4; no production/P2 changes, no video decode, no full-video processing.",
+  "frozen_cases": [
+    {
+      "material": "The Matrix",
+      "case_id": "the_matrix_temporal_stratum_08",
+      "role": "development_verified_anchor"
+    },
+    {
+      "material": "The Matrix",
+      "case_id": "the_matrix_temporal_stratum_03",
+      "role": "predeclared_temporal_candidate"
+    },
+    {
+      "material": "The Matrix",
+      "case_id": "the_matrix_temporal_stratum_12",
+      "role": "predeclared_temporal_candidate"
+    },
+    {
+      "material": "BR2049",
+      "case_id": "br2049_temporal_stratum_01",
+      "role": "predeclared_conditional_geometry_candidate"
+    }
+  ],
+  "diagnostic": {
+    "pixels_per_model": 1536000,
+    "H0": {
+      "all_pixels": {
+        "pixel_count": 1536000,
+        "hue_valid_pixel_count": 1535927,
+        "luminance_MAE_nits": 8.554623611901112,
+        "luminance_signed_mean_nits": -0.4906173931818092,
+        "deltaE2000_mean": 0.9464170007554005,
+        "chroma_error_signed_mean": 0.01629475607250381,
+        "chroma_error_absolute_mean": 0.028147901979287012,
+        "hue_error_absolute_mean_degrees": 20.804763863027336,
+        "RGB_residual_signed_mean_nits": [
+          -0.81409851318995,
+          -0.4608905934353132,
+          0.6025313420291925
+        ]
+      },
+      "reference_chroma_tertiles_ICtCp": [
+        0.03125857744907688,
+        0.06563958208903263
+      ],
+      "by_luminance": [
+        {
+          "group": "0–5",
+          "range_nits": [
+            0.0,
+            5.0
+          ],
+          "pixel_count": 963101,
+          "hue_valid_pixel_count": 963028,
+          "luminance_MAE_nits": 3.1472230015304956,
+          "luminance_signed_mean_nits": 2.962448696074429,
+          "deltaE2000_mean": 0.4006928307477043,
+          "chroma_error_signed_mean": 0.030590808849968475,
+          "chroma_error_absolute_mean": 0.03195560192117402,
+          "hue_error_absolute_mean_degrees": 27.67887993868166,
+          "RGB_residual_signed_mean_nits": [
+            3.924149135825504,
+            2.727581184618267,
+            1.387431280302287
+          ]
+        },
+        {
+          "group": "5–20",
+          "range_nits": [
+            5.0,
+            20.0
+          ],
+          "pixel_count": 229578,
+          "hue_valid_pixel_count": 229578,
+          "luminance_MAE_nits": 9.99182347232042,
+          "luminance_signed_mean_nits": 4.467220791262698,
+          "deltaE2000_mean": 1.019727888331468,
+          "chroma_error_signed_mean": 0.004130487441105342,
+          "chroma_error_absolute_mean": 0.020759694243036732,
+          "hue_error_absolute_mean_degrees": 8.631682425181841,
+          "RGB_residual_signed_mean_nits": [
+            4.895448659674207,
+            4.450191789710185,
+            2.764863321126125
+          ]
+        },
+        {
+          "group": "20–50",
+          "range_nits": [
+            20.0,
+            50.0
+          ],
+          "pixel_count": 208305,
+          "hue_valid_pixel_count": 208305,
+          "luminance_MAE_nits": 16.45155775047883,
+          "luminance_signed_mean_nits": -4.135221939947339,
+          "deltaE2000_mean": 1.763123451394034,
+          "chroma_error_signed_mean": -0.012784627991006384,
+          "chroma_error_absolute_mean": 0.020332940130183656,
+          "hue_error_absolute_mean_degrees": 9.66207114643088,
+          "RGB_residual_signed_mean_nits": [
+            -6.048078465881214,
+            -3.7879525637983464,
+            0.3682986727645055
+          ]
+        },
+        {
+          "group": "50–100",
+          "range_nits": [
+            50.0,
+            100.0
+          ],
+          "pixel_count": 117517,
+          "hue_valid_pixel_count": 117517,
+          "luminance_MAE_nits": 30.063442993799026,
+          "luminance_signed_mean_nits": -25.138815237759832,
+          "deltaE2000_mean": 3.1957331413078984,
+          "chroma_error_signed_mean": -0.01846359414775015,
+          "chroma_error_absolute_mean": 0.024381808008014264,
+          "hue_error_absolute_mean_degrees": 9.893376430095191,
+          "RGB_residual_signed_mean_nits": [
+            -32.48921688560469,
+            -23.79212738031291,
+            -7.9736188542888815
+          ]
+        },
+        {
+          "group": "100–250",
+          "range_nits": [
+            100.0,
+            250.0
+          ],
+          "pixel_count": 17499,
+          "hue_valid_pixel_count": 17499,
+          "luminance_MAE_nits": 48.85982234635915,
+          "luminance_signed_mean_nits": -46.66984832762974,
+          "deltaE2000_mean": 5.192374188083549,
+          "chroma_error_signed_mean": -0.03135460229007262,
+          "chroma_error_absolute_mean": 0.03383085684191216,
+          "hue_error_absolute_mean_degrees": 8.12161382696644,
+          "RGB_residual_signed_mean_nits": [
+            -61.478615917024,
+            -44.088311134779396,
+            -10.582478530305176
+          ]
+        },
+        {
+          "group": "250–500",
+          "range_nits": [
+            250.0,
+            500.0
+          ],
+          "pixel_count": 0,
+          "hue_valid_pixel_count": 0,
+          "luminance_MAE_nits": null,
+          "luminance_signed_mean_nits": null,
+          "deltaE2000_mean": null,
+          "chroma_error_signed_mean": null,
+          "chroma_error_absolute_mean": null,
+          "hue_error_absolute_mean_degrees": null,
+          "RGB_residual_signed_mean_nits": null
+        },
+        {
+          "group": "500–1000",
+          "range_nits": [
+            500.0,
+            1000.0
+          ],
+          "pixel_count": 0,
+          "hue_valid_pixel_count": 0,
+          "luminance_MAE_nits": null,
+          "luminance_signed_mean_nits": null,
+          "deltaE2000_mean": null,
+          "chroma_error_signed_mean": null,
+          "chroma_error_absolute_mean": null,
+          "hue_error_absolute_mean_degrees": null,
+          "RGB_residual_signed_mean_nits": null
+        },
+        {
+          "group": ">1000",
+          "range_nits": [
+            1000.0,
+            null
+          ],
+          "pixel_count": 0,
+          "hue_valid_pixel_count": 0,
+          "luminance_MAE_nits": null,
+          "luminance_signed_mean_nits": null,
+          "deltaE2000_mean": null,
+          "chroma_error_signed_mean": null,
+          "chroma_error_absolute_mean": null,
+          "hue_error_absolute_mean_degrees": null,
+          "RGB_residual_signed_mean_nits": null
+        }
+      ],
+      "by_chroma": [
+        {
+          "group": "low chroma",
+          "reference_chroma_ICtCp_range": [
+            0.0,
+            0.03125857744907688
+          ],
+          "pixel_count": 512000,
+          "hue_valid_pixel_count": 511927,
+          "luminance_MAE_nits": 1.4470296570438945,
+          "luminance_signed_mean_nits": 1.3716976725124002,
+          "deltaE2000_mean": 0.210353776704493,
+          "chroma_error_signed_mean": 0.0326557089731871,
+          "chroma_error_absolute_mean": 0.03271416903157791,
+          "hue_error_absolute_mean_degrees": 41.097021198497266,
+          "RGB_residual_signed_mean_nits": [
+            1.9349216801229678,
+            1.2095164848788587,
+            0.7308865159565003
+          ]
+        },
+        {
+          "group": "medium chroma",
+          "reference_chroma_ICtCp_range": [
+            0.03125857744907688,
+            0.06563958208903263
+          ],
+          "pixel_count": 512000,
+          "hue_valid_pixel_count": 512000,
+          "luminance_MAE_nits": 7.823327967532727,
+          "luminance_signed_mean_nits": 2.9877398952490486,
+          "deltaE2000_mean": 0.8552540016621415,
+          "chroma_error_signed_mean": 0.021940097050679674,
+          "chroma_error_absolute_mean": 0.02914707478964302,
+          "hue_error_absolute_mean_degrees": 13.378503755027522,
+          "RGB_residual_signed_mean_nits": [
+            3.5161992951891103,
+            2.8791676063623752,
+            1.8880051144886858
+          ]
+        },
+        {
+          "group": "high chroma",
+          "reference_chroma_ICtCp_range": [
+            0.06563958208903263,
+            null
+          ],
+          "pixel_count": 512000,
+          "hue_valid_pixel_count": 512000,
+          "luminance_MAE_nits": 16.393513211126724,
+          "luminance_signed_mean_nits": -5.831289747306877,
+          "deltaE2000_mean": 1.7736432238995667,
+          "chroma_error_signed_mean": -0.005711537806355346,
+          "chroma_error_absolute_mean": 0.022582462116640094,
+          "hue_error_absolute_mean_degrees": 7.94165986756013,
+          "RGB_residual_signed_mean_nits": [
+            -7.893416514881944,
+            -5.471355871547174,
+            -0.8112976043576087
+          ]
+        }
+      ],
+      "by_hue": [
+        {
+          "group": "red",
+          "sector_degrees": [
+            330.0,
+            30.0
+          ],
+          "pixel_count": 72053,
+          "hue_valid_pixel_count": 72012,
+          "luminance_MAE_nits": 1.0357439961176655,
+          "luminance_signed_mean_nits": 1.0357439961176655,
+          "deltaE2000_mean": 0.20235009578631705,
+          "chroma_error_signed_mean": 0.03719399332132519,
+          "chroma_error_absolute_mean": 0.03719549649347578,
+          "hue_error_absolute_mean_degrees": 97.464450264237,
+          "RGB_residual_signed_mean_nits": [
+            1.6139703024780694,
+            0.8369588159213226,
+            0.7469801089716718
+          ]
+        },
+        {
+          "group": "yellow",
+          "sector_degrees": [
+            30.0,
+            90.0
+          ],
+          "pixel_count": 107646,
+          "hue_valid_pixel_count": 107646,
+          "luminance_MAE_nits": 1.1339578640731514,
+          "luminance_signed_mean_nits": 1.1201289999724013,
+          "deltaE2000_mean": 0.1610139977067546,
+          "chroma_error_signed_mean": 0.03080635236794919,
+          "chroma_error_absolute_mean": 0.030889495470626655,
+          "hue_error_absolute_mean_degrees": 51.21580598838907,
+          "RGB_residual_signed_mean_nits": [
+            1.5816824374618126,
+            0.9880815832299931,
+            0.5851890425168228
+          ]
+        },
+        {
+          "group": "green",
+          "sector_degrees": [
+            90.0,
+            150.0
+          ],
+          "pixel_count": 748470,
+          "hue_valid_pixel_count": 748462,
+          "luminance_MAE_nits": 5.647368667172977,
+          "luminance_signed_mean_nits": 1.0877529673980615,
+          "deltaE2000_mean": 0.7025214985795424,
+          "chroma_error_signed_mean": 0.024423762210988447,
+          "chroma_error_absolute_mean": 0.03153133343083442,
+          "hue_error_absolute_mean_degrees": 13.286587898270495,
+          "RGB_residual_signed_mean_nits": [
+            1.2701609853577729,
+            1.0534777989849182,
+            0.6715637239932521
+          ]
+        },
+        {
+          "group": "cyan",
+          "sector_degrees": [
+            150.0,
+            210.0
+          ],
+          "pixel_count": 575938,
+          "hue_valid_pixel_count": 575924,
+          "luminance_MAE_nits": 15.073485943240332,
+          "luminance_signed_mean_nits": -3.1216282580796473,
+          "deltaE2000_mean": 1.5420158341406252,
+          "chroma_error_signed_mean": -0.001123445512744956,
+          "chroma_error_absolute_mean": 0.021235853494104916,
+          "hue_error_absolute_mean_degrees": 10.199389216361729,
+          "RGB_residual_signed_mean_nits": [
+            -4.415260377172014,
+            -2.935321512450011,
+            0.47906624695698025
+          ]
+        },
+        {
+          "group": "blue",
+          "sector_degrees": [
+            210.0,
+            270.0
+          ],
+          "pixel_count": 1028,
+          "hue_valid_pixel_count": 1028,
+          "luminance_MAE_nits": 1.786628376092522,
+          "luminance_signed_mean_nits": 1.7785386756821142,
+          "deltaE2000_mean": 0.2373128420109444,
+          "chroma_error_signed_mean": 0.05757650483813607,
+          "chroma_error_absolute_mean": 0.05757650483813607,
+          "hue_error_absolute_mean_degrees": 106.56602153654423,
+          "RGB_residual_signed_mean_nits": [
+            2.437087807726717,
+            1.6147694839882867,
+            0.7335918793970849
+          ]
+        },
+        {
+          "group": "magenta",
+          "sector_degrees": [
+            270.0,
+            330.0
+          ],
+          "pixel_count": 30865,
+          "hue_valid_pixel_count": 30855,
+          "luminance_MAE_nits": 1.0721318653585976,
+          "luminance_signed_mean_nits": 1.0721318653585976,
+          "deltaE2000_mean": 0.2468274675121181,
+          "chroma_error_signed_mean": 0.043415484602991154,
+          "chroma_error_absolute_mean": 0.043415484602991154,
+          "hue_error_absolute_mean_degrees": 113.26147610743186,
+          "RGB_residual_signed_mean_nits": [
+            1.7082457801196391,
+            0.8362324578992439,
+            0.9512663147636204
+          ]
+        }
+      ]
+    },
+    "H1": {
+      "all_pixels": {
+        "pixel_count": 1536000,
+        "hue_valid_pixel_count": 1535927,
+        "luminance_MAE_nits": 8.346681922122698,
+        "luminance_signed_mean_nits": -1.960581204218796,
+        "deltaE2000_mean": 0.9119867819111664,
+        "chroma_error_signed_mean": -0.0009524826593872839,
+        "chroma_error_absolute_mean": 0.02026002704015056,
+        "hue_error_absolute_mean_degrees": 19.525826416498976,
+        "RGB_residual_signed_mean_nits": [
+          -2.2229414149737665,
+          -2.0601477873458585,
+          0.3400624842382937
+        ]
+      },
+      "reference_chroma_tertiles_ICtCp": [
+        0.03125857744907688,
+        0.06563958208903263
+      ],
+      "by_luminance": [
+        {
+          "group": "0–5",
+          "range_nits": [
+            0.0,
+            5.0
+          ],
+          "pixel_count": 963101,
+          "hue_valid_pixel_count": 963028,
+          "luminance_MAE_nits": 2.7703063648930293,
+          "luminance_signed_mean_nits": 2.560432149304133,
+          "deltaE2000_mean": 0.2910648140787019,
+          "chroma_error_signed_mean": 0.011388187551642013,
+          "chroma_error_absolute_mean": 0.016354746194583818,
+          "hue_error_absolute_mean_degrees": 24.72279326800729,
+          "RGB_residual_signed_mean_nits": [
+            3.239150985027663,
+            2.386783533550391,
+            1.5390885293466208
+          ]
+        },
+        {
+          "group": "5–20",
+          "range_nits": [
+            5.0,
+            20.0
+          ],
+          "pixel_count": 229578,
+          "hue_valid_pixel_count": 229578,
+          "luminance_MAE_nits": 8.864843725734568,
+          "luminance_signed_mean_nits": 2.813126140582355,
+          "deltaE2000_mean": 0.9150689791424431,
+          "chroma_error_signed_mean": -0.012413584304107458,
+          "chroma_error_absolute_mean": 0.021887025094530277,
+          "hue_error_absolute_mean_degrees": 10.194546041699674,
+          "RGB_residual_signed_mean_nits": [
+            3.333547870877591,
+            2.6296123109794833,
+            2.605834199978456
+          ]
+        },
+        {
+          "group": "20–50",
+          "range_nits": [
+            20.0,
+            50.0
+          ],
+          "pixel_count": 208305,
+          "hue_valid_pixel_count": 208305,
+          "luminance_MAE_nits": 15.928239998427522,
+          "luminance_signed_mean_nits": -7.748785635215196,
+          "deltaE2000_mean": 1.8667933104800618,
+          "chroma_error_signed_mean": -0.02518196123335387,
+          "chroma_error_absolute_mean": 0.027730547176873316,
+          "hue_error_absolute_mean_degrees": 10.953691004346206,
+          "RGB_residual_signed_mean_nits": [
+            -8.830726416257612,
+            -7.9365334983479885,
+            -0.8091752746101739
+          ]
+        },
+        {
+          "group": "50–100",
+          "range_nits": [
+            50.0,
+            100.0
+          ],
+          "pixel_count": 117517,
+          "hue_valid_pixel_count": 117517,
+          "luminance_MAE_nits": 32.516545477915095,
+          "luminance_signed_mean_nits": -30.08261577871422,
+          "deltaE2000_mean": 3.5887479263019033,
+          "chroma_error_signed_mean": -0.030610064949595645,
+          "chroma_error_absolute_mean": 0.03257308457193264,
+          "hue_error_absolute_mean_degrees": 11.619601429830745,
+          "RGB_residual_signed_mean_nits": [
+            -36.305374631880845,
+            -29.452979028753447,
+            -9.714571356227454
+          ]
+        },
+        {
+          "group": "100–250",
+          "range_nits": [
+            100.0,
+            250.0
+          ],
+          "pixel_count": 17499,
+          "hue_valid_pixel_count": 17499,
+          "luminance_MAE_nits": 55.89271394813065,
+          "luminance_signed_mean_nits": -55.655169781072416,
+          "deltaE2000_mean": 5.703520591074109,
+          "chroma_error_signed_mean": -0.04219503338642508,
+          "chroma_error_absolute_mean": 0.04223366263506007,
+          "hue_error_absolute_mean_degrees": 11.077720901789343,
+          "RGB_residual_signed_mean_nits": [
+            -68.19781945127644,
+            -54.423475486815704,
+            -14.173460896476431
+          ]
+        },
+        {
+          "group": "250–500",
+          "range_nits": [
+            250.0,
+            500.0
+          ],
+          "pixel_count": 0,
+          "hue_valid_pixel_count": 0,
+          "luminance_MAE_nits": null,
+          "luminance_signed_mean_nits": null,
+          "deltaE2000_mean": null,
+          "chroma_error_signed_mean": null,
+          "chroma_error_absolute_mean": null,
+          "hue_error_absolute_mean_degrees": null,
+          "RGB_residual_signed_mean_nits": null
+        },
+        {
+          "group": "500–1000",
+          "range_nits": [
+            500.0,
+            1000.0
+          ],
+          "pixel_count": 0,
+          "hue_valid_pixel_count": 0,
+          "luminance_MAE_nits": null,
+          "luminance_signed_mean_nits": null,
+          "deltaE2000_mean": null,
+          "chroma_error_signed_mean": null,
+          "chroma_error_absolute_mean": null,
+          "hue_error_absolute_mean_degrees": null,
+          "RGB_residual_signed_mean_nits": null
+        },
+        {
+          "group": ">1000",
+          "range_nits": [
+            1000.0,
+            null
+          ],
+          "pixel_count": 0,
+          "hue_valid_pixel_count": 0,
+          "luminance_MAE_nits": null,
+          "luminance_signed_mean_nits": null,
+          "deltaE2000_mean": null,
+          "chroma_error_signed_mean": null,
+          "chroma_error_absolute_mean": null,
+          "hue_error_absolute_mean_degrees": null,
+          "RGB_residual_signed_mean_nits": null
+        }
+      ],
+      "by_chroma": [
+        {
+          "group": "low chroma",
+          "reference_chroma_ICtCp_range": [
+            0.0,
+            0.03125857744907688
+          ],
+          "pixel_count": 512000,
+          "hue_valid_pixel_count": 511927,
+          "luminance_MAE_nits": 1.2518852235887756,
+          "luminance_signed_mean_nits": 1.1652952312747507,
+          "deltaE2000_mean": 0.14051422440319317,
+          "chroma_error_signed_mean": 0.01655436190349107,
+          "chroma_error_absolute_mean": 0.01693070589833971,
+          "hue_error_absolute_mean_degrees": 35.04377720307586,
+          "RGB_residual_signed_mean_nits": [
+            1.5204574882393742,
+            1.0591509369698087,
+            0.8055095084102587
+          ]
+        },
+        {
+          "group": "medium chroma",
+          "reference_chroma_ICtCp_range": [
+            0.03125857744907688,
+            0.06563958208903263
+          ],
+          "pixel_count": 512000,
+          "hue_valid_pixel_count": 512000,
+          "luminance_MAE_nits": 7.457748494745816,
+          "luminance_signed_mean_nits": 1.3182012049658796,
+          "deltaE2000_mean": 0.7382075441378495,
+          "chroma_error_signed_mean": 0.004985888453328717,
+          "chroma_error_absolute_mean": 0.01628644393653982,
+          "hue_error_absolute_mean_degrees": 12.754624237796383,
+          "RGB_residual_signed_mean_nits": [
+            2.2074302732470614,
+            0.984638394998853,
+            1.192654981022832
+          ]
+        },
+        {
+          "group": "high chroma",
+          "reference_chroma_ICtCp_range": [
+            0.06563958208903263,
+            null
+          ],
+          "pixel_count": 512000,
+          "hue_valid_pixel_count": 512000,
+          "luminance_MAE_nits": 16.3304120480335,
+          "luminance_signed_mean_nits": -8.365240048897018,
+          "deltaE2000_mean": 1.8572385771924564,
+          "chroma_error_signed_mean": -0.024397698334981642,
+          "chroma_error_absolute_mean": 0.027562931285572155,
+          "hue_error_absolute_mean_degrees": 10.781290328951677,
+          "RGB_residual_signed_mean_nits": [
+            -10.396712006407965,
+            -8.224232694006277,
+            -0.9779770367182096
+          ]
+        }
+      ],
+      "by_hue": [
+        {
+          "group": "red",
+          "sector_degrees": [
+            330.0,
+            30.0
+          ],
+          "pixel_count": 72053,
+          "hue_valid_pixel_count": 72012,
+          "luminance_MAE_nits": 0.9184467952505321,
+          "luminance_signed_mean_nits": 0.9184390940032187,
+          "deltaE2000_mean": 0.1231752663598399,
+          "chroma_error_signed_mean": 0.019262743044111626,
+          "chroma_error_absolute_mean": 0.01939300709108238,
+          "hue_error_absolute_mean_degrees": 77.99053612217949,
+          "RGB_residual_signed_mean_nits": [
+            1.2097493124484422,
+            0.8099756267295939,
+            0.8680349865151582
+          ]
+        },
+        {
+          "group": "yellow",
+          "sector_degrees": [
+            30.0,
+            90.0
+          ],
+          "pixel_count": 107646,
+          "hue_valid_pixel_count": 107646,
+          "luminance_MAE_nits": 0.9838448407908358,
+          "luminance_signed_mean_nits": 0.9690902961637374,
+          "deltaE2000_mean": 0.1067013442615095,
+          "chroma_error_signed_mean": 0.015991245029904427,
+          "chroma_error_absolute_mean": 0.016297815237664333,
+          "hue_error_absolute_mean_degrees": 42.487995012760706,
+          "RGB_residual_signed_mean_nits": [
+            1.2465546679243198,
+            0.8886936177142952,
+            0.6591249930813892
+          ]
+        },
+        {
+          "group": "green",
+          "sector_degrees": [
+            90.0,
+            150.0
+          ],
+          "pixel_count": 748470,
+          "hue_valid_pixel_count": 748462,
+          "luminance_MAE_nits": 5.286140304796506,
+          "luminance_signed_mean_nits": 0.5337374186712458,
+          "deltaE2000_mean": 0.6067596645853688,
+          "chroma_error_signed_mean": 0.00208164098169994,
+          "chroma_error_absolute_mean": 0.01869962211508118,
+          "hue_error_absolute_mean_degrees": 13.076689841932614,
+          "RGB_residual_signed_mean_nits": [
+            0.21101632846289234,
+            0.6192082700095946,
+            0.9861757524036914
+          ]
+        },
+        {
+          "group": "cyan",
+          "sector_degrees": [
+            150.0,
+            210.0
+          ],
+          "pixel_count": 575938,
+          "hue_valid_pixel_count": 575924,
+          "luminance_MAE_nits": 15.038238550266742,
+          "luminance_signed_mean_nits": -6.2719154058119475,
+          "deltaE2000_mean": 1.5997560430709659,
+          "chroma_error_signed_mean": -0.012086227514636368,
+          "chroma_error_absolute_mean": 0.022800911917585064,
+          "hue_error_absolute_mean_degrees": 12.377695160503373,
+          "RGB_residual_signed_mean_nits": [
+            -6.656680953832805,
+            -6.61314644467309,
+            -0.6659701475836943
+          ]
+        },
+        {
+          "group": "blue",
+          "sector_degrees": [
+            210.0,
+            270.0
+          ],
+          "pixel_count": 1028,
+          "hue_valid_pixel_count": 1028,
+          "luminance_MAE_nits": 1.6191438647535068,
+          "luminance_signed_mean_nits": 1.6104842174680325,
+          "deltaE2000_mean": 0.1834737208309847,
+          "chroma_error_signed_mean": 0.04232019396432911,
+          "chroma_error_absolute_mean": 0.04232019396432911,
+          "hue_error_absolute_mean_degrees": 111.93837690554896,
+          "RGB_residual_signed_mean_nits": [
+            2.1084908190700755,
+            1.4844867299460176,
+            0.8448849307744296
+          ]
+        },
+        {
+          "group": "magenta",
+          "sector_degrees": [
+            270.0,
+            330.0
+          ],
+          "pixel_count": 30865,
+          "hue_valid_pixel_count": 30855,
+          "luminance_MAE_nits": 0.9442629425877448,
+          "luminance_signed_mean_nits": 0.9442629425877448,
+          "deltaE2000_mean": 0.1542285298143609,
+          "chroma_error_signed_mean": 0.025498829272348002,
+          "chroma_error_absolute_mean": 0.02579490175939221,
+          "hue_error_absolute_mean_degrees": 89.75002432314945,
+          "RGB_residual_signed_mean_nits": [
+            1.229155706103785,
+            0.8218040651607973,
+            1.0823032447767345
+          ]
+        }
+      ]
+    },
+    "dependency_gate": {
+      "H0": {
+        "classification": "C_mixed_dependency",
+        "predeclared_rule": "weighted relative SD of group mean ΔE2000: strong >=0.25; dominance requires >=1.5× the other axis",
+        "luminance_dispersion": 0.9858133535268011,
+        "chroma_dispersion": 0.6777746501190244,
+        "hue_dispersion": 0.5191110056382983,
+        "color_dispersion_max": 0.6777746501190244
+      },
+      "H1": {
+        "classification": "A_luminance_dominant",
+        "predeclared_rule": "weighted relative SD of group mean ΔE2000: strong >=0.25; dominance requires >=1.5× the other axis",
+        "luminance_dispersion": 1.1886491634695182,
+        "chroma_dispersion": 0.7802093370183089,
+        "hue_dispersion": 0.6098115516214919,
+        "color_dispersion_max": 0.7802093370183089
+      },
+      "combined_classification": "C_mixed_dependency",
+      "model_J_permitted": false,
+      "J_gate": "J is permitted only if both existing H0 and H1 residuals classify A under the predeclared rule."
+    }
+  },
+  "model_J": {
+    "attempted": false,
+    "reason": "Not fitted: predeclared residual gate did not establish a dominant luminance-only dependency in both H0 and H1."
+  },
+  "established_H1_stability": {
+    "determinant": 0.3794291049052593,
+    "condition_number": 2.9777816184576213,
+    "deviation_from_identity_frobenius": 0.8534900752451925
+  },
+  "development_comparison": {
+    "rows": [
+      {
+        "model": "H0",
+        "mean_deltaE2000": 0.9464170003322566,
+        "luminance_MAE_nits": 8.554623612133987,
+        "mean_abs_chroma": 0.02814790199735387,
+        "mean_abs_hue": 20.8047638559891
+      },
+      {
+        "model": "H1",
+        "mean_deltaE2000": 0.9119867819723866,
+        "luminance_MAE_nits": 8.346681921496609,
+        "mean_abs_chroma": 0.02026002706299912,
+        "mean_abs_hue": 19.525826409549623
+      }
+    ],
+    "acceptance_rule": "mean ΔE2000 improvement >=5%; no visible color artifacts; no worsening seam continuity; no pathological coefficients; no significant instability"
+  },
+  "cross_scene_validation": {
+    "selected_architecture": "H0",
+    "rows": [
+      {
+        "material": "The Matrix",
+        "case_id": "the_matrix_temporal_stratum_08",
+        "role": "development_verified_anchor",
+        "frame_pair": {
+          "hdr": 73367,
+          "om": 73348
+        },
+        "scene_claim": "unverified_temporal_stratum",
+        "scene_independence_verified": false,
+        "known_verified_anchor": true,
+        "geometry_confidence": 1.0,
+        "geometry_confirmatory_gate_at_least_0_95": true,
+        "fit_mask": {
+          "definition": "SDR ∩ HDR only",
+          "pixel_count": 1536000
+        },
+        "parameter_count": {
+          "Model_E_reported": 12,
+          "H0_effective_luminance_controls": 10
+        },
+        "metrics": {
+          "RGB_MSE_normalized": 2.8122151108872593e-06,
+          "luminance": {
+            "MAE_nits": 8.554623612133987,
+            "RMSE_nits": 17.72270640464349,
+            "median_absolute_error_nits": 1.5602203679237896,
+            "P95_absolute_error_nits": 41.762769766002975
+          },
+          "deltaE2000": {
+            "count": 1536000,
+            "mean": 0.9464170003322566,
+            "median": 0.2897771468022312,
+            "p95": 3.776334483353466
+          },
+          "deltaEICtCp": {
+            "count": 1536000,
+            "mean": 0.08361008896644179,
+            "median": 0.06990855711688299,
+            "p95": 0.20335206206556278
+          },
+          "chroma_error_ICtCp_signed": {
+            "count": 1536000,
+            "mean": 0.016294756089862552,
+            "median": 0.019480572062296087,
+            "p95": 0.05950227740931275
+          },
+          "chroma_error_ICtCp_absolute": {
+            "count": 1536000,
+            "mean": 0.02814790199735387,
+            "median": 0.02463600974339901,
+            "p95": 0.0628778630987783
+          },
+          "hue_error_degrees_signed_non_neutral": {
+            "count": 1535927,
+            "mean": 10.704649069057064,
+            "median": 3.49369603877943,
+            "p95": 86.69966170679265
+          },
+          "hue_error_degrees_absolute_non_neutral": {
+            "count": 1535927,
+            "mean": 20.8047638559891,
+            "median": 10.012679216190007,
+            "p95": 89.4901068885701
+          },
+          "hue_excluded_neutral_reference_pixels": 73
+        },
+        "seam": {
+          "definition": "HDR-center composite continuity proxy; not unseen-region ground truth",
+          "boundaries": [
+            {
+              "boundary": "top",
+              "luma_mean_nits": 7.039245801417498,
+              "luma_P95_nits": 24.868833620566953,
+              "chroma_ICtCp": 0.03438622196506214,
+              "hue_degrees": 7.17321821997252,
+              "gradient_nits_per_pixel": 0.9345594327272891
+            },
+            {
+              "boundary": "bottom",
+              "luma_mean_nits": 5.494013753517481,
+              "luma_P95_nits": 20.977492964212285,
+              "chroma_ICtCp": 0.022206068248002888,
+              "hue_degrees": 19.858664969699948,
+              "gradient_nits_per_pixel": 0.0
+            }
+          ]
+        },
+        "range": {
+          "finite": true,
+          "min": 6.574246502835514e-06,
+          "max": 0.022762352781155584
+        },
+        "performance_seconds": {
+          "fit": 0.07020120000015595,
+          "full_sdr_apply": 0.05296889999954146
+        }
+      },
+      {
+        "material": "The Matrix",
+        "case_id": "the_matrix_temporal_stratum_03",
+        "role": "predeclared_temporal_candidate",
+        "frame_pair": {
+          "hdr": 28382,
+          "om": 28363
+        },
+        "scene_claim": "unverified_temporal_stratum",
+        "scene_independence_verified": false,
+        "known_verified_anchor": false,
+        "geometry_confidence": 1.0,
+        "geometry_confirmatory_gate_at_least_0_95": true,
+        "fit_mask": {
+          "definition": "SDR ∩ HDR only",
+          "pixel_count": 1536000
+        },
+        "parameter_count": {
+          "Model_E_reported": 12,
+          "H0_effective_luminance_controls": 10
+        },
+        "metrics": {
+          "RGB_MSE_normalized": 1.3331249029286164e-05,
+          "luminance": {
+            "MAE_nits": 13.363043092740648,
+            "RMSE_nits": 37.51614421863541,
+            "median_absolute_error_nits": 3.334813894408069,
+            "P95_absolute_error_nits": 70.55263840420231
+          },
+          "deltaE2000": {
+            "count": 1536000,
+            "mean": 1.9710309519890603,
+            "median": 1.4242624732236626,
+            "p95": 7.365988532923021
+          },
+          "deltaEICtCp": {
+            "count": 1536000,
+            "mean": 0.06043078132267701,
+            "median": 0.0418007710309361,
+            "p95": 0.1723598930012189
+          },
+          "chroma_error_ICtCp_signed": {
+            "count": 1536000,
+            "mean": -0.03144124594353827,
+            "median": -0.037163629990662764,
+            "p95": 0.022080322740146836
+          },
+          "chroma_error_ICtCp_absolute": {
+            "count": 1536000,
+            "mean": 0.03686568605092543,
+            "median": 0.03743334750471571,
+            "p95": 0.06441193705503369
+          },
+          "hue_error_degrees_signed_non_neutral": {
+            "count": 1536000,
+            "mean": 3.1719938506819756,
+            "median": 3.5495182125347124,
+            "p95": 26.673779252695176
+          },
+          "hue_error_degrees_absolute_non_neutral": {
+            "count": 1536000,
+            "mean": 11.354176032950912,
+            "median": 4.091292134269349,
+            "p95": 49.82748994174264
+          },
+          "hue_excluded_neutral_reference_pixels": 0
+        },
+        "seam": {
+          "definition": "HDR-center composite continuity proxy; not unseen-region ground truth",
+          "boundaries": [
+            {
+              "boundary": "top",
+              "luma_mean_nits": 5.328163449873176,
+              "luma_P95_nits": 33.470787195541305,
+              "chroma_ICtCp": 0.03227630395326411,
+              "hue_degrees": 9.288212162009613,
+              "gradient_nits_per_pixel": 1.3283955437011832
+            },
+            {
+              "boundary": "bottom",
+              "luma_mean_nits": 33.53231787173396,
+              "luma_P95_nits": 135.2685136480626,
+              "chroma_ICtCp": 0.0416082946802692,
+              "hue_degrees": 8.44641660724173,
+              "gradient_nits_per_pixel": 0.0
+            }
+          ]
+        },
+        "range": {
+          "finite": true,
+          "min": 4.742770482750928e-06,
+          "max": 0.03971552723665789
+        },
+        "performance_seconds": {
+          "fit": 0.07189300000027288,
+          "full_sdr_apply": 0.05499529999997321
+        }
+      },
+      {
+        "material": "The Matrix",
+        "case_id": "the_matrix_temporal_stratum_12",
+        "role": "predeclared_temporal_candidate",
+        "frame_pair": {
+          "hdr": 111978,
+          "om": 111959
+        },
+        "scene_claim": "unverified_temporal_stratum",
+        "scene_independence_verified": false,
+        "known_verified_anchor": false,
+        "geometry_confidence": 1.0,
+        "geometry_confirmatory_gate_at_least_0_95": true,
+        "fit_mask": {
+          "definition": "SDR ∩ HDR only",
+          "pixel_count": 1536000
+        },
+        "parameter_count": {
+          "Model_E_reported": 12,
+          "H0_effective_luminance_controls": 10
+        },
+        "metrics": {
+          "RGB_MSE_normalized": 1.585206766555578e-06,
+          "luminance": {
+            "MAE_nits": 7.862801460240478,
+            "RMSE_nits": 12.922879720853278,
+            "median_absolute_error_nits": 4.324841907262835,
+            "P95_absolute_error_nits": 26.29489205171602
+          },
+          "deltaE2000": {
+            "count": 1536000,
+            "mean": 1.0383276249780584,
+            "median": 0.8093391351740191,
+            "p95": 2.851471611654013
+          },
+          "deltaEICtCp": {
+            "count": 1536000,
+            "mean": 0.0748647595950081,
+            "median": 0.05113200196876702,
+            "p95": 0.1972491134555845
+          },
+          "chroma_error_ICtCp_signed": {
+            "count": 1536000,
+            "mean": -0.006509235035446174,
+            "median": -0.015086354205915638,
+            "p95": 0.04999038584724746
+          },
+          "chroma_error_ICtCp_absolute": {
+            "count": 1536000,
+            "mean": 0.027099630200990415,
+            "median": 0.028651527980217542,
+            "p95": 0.05229430321678236
+          },
+          "hue_error_degrees_signed_non_neutral": {
+            "count": 1536000,
+            "mean": 14.547632462610688,
+            "median": 14.356454833839758,
+            "p95": 44.58573360783058
+          },
+          "hue_error_degrees_absolute_non_neutral": {
+            "count": 1536000,
+            "mean": 18.14679247278991,
+            "median": 15.006186823036044,
+            "p95": 46.360150465299505
+          },
+          "hue_excluded_neutral_reference_pixels": 0
+        },
+        "seam": {
+          "definition": "HDR-center composite continuity proxy; not unseen-region ground truth",
+          "boundaries": [
+            {
+              "boundary": "top",
+              "luma_mean_nits": 4.3964130682549865,
+              "luma_P95_nits": 15.598847650345144,
+              "chroma_ICtCp": 0.027039925928673034,
+              "hue_degrees": 12.878824403822033,
+              "gradient_nits_per_pixel": 0.6011515863596758
+            },
+            {
+              "boundary": "bottom",
+              "luma_mean_nits": 5.773403663871477,
+              "luma_P95_nits": 17.730114481491317,
+              "chroma_ICtCp": 0.02454691065492481,
+              "hue_degrees": 16.846528971426036,
+              "gradient_nits_per_pixel": 0.0
+            }
+          ]
+        },
+        "range": {
+          "finite": true,
+          "min": 2.1451182693774214e-05,
+          "max": 0.015530712062444352
+        },
+        "performance_seconds": {
+          "fit": 0.07904910000070231,
+          "full_sdr_apply": 0.06191149999995105
+        }
+      },
+      {
+        "material": "BR2049",
+        "case_id": "br2049_temporal_stratum_01",
+        "role": "predeclared_conditional_geometry_candidate",
+        "frame_pair": {
+          "hdr": 11699,
+          "om": 12866
+        },
+        "scene_claim": "unverified_temporal_stratum",
+        "scene_independence_verified": false,
+        "known_verified_anchor": false,
+        "geometry_confidence": 0.9155,
+        "geometry_confirmatory_gate_at_least_0_95": false,
+        "fit_mask": {
+          "definition": "SDR ∩ HDR only",
+          "pixel_count": 6144000
+        },
+        "parameter_count": {
+          "Model_E_reported": 12,
+          "H0_effective_luminance_controls": 10
+        },
+        "metrics": {
+          "RGB_MSE_normalized": 9.600862710258836e-11,
+          "luminance": {
+            "MAE_nits": 0.04620785302973792,
+            "RMSE_nits": 0.09451832423934937,
+            "median_absolute_error_nits": 0.030522476973089917,
+            "P95_absolute_error_nits": 0.12177859947148419
+          },
+          "deltaE2000": {
+            "count": 6144000,
+            "mean": 0.008545233820617016,
+            "median": 0.005936080119906513,
+            "p95": 0.020614132388989428
+          },
+          "deltaEICtCp": {
+            "count": 6144000,
+            "mean": 0.01023645653662848,
+            "median": 0.009627173687934571,
+            "p95": 0.019549320866619813
+          },
+          "chroma_error_ICtCp_signed": {
+            "count": 6144000,
+            "mean": -0.00040938006120786786,
+            "median": -0.0015357249999333675,
+            "p95": 0.010303378140394306
+          },
+          "chroma_error_ICtCp_absolute": {
+            "count": 6144000,
+            "mean": 0.00466940182479244,
+            "median": 0.004042940390494985,
+            "p95": 0.011300694013492672
+          },
+          "hue_error_degrees_signed_non_neutral": {
+            "count": 6095886,
+            "mean": -10.459112147544742,
+            "median": -6.888788861925823,
+            "p95": 66.31302908830313
+          },
+          "hue_error_degrees_absolute_non_neutral": {
+            "count": 6095886,
+            "mean": 37.410014246047794,
+            "median": 22.080061690818205,
+            "p95": 145.56352929941227
+          },
+          "hue_excluded_neutral_reference_pixels": 48114
+        },
+        "seam": {
+          "definition": "HDR-center composite continuity proxy; not unseen-region ground truth",
+          "boundaries": [
+            {
+              "boundary": "top",
+              "luma_mean_nits": 0.06295476708252162,
+              "luma_P95_nits": 0.16566679084703673,
+              "chroma_ICtCp": 0.004384476942389749,
+              "hue_degrees": 73.47701102487206,
+              "gradient_nits_per_pixel": 0.04315429019219517
+            },
+            {
+              "boundary": "bottom",
+              "luma_mean_nits": 0.05514924900684947,
+              "luma_P95_nits": 0.17881901462008368,
+              "chroma_ICtCp": 0.00473455561355195,
+              "hue_degrees": 38.82652474614413,
+              "gradient_nits_per_pixel": 0.0
+            }
+          ]
+        },
+        "range": {
+          "finite": true,
+          "min": 3.79626138099855e-08,
+          "max": 0.005773122878861356
+        },
+        "performance_seconds": {
+          "fit": 0.30962730000010197,
+          "full_sdr_apply": 0.2718454000005295
+        }
+      }
+    ]
+  },
+  "synthetic_hidden_region": {
+    "definition": "Known full HDR -> SDR/DVD-style grade; H0/H1 fit only central HDR crop",
+    "geometry": {
+      "full_shape": [
+        360,
+        640,
+        3
+      ],
+      "central_crop_y": [
+        72,
+        288
+      ]
+    },
+    "truth_matrix": null,
+    "matrix_fit": {
+      "selected": {
+        "constraint_family": "C_limited_cross_channel",
+        "lambda": 0.001,
+        "matrix": [
+          [
+            1.0557200721976032,
+            -0.04685023048163103,
+            0.00868813315093069
+          ],
+          [
+            -0.02791951440800192,
+            1.0161623401574156,
+            0.0002897928689095043
+          ],
+          [
+            0.02016693199679546,
+            -0.026764212652937075,
+            1.0723565151833543
+          ]
+        ],
+        "determinant": 1.1488394981983887,
+        "condition_number": 1.1020489754829896,
+        "deviation_from_identity_frobenius": 0.11302412228440378,
+        "optimizer_success": true,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "optimizer_iterations": 81,
+        "fit_seconds_cpu": 4.028055200000381,
+        "holdout_terms": {
+          "luma_mse_scaled": 1.2186483542954173e-05,
+          "chroma_mse_scaled": 6.9390999872263884e-06,
+          "hue_mse_scaled": 2.0795047621713775e-06,
+          "deltaE_mse_scaled": 2.8772500263192005e-05
+        },
+        "holdout_objective": 2.6036567473871373e-05,
+        "stable": true
+      },
+      "candidates": [
+        {
+          "constraint_family": "A_unconstrained_regularized",
+          "lambda": 0.001,
+          "matrix": [
+            [
+              1.0557223165182794,
+              -0.04687884744247357,
+              0.008713353796689404
+            ],
+            [
+              -0.02789593624389679,
+              1.0161243666616018,
+              0.0003021320280092692
+            ],
+            [
+              0.02019183686361488,
+              -0.026793865817767215,
+              1.0723582613417362
+            ]
+          ],
+          "determinant": 1.1488007888390672,
+          "condition_number": 1.1021035918780118,
+          "deviation_from_identity_frobenius": 0.1130404117065854,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+          "optimizer_iterations": 63,
+          "fit_seconds_cpu": 3.2089826000001267,
+          "holdout_terms": {
+            "luma_mse_scaled": 1.2217326253551942e-05,
+            "chroma_mse_scaled": 7.0040812824583355e-06,
+            "hue_mse_scaled": 2.0583863434613655e-06,
+            "deltaE_mse_scaled": 2.8934313558178375e-05
+          },
+          "holdout_objective": 2.6100270782266043e-05,
+          "stable": true
+        },
+        {
+          "constraint_family": "A_unconstrained_regularized",
+          "lambda": 0.01,
+          "matrix": [
+            [
+              1.0516901726024122,
+              -0.04124259199935882,
+              0.007218905545702104
+            ],
+            [
+              -0.028942300810434158,
+              1.0190649565373777,
+              -0.0015171289348718552
+            ],
+            [
+              0.018967436731483812,
+              -0.020851542520487248,
+              1.0675584659622497
+            ]
+          ],
+          "determinant": 1.1427041929337571,
+          "condition_number": 1.0919663704776774,
+          "deviation_from_identity_frobenius": 0.10481920513325918,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_iterations": 71,
+          "fit_seconds_cpu": 3.5820255999997244,
+          "holdout_terms": {
+            "luma_mse_scaled": 1.3987724843001745e-05,
+            "chroma_mse_scaled": 2.2582181634707476e-05,
+            "hue_mse_scaled": 2.7690190045994427e-06,
+            "deltaE_mse_scaled": 7.571035232090467e-05
+          },
+          "holdout_objective": 0.00013876418955082083,
+          "stable": true
+        },
+        {
+          "constraint_family": "A_unconstrained_regularized",
+          "lambda": 0.1,
+          "matrix": [
+            [
+              1.0353665667092495,
+              -0.020524074966157893,
+              0.002800688189799166
+            ],
+            [
+              -0.028325103313212606,
+              1.0248754529668742,
+              -0.008271903846477063
+            ],
+            [
+              0.019354858861245206,
+              -0.0010271505180626797,
+              1.0461887122531526
+            ]
+          ],
+          "determinant": 1.1094644444596247,
+          "condition_number": 1.0579412976814402,
+          "deviation_from_identity_frobenius": 0.07535557258052952,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_iterations": 64,
+          "fit_seconds_cpu": 3.183606200000213,
+          "holdout_terms": {
+            "luma_mse_scaled": 8.405131660031815e-05,
+            "chroma_mse_scaled": 0.00028781909884251125,
+            "hue_mse_scaled": 2.188158356332459e-05,
+            "deltaE_mse_scaled": 0.0009507853876340514
+          },
+          "holdout_objective": 0.0008969006760937367,
+          "stable": true
+        },
+        {
+          "constraint_family": "B_positive_diagonal",
+          "lambda": 0.001,
+          "matrix": [
+            [
+              1.055775683869122,
+              -0.04696040798385422,
+              0.008739955256205354
+            ],
+            [
+              -0.027875340334128564,
+              1.0160559709491008,
+              0.0003482454131689329
+            ],
+            [
+              0.020139634382635458,
+              -0.026868721017003133,
+              1.0724902991601215
+            ]
+          ],
+          "determinant": 1.148922822235273,
+          "condition_number": 1.102255658793652,
+          "deviation_from_identity_frobenius": 0.11318091817160737,
+          "optimizer_success": false,
+          "optimizer_message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+          "optimizer_iterations": 90,
+          "fit_seconds_cpu": 4.543619699999908,
+          "holdout_terms": {
+            "luma_mse_scaled": 1.2273337368173063e-05,
+            "chroma_mse_scaled": 6.847440805960434e-06,
+            "hue_mse_scaled": 2.1222877835412306e-06,
+            "deltaE_mse_scaled": 2.8671349277549212e-05
+          },
+          "holdout_objective": 2.6067371354316295e-05,
+          "stable": true
+        },
+        {
+          "constraint_family": "B_positive_diagonal",
+          "lambda": 0.01,
+          "matrix": [
+            [
+              1.0517007579885433,
+              -0.04128656127422712,
+              0.007251447588043591
+            ],
+            [
+              -0.028939320121383925,
+              1.0190487341408463,
+              -0.001502437312047707
+            ],
+            [
+              0.018940731325839937,
+              -0.02083244619971144,
+              1.0675705842370893
+            ]
+          ],
+          "determinant": 1.1427091669620721,
+          "condition_number": 1.0920052580719084,
+          "deviation_from_identity_frobenius": 0.10483918075728606,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_iterations": 86,
+          "fit_seconds_cpu": 4.072725899999568,
+          "holdout_terms": {
+            "luma_mse_scaled": 1.3949648756344535e-05,
+            "chroma_mse_scaled": 2.2616876693327345e-05,
+            "hue_mse_scaled": 2.8654948544156587e-06,
+            "deltaE_mse_scaled": 7.574586201151198e-05
+          },
+          "holdout_objective": 0.0001388278550957362,
+          "stable": true
+        },
+        {
+          "constraint_family": "B_positive_diagonal",
+          "lambda": 0.1,
+          "matrix": [
+            [
+              1.0353735289387929,
+              -0.020532265162922923,
+              0.0028020377807248423
+            ],
+            [
+              -0.028319292676804612,
+              1.024865633325186,
+              -0.008268016480194538
+            ],
+            [
+              0.01935952261942159,
+              -0.0010369658831439362,
+              1.0461938206350763
+            ]
+          ],
+          "determinant": 1.1094664543771222,
+          "condition_number": 1.0579524160599874,
+          "deviation_from_identity_frobenius": 0.07535973402343582,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_iterations": 56,
+          "fit_seconds_cpu": 2.7246249999998327,
+          "holdout_terms": {
+            "luma_mse_scaled": 8.392533158279766e-05,
+            "chroma_mse_scaled": 0.0002878361168531957,
+            "hue_mse_scaled": 2.1889563218455577e-05,
+            "deltaE_mse_scaled": 0.0009507229636330397
+          },
+          "holdout_objective": 0.0008969086941848684,
+          "stable": true
+        },
+        {
+          "constraint_family": "C_limited_cross_channel",
+          "lambda": 0.001,
+          "matrix": [
+            [
+              1.0557200721976032,
+              -0.04685023048163103,
+              0.00868813315093069
+            ],
+            [
+              -0.02791951440800192,
+              1.0161623401574156,
+              0.0002897928689095043
+            ],
+            [
+              0.02016693199679546,
+              -0.026764212652937075,
+              1.0723565151833543
+            ]
+          ],
+          "determinant": 1.1488394981983887,
+          "condition_number": 1.1020489754829896,
+          "deviation_from_identity_frobenius": 0.11302412228440378,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_iterations": 81,
+          "fit_seconds_cpu": 4.028055200000381,
+          "holdout_terms": {
+            "luma_mse_scaled": 1.2186483542954173e-05,
+            "chroma_mse_scaled": 6.9390999872263884e-06,
+            "hue_mse_scaled": 2.0795047621713775e-06,
+            "deltaE_mse_scaled": 2.8772500263192005e-05
+          },
+          "holdout_objective": 2.6036567473871373e-05,
+          "stable": true
+        },
+        {
+          "constraint_family": "C_limited_cross_channel",
+          "lambda": 0.01,
+          "matrix": [
+            [
+              1.0516690663730348,
+              -0.0414049599206031,
+              0.007424183213251061
+            ],
+            [
+              -0.02898637979804873,
+              1.0189724358348506,
+              -0.0013594431056024663
+            ],
+            [
+              0.018952637430644535,
+              -0.021094108228495053,
+              1.0678436588437625
+            ]
+          ],
+          "determinant": 1.1428749998312078,
+          "condition_number": 1.0923951470381639,
+          "deviation_from_identity_frobenius": 0.10511003356471321,
+          "optimizer_success": false,
+          "optimizer_message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+          "optimizer_iterations": 90,
+          "fit_seconds_cpu": 4.494688699999642,
+          "holdout_terms": {
+            "luma_mse_scaled": 1.3834354274594158e-05,
+            "chroma_mse_scaled": 2.211165679442319e-05,
+            "hue_mse_scaled": 2.512824144008171e-06,
+            "deltaE_mse_scaled": 7.442577731708847e-05
+          },
+          "holdout_objective": 0.00013885455607281773,
+          "stable": true
+        },
+        {
+          "constraint_family": "C_limited_cross_channel",
+          "lambda": 0.1,
+          "matrix": [
+            [
+              1.0352569668987774,
+              -0.020445371236907806,
+              0.0028453139469179845
+            ],
+            [
+              -0.02841625400179849,
+              1.0249341543617692,
+              -0.008226664539242593
+            ],
+            [
+              0.019259995715758944,
+              -0.0009964251376326108,
+              1.046266588626536
+            ]
+          ],
+          "determinant": 1.1094931292360872,
+          "condition_number": 1.0579171428579959,
+          "deviation_from_identity_frobenius": 0.07535631232490456,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_iterations": 55,
+          "fit_seconds_cpu": 2.700669399999242,
+          "holdout_terms": {
+            "luma_mse_scaled": 8.514862591334614e-05,
+            "chroma_mse_scaled": 0.00028739578358521947,
+            "hue_mse_scaled": 2.1894533786674727e-05,
+            "deltaE_mse_scaled": 0.0009512204284210591
+          },
+          "holdout_objective": 0.0008973225703701709,
+          "stable": true
+        }
+      ],
+      "training_sample_count": 4096,
+      "holdout_sample_count": 2048,
+      "objective": "0.35*luminance_MSE_scaled + 0.20*ICtCp_chroma_MSE_scaled + 0.20*nonneutral_hue_MSE_scaled + 0.25*DeltaE2000_MSE_scaled + lambda*||M-I||_F^2"
+    },
+    "H0": {
+      "common": {
+        "RGB_MSE_normalized": 2.4402923605697424e-05,
+        "luminance": {
+          "MAE_nits": 1.3131007773978431,
+          "RMSE_nits": 1.9701239786504559,
+          "median_absolute_error_nits": 0.827506065197263,
+          "P95_absolute_error_nits": 4.999654467735035
+        },
+        "deltaE2000": {
+          "count": 138240,
+          "mean": 2.2577051455168866,
+          "median": 2.0652315894888833,
+          "p95": 3.8234517318492487
+        },
+        "deltaEICtCp": {
+          "count": 138240,
+          "mean": 0.012179364979519334,
+          "median": 0.011941226769954641,
+          "p95": 0.015573487760987463
+        },
+        "chroma_error_ICtCp_signed": {
+          "count": 138240,
+          "mean": -0.00696504132133226,
+          "median": -0.010352954778617703,
+          "p95": 0.007938785550409236
+        },
+        "chroma_error_ICtCp_absolute": {
+          "count": 138240,
+          "mean": 0.009250904856815564,
+          "median": 0.01036079336364594,
+          "p95": 0.01284316829144123
+        },
+        "hue_error_degrees_signed_non_neutral": {
+          "count": 138240,
+          "mean": 1.6983867916336366,
+          "median": 0.7989001903688591,
+          "p95": 21.638667996156432
+        },
+        "hue_error_degrees_absolute_non_neutral": {
+          "count": 138240,
+          "mean": 11.570351958607919,
+          "median": 8.432475095980692,
+          "p95": 34.250075650954635
+        },
+        "hue_excluded_neutral_reference_pixels": 0
+      },
+      "hidden": {
+        "RGB_MSE_normalized": 1.211499690398839e-05,
+        "luminance": {
+          "MAE_nits": 2.171249285544677,
+          "RMSE_nits": 4.870290238788343,
+          "median_absolute_error_nits": 1.3402289758682358,
+          "P95_absolute_error_nits": 5.045023738979304
+        },
+        "deltaE2000": {
+          "count": 92160,
+          "mean": 1.8933670447906574,
+          "median": 1.9192952523954965,
+          "p95": 2.539370470901383
+        },
+        "deltaEICtCp": {
+          "count": 92160,
+          "mean": 0.011786225754503736,
+          "median": 0.011465428671917459,
+          "p95": 0.015633329338491743
+        },
+        "chroma_error_ICtCp_signed": {
+          "count": 92160,
+          "mean": -0.0034023905863964842,
+          "median": -0.006138777303804332,
+          "p95": 0.009940449115820494
+        },
+        "chroma_error_ICtCp_absolute": {
+          "count": 92160,
+          "mean": 0.008607883917976657,
+          "median": 0.009720921299796879,
+          "p95": 0.012880810847546236
+        },
+        "hue_error_degrees_signed_non_neutral": {
+          "count": 92160,
+          "mean": -4.708343718340858,
+          "median": -0.25890915200006503,
+          "p95": 12.025884475224004
+        },
+        "hue_error_degrees_absolute_non_neutral": {
+          "count": 92160,
+          "mean": 10.886309204348972,
+          "median": 6.5251189906010545,
+          "p95": 36.65729315886153
+        },
+        "hue_excluded_neutral_reference_pixels": 0
+      }
+    },
+    "H1": {
+      "common": {
+        "RGB_MSE_normalized": 2.8607047816743963e-08,
+        "luminance": {
+          "MAE_nits": 1.1055485853110465,
+          "RMSE_nits": 1.4725926792742485,
+          "median_absolute_error_nits": 0.8436793791504262,
+          "P95_absolute_error_nits": 3.0602842409655753
+        },
+        "deltaE2000": {
+          "count": 138240,
+          "mean": 0.027912358668015724,
+          "median": 0.025575503690833046,
+          "p95": 0.05394537250632167
+        },
+        "deltaEICtCp": {
+          "count": 138240,
+          "mean": 0.00022726592941546125,
+          "median": 0.00018568306777197108,
+          "p95": 0.0005626765618999415
+        },
+        "chroma_error_ICtCp_signed": {
+          "count": 138240,
+          "mean": -4.062370814415866e-05,
+          "median": -4.73835700190179e-05,
+          "p95": 0.00014886178935066813
+        },
+        "chroma_error_ICtCp_absolute": {
+          "count": 138240,
+          "mean": 8.187596636571024e-05,
+          "median": 6.434083645817656e-05,
+          "p95": 0.0001979722780596136
+        },
+        "hue_error_degrees_signed_non_neutral": {
+          "count": 138240,
+          "mean": -0.0042192330733571365,
+          "median": -0.004352233169855191,
+          "p95": 0.04934680209011477
+        },
+        "hue_error_degrees_absolute_non_neutral": {
+          "count": 138240,
+          "mean": 0.035009976678022026,
+          "median": 0.03129079769407785,
+          "p95": 0.09744786835942508
+        },
+        "hue_excluded_neutral_reference_pixels": 0
+      },
+      "hidden": {
+        "RGB_MSE_normalized": 1.9402053951472163e-07,
+        "luminance": {
+          "MAE_nits": 1.8855853576797037,
+          "RMSE_nits": 4.738794374922964,
+          "median_absolute_error_nits": 0.811881176676979,
+          "P95_absolute_error_nits": 3.9052005405985883
+        },
+        "deltaE2000": {
+          "count": 92160,
+          "mean": 0.06280724105846688,
+          "median": 0.03009398960541698,
+          "p95": 0.07340085740507253
+        },
+        "deltaEICtCp": {
+          "count": 92160,
+          "mean": 0.0007395814246491606,
+          "median": 0.00022512696650362854,
+          "p95": 0.0007543020272641321
+        },
+        "chroma_error_ICtCp_signed": {
+          "count": 92160,
+          "mean": -6.343280148548085e-05,
+          "median": -5.104828335474997e-05,
+          "p95": 0.00016297708459427353
+        },
+        "chroma_error_ICtCp_absolute": {
+          "count": 92160,
+          "mean": 0.0001235755956056575,
+          "median": 9.129359854744695e-05,
+          "p95": 0.00037203555975662587
+        },
+        "hue_error_degrees_signed_non_neutral": {
+          "count": 92160,
+          "mean": -0.005253711368020521,
+          "median": -0.0011587991592209982,
+          "p95": 0.04829429673978174
+        },
+        "hue_error_degrees_absolute_non_neutral": {
+          "count": 92160,
+          "mean": 0.0367879513587081,
+          "median": 0.03687696603573683,
+          "p95": 0.0810800186879186
+        },
+        "hue_excluded_neutral_reference_pixels": 0
+      },
+      "range": {
+        "pre_nonnegative_clip": {
+          "finite": true,
+          "min": 0.011514135949675154,
+          "max": 0.5547970569713121,
+          "negative_count": 0,
+          "above_peak_count": 0,
+          "above_peak_fraction": 0.0
+        },
+        "post_nonnegative_clip": {
+          "finite": true,
+          "min": 0.011514135949675154,
+          "max": 0.5547970569713121,
+          "negative_count": 0,
+          "above_peak_count": 0,
+          "above_peak_fraction": 0.0
+        }
+      }
+    }
+  },
+  "final_decision": {
+    "outcome": "C — no compact tested model is sufficiently general",
+    "rationale": "H1 fails the 5% acceptance gate and visible-artifact gate. The diagnostic did not authorize arbitrary architecture expansion beyond at most J; the frozen four-pair validation is H0 baseline evidence, with unverified Matrix shot independence and BR geometry below the confirmatory threshold.",
+    "why_necessary": "The observed residual structure and failed H1 gate do not support claiming that a global matrix or an untested extension reconstructs the studio regrade.",
+    "why_not_more_complex": "J was only permitted for clear dual H0/H1 luminance dominance. The gate result above controls this decision; adding hue/chroma/polynomial/LUT/spatial/framewise models would violate the one-shot compact-model protocol and would not repair the missing cross-scene/geometry evidence."
+  }
+}

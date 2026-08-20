@@ -1,0 +1,1398 @@
+{
+  "status": "COMPLETE",
+  "experimental_root": "G:\\Auto-OpenMatte-Sdr2hdr-converter — kopia",
+  "anchor": {
+    "material": "The Matrix",
+    "case_id": "the_matrix_temporal_stratum_08",
+    "selection_index": 8,
+    "selection_fraction": 0.3741477171313319,
+    "selection_basis": "predeclared evenly spaced temporal strata over 5%..95% of known HDR duration; no performance metric used",
+    "scene_id": "the_matrix_scene_unverified_08",
+    "scene_category": "unverified_temporal_stratum",
+    "scene_independence_verified": false,
+    "hdr_frame": 73367,
+    "om_frame": 73348,
+    "hdr_timestamp_seconds": 3060.0152916666666,
+    "om_timestamp_seconds": 3059.2228333333333,
+    "offset_frames": -19,
+    "offset_seconds": -0.7924583333333333,
+    "known_verified_anchor": true,
+    "hdr_source": "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+    "om_source": "G:\\Filmy\\IMAX format (open matte)\\The Matrix (1999) [OPEN MATTE] [WEB-DL 1080p 10bit DD5.1 x265].mkv",
+    "hdr_resolution": [
+      3840,
+      1600
+    ],
+    "om_resolution": [
+      1920,
+      1080
+    ],
+    "fps": "24000/1001",
+    "fps_float": 23.976023976023978,
+    "hdr_start_pts_seconds": 0.0,
+    "om_start_pts_seconds": 0.005,
+    "sync_confidence": 0.940513,
+    "sync_status": "LOCKED",
+    "sync_method": "previously accepted bounded local image synchronization; fixed offset reused without rerun",
+    "sync_validation_method": "preserved start/middle/end local windows, all offset -19, spread 0",
+    "geometry": {
+      "scale_x": 0.5,
+      "scale_y": 0.5,
+      "offset_x": 0,
+      "offset_y": 140,
+      "overlap": [
+        0,
+        140,
+        1920,
+        940
+      ],
+      "confidence": 1.0,
+      "status": "preserved geometry contract"
+    },
+    "hdr_decode": {
+      "command": [
+        "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\install\\bin\\ffmpeg.exe",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-nostdin",
+        "-ss",
+        "3060.015291667",
+        "-i",
+        "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+        "-map",
+        "0:v:0",
+        "-frames:v",
+        "1",
+        "-pix_fmt",
+        "rgb48le",
+        "-vsync",
+        "0",
+        "-f",
+        "rawvideo",
+        "pipe:1"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 36864000,
+      "expected_bytes": 36864000,
+      "stream": "0:v:0",
+      "pixel_format": "rgb48le"
+    },
+    "om_decode": {
+      "command": [
+        "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\install\\bin\\ffmpeg.exe",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-nostdin",
+        "-ss",
+        "3059.222833333",
+        "-i",
+        "G:\\Filmy\\IMAX format (open matte)\\The Matrix (1999) [OPEN MATTE] [WEB-DL 1080p 10bit DD5.1 x265].mkv",
+        "-map",
+        "0:v:0",
+        "-frames:v",
+        "1",
+        "-pix_fmt",
+        "rgb48le",
+        "-vsync",
+        "0",
+        "-f",
+        "rawvideo",
+        "pipe:1"
+      ],
+      "returncode": 0,
+      "stderr": "[matroska,webm @ 0000021CBF521EC0] Unsupported encoding type\r\n    Last message repeated 1 times\r\n",
+      "stdout_bytes": 12441600,
+      "expected_bytes": 12441600,
+      "stream": "0:v:0",
+      "pixel_format": "rgb48le"
+    },
+    "hdr_rgb_u16_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\raw_rgb_u16\\the_matrix\\the_matrix_temporal_stratum_08_hdr_rgb_u16.npy",
+    "om_rgb_u16_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\raw_rgb_u16\\the_matrix\\the_matrix_temporal_stratum_08_om_rgb_u16.npy",
+    "sdr_luminance_nits_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\luminance_overlap_nits\\the_matrix\\the_matrix_temporal_stratum_08_sdr_luminance_nits.npy",
+    "hdr_luminance_nits_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\luminance_overlap_nits\\the_matrix\\the_matrix_temporal_stratum_08_hdr_luminance_nits.npy",
+    "hdr_rgb_shape": [
+      1600,
+      3840,
+      3
+    ],
+    "om_rgb_shape": [
+      1080,
+      1920,
+      3
+    ],
+    "overlap": {
+      "bbox_open_matte_coordinates": [
+        0,
+        140,
+        1920,
+        940
+      ],
+      "shape": [
+        800,
+        1920,
+        3
+      ],
+      "resize_applied_to_hdr": true
+    },
+    "sample_count": 1536000,
+    "sdr_luminance_stats": {
+      "count": 1536000,
+      "minimum": 0.02334730513393879,
+      "median": 81.5302734375,
+      "P95": 3356.0888671875,
+      "P99": 5032.16845703125,
+      "maximum": 7813.65478515625
+    },
+    "hdr_luminance_stats": {
+      "count": 1536000,
+      "minimum": 0.0,
+      "median": 1.7716362476348877,
+      "P95": 60.884002685546875,
+      "P99": 103.25154113769531,
+      "maximum": 214.76898193359375
+    },
+    "finite": {
+      "hdr_rgb": true,
+      "om_rgb": true,
+      "sdr_luminance": true,
+      "hdr_luminance": true
+    },
+    "extraction_scope": "bounded one-frame source extraction; no full scan"
+  },
+  "input_files": {
+    "hdr_rgb": "G:\\Auto-OpenMatte-Sdr2hdr-converter — kopia\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\raw_rgb_u16\\the_matrix\\the_matrix_temporal_stratum_08_hdr_rgb_u16.npy",
+    "om_rgb": "G:\\Auto-OpenMatte-Sdr2hdr-converter — kopia\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\raw_rgb_u16\\the_matrix\\the_matrix_temporal_stratum_08_om_rgb_u16.npy",
+    "sdr_nits": "G:\\Auto-OpenMatte-Sdr2hdr-converter — kopia\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\luminance_overlap_nits\\the_matrix\\the_matrix_temporal_stratum_08_sdr_luminance_nits.npy",
+    "hdr_nits": "G:\\Auto-OpenMatte-Sdr2hdr-converter — kopia\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\luminance_overlap_nits\\the_matrix\\the_matrix_temporal_stratum_08_hdr_luminance_nits.npy"
+  },
+  "fit_mask": {
+    "definition": "SDR ∩ HDR verified P2.32 overlap only",
+    "bbox_open_matte_coordinates": [
+      0,
+      140,
+      1920,
+      940
+    ],
+    "pixel_count": 1536000
+  },
+  "color_pipeline": {
+    "sdr_transfer": "BT.709 code -> power 2.4 (BT.1886-style)",
+    "sdr_primaries": "BT.709",
+    "sdr_matrix": "BT.709-to-BT.2020 3x3",
+    "hdr_transfer": "ST.2084 PQ EOTF",
+    "hdr_primaries": "BT.2020",
+    "model_representation": "linear BT.2020 RGB; HDR normalized where 1=10000 nits",
+    "raw_representation": "P2.32 rgb48le-derived uint16 RGB; not YCbCr",
+    "scientific_output": "linear BT.2020 nits NPY plus PQ 16-bit PNG"
+  },
+  "decode_validation": {
+    "raw_dtypes": {
+      "hdr": "uint16",
+      "om": "uint16",
+      "sdr_luminance": "float32",
+      "hdr_luminance": "float32"
+    },
+    "consistency": {
+      "sdr_reconstructed_vs_saved_MAE_nits": 1.582274585282106e-05,
+      "sdr_reconstructed_vs_saved_P95_nits": 9.027102305481094e-05,
+      "hdr_reconstructed_vs_saved_MAE_nits": 0.21017617944129446,
+      "hdr_reconstructed_vs_saved_P95_nits": 1.006201844185681,
+      "resize_backend": "OpenCV INTER_LINEAR; P2.32 original extraction used FFmpeg bilinear, so this is an integrity check rather than bit-exact equality"
+    }
+  },
+  "cuda": {
+    "available": true,
+    "cupy_version": "14.1.1",
+    "device_count": 1,
+    "device_name": "NVIDIA GeForce RTX 3080",
+    "note": "Research Models E/G are NumPy/SciPy CPU implementations; no CUDA fit/apply path exists, so no CUDA model benchmark was run."
+  },
+  "real_models": {
+    "ModelE": {
+      "model": "Model E: CDF + Regularization",
+      "parameter_count": 12,
+      "parameters": {
+        "lut_x": [
+          0.0,
+          0.012402626484996314,
+          0.024805252969992628,
+          0.03720787945498894,
+          0.049610505939985255,
+          0.06201313242498157,
+          0.07441575890997788,
+          0.08681838539497419,
+          0.09922101187997051,
+          0.11162363836496683,
+          0.12402626484996314,
+          0.13642889133495945,
+          0.14883151781995577,
+          0.1612341443049521,
+          0.17363677078994838,
+          0.1860393972749447,
+          0.19844202375994102,
+          0.21084465024493734,
+          0.22324727672993366,
+          0.23564990321492996,
+          0.24805252969992628,
+          0.2604551561849226,
+          0.2728577826699189,
+          0.28526040915491524,
+          0.29766303563991153,
+          0.3100656621249078,
+          0.3224682886099042,
+          0.33487091509490047,
+          0.34727354157989676,
+          0.3596761680648931,
+          0.3720787945498894,
+          0.38448142103488575,
+          0.39688404751988204,
+          0.40928667400487834,
+          0.4216893004898747,
+          0.434091926974871,
+          0.4464945534598673,
+          0.4588971799448636,
+          0.4712998064298599,
+          0.48370243291485626,
+          0.49610505939985255,
+          0.5085076858848488,
+          0.5209103123698452,
+          0.5333129388548415,
+          0.5457155653398378,
+          0.5581181918248341,
+          0.5705208183098305,
+          0.5829234447948267,
+          0.5953260712798231,
+          0.6077286977648194,
+          0.6201313242498157,
+          0.632533950734812,
+          0.6449365772198083,
+          0.6573392037048046,
+          0.6697418301898009,
+          0.6821444566747973,
+          0.6945470831597935,
+          0.7069497096447899,
+          0.7193523361297862,
+          0.7317549626147826,
+          0.7441575890997788,
+          0.7565602155847752,
+          0.7689628420697715,
+          0.7813654685547677
+        ],
+        "lut_y": [
+          8.527841767689851e-05,
+          0.0003401835732052772,
+          0.0005256323035992406,
+          0.000776476249702069,
+          0.0009318274450784621,
+          0.0011620603705738129,
+          0.0013538966456531902,
+          0.0015171263101143007,
+          0.0016689050483650214,
+          0.0018105207909189978,
+          0.001953759567588622,
+          0.0020997566540867604,
+          0.002265016211022046,
+          0.0024462905045521777,
+          0.002628741147497941,
+          0.0028366131468095176,
+          0.0030167675450178837,
+          0.0032069230592247353,
+          0.0033919034837595033,
+          0.003592096663345758,
+          0.0038117482185730856,
+          0.0040367627677715635,
+          0.004270607795534399,
+          0.004522525629099226,
+          0.004781910033352261,
+          0.005038466415638619,
+          0.005301113925283816,
+          0.005551609164175503,
+          0.0058070969677001235,
+          0.00607119207009689,
+          0.0063267715958455276,
+          0.006585087391884151,
+          0.006873598998933928,
+          0.00716393165513875,
+          0.007449199377452054,
+          0.007757577783309677,
+          0.008031034009785509,
+          0.008276744024149657,
+          0.008485664738248393,
+          0.008706958586667953,
+          0.008931604276243307,
+          0.009213264729741193,
+          0.009539759410492331,
+          0.009901200564199521,
+          0.010299821498142693,
+          0.010686016077142821,
+          0.011055337371447054,
+          0.011431967218261894,
+          0.011798192256789273,
+          0.012160901168836148,
+          0.012563811409993983,
+          0.012904755100189224,
+          0.013335873386880514,
+          0.01374242163147203,
+          0.014037647244148792,
+          0.014361407737134933,
+          0.014827406875729211,
+          0.015395119642762429,
+          0.015987674089942693,
+          0.01690026055536845,
+          0.017721107658677182,
+          0.018112046775857742,
+          0.01867477384743326,
+          0.01989912269665514
+        ],
+        "correction_coeffs": [
+          8.633174228365786e-05,
+          -0.0007047345433517577,
+          -0.00041890432196076057,
+          -0.0002511919556322303
+        ],
+        "sigmoid_params": [
+          -0.00027243562275559966,
+          0.3333350660755738,
+          0.1000014606431338,
+          -0.000643201981637091,
+          0.6666635111446398,
+          0.10000484782809421
+        ],
+        "chroma_gain": 0.25624840528832354,
+        "chroma_slope": -0.5662744242169686
+      },
+      "fit_time_seconds_cpu": 0.2033000000001266,
+      "apply_time_seconds_cpu": 0.06261690000064846,
+      "fit_python_tracemalloc_peak_bytes": 210610620,
+      "objective_common_rgb_MSE_normalized": 6.4718115529132125e-06,
+      "objective_common_luminance_MSE_nits_squared": 339.4432881834993,
+      "regularization_term": 1.2306121335788034e-07,
+      "convergence": "SciPy L-BFGS-B runs internally; OptimizeResult is not exposed by Model E",
+      "warnings": [],
+      "output_range": {
+        "finite": true,
+        "minimum_normalized": 0.0,
+        "maximum_normalized": 0.03454671015904942,
+        "negative_count_after_model_clip": 0,
+        "above_peak_count": 0,
+        "above_peak_fraction": 0.0
+      },
+      "common_region_luminance": {
+        "global": {
+          "count": 1536000,
+          "MAE_nits": 9.517072616038536,
+          "RMSE_nits": 18.423986761379833,
+          "median_absolute_error_nits": 2.2476765663041016,
+          "P95_absolute_error_nits": 42.019848984745664,
+          "P99_absolute_error_nits": 75.14976307523493,
+          "maximum_absolute_error_nits": 210.784521745756
+        },
+        "by_reference_luminance_nits": {
+          "0-10": {
+            "range_nits": [
+              0.0,
+              10.0
+            ],
+            "count": 1086481,
+            "MAE_nits": 4.901290936839066,
+            "RMSE_nits": 11.921766373004912,
+            "median_absolute_error_nits": 1.208939004256772,
+            "P95_absolute_error_nits": 24.947620893690058
+          },
+          "10-100": {
+            "range_nits": [
+              10.0,
+              100.0
+            ],
+            "count": 432020,
+            "MAE_nits": 19.69413004442541,
+            "RMSE_nits": 26.329768666985387,
+            "median_absolute_error_nits": 14.00514464249884,
+            "P95_absolute_error_nits": 55.981555072528096
+          },
+          "100-500": {
+            "range_nits": [
+              100.0,
+              500.0
+            ],
+            "count": 17499,
+            "MAE_nits": 44.84861981225694,
+            "RMSE_nits": 62.091199840044005,
+            "median_absolute_error_nits": 25.621070686071533,
+            "P95_absolute_error_nits": 124.434905224207
+          },
+          "500-1000": {
+            "range_nits": [
+              500.0,
+              1000.0
+            ],
+            "count": 0,
+            "MAE_nits": null,
+            "RMSE_nits": null,
+            "median_absolute_error_nits": null,
+            "P95_absolute_error_nits": null
+          },
+          ">1000": {
+            "range_nits": [
+              1000.0,
+              null
+            ],
+            "count": 0,
+            "MAE_nits": null,
+            "RMSE_nits": null,
+            "median_absolute_error_nits": null,
+            "P95_absolute_error_nits": null
+          }
+        }
+      },
+      "common_region_color": {
+        "deltaE2000_peak_relative_Rec2020_to_Lab_D65": {
+          "count": 1536000,
+          "mean": 4.12446429877366,
+          "median": 1.757926549865999,
+          "p95": 12.444476269243124
+        },
+        "deltaEICtCp": {
+          "count": 1536000,
+          "mean": 0.2068455360767833,
+          "median": 0.19943623799867372,
+          "p95": 0.3271611151544802
+        },
+        "chroma_error_ICtCp_signed": {
+          "count": 1536000,
+          "mean": 0.170772960801839,
+          "median": 0.17615909830061036,
+          "p95": 0.2809672007500703
+        },
+        "chroma_error_ICtCp_absolute": {
+          "count": 1536000,
+          "mean": 0.17159535123821942,
+          "median": 0.17615909830061036,
+          "p95": 0.2809672007500703
+        },
+        "hue_error_degrees_signed": {
+          "count": 1536000,
+          "mean": 1.5517595588959532,
+          "median": -7.07195209976133,
+          "p95": 91.31239560057365
+        },
+        "hue_error_degrees_absolute": {
+          "count": 1536000,
+          "mean": 29.82221281743845,
+          "median": 23.751995271807644,
+          "p95": 92.29148381595272
+        }
+      },
+      "seam_proxy": {
+        "definition": "HDR-center composite versus model-predicted extension; proxy only, because no HDR extension reference exists",
+        "boundaries": [
+          {
+            "boundary": "top",
+            "y_coordinate": 140,
+            "luminance_discontinuity_nits": 8.508475224820028,
+            "luminance_discontinuity_P95_nits": 28.184811050363287,
+            "chroma_discontinuity_ICtCp": 0.21751477775040082,
+            "hue_discontinuity_degrees": 28.16559708350434,
+            "gradient_discontinuity_nits_per_pixel": 1.0136443144143648
+          },
+          {
+            "boundary": "bottom",
+            "y_coordinate": 940,
+            "luminance_discontinuity_nits": 7.8915739222834995,
+            "luminance_discontinuity_P95_nits": 24.70671505658168,
+            "chroma_discontinuity_ICtCp": 0.16419516219613955,
+            "hue_discontinuity_degrees": 38.40019946247705,
+            "gradient_discontinuity_nits_per_pixel": 0.0
+          }
+        ]
+      },
+      "exr": "not available: OpenCV(5.0.0) D:\\a\\opencv-python\\opencv-python\\opencv\\modules\\imgcodecs\\src\\loadsave.cpp:1624: error: (-2:Unspecified error) could not find encoder for the specified extension in function 'cv::imencodeWithMetadata'\n"
+    },
+    "ModelG": {
+      "model": "Model G: Hybrid",
+      "parameter_count": 29,
+      "parameters": {
+        "luma_x": [
+          0.00013449636593625505,
+          0.0008234743290474629,
+          0.0017136903131857724,
+          0.00313411871740675,
+          0.005814619675528903,
+          0.013149352352210713,
+          0.03545188639261771,
+          0.11608165116432202,
+          0.2509761184888695,
+          0.5032168472775582
+        ],
+        "luma_y": [
+          2.8355891113403743e-06,
+          1.4962873593120591e-05,
+          2.7186367485200358e-05,
+          5.240498007309403e-05,
+          0.00011471565882315047,
+          0.00024512096739544694,
+          0.0006101300371992247,
+          0.0018581308921807656,
+          0.003909117517800593,
+          0.005599140017831151
+        ],
+        "highlight_threshold": 0.27181890424998767,
+        "highlight_slope": 1.0063630320969628,
+        "highlight_max": 0.02119010942086827,
+        "shadow_threshold": 0.000712369908432658,
+        "shadow_gain": 0.0188068655495466,
+        "sat_base": 0.25624840528832354,
+        "sat_slope": -0.5662744242169686,
+        "color_matrix": [
+          [
+            0.9764725733255484,
+            -0.020100499405253134,
+            -0.011339898984977207
+          ],
+          [
+            -0.02011370297311002,
+            0.9824547581208816,
+            -0.01012568281288834
+          ],
+          [
+            -0.01136907518235871,
+            -0.010144274971348295,
+            0.9938735865998293
+          ]
+        ],
+        "hue_angles": [
+          -0.016882558893792268,
+          0.03422366365888957,
+          -0.012328500837722804
+        ]
+      },
+      "fit_time_seconds_cpu": 0.5862320000005639,
+      "apply_time_seconds_cpu": 0.10574129999986326,
+      "fit_python_tracemalloc_peak_bytes": 259592234,
+      "objective_common_rgb_MSE_normalized": 3.117991381283042e-05,
+      "objective_common_luminance_MSE_nits_squared": 3231.246244039606,
+      "regularization_term": null,
+      "convergence": "analytical/statistical fit; no iterative optimizer or convergence object",
+      "warnings": [],
+      "output_range": {
+        "finite": true,
+        "minimum_normalized": 0.0,
+        "maximum_normalized": 0.05129672004305409,
+        "negative_count_after_model_clip": 0,
+        "above_peak_count": 0,
+        "above_peak_fraction": 0.0
+      },
+      "common_region_luminance": {
+        "global": {
+          "count": 1536000,
+          "MAE_nits": 22.981350743012424,
+          "RMSE_nits": 56.844051967110914,
+          "median_absolute_error_nits": 2.0691143893346493,
+          "P95_absolute_error_nits": 174.06340581611136,
+          "P99_absolute_error_nits": 231.32337389371955,
+          "maximum_absolute_error_nits": 255.5722381287435
+        },
+        "by_reference_luminance_nits": {
+          "0-10": {
+            "range_nits": [
+              0.0,
+              10.0
+            ],
+            "count": 1086481,
+            "MAE_nits": 7.170325265269454,
+            "RMSE_nits": 30.199307361484674,
+            "median_absolute_error_nits": 0.7175773859971406,
+            "P95_absolute_error_nits": 25.979222822044274
+          },
+          "10-100": {
+            "range_nits": [
+              10.0,
+              100.0
+            ],
+            "count": 432020,
+            "MAE_nits": 58.75141452116432,
+            "RMSE_nits": 92.5465864227344,
+            "median_absolute_error_nits": 21.30619818869709,
+            "P95_absolute_error_nits": 209.11567782263984
+          },
+          "100-500": {
+            "range_nits": [
+              100.0,
+              500.0
+            ],
+            "count": 17499,
+            "MAE_nits": 121.55817334124515,
+            "RMSE_nits": 124.7043776779083,
+            "median_absolute_error_nits": 130.70381556823133,
+            "P95_absolute_error_nits": 150.16371250881792
+          },
+          "500-1000": {
+            "range_nits": [
+              500.0,
+              1000.0
+            ],
+            "count": 0,
+            "MAE_nits": null,
+            "RMSE_nits": null,
+            "median_absolute_error_nits": null,
+            "P95_absolute_error_nits": null
+          },
+          ">1000": {
+            "range_nits": [
+              1000.0,
+              null
+            ],
+            "count": 0,
+            "MAE_nits": null,
+            "RMSE_nits": null,
+            "median_absolute_error_nits": null,
+            "P95_absolute_error_nits": null
+          }
+        }
+      },
+      "common_region_color": {
+        "deltaE2000_peak_relative_Rec2020_to_Lab_D65": {
+          "count": 1536000,
+          "mean": 4.55848883380507,
+          "median": 1.7835433313365474,
+          "p95": 14.699730812315167
+        },
+        "deltaEICtCp": {
+          "count": 1536000,
+          "mean": 0.2163383170510732,
+          "median": 0.2059071343871221,
+          "p95": 0.3393134366578732
+        },
+        "chroma_error_ICtCp_signed": {
+          "count": 1536000,
+          "mean": 0.17662740170738062,
+          "median": 0.1803234640514924,
+          "p95": 0.28014663648245175
+        },
+        "chroma_error_ICtCp_absolute": {
+          "count": 1536000,
+          "mean": 0.17673983018682718,
+          "median": 0.1803234640514924,
+          "p95": 0.28014663648245175
+        },
+        "hue_error_degrees_signed": {
+          "count": 1536000,
+          "mean": -8.600504449935675,
+          "median": -18.477230987253343,
+          "p95": 88.85943892004504
+        },
+        "hue_error_degrees_absolute": {
+          "count": 1536000,
+          "mean": 31.532671749994712,
+          "median": 27.188133530042133,
+          "p95": 89.77371632873572
+        }
+      },
+      "seam_proxy": {
+        "definition": "HDR-center composite versus model-predicted extension; proxy only, because no HDR extension reference exists",
+        "boundaries": [
+          {
+            "boundary": "top",
+            "y_coordinate": 140,
+            "luminance_discontinuity_nits": 10.70827719908837,
+            "luminance_discontinuity_P95_nits": 32.17576911584288,
+            "chroma_discontinuity_ICtCp": 0.22823982798394363,
+            "hue_discontinuity_degrees": 34.67022203551658,
+            "gradient_discontinuity_nits_per_pixel": 1.160705338199251
+          },
+          {
+            "boundary": "bottom",
+            "y_coordinate": 940,
+            "luminance_discontinuity_nits": 7.902415874860497,
+            "luminance_discontinuity_P95_nits": 26.01204874403529,
+            "chroma_discontinuity_ICtCp": 0.18455714515138288,
+            "hue_discontinuity_degrees": 40.656753315394845,
+            "gradient_discontinuity_nits_per_pixel": 0.0
+          }
+        ]
+      },
+      "exr": "not available: OpenCV(5.0.0) D:\\a\\opencv-python\\opencv-python\\opencv\\modules\\imgcodecs\\src\\loadsave.cpp:1624: error: (-2:Unspecified error) could not find encoder for the specified extension in function 'cv::imencodeWithMetadata'\n"
+    }
+  },
+  "exr": "not available: OpenCV(5.0.0) D:\\a\\opencv-python\\opencv-python\\opencv\\modules\\imgcodecs\\src\\loadsave.cpp:1624: error: (-2:Unspecified error) could not find encoder for the specified extension in function 'cv::imencodeWithMetadata'\n",
+  "synthetic_hidden_region": {
+    "definition": "Full synthetic HDR ground truth -> derived full SDR -> only central HDR crop supplied for fit",
+    "geometry": {
+      "full_shape": [
+        576,
+        1024,
+        3
+      ],
+      "central_hdr_crop_y": [
+        115,
+        461
+      ]
+    },
+    "models": {
+      "ModelE": {
+        "parameter_count": 12,
+        "parameters": {
+          "lut_x": [
+            0.0,
+            0.014587052681016031,
+            0.029174105362032063,
+            0.043761158043048094,
+            0.058348210724064126,
+            0.07293526340508016,
+            0.08752231608609619,
+            0.10210936876711221,
+            0.11669642144812825,
+            0.1312834741291443,
+            0.14587052681016033,
+            0.16045757949117634,
+            0.17504463217219238,
+            0.18963168485320842,
+            0.20421873753422443,
+            0.21880579021524046,
+            0.2333928428962565,
+            0.24797989557727254,
+            0.2625669482582886,
+            0.2771540009393046,
+            0.29174105362032066,
+            0.30632810630133667,
+            0.3209151589823527,
+            0.33550221166336874,
+            0.35008926434438475,
+            0.36467631702540076,
+            0.37926336970641683,
+            0.39385042238743284,
+            0.40843747506844885,
+            0.4230245277494649,
+            0.43761158043048093,
+            0.452198633111497,
+            0.466785685792513,
+            0.481372738473529,
+            0.4959597911545451,
+            0.5105468438355611,
+            0.5251338965165772,
+            0.5397209491975932,
+            0.5543080018786092,
+            0.5688950545596252,
+            0.5834821072406413,
+            0.5980691599216573,
+            0.6126562126026733,
+            0.6272432652836893,
+            0.6418303179647054,
+            0.6564173706457214,
+            0.6710044233267375,
+            0.6855914760077535,
+            0.7001785286887695,
+            0.7147655813697855,
+            0.7293526340508015,
+            0.7439396867318177,
+            0.7585267394128337,
+            0.7731137920938497,
+            0.7877008447748657,
+            0.8022878974558817,
+            0.8168749501368977,
+            0.8314620028179138,
+            0.8460490554989298,
+            0.8606361081799458,
+            0.8752231608609619,
+            0.8898102135419779,
+            0.904397266222994,
+            0.91898431890401
+          ],
+          "lut_y": [
+            0.009781963003497334,
+            0.009781963003497334,
+            0.009781963003497334,
+            0.009781963003497334,
+            0.009781963003497334,
+            0.009781963003497334,
+            0.009781963003497334,
+            0.009781963003497334,
+            0.009953483266293408,
+            0.011362389939838369,
+            0.012858098400131558,
+            0.014370959373588746,
+            0.01596713204298082,
+            0.017607936735483175,
+            0.019317759740135734,
+            0.021080929195853186,
+            0.022917158318232232,
+            0.02482617471773524,
+            0.026795860652896398,
+            0.028887081588954984,
+            0.031025523209289245,
+            0.033281293339363395,
+            0.03560917594801332,
+            0.03808782190947312,
+            0.04061401056992212,
+            0.043243437483118534,
+            0.04603277484948502,
+            0.04893270511155895,
+            0.051945719906004946,
+            0.05516708815252125,
+            0.058572715384812714,
+            0.06219100566363493,
+            0.06597639053363792,
+            0.06995885453931203,
+            0.07418820448695362,
+            0.07869541139243057,
+            0.08349555538817303,
+            0.08864290581510981,
+            0.09405442253174777,
+            0.09991530673059824,
+            0.1062946658822061,
+            0.11299599493864593,
+            0.12095497881727955,
+            0.12871363264020913,
+            0.1366038964374377,
+            0.14535455695507926,
+            0.15500196856874113,
+            0.16536798283527568,
+            0.17670689972774728,
+            0.18957844010008057,
+            0.20528712163448476,
+            0.22125173670968273,
+            0.2379723654714286,
+            0.258273190789664,
+            0.2803800389028366,
+            0.3079464685386492,
+            0.3387136737289425,
+            0.374678531625367,
+            0.41736395686097455,
+            0.468976169572579,
+            0.5321919079792794,
+            0.6120993401791662,
+            0.7159115382734946,
+            0.8582279534420109
+          ],
+          "correction_coeffs": [
+            3.2073887341601485e-05,
+            -0.00016437699687916408,
+            -0.0002906460802181605,
+            -0.0003761400449625446
+          ],
+          "sigmoid_params": [
+            5.190996395751953e-05,
+            0.33333337947886743,
+            0.10000010125628035,
+            0.0003384761651900361,
+            0.666666975951897,
+            0.10000087492269749
+          ],
+          "chroma_gain": -2.6756214897240147,
+          "chroma_slope": 6.637446451671132
+        },
+        "common_region": {
+          "luminance": {
+            "global": {
+              "count": 354304,
+              "MAE_nits": 14.082004364322298,
+              "RMSE_nits": 22.687831003023504,
+              "median_absolute_error_nits": 6.91112300404825,
+              "P95_absolute_error_nits": 55.347996954744005,
+              "P99_absolute_error_nits": 80.2173849617484,
+              "maximum_absolute_error_nits": 113.41025025710587
+            },
+            "by_reference_luminance_nits": {
+              "0-10": {
+                "range_nits": [
+                  0.0,
+                  10.0
+                ],
+                "count": 0,
+                "MAE_nits": null,
+                "RMSE_nits": null,
+                "median_absolute_error_nits": null,
+                "P95_absolute_error_nits": null
+              },
+              "10-100": {
+                "range_nits": [
+                  10.0,
+                  100.0
+                ],
+                "count": 68,
+                "MAE_nits": 0.7954253535796036,
+                "RMSE_nits": 0.969281596281432,
+                "median_absolute_error_nits": 0.7651278442905536,
+                "P95_absolute_error_nits": 1.68790559286006
+              },
+              "100-500": {
+                "range_nits": [
+                  100.0,
+                  500.0
+                ],
+                "count": 52660,
+                "MAE_nits": 1.0761590634168,
+                "RMSE_nits": 1.5247083567051287,
+                "median_absolute_error_nits": 0.7067976763508312,
+                "P95_absolute_error_nits": 3.1540435849720496
+              },
+              "500-1000": {
+                "range_nits": [
+                  500.0,
+                  1000.0
+                ],
+                "count": 85424,
+                "MAE_nits": 3.5739941101836594,
+                "RMSE_nits": 4.831235884536786,
+                "median_absolute_error_nits": 2.7962029535537454,
+                "P95_absolute_error_nits": 9.552041024336374
+              },
+              ">1000": {
+                "range_nits": [
+                  1000.0,
+                  null
+                ],
+                "count": 216152,
+                "MAE_nits": 21.40753255220838,
+                "RMSE_nits": 28.877976560250357,
+                "median_absolute_error_nits": 16.221131246930327,
+                "P95_absolute_error_nits": 64.86287537819629
+              }
+            }
+          },
+          "color": {
+            "deltaE2000_peak_relative_Rec2020_to_Lab_D65": {
+              "count": 354304,
+              "mean": 5.575388961657624,
+              "median": 4.512117326081222,
+              "p95": 15.059275839746068
+            },
+            "deltaEICtCp": {
+              "count": 354304,
+              "mean": 0.04532361719737778,
+              "median": 0.023341952147363794,
+              "p95": 0.22181020564055476
+            },
+            "chroma_error_ICtCp_signed": {
+              "count": 354304,
+              "mean": 0.03372730082516034,
+              "median": 0.016391080611302036,
+              "p95": 0.22008066299902726
+            },
+            "chroma_error_ICtCp_absolute": {
+              "count": 354304,
+              "mean": 0.04476348571041373,
+              "median": 0.02299504666238232,
+              "p95": 0.22008066299902726
+            },
+            "hue_error_degrees_signed": {
+              "count": 354304,
+              "mean": 0.27588350425324004,
+              "median": 0.28991898211311273,
+              "p95": 8.617776833463616
+            },
+            "hue_error_degrees_absolute": {
+              "count": 354304,
+              "mean": 3.475541542432488,
+              "median": 2.0649810805872915,
+              "p95": 10.627472395973973
+            }
+          }
+        },
+        "hidden_region": {
+          "luminance": {
+            "global": {
+              "count": 235520,
+              "MAE_nits": 12.543499741964494,
+              "RMSE_nits": 19.196485426347465,
+              "median_absolute_error_nits": 7.863433349369757,
+              "P95_absolute_error_nits": 42.519809990816064,
+              "P99_absolute_error_nits": 72.70137714518965,
+              "maximum_absolute_error_nits": 83.93721779402222
+            },
+            "by_reference_luminance_nits": {
+              "0-10": {
+                "range_nits": [
+                  0.0,
+                  10.0
+                ],
+                "count": 0,
+                "MAE_nits": null,
+                "RMSE_nits": null,
+                "median_absolute_error_nits": null,
+                "P95_absolute_error_nits": null
+              },
+              "10-100": {
+                "range_nits": [
+                  10.0,
+                  100.0
+                ],
+                "count": 1549,
+                "MAE_nits": 30.31798299857421,
+                "RMSE_nits": 35.64044115425204,
+                "median_absolute_error_nits": 29.798618245807305,
+                "P95_absolute_error_nits": 60.0583178890083
+              },
+              "100-500": {
+                "range_nits": [
+                  100.0,
+                  500.0
+                ],
+                "count": 23717,
+                "MAE_nits": 1.1355852705392842,
+                "RMSE_nits": 1.2190245010850171,
+                "median_absolute_error_nits": 1.1741389934338713,
+                "P95_absolute_error_nits": 1.8235889214245617
+              },
+              "500-1000": {
+                "range_nits": [
+                  500.0,
+                  1000.0
+                ],
+                "count": 52268,
+                "MAE_nits": 4.2871220144634545,
+                "RMSE_nits": 7.436416132414679,
+                "median_absolute_error_nits": 2.2579041629664403,
+                "P95_absolute_error_nits": 19.374351300484527
+              },
+              ">1000": {
+                "range_nits": [
+                  1000.0,
+                  null
+                ],
+                "count": 157986,
+                "MAE_nits": 16.813328612974125,
+                "RMSE_nits": 22.76799395983123,
+                "median_absolute_error_nits": 13.607305290253862,
+                "P95_absolute_error_nits": 53.38175191915923
+              }
+            }
+          },
+          "color": {
+            "deltaE2000_peak_relative_Rec2020_to_Lab_D65": {
+              "count": 235520,
+              "mean": 5.367608365011883,
+              "median": 4.973117975122076,
+              "p95": 11.957447505416228
+            },
+            "deltaEICtCp": {
+              "count": 235520,
+              "mean": 0.04273348465691128,
+              "median": 0.0262909965491677,
+              "p95": 0.15212916794307413
+            },
+            "chroma_error_ICtCp_signed": {
+              "count": 235520,
+              "mean": 0.03771340162344848,
+              "median": 0.025379093142740825,
+              "p95": 0.15177796273915048
+            },
+            "chroma_error_ICtCp_absolute": {
+              "count": 235520,
+              "mean": 0.042082242748957006,
+              "median": 0.025806208551186604,
+              "p95": 0.15177796273915048
+            },
+            "hue_error_degrees_signed": {
+              "count": 235520,
+              "mean": -0.49253770010856485,
+              "median": -0.38745693285624827,
+              "p95": 5.749926808484269
+            },
+            "hue_error_degrees_absolute": {
+              "count": 235520,
+              "mean": 3.0017791899147976,
+              "median": 2.1158721231217106,
+              "p95": 9.604079259306262
+            }
+          }
+        },
+        "output_range": {
+          "finite": true,
+          "minimum_normalized": 0.0,
+          "maximum_normalized": 0.8864966776113007,
+          "negative_count_after_model_clip": 0,
+          "above_peak_count": 0,
+          "above_peak_fraction": 0.0
+        },
+        "exr": "not available: OpenCV(5.0.0) D:\\a\\opencv-python\\opencv-python\\opencv\\modules\\imgcodecs\\src\\loadsave.cpp:1624: error: (-2:Unspecified error) could not find encoder for the specified extension in function 'cv::imencodeWithMetadata'\n"
+      },
+      "ModelG": {
+        "parameter_count": 29,
+        "parameters": {
+          "luma_x": [
+            0.1751972180967617,
+            0.3622944849836628,
+            0.4713804014443682,
+            0.5338075979135317,
+            0.6347440155878282,
+            0.6861793830216735,
+            0.7168915026358968,
+            0.7482703563226402,
+            0.7835842353390378,
+            0.9102307236019179
+          ],
+          "luma_y": [
+            0.020864763042855495,
+            0.040658512519723265,
+            0.06610508068532263,
+            0.08741199289765984,
+            0.13234005082164227,
+            0.1645259437488299,
+            0.19290064713135072,
+            0.22885104831234843,
+            0.28043699384590287,
+            0.6168363902612837
+          ],
+          "highlight_threshold": 0.791708179681382,
+          "highlight_slope": 2.47974500562105,
+          "highlight_max": 0.8590257340141918,
+          "shadow_threshold": 0.3381706075215747,
+          "shadow_gain": 0.10219458757621636,
+          "sat_base": -2.6756214897240147,
+          "sat_slope": 6.637446451671132,
+          "color_matrix": [
+            [
+              0.8759980414492614,
+              -0.12492004488237136,
+              -0.12331453069224557
+            ],
+            [
+              -0.12661958051011465,
+              0.8723843255679348,
+              -0.12614944376222617
+            ],
+            [
+              -0.1233812337363047,
+              -0.12452336221129359,
+              0.8767267846780725
+            ]
+          ],
+          "hue_angles": [
+            -0.00371082632303584,
+            0.007160447531773249,
+            -0.0017904995015333072
+          ]
+        },
+        "common_region": {
+          "luminance": {
+            "global": {
+              "count": 354304,
+              "MAE_nits": 94.81147451798729,
+              "RMSE_nits": 349.2697267856391,
+              "median_absolute_error_nits": 17.649017759306957,
+              "P95_absolute_error_nits": 253.4432698155006,
+              "P99_absolute_error_nits": 2170.250703845684,
+              "maximum_absolute_error_nits": 2929.4739317295034
+            },
+            "by_reference_luminance_nits": {
+              "0-10": {
+                "range_nits": [
+                  0.0,
+                  10.0
+                ],
+                "count": 0,
+                "MAE_nits": null,
+                "RMSE_nits": null,
+                "median_absolute_error_nits": null,
+                "P95_absolute_error_nits": null
+              },
+              "10-100": {
+                "range_nits": [
+                  10.0,
+                  100.0
+                ],
+                "count": 68,
+                "MAE_nits": 50.703945945357546,
+                "RMSE_nits": 50.70395011005382,
+                "median_absolute_error_nits": 50.706379741148915,
+                "P95_absolute_error_nits": 50.73236368153537
+              },
+              "100-500": {
+                "range_nits": [
+                  100.0,
+                  500.0
+                ],
+                "count": 52660,
+                "MAE_nits": 20.126659275712317,
+                "RMSE_nits": 23.247965216572577,
+                "median_absolute_error_nits": 18.51440174582146,
+                "P95_absolute_error_nits": 38.20194466216868
+              },
+              "500-1000": {
+                "range_nits": [
+                  500.0,
+                  1000.0
+                ],
+                "count": 85424,
+                "MAE_nits": 10.16569534904159,
+                "RMSE_nits": 13.218249472480492,
+                "median_absolute_error_nits": 7.738467005216165,
+                "P95_absolute_error_nits": 30.09812999218096
+              },
+              ">1000": {
+                "range_nits": [
+                  1000.0,
+                  null
+                ],
+                "count": 216152,
+                "MAE_nits": 146.4727255003014,
+                "RMSE_nits": 446.9411860963055,
+                "median_absolute_error_nits": 27.443037752285363,
+                "P95_absolute_error_nits": 922.7362221962962
+              }
+            }
+          },
+          "color": {
+            "deltaE2000_peak_relative_Rec2020_to_Lab_D65": {
+              "count": 354304,
+              "mean": 5.841676746147542,
+              "median": 5.078558942619287,
+              "p95": 15.327402203300334
+            },
+            "deltaEICtCp": {
+              "count": 354304,
+              "mean": 0.04669868613339996,
+              "median": 0.02535228683454465,
+              "p95": 0.2293315312709793
+            },
+            "chroma_error_ICtCp_signed": {
+              "count": 354304,
+              "mean": 0.03378984484656719,
+              "median": 0.01603898491989084,
+              "p95": 0.2271758056772626
+            },
+            "chroma_error_ICtCp_absolute": {
+              "count": 354304,
+              "mean": 0.044226876406645715,
+              "median": 0.022928212811041862,
+              "p95": 0.2271758056772626
+            },
+            "hue_error_degrees_signed": {
+              "count": 354304,
+              "mean": 1.0145752274862379,
+              "median": 0.6889393413775835,
+              "p95": 15.024218485704104
+            },
+            "hue_error_degrees_absolute": {
+              "count": 354304,
+              "mean": 7.583156928983462,
+              "median": 5.532552248733995,
+              "p95": 19.658584998148843
+            }
+          }
+        },
+        "hidden_region": {
+          "luminance": {
+            "global": {
+              "count": 235520,
+              "MAE_nits": 31.639144690428804,
+              "RMSE_nits": 67.46174983804612,
+              "median_absolute_error_nits": 18.729545418173274,
+              "P95_absolute_error_nits": 80.37645163513918,
+              "P99_absolute_error_nits": 259.1823839392232,
+              "maximum_absolute_error_nits": 1132.940443931796
+            },
+            "by_reference_luminance_nits": {
+              "0-10": {
+                "range_nits": [
+                  0.0,
+                  10.0
+                ],
+                "count": 0,
+                "MAE_nits": null,
+                "RMSE_nits": null,
+                "median_absolute_error_nits": null,
+                "P95_absolute_error_nits": null
+              },
+              "10-100": {
+                "range_nits": [
+                  10.0,
+                  100.0
+                ],
+                "count": 1549,
+                "MAE_nits": 45.32250909636241,
+                "RMSE_nits": 45.68614718874079,
+                "median_absolute_error_nits": 47.36142988709014,
+                "P95_absolute_error_nits": 51.042159825974515
+              },
+              "100-500": {
+                "range_nits": [
+                  100.0,
+                  500.0
+                ],
+                "count": 23717,
+                "MAE_nits": 18.42243279632047,
+                "RMSE_nits": 22.206192694900928,
+                "median_absolute_error_nits": 15.580362197004433,
+                "P95_absolute_error_nits": 42.18055158489322
+              },
+              "500-1000": {
+                "range_nits": [
+                  500.0,
+                  1000.0
+                ],
+                "count": 52268,
+                "MAE_nits": 11.136843528867237,
+                "RMSE_nits": 14.231026924518954,
+                "median_absolute_error_nits": 8.197129724689546,
+                "P95_absolute_error_nits": 30.423455890915427
+              },
+              ">1000": {
+                "range_nits": [
+                  1000.0,
+                  null
+                ],
+                "count": 157986,
+                "MAE_nits": 40.27205837670654,
+                "RMSE_nits": 81.38248309501766,
+                "median_absolute_error_nits": 24.28385837431381,
+                "P95_absolute_error_nits": 115.17223401170168
+              }
+            }
+          },
+          "color": {
+            "deltaE2000_peak_relative_Rec2020_to_Lab_D65": {
+              "count": 235520,
+              "mean": 5.4712152178723175,
+              "median": 4.96546896372268,
+              "p95": 11.654026553848048
+            },
+            "deltaEICtCp": {
+              "count": 235520,
+              "mean": 0.04319079342823068,
+              "median": 0.02512067672796466,
+              "p95": 0.14729435026390503
+            },
+            "chroma_error_ICtCp_signed": {
+              "count": 235520,
+              "mean": 0.03662082530748865,
+              "median": 0.022923353333821814,
+              "p95": 0.1465585715972562
+            },
+            "chroma_error_ICtCp_absolute": {
+              "count": 235520,
+              "mean": 0.041147991336609124,
+              "median": 0.023444127365044032,
+              "p95": 0.1465585715972562
+            },
+            "hue_error_degrees_signed": {
+              "count": 235520,
+              "mean": 0.9317178311983547,
+              "median": 0.06130046949897544,
+              "p95": 17.80434874803579
+            },
+            "hue_error_degrees_absolute": {
+              "count": 235520,
+              "mean": 8.553029491588838,
+              "median": 6.419330119163863,
+              "p95": 22.28642469404729
+            }
+          }
+        },
+        "output_range": {
+          "finite": true,
+          "minimum_normalized": 0.0,
+          "maximum_normalized": 0.6259251310322106,
+          "negative_count_after_model_clip": 0,
+          "above_peak_count": 0,
+          "above_peak_fraction": 0.0
+        },
+        "exr": "not available: OpenCV(5.0.0) D:\\a\\opencv-python\\opencv-python\\opencv\\modules\\imgcodecs\\src\\loadsave.cpp:1624: error: (-2:Unspecified error) could not find encoder for the specified extension in function 'cv::imencodeWithMetadata'\n"
+      }
+    }
+  }
+}

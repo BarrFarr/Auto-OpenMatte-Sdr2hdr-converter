@@ -1,0 +1,217 @@
+{
+  "phase": "P2.34",
+  "case_id": "the_matrix_temporal_stratum_06",
+  "material": "The Matrix",
+  "source_metadata": {
+    "hdr_source": "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+    "om_source": "G:\\Filmy\\IMAX format (open matte)\\The Matrix (1999) [OPEN MATTE] [WEB-DL 1080p 10bit DD5.1 x265].mkv",
+    "hdr_width": 3840,
+    "hdr_height": 1600,
+    "om_width": 1920,
+    "om_height": 1080,
+    "offset_frames": -19,
+    "offset_seconds": -0.7924583333333333,
+    "fps": "24000/1001",
+    "fps_float": 23.976023976023978,
+    "sync_confidence": 0.940513,
+    "sync_status": "LOCKED",
+    "geometry": {
+      "scale_x": 0.5,
+      "scale_y": 0.5,
+      "offset_x": 0,
+      "offset_y": 140,
+      "overlap": [
+        0,
+        140,
+        1920,
+        940
+      ],
+      "confidence": 1.0,
+      "status": "preserved geometry contract"
+    }
+  },
+  "boundary_result": {
+    "case_id": "the_matrix_temporal_stratum_06",
+    "material": "The Matrix",
+    "anchor_hdr_frame": 56247,
+    "anchor_om_frame": 56228,
+    "anchor_timestamp_seconds": 2345.968625,
+    "window": {
+      "half_window_seconds": 5.0,
+      "start_frame": 56127,
+      "end_frame_exclusive": 56368,
+      "requested_end_frame_exclusive": 56368,
+      "decoded_frame_count": 241
+    },
+    "boundaries": [
+      {
+        "frame": 56149,
+        "timestamp_seconds": 2341.8812083333332,
+        "boundary_score": 0.22941165487510926,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 56127,
+        "run_end_frame": 56170
+      },
+      {
+        "frame": 56177,
+        "timestamp_seconds": 2343.0490416666667,
+        "boundary_score": 0.17866416553978645,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 56171,
+        "run_end_frame": 56185
+      },
+      {
+        "frame": 56194,
+        "timestamp_seconds": 2343.758083333333,
+        "boundary_score": 0.16474803628327056,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 56192,
+        "run_end_frame": 56199
+      },
+      {
+        "frame": 56214,
+        "timestamp_seconds": 2344.5922499999997,
+        "boundary_score": 0.4614826099106313,
+        "threshold": 0.3,
+        "type": "hard",
+        "confidence": 1.0
+      },
+      {
+        "frame": 56236,
+        "timestamp_seconds": 2345.509833333333,
+        "boundary_score": 0.2791506567600119,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 56227,
+        "run_end_frame": 56238
+      },
+      {
+        "frame": 56247,
+        "timestamp_seconds": 2345.968625,
+        "boundary_score": 0.26672149469663653,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 56242,
+        "run_end_frame": 56249
+      },
+      {
+        "frame": 56255,
+        "timestamp_seconds": 2346.3022916666664,
+        "boundary_score": 0.24662643189924524,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 56252,
+        "run_end_frame": 56264
+      },
+      {
+        "frame": 56268,
+        "timestamp_seconds": 2346.8444999999997,
+        "boundary_score": 0.21732932470603247,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 56265,
+        "run_end_frame": 56277
+      },
+      {
+        "frame": 56283,
+        "timestamp_seconds": 2347.470125,
+        "boundary_score": 0.19937379812761535,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 56278,
+        "run_end_frame": 56283
+      },
+      {
+        "frame": 56289,
+        "timestamp_seconds": 2347.720375,
+        "boundary_score": 0.4684262697535892,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 56288,
+        "run_end_frame": 56293
+      },
+      {
+        "frame": 56347,
+        "timestamp_seconds": 2350.139458333333,
+        "boundary_score": 0.36326626052938893,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 56316,
+        "run_end_frame": 56367
+      }
+    ],
+    "boundary_count": 11,
+    "anchor_near_cut": true,
+    "anchor_near_cut_guard_frames": 12,
+    "nearest_boundary_distance_frames": 0,
+    "shot_status": "ANCHOR_NEAR_CUT",
+    "shot_start_frame": 56247,
+    "shot_end_frame_exclusive": 56255,
+    "shot_duration_frames": 8,
+    "shot_duration_seconds": 0.33366666666666667,
+    "anchor_position_in_shot": 0.0,
+    "boundary_detection": {
+      "algorithm": "deterministic local frame difference",
+      "weights": {
+        "histogram": 0.4,
+        "mean_luminance": 0.2,
+        "edge_ncc_change": 0.4
+      },
+      "hard_threshold": 0.3,
+      "gradual_threshold": 0.15,
+      "gradual_min_run_frames": 5,
+      "full_film_scan": false
+    },
+    "decode": {
+      "command": [
+        "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\install\\bin\\ffmpeg.exe",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-nostdin",
+        "-ss",
+        "2340.963625",
+        "-i",
+        "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+        "-map",
+        "0:v:0",
+        "-vf",
+        "scale=320:134,format=gray",
+        "-frames:v",
+        "241",
+        "-pix_fmt",
+        "gray",
+        "-vsync",
+        "0",
+        "-f",
+        "rawvideo",
+        "pipe:1"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "requested_start_frame": 56127,
+      "requested_end_frame": 56368,
+      "requested_frame_count": 241,
+      "decoded_frame_count": 241,
+      "proxy_shape": [
+        134,
+        320
+      ],
+      "seek_mode": "bounded fast input seek; local diagnostic only",
+      "full_film_scan": false
+    }
+  }
+}

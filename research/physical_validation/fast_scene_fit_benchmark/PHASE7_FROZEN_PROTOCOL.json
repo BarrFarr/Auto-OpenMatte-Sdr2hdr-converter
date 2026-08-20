@@ -1,0 +1,179 @@
+{
+  "phase": "Phase 7 — Fast Scene-Fit Benchmark for Frozen MMR-1",
+  "status": "PREDECLARED BEFORE EXTRACTION_OR_BENCHMARK",
+  "purpose": "Measure the smallest deterministic same-shot representative-frame and pixel budget that estimates the frozen Matrix 08 Phase-6 MMR-1 transform with practically no output-quality loss. This is not model development and does not authorize production integration or full-film processing.",
+  "scope": {
+    "research_only": true,
+    "production_modified": false,
+    "p232_modified": false,
+    "phase5_or_phase6_modified": false,
+    "model_research": false,
+    "new_model_family": false,
+    "mmr1_equations_changed": false,
+    "full_film_processing": false,
+    "full_shot_render": false,
+    "global_sync": false,
+    "geometry_refit": false,
+    "cross_scene_fit_permitted": false
+  },
+  "frozen_dependency_hashes_sha256": {
+    "mmr1_source": {
+      "path": "research/physical_validation/mmr_regrading/run_mmr_regrading.py",
+      "sha256": "BAEF76DBFABCEE3FA11656E8BD34B3DFA7E12E948386949910E17D6FC1F076F3"
+    },
+    "h0_and_output_helpers": {
+      "path": "research/physical_validation/scene_regrading/run_scene_regrading.py",
+      "sha256": "C24CB2BF7C88EC4FEF5ABD066736011E996D1810B721AD395E3E53DD34D2B9D0"
+    },
+    "phase6_harness": {
+      "path": "research/physical_validation/scene_level_validation/run_scene_level_validation.py",
+      "sha256": "6FE58610B0AFF240D7DB3E314D54AF2BE7A9D04FB11CAB8FAB64E090706464FE"
+    },
+    "phase6_protocol": {
+      "path": "research/physical_validation/scene_level_validation/PHASE6_FROZEN_PROTOCOL.json",
+      "sha256": "9ACAD01B4D1A8D596615EC484854F0E7FC777D5F9FF02AFF0DE923475776A0F8"
+    },
+    "phase6_metrics": {
+      "path": "research/physical_validation/scene_level_validation/results/scene_level_metrics.json",
+      "sha256": "6B565334FF0BD20C96462501219DA8FD377DA28ADD1CBCDE7A215912C546E4D8"
+    },
+    "phase6_report": {
+      "path": "research/physical_validation/scene_level_validation/SCENE_LEVEL_VALIDATION_REPORT.md",
+      "sha256": "F64AF79F2CA17C838BC108BB78B98DB2A7A0E98CCEF721BF6B5616A0980F7533"
+    },
+    "p232_metrics": {
+      "path": "dev/ffmpeg-build/validation/P232_real_material_dataset/P232_dataset_metrics.json",
+      "sha256": "5FE61B8EA91E64A9168FCB7A41F881DB5430A85DD75195388110F64E5F156E8E"
+    },
+    "p232_manifest": {
+      "path": "dev/ffmpeg-build/validation/P232_real_material_dataset/P232_dataset_manifest.json",
+      "sha256": "E682AC5ABA2128D6B45B2DBBC20B3300ED8DF1FF5D46B02A5D0C1109AA85A7EF"
+    }
+  },
+  "frozen_mmr1_contract": {
+    "model": "MMR1",
+    "feature_names": ["constant", "Y_target_nits/100", "Ct_base", "Cp_base", "(Y_target_nits/100)*Ct_base", "(Y_target_nits/100)*Cp_base"],
+    "parameter_count": 12,
+    "ridge_formula": "(XᵀX/N + λI)⁻¹(XᵀC/N + λΘ_identity)",
+    "lambda_grid": [0.0001, 0.001, 0.01],
+    "chroma_component_bound": 0.5,
+    "luma_feature_scale_nits": 100.0,
+    "spatial_split": "((y//80+x//120)%5)==0",
+    "max_regularized_gram_condition": 1000000.0,
+    "max_identity_deviation_l2": 5.0,
+    "max_chroma_bound_pixel_fraction": 0.005,
+    "max_inverse_negative_pixel_fraction": 0.005,
+    "final_luminance_rule": "reimpose each frame's Model-E Y_target after ICtCp inverse",
+    "frozen_functions_reused_unchanged": ["features", "identity_coefficients", "apply_mmr", "objective", "map_luma_ratio", "metrics", "seam_metrics"]
+  },
+  "reference_case": {
+    "case_id": "the_matrix_temporal_stratum_08",
+    "material": "The Matrix",
+    "phase6_status": "SCORABLE",
+    "source_paths": {
+      "hdr": "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+      "open_matte": "G:\\Filmy\\IMAX format (open matte)\\The Matrix (1999) [OPEN MATTE] [WEB-DL 1080p 10bit DD5.1 x265].mkv"
+    },
+    "ffmpeg": "dev/ffmpeg-build/install/bin/ffmpeg.exe",
+    "pixel_format": "rgb48le",
+    "fps": "24000/1001",
+    "offset_frames": -19,
+    "hdr_resolution": [3840, 1600],
+    "open_matte_resolution": [1920, 1080],
+    "overlap_open_matte": [0, 140, 1920, 940],
+    "shot_interval_hdr": [73274, 73460],
+    "sample_pairs": [
+      {"label": "10%", "fraction": 0.1, "hdr_frame": 73292, "open_matte_frame": 73273, "role": "training"},
+      {"label": "25%", "fraction": 0.25, "hdr_frame": 73320, "open_matte_frame": 73301, "role": "training"},
+      {"label": "50%", "fraction": 0.5, "hdr_frame": 73366, "open_matte_frame": 73347, "role": "training"},
+      {"label": "75%", "fraction": 0.75, "hdr_frame": 73413, "open_matte_frame": 73394, "role": "training"},
+      {"label": "90%", "fraction": 0.9, "hdr_frame": 73440, "open_matte_frame": 73421, "role": "temporal_holdout"}
+    ],
+    "phase6_reference_transform": {
+      "training_labels": ["10%", "25%", "50%", "75%"],
+      "temporal_holdout_label": "90%",
+      "selected_lambda": 0.0001,
+      "regularized_gram_condition_number": 9936.580259832052,
+      "coefficient_identity_deviation_l2": 0.7799746449671959,
+      "coefficients_sha256": "63AA8E9A02CA5600A16B5A3B59C3CE8F1AABFF246089AE0178E4D28882B4B50D",
+      "coefficients": [[-0.006212843540338669, -0.0009757131682028212], [-0.04979687105631999, 0.026810024757429617], [0.7464968129078802, -0.2663913024388888], [0.21591231370349354, 0.3570089822466362], [0.08899014428047351, 0.039659203915365676], [-0.005702524677085795, 0.017720173051111766]],
+      "reference_fit_rows_per_training_frame": {"train": 4096, "holdout": 2048},
+      "reference_heldout_mean_deltaE2000": 0.8170705193382721,
+      "reference_heldout_p95_deltaE2000": 2.985593109349509,
+      "reference_heldout_luminance_max_abs_error_nits": 1.3877787807814457e-13
+    }
+  },
+  "reproducibility_control": {
+    "required_before_sweep": true,
+    "definition": "Re-decode all five fixed Matrix 08 pairs and recompute the Phase-6 B4 (10/25/50/75%) pooled transform using the original 4096 training and 2048 heldout rows per training frame before testing any reduced budget.",
+    "required_coefficient_sha256": "63AA8E9A02CA5600A16B5A3B59C3CE8F1AABFF246089AE0178E4D28882B4B50D",
+    "maximum_coefficient_l2_difference": 1e-10,
+    "maximum_mean_deltaE2000_difference_per_tested_frame": 1e-08,
+    "maximum_p95_deltaE2000_difference_per_tested_frame": 1e-08,
+    "failure_action": "Stop as REPRODUCIBILITY_FAILURE. Do not interpret or recommend a reduced budget."
+  },
+  "benchmark_frame_budgets": {
+    "production_eligible_prefixes": [
+      {"id": "B1", "labels": ["10%"]},
+      {"id": "B2", "labels": ["10%", "25%"]},
+      {"id": "B3", "labels": ["10%", "25%", "50%"]},
+      {"id": "B4", "labels": ["10%", "25%", "50%", "75%"], "reference_frame_set": true}
+    ],
+    "temporal_holdout": "90% remains excluded from every production-eligible H0 and MMR fit and is applied/evaluated only after fitting.",
+    "five_frame_diagnostic": {
+      "id": "B5",
+      "labels": ["10%", "25%", "50%", "75%", "90%"],
+      "permitted": true,
+      "label": "NO_TEMPORAL_HOLDOUT_REFERENCE_COMPARISON_ONLY",
+      "may_influence_recommendation": false,
+      "reason": "It consumes the predeclared 90% temporal holdout and therefore cannot support a temporal-generalization or production-budget claim."
+    }
+  },
+  "benchmark_pixel_budgets": {
+    "fit_rows_per_frame": [500, 1000, 2500, 5000, 10000, 25000, 50000],
+    "full_overlap_fit_prohibited": true,
+    "candidate_row_definition": "Each number is the exact number of deterministic spatial training rows supplied by one representative frame to H0 and MMR fitting. Full-frame application and full-overlap reference-output comparison are permitted only after fitting and are not candidate fit rows.",
+    "selection_rule": "For each frame, preserve the frozen spatial train mask ((y//80+x//120)%5)!=0 and select an evenly spaced deterministic prefix-independent subset of the mask using integer linspace positions. The first n rows are not used. No random, content-adaptive, saliency, or learned sampling is permitted.",
+    "lambda_holdout_rows_per_frame": "Use an equally deterministic subset of the frozen heldout mask with min(2048, max(250, round(fit_rows_per_frame/2))) rows per training frame only to preserve frozen lambda selection. These rows are not included in the declared fit-row budget.",
+    "eligible_pixel_count_rule": "A requested candidate is invalid if either frozen mask has fewer required rows; no substitution or duplicated row is permitted."
+  },
+  "fit_apply_separation": {
+    "one_compact_fit_per_candidate": true,
+    "H0_and_MMR_fit_frames": "Only the labels in the candidate frame budget.",
+    "application_frames": ["10%", "25%", "50%", "75%", "90%"],
+    "forbidden": ["per-frame regression", "coefficient averaging", "temporal smoothing", "output-time adaptation", "lambda changes", "feature changes", "constraint changes"]
+  },
+  "equivalence_and_validity": {
+    "comparison": "Candidate output minus Phase-6-reference-transform output, over the fixed 1,536,000-pixel overlap for each of all five applied frames.",
+    "mean_deltaE2000_max": 0.05,
+    "p95_deltaE2000_max": 0.15,
+    "per_frame_required": true,
+    "quality_summary": "Report median and worst frame of per-frame mean/P95 differences, together with direct HDR-reference metrics; equivalence selection uses the reference-output differences.",
+    "coefficient_distance_from_reference_report_only": true,
+    "required_validity": ["finite output", "chroma-bound pixel fraction <= 0.005", "inverse-negative pixel fraction <= 0.005", "Y_target reimposition maximum absolute error <= 1e-05 nits", "all output applications use exactly the one candidate coefficient matrix"],
+    "recommended_candidate_selection": "Choose the production-eligible candidate with the fewest total fit rows (frame_count × fit_rows_per_frame) that passes every per-frame equivalence and validity requirement. Break a tie by fewer frames, then fewer rows per frame."
+  },
+  "measurement": {
+    "repetitions_per_candidate": 3,
+    "timing_scope": "Warm-cache fit-only H0 plus pooled MMR lambda sweep; separately record source extraction/decode, full-frame application, evaluation, and artifact writing. Do not label combined timing as fit time.",
+    "fit_time_statistics": ["median_seconds", "worst_seconds"],
+    "memory": "Record process peak RSS for every candidate repetition. GPU memory is not inferred or claimed unless measured by an available local GPU telemetry tool.",
+    "throughput_projection": "Use the selected configuration median and worst fit time, multiplied by 100, 500, and 1000 shots; report fit-only separately from decode and apply timings."
+  },
+  "visual_artifacts": {
+    "generate_for": "Only the selected production-eligible candidate and the Phase-6 reference, for the five fixed frames.",
+    "prohibited": "No visual panels for every sweep point and no full-shot/full-film render.",
+    "required_curves": ["frame-count versus quality/time", "pixel-budget versus quality/time", "pixel-budget versus peak RSS"]
+  },
+  "cross_scene_sanity": {
+    "policy": "EXCLUDED_BY_PHASE6_STATUS unless an existing Phase-6 case is both SCORABLE and permitted by the fixed Phase-6 status. Do not discover a new anchor, expand a window, change geometry, or refit sync.",
+    "eligible_cases_from_current_phase6_results": [],
+    "current_exclusion_reasons": {
+      "the_matrix_temporal_stratum_03": "ANCHOR_NEAR_CUT",
+      "the_matrix_temporal_stratum_12": "LOCAL_SHOT_UNRESOLVED",
+      "br2049_temporal_stratum_01": "ANCHOR_NEAR_CUT and geometry confidence 0.9155"
+    }
+  },
+  "required_final_answers": ["A. recommended representative frames per shot", "B. recommended fit rows per representative frame", "C. recommended total fit rows per shot", "D. median and worst-case fitting time", "E. expected analysis time per 100/500/1000 shots", "F. expected measured peak RSS", "G. expected quality difference versus the Phase-6 reference transform", "H. practicality for a local RTX 3080 / CPU workflow"],
+  "stop_rule": "Stop after the benchmark report. Do not change MMR-1, create a new model, integrate production, process the full film, or render a full shot."
+}

@@ -1,0 +1,883 @@
+{
+  "implementation": "P2.19.2 existing temporary-array benchmark",
+  "warmups": 5,
+  "timed_runs": 20,
+  "roi": [
+    560,
+    3840,
+    3
+  ],
+  "timing_ms": {
+    "cpu_transform": {
+      "median_ms": 367.9097499998534,
+      "mean_ms": 369.4524699996691,
+      "min_ms": 353.8508000001457,
+      "max_ms": 399.9509000004764,
+      "samples_ms": [
+        353.8508000001457,
+        356.14539999914996,
+        357.71869999916817,
+        359.6823999996559,
+        359.8517999998876,
+        360.7644000003347,
+        360.942299999806,
+        360.97719999997935,
+        363.21809999935795,
+        367.41340000116907,
+        368.4060999985377,
+        368.6753999991197,
+        369.2472999991878,
+        369.6196000000782,
+        371.061899999404,
+        371.47749999894586,
+        382.4544999988575,
+        388.76650000020163,
+        398.8251999999193,
+        399.9509000004764
+      ]
+    },
+    "gpu_transform_cuda_events": {
+      "median_ms": 14.496256351470947,
+      "mean_ms": 14.77174243927002,
+      "min_ms": 13.749247550964355,
+      "max_ms": 16.20684814453125,
+      "samples_ms": [
+        13.749247550964355,
+        13.770560264587402,
+        14.359423637390137,
+        14.366720199584961,
+        14.38105583190918,
+        14.397439956665039,
+        14.402527809143066,
+        14.404607772827148,
+        14.452735900878906,
+        14.49062442779541,
+        14.501888275146484,
+        14.545856475830078,
+        14.635007858276367,
+        14.725119590759277,
+        15.19001579284668,
+        15.276032447814941,
+        15.29753589630127,
+        16.089088439941406,
+        16.19251251220703,
+        16.20684814453125
+      ]
+    },
+    "upload_wall_clock": {
+      "count": 20,
+      "median_ms": 5.86230000044452,
+      "mean_ms": 9.205470000051719,
+      "min_ms": 5.815200000142795,
+      "max_ms": 17.739000000801752,
+      "p10_ms": 5.817609999940032,
+      "p90_ms": 17.629820000183827,
+      "p95_ms": 17.717529999754333,
+      "p99_ms": 17.73470600059227,
+      "samples_ms": [
+        17.604800001208787,
+        17.557699999088072,
+        17.716399999699206,
+        17.739000000801752,
+        17.620200000237674,
+        13.787299998512026,
+        5.909699999392615,
+        5.8690000005299225,
+        5.83820000065316,
+        6.08749999992142,
+        5.838400000357069,
+        5.815900000015972,
+        5.908600000111619,
+        5.847399999765912,
+        5.819899999551126,
+        5.841500000315136,
+        5.817799999931594,
+        5.815200000142795,
+        5.855600000359118,
+        5.819300000439398
+      ]
+    },
+    "download_wall_clock": {
+      "count": 20,
+      "median_ms": 7.161750000705069,
+      "mean_ms": 7.324325000172394,
+      "min_ms": 6.692000000839471,
+      "max_ms": 8.272500001112348,
+      "p10_ms": 6.887519999690994,
+      "p90_ms": 7.940139999118401,
+      "p95_ms": 8.06483000096705,
+      "p99_ms": 8.230966001083289,
+      "samples_ms": [
+        8.272500001112348,
+        6.709500001306878,
+        7.788900000377907,
+        7.5380999987828545,
+        7.927499998913845,
+        6.692000000839471,
+        7.53660000009404,
+        6.9681999993918,
+        8.053900000959402,
+        7.6938000001973705,
+        7.128900000680005,
+        7.1356000007654075,
+        7.73740000113321,
+        7.075099998473888,
+        6.9072999995114515,
+        6.910800000696327,
+        7.037999999738531,
+        7.231499999761581,
+        6.953000000066822,
+        7.187900000644731
+      ]
+    },
+    "total_wall_clock": {
+      "count": 20,
+      "median_ms": 28.50045000013779,
+      "mean_ms": 28.61818500005029,
+      "min_ms": 27.6400000002468,
+      "max_ms": 30.86509999957343,
+      "p10_ms": 27.778650000254856,
+      "p90_ms": 29.39940999949613,
+      "p95_ms": 30.102915000406938,
+      "p99_ms": 30.712662999740132,
+      "samples_ms": [
+        28.367000000798726,
+        28.529699999126024,
+        30.062800000450807,
+        27.77100000093924,
+        28.75080000012531,
+        28.730700001688092,
+        27.779500000178814,
+        29.272199999468285,
+        27.83379999891622,
+        28.471200001149555,
+        28.34690000054252,
+        28.861200000392273,
+        29.325699999390054,
+        28.40519999881508,
+        27.962500000285218,
+        28.536199999507517,
+        30.86509999957343,
+        28.297299999394454,
+        28.55490000001737,
+        27.6400000002468
+      ]
+    }
+  },
+  "memory_after_primary": {
+    "pool_used_bytes": 104269824,
+    "pool_reserved_bytes": 104269824,
+    "device_free_bytes": 9419358208,
+    "device_total_bytes": 10736893952
+  },
+  "scaling": [
+    {
+      "height": 280,
+      "width": 3840,
+      "pixels": 1075200,
+      "cpu_transform": {
+        "median_ms": 173.02399999971385,
+        "mean_ms": 175.35115000009682,
+        "min_ms": 169.30320000028587,
+        "max_ms": 204.22079999843845,
+        "samples_ms": [
+          169.30320000028587,
+          170.07520000152,
+          170.12760000034177,
+          170.1283999991574,
+          171.9730000004347,
+          171.98800000005576,
+          172.05449999892153,
+          172.35050000090268,
+          172.61239999970712,
+          172.8091000004497,
+          173.238899998978,
+          173.25899999923422,
+          175.0184000011359,
+          175.50009999831673,
+          176.17840000093565,
+          176.95760000060545,
+          178.12600000070233,
+          178.3716000009008,
+          182.7303000009124,
+          204.22079999843845
+        ]
+      },
+      "gpu_transform_only": {
+        "median_ms": 7.167999982833862,
+        "mean_ms": 7.437032008171082,
+        "min_ms": 7.108511924743652,
+        "max_ms": 7.982079982757568,
+        "samples_ms": [
+          7.108511924743652,
+          7.1146240234375,
+          7.121920108795166,
+          7.122943878173828,
+          7.128064155578613,
+          7.132160186767578,
+          7.1342082023620605,
+          7.136064052581787,
+          7.137279987335205,
+          7.147520065307617,
+          7.188479900360107,
+          7.726079940795898,
+          7.733248233795166,
+          7.735263824462891,
+          7.735263824462891,
+          7.737343788146973,
+          7.781375885009766,
+          7.861248016357422,
+          7.976960182189941,
+          7.982079982757568
+        ]
+      }
+    },
+    {
+      "height": 560,
+      "width": 3840,
+      "pixels": 2150400,
+      "cpu_transform": {
+        "median_ms": 358.694700000342,
+        "mean_ms": 362.2521549999874,
+        "min_ms": 352.23729999961506,
+        "max_ms": 381.11489999937476,
+        "samples_ms": [
+          352.23729999961506,
+          353.3903999996255,
+          355.1201999998739,
+          356.18220000105794,
+          356.33299999972223,
+          356.83720000088215,
+          357.4711999990541,
+          357.9567999986466,
+          358.1673000007868,
+          358.17080000015267,
+          359.2186000005313,
+          360.86819999945874,
+          363.2281000009243,
+          364.4062000003032,
+          369.0742999988288,
+          369.72049999894807,
+          371.04510000062874,
+          371.7110000015964,
+          372.7897999997367,
+          381.11489999937476
+        ]
+      },
+      "gpu_transform_only": {
+        "median_ms": 14.446063995361328,
+        "mean_ms": 14.41324315071106,
+        "min_ms": 13.75436782836914,
+        "max_ms": 14.731264114379883,
+        "samples_ms": [
+          13.75436782836914,
+          13.784064292907715,
+          14.011391639709473,
+          14.366720199584961,
+          14.376959800720215,
+          14.377984046936035,
+          14.387200355529785,
+          14.393343925476074,
+          14.404607772827148,
+          14.444543838500977,
+          14.44758415222168,
+          14.447615623474121,
+          14.551039695739746,
+          14.566335678100586,
+          14.611455917358398,
+          14.612480163574219,
+          14.614399909973145,
+          14.667776107788086,
+          14.713727951049805,
+          14.731264114379883
+        ]
+      }
+    },
+    {
+      "height": 1080,
+      "width": 1920,
+      "pixels": 2073600,
+      "cpu_transform": {
+        "median_ms": 344.2699999995966,
+        "mean_ms": 346.9599199996992,
+        "min_ms": 337.96929999880376,
+        "max_ms": 373.751799999809,
+        "samples_ms": [
+          337.96929999880376,
+          338.27240000027814,
+          339.6007000010286,
+          340.0222999989637,
+          340.4967000005854,
+          341.99749999970663,
+          342.0003999999608,
+          342.80479999870295,
+          342.9279000010865,
+          343.9693000000261,
+          344.5706999991671,
+          347.3228000002564,
+          347.40359999887005,
+          349.269499998627,
+          350.63329999866255,
+          352.19099999994796,
+          352.8093999993871,
+          354.8879999998462,
+          356.2970000002679,
+          373.751799999809
+        ]
+      },
+      "gpu_transform_only": {
+        "median_ms": 13.917695999145508,
+        "mean_ms": 13.90737280845642,
+        "min_ms": 13.24953556060791,
+        "max_ms": 14.203904151916504,
+        "samples_ms": [
+          13.24953556060791,
+          13.252544403076172,
+          13.511520385742188,
+          13.865983963012695,
+          13.868032455444336,
+          13.880319595336914,
+          13.882207870483398,
+          13.883392333984375,
+          13.896703720092773,
+          13.911040306091309,
+          13.924351692199707,
+          13.946880340576172,
+          14.088095664978027,
+          14.09331226348877,
+          14.1015043258667,
+          14.134271621704102,
+          14.137184143066406,
+          14.142463684082031,
+          14.17420768737793,
+          14.203904151916504
+        ]
+      }
+    }
+  ],
+  "telemetry": {
+    "before": {
+      "available": true,
+      "gpus": [
+        {
+          "name": "NVIDIA GeForce RTX 3080",
+          "gpu_utilization_percent": 12.0,
+          "memory_utilization_percent": 1.0,
+          "power_watts": 64.73,
+          "sm_clock_mhz": 1755.0,
+          "memory_clock_mhz": 9251.0,
+          "memory_used_mib": 1670.0,
+          "memory_total_mib": 10240.0
+        }
+      ]
+    },
+    "after": {
+      "available": true,
+      "gpus": [
+        {
+          "name": "NVIDIA GeForce RTX 3080",
+          "gpu_utilization_percent": 99.0,
+          "memory_utilization_percent": 42.0,
+          "power_watts": 110.01,
+          "sm_clock_mhz": 1800.0,
+          "memory_clock_mhz": 9251.0,
+          "memory_used_mib": 2368.0,
+          "memory_total_mib": 10240.0
+        }
+      ]
+    }
+  },
+  "static_sync_audit": {
+    "bench_p2192_gpu_transform.py": [
+      {
+        "line": 67,
+        "pattern": "cp.asarray(",
+        "text": "GPU_MATRIX = cp.asarray(_M_709_TO_2020, dtype=cp.float64)"
+      },
+      {
+        "line": 93,
+        "pattern": "cp.asarray(",
+        "text": "curve_lut_gpu = cp.asarray(curve_lut[\"lut\"], dtype=cp.float64)"
+      },
+      {
+        "line": 94,
+        "pattern": "cp.asarray(",
+        "text": "pq_lut_gpu = cp.asarray(pq_lut, dtype=cp.float64)"
+      },
+      {
+        "line": 96,
+        "pattern": "cp.asarray(",
+        "text": "\"start\": cp.asarray(curve_lut[\"curve_start_linear\"], dtype=cp.float64),"
+      },
+      {
+        "line": 97,
+        "pattern": "cp.asarray(",
+        "text": "\"start_hdr\": cp.asarray(curve_lut[\"curve_start_hdr_linear\"], dtype=cp.float64),"
+      },
+      {
+        "line": 98,
+        "pattern": "cp.asarray(",
+        "text": "\"inv_range\": cp.asarray(curve_lut[\"inv_range\"], dtype=cp.float64),"
+      },
+      {
+        "line": 100,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 100,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 197,
+        "pattern": "cp.asarray(",
+        "text": "matrix_gpu = cp.asarray(matrix, dtype=cp.float64)"
+      },
+      {
+        "line": 260,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 260,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 266,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 266,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 267,
+        "pattern": "Event(",
+        "text": "start_event = cp.cuda.Event()"
+      },
+      {
+        "line": 268,
+        "pattern": "Event(",
+        "text": "end_event = cp.cuda.Event()"
+      },
+      {
+        "line": 272,
+        "pattern": ".synchronize()",
+        "text": "end_event.synchronize()"
+      },
+      {
+        "line": 281,
+        "pattern": "cp.asarray(",
+        "text": "value = cp.asarray(frame, dtype=cp.float64)"
+      },
+      {
+        "line": 282,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 282,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 286,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 286,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 288,
+        "pattern": "cp.asarray(",
+        "text": "value = cp.asarray(frame, dtype=cp.float64)"
+      },
+      {
+        "line": 289,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 289,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 298,
+        "pattern": "asnumpy(",
+        "text": "value = cp.asnumpy(output_gpu)"
+      },
+      {
+        "line": 299,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 299,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 303,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 303,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 305,
+        "pattern": "asnumpy(",
+        "text": "value = cp.asnumpy(output_gpu)"
+      },
+      {
+        "line": 306,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 306,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 319,
+        "pattern": "cp.asarray(",
+        "text": "frame_gpu = cp.asarray(frame, dtype=cp.float64)"
+      },
+      {
+        "line": 321,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 321,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 322,
+        "pattern": "asnumpy(",
+        "text": "output_cpu = cp.asnumpy(output_gpu)"
+      },
+      {
+        "line": 328,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 328,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 331,
+        "pattern": "cp.asarray(",
+        "text": "frame_gpu = cp.asarray(frame, dtype=cp.float64)"
+      },
+      {
+        "line": 333,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 333,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 334,
+        "pattern": "asnumpy(",
+        "text": "output_cpu = cp.asnumpy(output_gpu)"
+      },
+      {
+        "line": 335,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 335,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 373,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 373,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 377,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 377,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 381,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 381,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 446,
+        "pattern": "cp.asarray(",
+        "text": "frame_gpu = cp.asarray(frame, dtype=cp.float64)"
+      },
+      {
+        "line": 448,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 448,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 449,
+        "pattern": "asnumpy(",
+        "text": "gpu_output = cp.asnumpy(gpu_output_gpu)"
+      },
+      {
+        "line": 506,
+        "pattern": "cp.asarray(",
+        "text": "shadow_gpu_frame = cp.asarray(shadow_frame, dtype=cp.float64)"
+      },
+      {
+        "line": 507,
+        "pattern": "asnumpy(",
+        "text": "shadow_gpu = cp.asnumpy(gpu_apply_shot_transform(shadow_gpu_frame, setup))"
+      },
+      {
+        "line": 514,
+        "pattern": "cp.asarray(",
+        "text": "white_gpu_frame = cp.asarray(white_frame, dtype=cp.float64)"
+      },
+      {
+        "line": 516,
+        "pattern": "asnumpy(",
+        "text": "cp.asnumpy(gpu_apply_shot_transform(white_gpu_frame, setup))"
+      },
+      {
+        "line": 616,
+        "pattern": "cp.asarray(",
+        "text": "frame_gpu = cp.asarray(frame, dtype=cp.float64)"
+      },
+      {
+        "line": 617,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 617,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 622,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 622,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 679,
+        "pattern": "cp.asarray(",
+        "text": "frame_gpu = cp.asarray(frame, dtype=cp.float64)"
+      },
+      {
+        "line": 680,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 680,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 682,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 682,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 683,
+        "pattern": "asnumpy(",
+        "text": "gpu_output = cp.asnumpy(gpu_output_gpu)"
+      },
+      {
+        "line": 695,
+        "pattern": "cp.asarray(",
+        "text": "real_gpu_frame = cp.asarray(real_roi, dtype=cp.float64)"
+      },
+      {
+        "line": 696,
+        "pattern": "asnumpy(",
+        "text": "real_gpu = cp.asnumpy(gpu_apply_shot_transform(real_gpu_frame, setup))"
+      },
+      {
+        "line": 697,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 697,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      }
+    ],
+    "bench_p220_gpu_backend.py": [
+      {
+        "line": 73,
+        "pattern": "Event(",
+        "text": "start = cp.cuda.Event()"
+      },
+      {
+        "line": 74,
+        "pattern": "Event(",
+        "text": "end = cp.cuda.Event()"
+      },
+      {
+        "line": 78,
+        "pattern": ".synchronize()",
+        "text": "end.synchronize()"
+      },
+      {
+        "line": 205,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 205,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 216,
+        "pattern": "Stream.null.synchronize",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 216,
+        "pattern": ".synchronize()",
+        "text": "cp.cuda.Stream.null.synchronize()"
+      }
+    ],
+    "src\\auto_openmatte\\processing\\transform_backend.py": [
+      {
+        "line": 326,
+        "pattern": "Device(self.device_id)",
+        "text": "with cupy.cuda.Device(self.device_id):"
+      },
+      {
+        "line": 366,
+        "pattern": "Device(self.device_id)",
+        "text": "with cupy.cuda.Device(self.device_id):"
+      },
+      {
+        "line": 374,
+        "pattern": "cupy.asarray(",
+        "text": "curve_lut_gpu = cupy.asarray(curve_lut[\"lut\"], dtype=cupy.float64)"
+      },
+      {
+        "line": 375,
+        "pattern": "cupy.asarray(",
+        "text": "curve_start_gpu = cupy.asarray("
+      },
+      {
+        "line": 378,
+        "pattern": "cupy.asarray(",
+        "text": "curve_start_hdr_gpu = cupy.asarray("
+      },
+      {
+        "line": 381,
+        "pattern": "cupy.asarray(",
+        "text": "curve_inv_range_gpu = cupy.asarray("
+      },
+      {
+        "line": 386,
+        "pattern": "cupy.asarray(",
+        "text": "self._pq_lut_gpu = cupy.asarray("
+      },
+      {
+        "line": 390,
+        "pattern": "cupy.asarray(",
+        "text": "self._matrix_gpu = cupy.asarray("
+      },
+      {
+        "line": 399,
+        "pattern": "cupy.asarray(",
+        "text": "color_matrix_gpu = cupy.asarray(color_matrix, dtype=cupy.float64)"
+      },
+      {
+        "line": 400,
+        "pattern": "Stream.null.synchronize",
+        "text": "cupy.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 400,
+        "pattern": ".synchronize()",
+        "text": "cupy.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 503,
+        "pattern": ".set(",
+        "text": "buffers.input_flat.set(host_frame.reshape(-1, 3))"
+      },
+      {
+        "line": 687,
+        "pattern": "asnumpy(",
+        "text": "output = workspace.cupy.asnumpy(buffers.output_flat)"
+      },
+      {
+        "line": 720,
+        "pattern": "Device(self.device_id)",
+        "text": "with workspace.cupy.cuda.Device(self.device_id):"
+      },
+      {
+        "line": 723,
+        "pattern": "Stream.null.synchronize",
+        "text": "workspace.cupy.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 723,
+        "pattern": ".synchronize()",
+        "text": "workspace.cupy.cuda.Stream.null.synchronize()"
+      },
+      {
+        "line": 735,
+        "pattern": "Device(self.device_id)",
+        "text": "free_bytes, total_bytes = cupy.cuda.Device(self.device_id).mem_info"
+      }
+    ]
+  }
+}

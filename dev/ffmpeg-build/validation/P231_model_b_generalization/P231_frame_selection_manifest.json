@@ -1,0 +1,51 @@
+{
+  "phase": "P2.31",
+  "selection_locked_before_scoring": true,
+  "selection_basis": "all complete preserved raw SDR input + HDR-master target pairs from inventory; no performance-based selection",
+  "requested_matrix_pairs": 20,
+  "requested_br2049_pairs": 20,
+  "selected_matrix_frames": [
+    {
+      "case": "matrix_frame_73367",
+      "material": "The Matrix",
+      "snapshot_index": 0,
+      "hdr_frame": 73367,
+      "open_matte_frame": 73348,
+      "scene_label": "unknown; preserved P2.28 local sample",
+      "coverage_tags": [
+        "unknown_scene",
+        "local_48_frame_sample"
+      ],
+      "selection_reason": "complete preserved raw SDR input and HDR-master target pair; fixed inventory order"
+    },
+    {
+      "case": "matrix_frame_73391",
+      "material": "The Matrix",
+      "snapshot_index": 24,
+      "hdr_frame": 73391,
+      "open_matte_frame": 73372,
+      "scene_label": "unknown; preserved P2.28 local sample",
+      "coverage_tags": [
+        "unknown_scene",
+        "local_48_frame_sample"
+      ],
+      "selection_reason": "complete preserved raw SDR input and HDR-master target pair; fixed inventory order"
+    },
+    {
+      "case": "matrix_frame_73414",
+      "material": "The Matrix",
+      "snapshot_index": 47,
+      "hdr_frame": 73414,
+      "open_matte_frame": 73395,
+      "scene_label": "unknown; preserved P2.28 local sample",
+      "coverage_tags": [
+        "unknown_scene",
+        "local_48_frame_sample"
+      ],
+      "selection_reason": "complete preserved raw SDR input and HDR-master target pair; fixed inventory order"
+    }
+  ],
+  "selected_br2049_frames": [],
+  "scene_diversity_known": false,
+  "reason_not_20_plus_20": "only three complete Matrix source pairs are preserved; BR2049 raw SDR input arrays are absent"
+}

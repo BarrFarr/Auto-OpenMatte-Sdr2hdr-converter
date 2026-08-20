@@ -1,0 +1,41 @@
+case_id,material,selection_index,hdr_frame,om_frame,offset_frames,shot_status,shot_start_frame,shot_end_frame_exclusive,shot_duration_frames,selected_sample_count,successful_samples,failed_sample_count,pooled_curve_nodes,online_prediction_splits,finite_values,status,error
+the_matrix_temporal_stratum_01,The Matrix,1,9805,9786,-19,LOCAL_SHOT_RESOLVED,9731,9845,114,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+the_matrix_temporal_stratum_02,The Matrix,2,19093,19074,-19,LOCAL_SHOT_RESOLVED,18980,19178,198,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+the_matrix_temporal_stratum_03,The Matrix,3,28382,28363,-19,ANCHOR_NEAR_CUT,28370,28390,20,4,4,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+the_matrix_temporal_stratum_04,The Matrix,4,37670,37651,-19,LOCAL_SHOT_UNRESOLVED,37655,,,0,0,0,,0,False,FAILED,No usable real shot: status=LOCAL_SHOT_UNRESOLVED samples=0
+the_matrix_temporal_stratum_05,The Matrix,5,46959,46940,-19,LOCAL_SHOT_RESOLVED,46901,47025,124,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+the_matrix_temporal_stratum_06,The Matrix,6,56247,56228,-19,ANCHOR_NEAR_CUT,56246,56255,9,2,0,0,,0,False,FAILED,No usable real shot: status=ANCHOR_NEAR_CUT samples=2
+the_matrix_temporal_stratum_07,The Matrix,7,65536,65517,-19,ANCHOR_NEAR_CUT,65527,65575,48,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+the_matrix_temporal_stratum_08,The Matrix,8,73367,73348,-19,LOCAL_SHOT_RESOLVED,73274,73460,186,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+the_matrix_temporal_stratum_09,The Matrix,9,84113,84094,-19,LOCAL_SHOT_UNRESOLVED,84024,,,0,0,0,,0,False,FAILED,No usable real shot: status=LOCAL_SHOT_UNRESOLVED samples=0
+the_matrix_temporal_stratum_10,The Matrix,10,93401,93382,-19,LOCAL_SHOT_UNRESOLVED,,93428,,0,0,0,,0,False,FAILED,No usable real shot: status=LOCAL_SHOT_UNRESOLVED samples=0
+the_matrix_temporal_stratum_11,The Matrix,11,102690,102671,-19,LOCAL_SHOT_RESOLVED,102630,102716,86,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+the_matrix_temporal_stratum_12,The Matrix,12,111978,111959,-19,LOCAL_SHOT_UNRESOLVED,111952,,,0,0,0,,0,False,FAILED,No usable real shot: status=LOCAL_SHOT_UNRESOLVED samples=0
+the_matrix_temporal_stratum_13,The Matrix,13,121267,121248,-19,LOCAL_SHOT_UNRESOLVED,,121309,,0,0,0,,0,False,FAILED,No usable real shot: status=LOCAL_SHOT_UNRESOLVED samples=0
+the_matrix_temporal_stratum_14,The Matrix,14,130555,130536,-19,ANCHOR_NEAR_CUT,130539,130556,17,3,3,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+the_matrix_temporal_stratum_15,The Matrix,15,139844,139825,-19,ANCHOR_NEAR_CUT,139830,139845,15,3,3,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+the_matrix_temporal_stratum_16,The Matrix,16,149132,149113,-19,LOCAL_SHOT_UNRESOLVED,,149170,,0,0,0,,0,False,FAILED,No usable real shot: status=LOCAL_SHOT_UNRESOLVED samples=0
+the_matrix_temporal_stratum_17,The Matrix,17,158421,158402,-19,LOCAL_SHOT_UNRESOLVED,158413,,,0,0,0,,0,False,FAILED,No usable real shot: status=LOCAL_SHOT_UNRESOLVED samples=0
+the_matrix_temporal_stratum_18,The Matrix,18,167709,167690,-19,LOCAL_SHOT_RESOLVED,167686,167791,105,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+the_matrix_temporal_stratum_19,The Matrix,19,176998,176979,-19,LOCAL_SHOT_RESOLVED,176885,177011,126,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+the_matrix_temporal_stratum_20,The Matrix,20,186286,186267,-19,LOCAL_SHOT_UNRESOLVED,186175,,,0,0,0,,0,False,FAILED,No usable real shot: status=LOCAL_SHOT_UNRESOLVED samples=0
+br2049_temporal_stratum_01,BR2049,1,11699,12866,1167,ANCHOR_NEAR_CUT,11693,11724,31,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+br2049_temporal_stratum_02,BR2049,2,22783,23950,1167,LOCAL_SHOT_UNRESOLVED,22721,,,0,0,0,,0,False,FAILED,No usable real shot: status=LOCAL_SHOT_UNRESOLVED samples=0
+br2049_temporal_stratum_03,BR2049,3,33866,35033,1167,LOCAL_SHOT_RESOLVED,33833,33900,67,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+br2049_temporal_stratum_04,BR2049,4,44950,46117,1167,LOCAL_SHOT_UNRESOLVED,44870,,,0,0,0,,0,False,FAILED,No usable real shot: status=LOCAL_SHOT_UNRESOLVED samples=0
+br2049_temporal_stratum_05,BR2049,5,56033,57200,1167,ANCHOR_NEAR_CUT,56032,56135,103,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+br2049_temporal_stratum_06,BR2049,6,67116,68283,1167,LOCAL_SHOT_UNRESOLVED,67007,,,0,0,0,,0,False,FAILED,No usable real shot: status=LOCAL_SHOT_UNRESOLVED samples=0
+br2049_temporal_stratum_07,BR2049,7,78200,79367,1167,LOCAL_SHOT_UNRESOLVED,78176,,,0,0,0,,0,False,FAILED,No usable real shot: status=LOCAL_SHOT_UNRESOLVED samples=0
+br2049_temporal_stratum_08,BR2049,8,89283,90450,1167,ANCHOR_NEAR_CUT,89177,89284,107,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+br2049_temporal_stratum_09,BR2049,9,100367,101534,1167,LOCAL_SHOT_RESOLVED,100328,100412,84,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+br2049_temporal_stratum_10,BR2049,10,111450,112617,1167,ANCHOR_NEAR_CUT,111438,111454,16,3,3,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+br2049_temporal_stratum_11,BR2049,11,122534,123701,1167,LOCAL_SHOT_UNRESOLVED,122427,,,0,0,0,,0,False,FAILED,No usable real shot: status=LOCAL_SHOT_UNRESOLVED samples=0
+br2049_temporal_stratum_12,BR2049,12,133617,134784,1167,LOCAL_SHOT_RESOLVED,133523,133736,213,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+br2049_temporal_stratum_13,BR2049,13,144701,145868,1167,LOCAL_SHOT_RESOLVED,144630,144730,100,5,5,0,6,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+br2049_temporal_stratum_14,BR2049,14,155784,156951,1167,ANCHOR_NEAR_CUT,155735,155788,53,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+br2049_temporal_stratum_15,BR2049,15,166868,168035,1167,LOCAL_SHOT_RESOLVED,166852,166889,37,5,5,0,6,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+br2049_temporal_stratum_16,BR2049,16,177951,179118,1167,LOCAL_SHOT_RESOLVED,177873,178040,167,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+br2049_temporal_stratum_17,BR2049,17,189034,190201,1167,LOCAL_SHOT_UNRESOLVED,188931,,,0,0,0,,0,False,FAILED,No usable real shot: status=LOCAL_SHOT_UNRESOLVED samples=0
+br2049_temporal_stratum_18,BR2049,18,200118,201285,1167,LOCAL_SHOT_RESOLVED,200046,200180,134,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+br2049_temporal_stratum_19,BR2049,19,211201,212368,1167,LOCAL_SHOT_RESOLVED,211182,211267,85,5,5,0,13,0,False,FAILED,zero-size array to reduction operation CUPY_CUB_MAX which has no identity
+br2049_temporal_stratum_20,BR2049,20,222285,223452,1167,LOCAL_SHOT_UNRESOLVED,,222286,,0,0,0,,0,False,FAILED,No usable real shot: status=LOCAL_SHOT_UNRESOLVED samples=0

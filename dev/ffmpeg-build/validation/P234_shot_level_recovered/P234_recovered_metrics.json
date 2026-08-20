@@ -1,0 +1,3529 @@
+{
+  "phase": "P2.34_RECOVERED_COMPACT",
+  "status": "PARTIALLY FEASIBLE",
+  "recovery_only": true,
+  "source_directory": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\validation\\P234_shot_level_full_rerun",
+  "source_hash_verification": {
+    "before": {
+      "anchors/br2049_temporal_stratum_01.json": "C81BF0DDCFF88374C49F637DA16A660BB9A1C6D6BE8BDF92C3A118ABAE4D16FC",
+      "anchors/br2049_temporal_stratum_02.json": "6270568FCD62EFA3D1E517CEFE6BE634BACDEB966BB97E3780CBD69645218BAE",
+      "anchors/br2049_temporal_stratum_03.json": "E3F5415602438B62420C6B09EBE002F7047BC8239A0B14B322DBF99E0AB59094",
+      "anchors/br2049_temporal_stratum_04.json": "ADBC071F70CC4B19A9F0D3138045460977E4AA84DE18EAC2ED8E35940DF4894D",
+      "anchors/br2049_temporal_stratum_05.json": "363DC5ECC6154ABD73A54C148EB234E177AD8142F9B99E90E7DCF62F94140668",
+      "anchors/br2049_temporal_stratum_06.json": "79D132BFD8D80EC3C4905C820281D07440D96B505294D3A672485AB6921A1278",
+      "anchors/br2049_temporal_stratum_07.json": "197F8D6C2D1E2AFF4510DB61F2FCC293506EDE528C4382B7F6CDACDAABD54C5E",
+      "anchors/br2049_temporal_stratum_08.json": "ADAE5F08E65C29F90A9F1FB2C8CD6CE32BCCA4631C155960AEF284A7A7CD6A13",
+      "anchors/br2049_temporal_stratum_09.json": "096EB0D849239B0DDF109F056E4DBB21F44EEC3602E47CD9038D92C47E77CBAC",
+      "anchors/br2049_temporal_stratum_10.json": "742D1DC585B671DB9D20A3501569A92C0DBFF72FFADE5456F8EB9AE7FE1BB350",
+      "anchors/br2049_temporal_stratum_11.json": "D7100EC3F5B394B1C0C44B415DEC9AA21C924F48056B20B018CB10BEF2E86A03",
+      "anchors/br2049_temporal_stratum_12.json": "83FBFA04FC1937B1314EDD25C62C24C9AC4F420E928E6B1514A791A5EC4084D0",
+      "anchors/br2049_temporal_stratum_13.json": "699A57C17847281620F90C1A6F59194DC36CC701B620C2854C89D3A8DBD0AA2D",
+      "anchors/br2049_temporal_stratum_14.json": "81C18CE3C01FDE9499E8E7891BCAE5BC7676C4EE1BD54370C9EAEBF6595BC0C1",
+      "anchors/br2049_temporal_stratum_15.json": "918AFCDB5A0293674719E93CD3137D826DB240E6AA2B827C9B6067D02FEA5599",
+      "anchors/br2049_temporal_stratum_16.json": "AA981CBE0D79A3BDA8D79D8C8E5278E3DDE21348728E69C6173089CCBD927FB4",
+      "anchors/br2049_temporal_stratum_17.json": "18F7864B55464B707B5BDA68D7DB98B72B758170DC707DA582B8652203070DE0",
+      "anchors/br2049_temporal_stratum_18.json": "CE252BF331B902139F448AEACB71361D0BB015EB6519EEF3D09E934B61C6318A",
+      "anchors/br2049_temporal_stratum_19.json": "F4C2FCBC6C37A5E39F636916E92C593BDFE733408F07028356EB79DE3D946A53",
+      "anchors/br2049_temporal_stratum_20.json": "8B082D3E86514987713409A69FDB2B0D05C762A7D212CE7975B546DF1E05FFAD",
+      "anchors/the_matrix_temporal_stratum_01.json": "D5C6779C025D9C03F137A75E49CE35E8F44A0529A162A58D9AB8A85457D9776F",
+      "anchors/the_matrix_temporal_stratum_02.json": "AA199CEBA443CFBE41F26A98358B9A0F514675D2C2E78F3229E40E4031AC827C",
+      "anchors/the_matrix_temporal_stratum_03.json": "EA7F0901D88C9F6D7D6E3C89FDB8E5B24C54A793529F8389DAFF0BE736FFC526",
+      "anchors/the_matrix_temporal_stratum_04.json": "EE28D9F82E2336CF6FCD64AD276839CAF9456FFA64CFDFEF618C17A2E16C97D7",
+      "anchors/the_matrix_temporal_stratum_05.json": "7AF2E05217DC3F823EAF3DC401138F125F2BA7584ADC53B9DD33277F42681479",
+      "anchors/the_matrix_temporal_stratum_06.json": "5B4533D5CD48D3711BE95AAF91355D73B80ABE21FEA32DDCF1E4A78B422DD01B",
+      "anchors/the_matrix_temporal_stratum_07.json": "F107A16D364FA4636AE2A781E390D1538ABD3F72DFF6A4E9A03CEDB1D98134B7",
+      "anchors/the_matrix_temporal_stratum_08.json": "9C4279755BB0EC191E51C25084589F0A3126751C28EF0F4BFCBA35B67F31CF24",
+      "anchors/the_matrix_temporal_stratum_09.json": "7C893C14655E091E0DB24516165356998F8385E738297E8697B37D06F991CF3E",
+      "anchors/the_matrix_temporal_stratum_10.json": "68A3DF07055A410334B0FE5DB98824262366BEFE4715DD21E8DE2BAF0EBD0C05",
+      "anchors/the_matrix_temporal_stratum_11.json": "3D0964963F797292154B2B338788273388AD07435CB17639B116F6D19D9FA372",
+      "anchors/the_matrix_temporal_stratum_12.json": "3C4629729E769313199FBF62419786D8FFD24D06FEC192F709FAA664327E8AC1",
+      "anchors/the_matrix_temporal_stratum_13.json": "C10A0E0C84ADE723AE574C23E46F77E9F2A6E85CEE2C184AE8CDEC09771F84CC",
+      "anchors/the_matrix_temporal_stratum_14.json": "25862DE1E6F982BA4F14CE9F91A2E242E5E10E5CAA6666820D1E262660BC8528",
+      "anchors/the_matrix_temporal_stratum_15.json": "518F4C1058AB19864C0531AD6020C430BEFDD0BB2B6C4EE92C307511D1AB6F97",
+      "anchors/the_matrix_temporal_stratum_16.json": "14E63352F964B4A2A2A3567FCD23B4E09EF13D2A6C83635C48528275527EA5E6",
+      "anchors/the_matrix_temporal_stratum_17.json": "72BBBEB89CB2EBAE7918E3C08062A9A14E579E9AC97FF021626635DC47A5070A",
+      "anchors/the_matrix_temporal_stratum_18.json": "2D03CBA289DC8A70F61B29D581AE34F8F21A16D341453F74C83D9D358CD7BD46",
+      "anchors/the_matrix_temporal_stratum_19.json": "8CAD5D8EAA420688A06615171D4AE04294033FC8464D346284514A5CFC0B3942",
+      "anchors/the_matrix_temporal_stratum_20.json": "4BD32D7E4A9EAE4D7E44B46F44822611F3351F39813479F14546852B768644EA",
+      "checkpoint.json": "04DA5C709A6977B31B887E6CC16617FFD6297A549445A85E9450A6CDE028F3DB",
+      "P234_shot_level_metrics.json": "F179FE6A3B891F109C4AD69F9B2B0BA7A635BCFAC648F75F145E4609324BDAD7",
+      "P234_shot_manifest.json": "917652EB204B3911DB3E8BF13437408F5CB3589753F21056D4B91576943B252D"
+    },
+    "after": {
+      "anchors/br2049_temporal_stratum_01.json": "C81BF0DDCFF88374C49F637DA16A660BB9A1C6D6BE8BDF92C3A118ABAE4D16FC",
+      "anchors/br2049_temporal_stratum_02.json": "6270568FCD62EFA3D1E517CEFE6BE634BACDEB966BB97E3780CBD69645218BAE",
+      "anchors/br2049_temporal_stratum_03.json": "E3F5415602438B62420C6B09EBE002F7047BC8239A0B14B322DBF99E0AB59094",
+      "anchors/br2049_temporal_stratum_04.json": "ADBC071F70CC4B19A9F0D3138045460977E4AA84DE18EAC2ED8E35940DF4894D",
+      "anchors/br2049_temporal_stratum_05.json": "363DC5ECC6154ABD73A54C148EB234E177AD8142F9B99E90E7DCF62F94140668",
+      "anchors/br2049_temporal_stratum_06.json": "79D132BFD8D80EC3C4905C820281D07440D96B505294D3A672485AB6921A1278",
+      "anchors/br2049_temporal_stratum_07.json": "197F8D6C2D1E2AFF4510DB61F2FCC293506EDE528C4382B7F6CDACDAABD54C5E",
+      "anchors/br2049_temporal_stratum_08.json": "ADAE5F08E65C29F90A9F1FB2C8CD6CE32BCCA4631C155960AEF284A7A7CD6A13",
+      "anchors/br2049_temporal_stratum_09.json": "096EB0D849239B0DDF109F056E4DBB21F44EEC3602E47CD9038D92C47E77CBAC",
+      "anchors/br2049_temporal_stratum_10.json": "742D1DC585B671DB9D20A3501569A92C0DBFF72FFADE5456F8EB9AE7FE1BB350",
+      "anchors/br2049_temporal_stratum_11.json": "D7100EC3F5B394B1C0C44B415DEC9AA21C924F48056B20B018CB10BEF2E86A03",
+      "anchors/br2049_temporal_stratum_12.json": "83FBFA04FC1937B1314EDD25C62C24C9AC4F420E928E6B1514A791A5EC4084D0",
+      "anchors/br2049_temporal_stratum_13.json": "699A57C17847281620F90C1A6F59194DC36CC701B620C2854C89D3A8DBD0AA2D",
+      "anchors/br2049_temporal_stratum_14.json": "81C18CE3C01FDE9499E8E7891BCAE5BC7676C4EE1BD54370C9EAEBF6595BC0C1",
+      "anchors/br2049_temporal_stratum_15.json": "918AFCDB5A0293674719E93CD3137D826DB240E6AA2B827C9B6067D02FEA5599",
+      "anchors/br2049_temporal_stratum_16.json": "AA981CBE0D79A3BDA8D79D8C8E5278E3DDE21348728E69C6173089CCBD927FB4",
+      "anchors/br2049_temporal_stratum_17.json": "18F7864B55464B707B5BDA68D7DB98B72B758170DC707DA582B8652203070DE0",
+      "anchors/br2049_temporal_stratum_18.json": "CE252BF331B902139F448AEACB71361D0BB015EB6519EEF3D09E934B61C6318A",
+      "anchors/br2049_temporal_stratum_19.json": "F4C2FCBC6C37A5E39F636916E92C593BDFE733408F07028356EB79DE3D946A53",
+      "anchors/br2049_temporal_stratum_20.json": "8B082D3E86514987713409A69FDB2B0D05C762A7D212CE7975B546DF1E05FFAD",
+      "anchors/the_matrix_temporal_stratum_01.json": "D5C6779C025D9C03F137A75E49CE35E8F44A0529A162A58D9AB8A85457D9776F",
+      "anchors/the_matrix_temporal_stratum_02.json": "AA199CEBA443CFBE41F26A98358B9A0F514675D2C2E78F3229E40E4031AC827C",
+      "anchors/the_matrix_temporal_stratum_03.json": "EA7F0901D88C9F6D7D6E3C89FDB8E5B24C54A793529F8389DAFF0BE736FFC526",
+      "anchors/the_matrix_temporal_stratum_04.json": "EE28D9F82E2336CF6FCD64AD276839CAF9456FFA64CFDFEF618C17A2E16C97D7",
+      "anchors/the_matrix_temporal_stratum_05.json": "7AF2E05217DC3F823EAF3DC401138F125F2BA7584ADC53B9DD33277F42681479",
+      "anchors/the_matrix_temporal_stratum_06.json": "5B4533D5CD48D3711BE95AAF91355D73B80ABE21FEA32DDCF1E4A78B422DD01B",
+      "anchors/the_matrix_temporal_stratum_07.json": "F107A16D364FA4636AE2A781E390D1538ABD3F72DFF6A4E9A03CEDB1D98134B7",
+      "anchors/the_matrix_temporal_stratum_08.json": "9C4279755BB0EC191E51C25084589F0A3126751C28EF0F4BFCBA35B67F31CF24",
+      "anchors/the_matrix_temporal_stratum_09.json": "7C893C14655E091E0DB24516165356998F8385E738297E8697B37D06F991CF3E",
+      "anchors/the_matrix_temporal_stratum_10.json": "68A3DF07055A410334B0FE5DB98824262366BEFE4715DD21E8DE2BAF0EBD0C05",
+      "anchors/the_matrix_temporal_stratum_11.json": "3D0964963F797292154B2B338788273388AD07435CB17639B116F6D19D9FA372",
+      "anchors/the_matrix_temporal_stratum_12.json": "3C4629729E769313199FBF62419786D8FFD24D06FEC192F709FAA664327E8AC1",
+      "anchors/the_matrix_temporal_stratum_13.json": "C10A0E0C84ADE723AE574C23E46F77E9F2A6E85CEE2C184AE8CDEC09771F84CC",
+      "anchors/the_matrix_temporal_stratum_14.json": "25862DE1E6F982BA4F14CE9F91A2E242E5E10E5CAA6666820D1E262660BC8528",
+      "anchors/the_matrix_temporal_stratum_15.json": "518F4C1058AB19864C0531AD6020C430BEFDD0BB2B6C4EE92C307511D1AB6F97",
+      "anchors/the_matrix_temporal_stratum_16.json": "14E63352F964B4A2A2A3567FCD23B4E09EF13D2A6C83635C48528275527EA5E6",
+      "anchors/the_matrix_temporal_stratum_17.json": "72BBBEB89CB2EBAE7918E3C08062A9A14E579E9AC97FF021626635DC47A5070A",
+      "anchors/the_matrix_temporal_stratum_18.json": "2D03CBA289DC8A70F61B29D581AE34F8F21A16D341453F74C83D9D358CD7BD46",
+      "anchors/the_matrix_temporal_stratum_19.json": "8CAD5D8EAA420688A06615171D4AE04294033FC8464D346284514A5CFC0B3942",
+      "anchors/the_matrix_temporal_stratum_20.json": "4BD32D7E4A9EAE4D7E44B46F44822611F3351F39813479F14546852B768644EA",
+      "checkpoint.json": "04DA5C709A6977B31B887E6CC16617FFD6297A549445A85E9450A6CDE028F3DB",
+      "P234_shot_level_metrics.json": "F179FE6A3B891F109C4AD69F9B2B0BA7A635BCFAC648F75F145E4609324BDAD7",
+      "P234_shot_manifest.json": "917652EB204B3911DB3E8BF13437408F5CB3589753F21056D4B91576943B252D"
+    },
+    "hashes_unchanged": true
+  },
+  "source_disk_audit": {
+    "total_files": 43,
+    "total_bytes": 321961681,
+    "by_file": [
+      {
+        "path": "anchors/br2049_temporal_stratum_01.json",
+        "bytes": 5819195,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_02.json",
+        "bytes": 9972,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_03.json",
+        "bytes": 4978042,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_04.json",
+        "bytes": 9953,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_05.json",
+        "bytes": 5033410,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_06.json",
+        "bytes": 10226,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_07.json",
+        "bytes": 9899,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_08.json",
+        "bytes": 4977834,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_09.json",
+        "bytes": 5080322,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_10.json",
+        "bytes": 5052561,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_11.json",
+        "bytes": 10016,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_12.json",
+        "bytes": 5027726,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_13.json",
+        "bytes": 5547175,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_14.json",
+        "bytes": 5003537,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_15.json",
+        "bytes": 5452677,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_16.json",
+        "bytes": 5247157,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_17.json",
+        "bytes": 10003,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_18.json",
+        "bytes": 5003031,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_19.json",
+        "bytes": 6214664,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/br2049_temporal_stratum_20.json",
+        "bytes": 9926,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_01.json",
+        "bytes": 2881949,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_02.json",
+        "bytes": 2292736,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_03.json",
+        "bytes": 2172343,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_04.json",
+        "bytes": 9991,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_05.json",
+        "bytes": 2514450,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_06.json",
+        "bytes": 12201,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_07.json",
+        "bytes": 2585626,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_08.json",
+        "bytes": 2370492,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_09.json",
+        "bytes": 9744,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_10.json",
+        "bytes": 9782,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_11.json",
+        "bytes": 2151537,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_12.json",
+        "bytes": 10253,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_13.json",
+        "bytes": 10252,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_14.json",
+        "bytes": 2538016,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_15.json",
+        "bytes": 2545888,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_16.json",
+        "bytes": 9986,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_17.json",
+        "bytes": 9704,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_18.json",
+        "bytes": 2557299,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_19.json",
+        "bytes": 2864383,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "anchors/the_matrix_temporal_stratum_20.json",
+        "bytes": 9947,
+        "extension": ".json",
+        "directory": "anchors",
+        "artifact_type": "per-anchor JSON"
+      },
+      {
+        "path": "checkpoint.json",
+        "bytes": 2742,
+        "extension": ".json",
+        "directory": "[root]",
+        "artifact_type": "checkpoint"
+      },
+      {
+        "path": "P234_shot_level_metrics.json",
+        "bytes": 116317477,
+        "extension": ".json",
+        "directory": "[root]",
+        "artifact_type": "aggregate metrics"
+      },
+      {
+        "path": "P234_shot_manifest.json",
+        "bytes": 109567557,
+        "extension": ".json",
+        "directory": "[root]",
+        "artifact_type": "manifest"
+      }
+    ],
+    "by_extension": {
+      ".json": 321961681
+    },
+    "by_directory": {
+      "anchors": 96073905,
+      "[root]": 225887776
+    },
+    "by_artifact_type": {
+      "per-anchor JSON": 96073905,
+      "checkpoint": 2742,
+      "aggregate metrics": 116317477,
+      "manifest": 109567557
+    }
+  },
+  "source_schema_audit": {
+    "manifest": {
+      "phase": "P2.34",
+      "status": "COMPLETE",
+      "requested_anchor_count": 40,
+      "processed_anchor_count": 40
+    },
+    "metrics": {
+      "phase": "P2.34",
+      "status": "COMPLETE",
+      "requested_anchor_count": 40,
+      "processed_anchor_count": 40,
+      "successful_samples": 113,
+      "failed_samples": 0,
+      "no_valid_total_events": 61102,
+      "prediction_split_count": 48
+    },
+    "checkpoint": {
+      "phase": "P2.34_CUDA_FULL",
+      "completed_anchor_count": 40,
+      "requested_anchor_count": 40,
+      "successful_samples": 113,
+      "failed_samples": 0
+    },
+    "anchor_compact_sections": [
+      "case_id/material/frame metadata",
+      "boundary.shot_status and shot frame fields",
+      "selected_samples and successful_samples",
+      "online_prediction_splits[*].models[*].metrics/support",
+      "prediction_diagnostics (counted only, not exported)",
+      "pooled_curve.diagnostics"
+    ],
+    "large_or_repeated_sections_not_exported": [
+      "compact_score_trace",
+      "decode_command",
+      "sample_summaries.bin_statistics",
+      "sample_summaries.curve arrays",
+      "pooled_curve.curve arrays",
+      "pooled_curve.bin_statistics",
+      "online_prediction_splits[*].prediction_diagnostics details",
+      "boundary.boundaries",
+      "gpu_memory"
+    ]
+  },
+  "run_consistency": {
+    "computed": {
+      "anchor_count": 40,
+      "material_anchor_counts": {
+        "The Matrix": 20,
+        "BR2049": 20
+      },
+      "valid_prediction_anchor_count": 24,
+      "valid_prediction_split_count": 48,
+      "successful_samples": 113,
+      "failed_samples": 0,
+      "unresolved_anchor_count": 15,
+      "near_cut_insufficient_anchor_count": 1,
+      "no_valid_pixels_total": 61102,
+      "no_valid_pixels_by_material": {
+        "The Matrix": 17216,
+        "BR2049": 43886
+      }
+    },
+    "expected": {
+      "anchor_count": 40,
+      "material_anchor_counts": {
+        "The Matrix": 20,
+        "BR2049": 20
+      },
+      "valid_prediction_anchor_count": 24,
+      "valid_prediction_split_count": 48,
+      "successful_samples": 113,
+      "failed_samples": 0,
+      "unresolved_anchor_count": 15,
+      "near_cut_insufficient_anchor_count": 1,
+      "no_valid_pixels_total": 61102,
+      "no_valid_pixels_by_material": {
+        "The Matrix": 17216,
+        "BR2049": 43886
+      }
+    },
+    "matches": true
+  },
+  "materials": {
+    "The Matrix": {
+      "valid_anchor_count": 11,
+      "valid_split_count": 22,
+      "unresolved_anchor_count": 8,
+      "near_cut_anchor_count": 6,
+      "near_cut_insufficient_anchor_count": 1,
+      "partial_anchor_count": 11,
+      "NO_VALID_PIXELS_count": 17216,
+      "NO_VALID_PIXELS_by_region": {
+        "highlight_gt_200": 4046,
+        "200–500": 4046,
+        "500–1000": 4278,
+        ">1000": 4400,
+        "midtone_10_200": 446
+      },
+      "NO_VALID_PIXELS_by_sample": {
+        "90%": 6244,
+        "75%": 7096,
+        "50%": 2282,
+        "25%": 1594
+      },
+      "models": {
+        "model_a": {
+          "metrics_by_region": {
+            "global": {
+              "MAE": {
+                "source_case_count": 22,
+                "source_pixel_count": 33792000,
+                "macro": {
+                  "value": 6.861887049069719,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 6.861887049069719,
+                  "source_pixel_count": 33792000,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 22,
+                "source_pixel_count": 33792000,
+                "macro": {
+                  "value": 18.40284693755082,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 22.737194348895372,
+                  "source_pixel_count": 33792000,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 22,
+                "source_pixel_count": 33792000,
+                "macro": {
+                  "value": 30.758415555646522,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 22,
+                "source_pixel_count": 33792000,
+                "macro": {
+                  "value": 77.68791472700346,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 22,
+                "source_pixel_count": 33792000,
+                "macro": {
+                  "value": 295.57632218032586,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "shadow": {
+              "MAE": {
+                "source_case_count": 22,
+                "source_pixel_count": 28200208,
+                "macro": {
+                  "value": 3.825265689356587,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 3.41019799041913,
+                  "source_pixel_count": 28200208,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 22,
+                "source_pixel_count": 28200208,
+                "macro": {
+                  "value": 10.146185680807564,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 10.38670271675793,
+                  "source_pixel_count": 28200208,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 22,
+                "source_pixel_count": 28200208,
+                "macro": {
+                  "value": 18.750102439646984,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 22,
+                "source_pixel_count": 28200208,
+                "macro": {
+                  "value": 50.33541491455165,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 22,
+                "source_pixel_count": 28200208,
+                "macro": {
+                  "value": 104.96525734424662,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "midtone": {
+              "MAE": {
+                "source_case_count": 22,
+                "source_pixel_count": 5463746,
+                "macro": {
+                  "value": 20.497658774400524,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 19.1347283495485,
+                  "source_pixel_count": 5463746,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 22,
+                "source_pixel_count": 5463746,
+                "macro": {
+                  "value": 27.031874046174575,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 27.993030901641415,
+                  "source_pixel_count": 5463746,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 22,
+                "source_pixel_count": 5463746,
+                "macro": {
+                  "value": 56.77650314645542,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 22,
+                "source_pixel_count": 5463746,
+                "macro": {
+                  "value": 76.97179322348293,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 22,
+                "source_pixel_count": 5463746,
+                "macro": {
+                  "value": 153.61909383698818,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "highlight": {
+              "MAE": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 268.4056605920388,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 243.3601911049957,
+                  "source_pixel_count": 128046,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 278.5889648147463,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 281.4909927798098,
+                  "source_pixel_count": 128046,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 372.03461187118705,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 417.0136822287881,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 441.24065963738684,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "200_500": {
+              "MAE": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 250.4865261689587,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 217.17856596686926,
+                  "source_pixel_count": 118532,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 255.4972947466675,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 241.81929379884997,
+                  "source_pixel_count": 118532,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 317.25147259219625,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 331.0754015062165,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 352.536199784335,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "500_1000": {
+              "MAE": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 538.6539386071985,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 569.5490066265853,
+                  "source_pixel_count": 9514,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 543.2725443589507,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 581.2806647896473,
+                  "source_pixel_count": 9514,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 663.1559550281968,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 677.3633386024167,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 708.9340699903317,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "gt_1000": {
+              "MAE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "RMSE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P95": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P99": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "max": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              }
+            }
+          },
+          "support": {
+            "outside_domain_count": 12087190,
+            "outside_domain_percentage": 35.76938328598485,
+            "clipping_count": 0,
+            "extrapolation_count": 0,
+            "total_count": 33792000
+          }
+        },
+        "shot": {
+          "metrics_by_region": {
+            "global": {
+              "MAE": {
+                "source_case_count": 22,
+                "source_pixel_count": 33792000,
+                "macro": {
+                  "value": 4.573970001378252,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 4.573970001378252,
+                  "source_pixel_count": 33792000,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 22,
+                "source_pixel_count": 33792000,
+                "macro": {
+                  "value": 16.92442254297052,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 23.30697014402878,
+                  "source_pixel_count": 33792000,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 22,
+                "source_pixel_count": 33792000,
+                "macro": {
+                  "value": 20.629543602788697,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 22,
+                "source_pixel_count": 33792000,
+                "macro": {
+                  "value": 72.26544802782962,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 22,
+                "source_pixel_count": 33792000,
+                "macro": {
+                  "value": 300.64196056017056,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "shadow": {
+              "MAE": {
+                "source_case_count": 22,
+                "source_pixel_count": 28200208,
+                "macro": {
+                  "value": 1.3304175587154934,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 1.1079897857483436,
+                  "source_pixel_count": 28200208,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 22,
+                "source_pixel_count": 28200208,
+                "macro": {
+                  "value": 3.1630541400963454,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 3.1391842457576664,
+                  "source_pixel_count": 28200208,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 22,
+                "source_pixel_count": 28200208,
+                "macro": {
+                  "value": 7.8753041463463695,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 22,
+                "source_pixel_count": 28200208,
+                "macro": {
+                  "value": 14.901189933064028,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 22,
+                "source_pixel_count": 28200208,
+                "macro": {
+                  "value": 18.284976285721985,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "midtone": {
+              "MAE": {
+                "source_case_count": 22,
+                "source_pixel_count": 5463746,
+                "macro": {
+                  "value": 19.127935847401766,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 15.652827741310523,
+                  "source_pixel_count": 5463746,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 22,
+                "source_pixel_count": 5463746,
+                "macro": {
+                  "value": 28.798456524629554,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 29.351981603577112,
+                  "source_pixel_count": 5463746,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 22,
+                "source_pixel_count": 5463746,
+                "macro": {
+                  "value": 64.97344495752992,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 22,
+                "source_pixel_count": 5463746,
+                "macro": {
+                  "value": 88.49429845067442,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 22,
+                "source_pixel_count": 5463746,
+                "macro": {
+                  "value": 158.12332950393474,
+                  "source_case_count": 22,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "highlight": {
+              "MAE": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 289.7888818418704,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 295.16718137482434,
+                  "source_pixel_count": 128046,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 298.9715719507909,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 323.14839479524915,
+                  "source_pixel_count": 128046,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 397.3458746010572,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 428.96133747967133,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 455.7992294151711,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "200_500": {
+              "MAE": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 271.6258806524432,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 269.1715096799237,
+                  "source_pixel_count": 118532,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 275.82071118501466,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 284.52979978102815,
+                  "source_pixel_count": 118532,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 342.7610311319454,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 349.8368299481204,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 365.1664861742801,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "500_1000": {
+              "MAE": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 563.6817195329957,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 619.0392601366458,
+                  "source_pixel_count": 9514,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 567.4186533778942,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 629.9217959712096,
+                  "source_pixel_count": 9514,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 670.7381259683335,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 690.1302233355456,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 714.4497870656184,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "gt_1000": {
+              "MAE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "RMSE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P95": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P99": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "max": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              }
+            }
+          },
+          "support": {
+            "outside_domain_count": 2445546,
+            "outside_domain_percentage": 7.237056107954546,
+            "clipping_count": 0,
+            "extrapolation_count": 0,
+            "total_count": 33792000
+          }
+        }
+      },
+      "shot_train_domain_range_nits": {
+        "min": 0.030366397473433195,
+        "max": 2653.555189598262,
+        "source_split_count": 22
+      },
+      "unavailable": [
+        "test_min",
+        "test_max",
+        "Model A domain_min",
+        "Model A domain_max",
+        "temporal curve spread at requested nits",
+        "temporal stability median/P90/P95/max",
+        "shot-to-shot variation median/P90/P95/max",
+        "P2.33 to P2.34 comparison",
+        "weighted pooled P95",
+        "weighted pooled P99"
+      ]
+    },
+    "BR2049": {
+      "valid_anchor_count": 13,
+      "valid_split_count": 26,
+      "unresolved_anchor_count": 7,
+      "near_cut_anchor_count": 6,
+      "near_cut_insufficient_anchor_count": 0,
+      "partial_anchor_count": 13,
+      "NO_VALID_PIXELS_count": 43886,
+      "NO_VALID_PIXELS_by_region": {
+        "midtone_10_200": 1632,
+        "highlight_gt_200": 10400,
+        "200–500": 10400,
+        "500–1000": 10400,
+        ">1000": 10400,
+        "shadow_lt_10": 654
+      },
+      "NO_VALID_PIXELS_by_sample": {
+        "90%": 20308,
+        "75%": 20336,
+        "50%": 1622,
+        "25%": 1620
+      },
+      "models": {
+        "model_a": {
+          "metrics_by_region": {
+            "global": {
+              "MAE": {
+                "source_case_count": 26,
+                "source_pixel_count": 159744000,
+                "macro": {
+                  "value": 0.5488178468985085,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 0.5488178468985085,
+                  "source_pixel_count": 159744000,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 26,
+                "source_pixel_count": 159744000,
+                "macro": {
+                  "value": 1.3150459083236365,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 1.80237465949947,
+                  "source_pixel_count": 159744000,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 26,
+                "source_pixel_count": 159744000,
+                "macro": {
+                  "value": 1.9341264940197098,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 26,
+                "source_pixel_count": 159744000,
+                "macro": {
+                  "value": 6.425910211294774,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 26,
+                "source_pixel_count": 159744000,
+                "macro": {
+                  "value": 29.652932657340713,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "shadow": {
+              "MAE": {
+                "source_case_count": 26,
+                "source_pixel_count": 116985942,
+                "macro": {
+                  "value": 0.2846951316276104,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 0.23509591431493643,
+                  "source_pixel_count": 116985942,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 26,
+                "source_pixel_count": 116985942,
+                "macro": {
+                  "value": 0.6359857793075209,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 0.9708841681586458,
+                  "source_pixel_count": 116985942,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 26,
+                "source_pixel_count": 116985942,
+                "macro": {
+                  "value": 1.2323498574986702,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 26,
+                "source_pixel_count": 116985942,
+                "macro": {
+                  "value": 2.5512108530656263,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 26,
+                "source_pixel_count": 116985942,
+                "macro": {
+                  "value": 20.908921088151235,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "midtone": {
+              "MAE": {
+                "source_case_count": 25,
+                "source_pixel_count": 42758058,
+                "macro": {
+                  "value": 2.1411953989611843,
+                  "source_case_count": 25,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 1.407160286336466,
+                  "source_pixel_count": 42758058,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 25,
+                "source_pixel_count": 42758058,
+                "macro": {
+                  "value": 3.256822248248134,
+                  "source_case_count": 25,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 3.0915362006494362,
+                  "source_pixel_count": 42758058,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 25,
+                "source_pixel_count": 42758058,
+                "macro": {
+                  "value": 7.002517293791484,
+                  "source_case_count": 25,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 25,
+                "source_pixel_count": 42758058,
+                "macro": {
+                  "value": 10.58813308140348,
+                  "source_case_count": 25,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 25,
+                "source_pixel_count": 42758058,
+                "macro": {
+                  "value": 29.75990229286996,
+                  "source_case_count": 25,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "highlight": {
+              "MAE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "RMSE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P95": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P99": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "max": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              }
+            },
+            "200_500": {
+              "MAE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "RMSE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P95": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P99": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "max": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              }
+            },
+            "500_1000": {
+              "MAE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "RMSE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P95": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P99": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "max": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              }
+            },
+            "gt_1000": {
+              "MAE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "RMSE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P95": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P99": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "max": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              }
+            }
+          },
+          "support": {
+            "outside_domain_count": 58671530,
+            "outside_domain_percentage": 36.72847180488782,
+            "clipping_count": 0,
+            "extrapolation_count": 0,
+            "total_count": 159744000
+          }
+        },
+        "shot": {
+          "metrics_by_region": {
+            "global": {
+              "MAE": {
+                "source_case_count": 26,
+                "source_pixel_count": 159744000,
+                "macro": {
+                  "value": 0.8951025094026922,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 0.8951025094026922,
+                  "source_pixel_count": 159744000,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 26,
+                "source_pixel_count": 159744000,
+                "macro": {
+                  "value": 3.4251829043383544,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 4.6764271330168885,
+                  "source_pixel_count": 159744000,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 26,
+                "source_pixel_count": 159744000,
+                "macro": {
+                  "value": 3.273741609066707,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 26,
+                "source_pixel_count": 159744000,
+                "macro": {
+                  "value": 18.077462750201057,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 26,
+                "source_pixel_count": 159744000,
+                "macro": {
+                  "value": 53.44202890048011,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "shadow": {
+              "MAE": {
+                "source_case_count": 26,
+                "source_pixel_count": 116985942,
+                "macro": {
+                  "value": 0.23181285233376012,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 0.19414053180853771,
+                  "source_pixel_count": 116985942,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 26,
+                "source_pixel_count": 116985942,
+                "macro": {
+                  "value": 0.5749451487566621,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 0.9236393630539479,
+                  "source_pixel_count": 116985942,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 26,
+                "source_pixel_count": 116985942,
+                "macro": {
+                  "value": 1.1188211189937716,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 26,
+                "source_pixel_count": 116985942,
+                "macro": {
+                  "value": 2.452991064059142,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 26,
+                "source_pixel_count": 116985942,
+                "macro": {
+                  "value": 16.177800137570845,
+                  "source_case_count": 26,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "midtone": {
+              "MAE": {
+                "source_case_count": 25,
+                "source_pixel_count": 42758058,
+                "macro": {
+                  "value": 4.2913805115576125,
+                  "source_case_count": 25,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 2.8129327638785866,
+                  "source_pixel_count": 42758058,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 25,
+                "source_pixel_count": 42758058,
+                "macro": {
+                  "value": 8.608373991391057,
+                  "source_case_count": 25,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 8.908889668680882,
+                  "source_pixel_count": 42758058,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 25,
+                "source_pixel_count": 42758058,
+                "macro": {
+                  "value": 19.3470574109717,
+                  "source_case_count": 25,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 25,
+                "source_pixel_count": 42758058,
+                "macro": {
+                  "value": 30.20557760436031,
+                  "source_case_count": 25,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 25,
+                "source_pixel_count": 42758058,
+                "macro": {
+                  "value": 54.89862026203086,
+                  "source_case_count": 25,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "highlight": {
+              "MAE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "RMSE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P95": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P99": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "max": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              }
+            },
+            "200_500": {
+              "MAE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "RMSE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P95": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P99": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "max": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              }
+            },
+            "500_1000": {
+              "MAE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "RMSE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P95": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P99": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "max": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              }
+            },
+            "gt_1000": {
+              "MAE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "RMSE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P95": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P99": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "max": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              }
+            }
+          },
+          "support": {
+            "outside_domain_count": 14554621,
+            "outside_domain_percentage": 9.11121607071314,
+            "clipping_count": 0,
+            "extrapolation_count": 0,
+            "total_count": 159744000
+          }
+        }
+      },
+      "shot_train_domain_range_nits": {
+        "min": 0.016922491340933644,
+        "max": 3635.3553995591233,
+        "source_split_count": 26
+      },
+      "unavailable": [
+        "test_min",
+        "test_max",
+        "Model A domain_min",
+        "Model A domain_max",
+        "temporal curve spread at requested nits",
+        "temporal stability median/P90/P95/max",
+        "shot-to-shot variation median/P90/P95/max",
+        "P2.33 to P2.34 comparison",
+        "weighted pooled P95",
+        "weighted pooled P99"
+      ]
+    },
+    "Combined": {
+      "valid_anchor_count": 24,
+      "valid_split_count": 48,
+      "unresolved_anchor_count": 15,
+      "near_cut_anchor_count": 12,
+      "near_cut_insufficient_anchor_count": 1,
+      "partial_anchor_count": 24,
+      "NO_VALID_PIXELS_count": 61102,
+      "NO_VALID_PIXELS_by_region": {
+        "highlight_gt_200": 14446,
+        "200–500": 14446,
+        "500–1000": 14678,
+        ">1000": 14800,
+        "midtone_10_200": 2078,
+        "shadow_lt_10": 654
+      },
+      "NO_VALID_PIXELS_by_sample": {
+        "90%": 26552,
+        "75%": 27432,
+        "50%": 3904,
+        "25%": 3214
+      },
+      "models": {
+        "model_a": {
+          "metrics_by_region": {
+            "global": {
+              "MAE": {
+                "source_case_count": 48,
+                "source_pixel_count": 193536000,
+                "macro": {
+                  "value": 3.442307897893647,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 1.6510997710871327,
+                  "source_pixel_count": 193536000,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 48,
+                "source_pixel_count": 193536000,
+                "macro": {
+                  "value": 9.146954713386094,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 9.640938590397623,
+                  "source_pixel_count": 193536000,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 48,
+                "source_pixel_count": 193536000,
+                "macro": {
+                  "value": 15.145258980598664,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 48,
+                "source_pixel_count": 193536000,
+                "macro": {
+                  "value": 39.087662280994586,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 48,
+                "source_pixel_count": 193536000,
+                "macro": {
+                  "value": 151.5344861887089,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "shadow": {
+              "MAE": {
+                "source_case_count": 48,
+                "source_pixel_count": 145186150,
+                "macro": {
+                  "value": 1.9074566372533912,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 0.8518113445909653,
+                  "source_pixel_count": 145186150,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 48,
+                "source_pixel_count": 145186150,
+                "macro": {
+                  "value": 4.994827400828374,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 4.659858283452047,
+                  "source_pixel_count": 145186150,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 48,
+                "source_pixel_count": 145186150,
+                "macro": {
+                  "value": 9.261319790983315,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 48,
+                "source_pixel_count": 145186150,
+                "macro": {
+                  "value": 24.45230438124672,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 48,
+                "source_pixel_count": 145186150,
+                "macro": {
+                  "value": 59.434741872194955,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "midtone": {
+              "MAE": {
+                "source_case_count": 47,
+                "source_pixel_count": 48221804,
+                "macro": {
+                  "value": 10.73358251086896,
+                  "source_case_count": 47,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 3.415773010470604,
+                  "source_pixel_count": 48221804,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 47,
+                "source_pixel_count": 48221804,
+                "macro": {
+                  "value": 14.38556989834136,
+                  "source_case_count": 47,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 9.862107752053072,
+                  "source_pixel_count": 48221804,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 47,
+                "source_pixel_count": 48221804,
+                "macro": {
+                  "value": 30.30097875674056,
+                  "source_case_count": 47,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 47,
+                "source_pixel_count": 48221804,
+                "macro": {
+                  "value": 41.66133570110024,
+                  "source_case_count": 47,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 47,
+                "source_pixel_count": 48221804,
+                "macro": {
+                  "value": 87.73654514330829,
+                  "source_case_count": 47,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "highlight": {
+              "MAE": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 268.4056605920388,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 243.3601911049957,
+                  "source_pixel_count": 128046,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 278.5889648147463,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 281.4909927798098,
+                  "source_pixel_count": 128046,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 372.03461187118705,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 417.0136822287881,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 441.24065963738684,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "200_500": {
+              "MAE": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 250.4865261689587,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 217.17856596686926,
+                  "source_pixel_count": 118532,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 255.4972947466675,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 241.81929379884997,
+                  "source_pixel_count": 118532,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 317.25147259219625,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 331.0754015062165,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 352.536199784335,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "500_1000": {
+              "MAE": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 538.6539386071985,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 569.5490066265853,
+                  "source_pixel_count": 9514,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 543.2725443589507,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 581.2806647896473,
+                  "source_pixel_count": 9514,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 663.1559550281968,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 677.3633386024167,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 708.9340699903317,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "gt_1000": {
+              "MAE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "RMSE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P95": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P99": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "max": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              }
+            }
+          },
+          "support": {
+            "outside_domain_count": 70758720,
+            "outside_domain_percentage": 36.561011904761905,
+            "clipping_count": 0,
+            "extrapolation_count": 0,
+            "total_count": 193536000
+          }
+        },
+        "shot": {
+          "metrics_by_region": {
+            "global": {
+              "MAE": {
+                "source_case_count": 48,
+                "source_pixel_count": 193536000,
+                "macro": {
+                  "value": 2.5812501098914904,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 1.537444452446044,
+                  "source_pixel_count": 193536000,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 48,
+                "source_pixel_count": 193536000,
+                "macro": {
+                  "value": 9.612334405378098,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 10.625329058002773,
+                  "source_pixel_count": 193536000,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 48,
+                "source_pixel_count": 193536000,
+                "macro": {
+                  "value": 11.22848418952262,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 48,
+                "source_pixel_count": 193536000,
+                "macro": {
+                  "value": 42.91362266911415,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 48,
+                "source_pixel_count": 193536000,
+                "macro": {
+                  "value": 166.74199757783825,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "shadow": {
+              "MAE": {
+                "source_case_count": 48,
+                "source_pixel_count": 145186150,
+                "macro": {
+                  "value": 0.7353400094253879,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 0.3716418915577104,
+                  "source_pixel_count": 145186150,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 48,
+                "source_pixel_count": 145186150,
+                "macro": {
+                  "value": 1.7611617697873505,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 1.6129131777407855,
+                  "source_pixel_count": 145186150,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 48,
+                "source_pixel_count": 145186150,
+                "macro": {
+                  "value": 4.2155425065303795,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 48,
+                "source_pixel_count": 145186150,
+                "macro": {
+                  "value": 8.158415545686381,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 48,
+                "source_pixel_count": 145186150,
+                "macro": {
+                  "value": 17.14358920547345,
+                  "source_case_count": 48,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "midtone": {
+              "MAE": {
+                "source_case_count": 47,
+                "source_pixel_count": 48221804,
+                "macro": {
+                  "value": 11.236151094293175,
+                  "source_case_count": 47,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 4.26775027388638,
+                  "source_pixel_count": 48221804,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 47,
+                "source_pixel_count": 48221804,
+                "macro": {
+                  "value": 18.059050921843117,
+                  "source_case_count": 47,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 12.961162408905032,
+                  "source_pixel_count": 48221804,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 47,
+                "source_pixel_count": 48221804,
+                "macro": {
+                  "value": 40.70408987957342,
+                  "source_case_count": 47,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 47,
+                "source_pixel_count": 48221804,
+                "macro": {
+                  "value": 57.489659702635,
+                  "source_case_count": 47,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 47,
+                "source_pixel_count": 48221804,
+                "macro": {
+                  "value": 103.21656926887948,
+                  "source_case_count": 47,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "highlight": {
+              "MAE": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 289.7888818418704,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 295.16718137482434,
+                  "source_pixel_count": 128046,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 298.9715719507909,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 323.14839479524915,
+                  "source_pixel_count": 128046,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 397.3458746010572,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 428.96133747967133,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 12,
+                "source_pixel_count": 128046,
+                "macro": {
+                  "value": 455.7992294151711,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "200_500": {
+              "MAE": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 271.6258806524432,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 269.1715096799237,
+                  "source_pixel_count": 118532,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 275.82071118501466,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 284.52979978102815,
+                  "source_pixel_count": 118532,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 342.7610311319454,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 349.8368299481204,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 12,
+                "source_pixel_count": 118532,
+                "macro": {
+                  "value": 365.1664861742801,
+                  "source_case_count": 12,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "500_1000": {
+              "MAE": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 563.6817195329957,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 619.0392601366458,
+                  "source_pixel_count": 9514,
+                  "definition": "count-weighted MAE across valid prediction splits"
+                }
+              },
+              "RMSE": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 567.4186533778942,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "value": 629.9217959712096,
+                  "source_pixel_count": 9514,
+                  "definition": "root of count-weighted squared RMSE across valid prediction splits"
+                }
+              },
+              "P95": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 670.7381259683335,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "P99": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 690.1302233355456,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled weighted quantile cannot be reconstructed from per-split quantile scalars; P95/P99 are retained as documented macro averages only."
+                }
+              },
+              "max": {
+                "source_case_count": 5,
+                "source_pixel_count": 9514,
+                "macro": {
+                  "value": 714.4497870656184,
+                  "source_case_count": 5,
+                  "definition": "arithmetic mean of valid prediction-split scalars"
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "A pooled maximum cannot be reconstructed from per-split maxima."
+                }
+              }
+            },
+            "gt_1000": {
+              "MAE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "RMSE": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P95": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "P99": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              },
+              "max": {
+                "source_case_count": 0,
+                "source_pixel_count": 0,
+                "macro": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                },
+                "weighted": {
+                  "status": "INSUFFICIENT DATA",
+                  "reason": "No finite source scalar exists for this material/region/metric."
+                }
+              }
+            }
+          },
+          "support": {
+            "outside_domain_count": 17000167,
+            "outside_domain_percentage": 8.783981791501322,
+            "clipping_count": 0,
+            "extrapolation_count": 0,
+            "total_count": 193536000
+          }
+        }
+      },
+      "shot_train_domain_range_nits": {
+        "min": 0.016922491340933644,
+        "max": 3635.3553995591233,
+        "source_split_count": 48
+      },
+      "unavailable": [
+        "test_min",
+        "test_max",
+        "Model A domain_min",
+        "Model A domain_max",
+        "temporal curve spread at requested nits",
+        "temporal stability median/P90/P95/max",
+        "shot-to-shot variation median/P90/P95/max",
+        "P2.33 to P2.34 comparison",
+        "weighted pooled P95",
+        "weighted pooled P99"
+      ]
+    }
+  },
+  "scientific_aggregation_definition": {
+    "MAE_RMSE_macro": "arithmetic mean of valid prediction-split scalars",
+    "MAE_weighted": "count-weighted across valid prediction splits",
+    "RMSE_weighted": "root of count-weighted squared RMSE across valid prediction splits",
+    "P95_P99_macro": "arithmetic mean of valid per-split compact quantile scalars, as documented by P2.34",
+    "P95_P99_weighted": "INSUFFICIENT DATA: pooled quantiles cannot be reconstructed from per-split quantile scalars",
+    "NO_VALID_PIXELS": "diagnostic event count from preserved prediction_diagnostics; no replacement values"
+  },
+  "unavailable_fields": [
+    "test_min",
+    "test_max",
+    "Model A domain_min",
+    "Model A domain_max",
+    "temporal curve spread at 1/5/10/20/50/100/200/500 nits",
+    "temporal stability median absolute difference/P90/P95/max",
+    "shot-to-shot variation median/P90/P95/max",
+    "P2.33 to P2.34 comparison",
+    "weighted pooled P95",
+    "weighted pooled P99"
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "phase": "P2.34",
+  "case_id": "the_matrix_temporal_stratum_19",
+  "material": "The Matrix",
+  "source_metadata": {
+    "hdr_source": "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+    "om_source": "G:\\Filmy\\IMAX format (open matte)\\The Matrix (1999) [OPEN MATTE] [WEB-DL 1080p 10bit DD5.1 x265].mkv",
+    "hdr_width": 3840,
+    "hdr_height": 1600,
+    "om_width": 1920,
+    "om_height": 1080,
+    "offset_frames": -19,
+    "offset_seconds": -0.7924583333333333,
+    "fps": "24000/1001",
+    "fps_float": 23.976023976023978,
+    "sync_confidence": 0.940513,
+    "sync_status": "LOCKED",
+    "geometry": {
+      "scale_x": 0.5,
+      "scale_y": 0.5,
+      "offset_x": 0,
+      "offset_y": 140,
+      "overlap": [
+        0,
+        140,
+        1920,
+        940
+      ],
+      "confidence": 1.0,
+      "status": "preserved geometry contract"
+    }
+  },
+  "boundary_result": {
+    "case_id": "the_matrix_temporal_stratum_19",
+    "material": "The Matrix",
+    "anchor_hdr_frame": 176998,
+    "anchor_om_frame": 176979,
+    "anchor_timestamp_seconds": 7382.291583333333,
+    "window": {
+      "half_window_seconds": 5.0,
+      "start_frame": 176878,
+      "end_frame_exclusive": 177119,
+      "requested_end_frame_exclusive": 177119,
+      "decoded_frame_count": 241
+    },
+    "boundaries": [
+      {
+        "frame": 176885,
+        "timestamp_seconds": 7377.578541666666,
+        "boundary_score": 0.47965313553783784,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 176878,
+        "run_end_frame": 177006
+      },
+      {
+        "frame": 177011,
+        "timestamp_seconds": 7382.833791666666,
+        "boundary_score": 0.4998386253924707,
+        "threshold": 0.3,
+        "type": "hard",
+        "confidence": 1.0
+      },
+      {
+        "frame": 177049,
+        "timestamp_seconds": 7384.418708333333,
+        "boundary_score": 0.6716994775055869,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 177048,
+        "run_end_frame": 177053
+      },
+      {
+        "frame": 177055,
+        "timestamp_seconds": 7384.668958333333,
+        "boundary_score": 0.48808425082972684,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 177054,
+        "run_end_frame": 177059
+      },
+      {
+        "frame": 177075,
+        "timestamp_seconds": 7385.503124999999,
+        "boundary_score": 0.5276724364461423,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 177074,
+        "run_end_frame": 177110
+      }
+    ],
+    "boundary_count": 5,
+    "anchor_near_cut": false,
+    "anchor_near_cut_guard_frames": 12,
+    "nearest_boundary_distance_frames": 13,
+    "shot_status": "LOCAL_SHOT_RESOLVED",
+    "shot_start_frame": 176885,
+    "shot_end_frame_exclusive": 177011,
+    "shot_duration_frames": 126,
+    "shot_duration_seconds": 5.255249999999999,
+    "anchor_position_in_shot": 0.8968253968253969,
+    "boundary_detection": {
+      "algorithm": "deterministic local frame difference",
+      "weights": {
+        "histogram": 0.4,
+        "mean_luminance": 0.2,
+        "edge_ncc_change": 0.4
+      },
+      "hard_threshold": 0.3,
+      "gradual_threshold": 0.15,
+      "gradual_min_run_frames": 5,
+      "full_film_scan": false
+    },
+    "decode": {
+      "command": [
+        "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\install\\bin\\ffmpeg.exe",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-nostdin",
+        "-ss",
+        "7377.286583",
+        "-i",
+        "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+        "-map",
+        "0:v:0",
+        "-vf",
+        "scale=320:134,format=gray",
+        "-frames:v",
+        "241",
+        "-pix_fmt",
+        "gray",
+        "-vsync",
+        "0",
+        "-f",
+        "rawvideo",
+        "pipe:1"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "requested_start_frame": 176878,
+      "requested_end_frame": 177119,
+      "requested_frame_count": 241,
+      "decoded_frame_count": 241,
+      "proxy_shape": [
+        134,
+        320
+      ],
+      "seek_mode": "bounded fast input seek; local diagnostic only",
+      "full_film_scan": false
+    }
+  }
+}

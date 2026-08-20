@@ -1,0 +1,33 @@
+{
+  "status": "PARTIAL",
+  "case_id": "the_matrix_temporal_stratum_01",
+  "material": "The Matrix",
+  "anchor_hdr_frame": 9805,
+  "anchor_om_frame": 9786,
+  "boundary_status": "LOCAL_SHOT_RESOLVED",
+  "selected_sample_count": 5,
+  "prediction_reached": true,
+  "prediction_split_count": 2,
+  "no_valid_pixels": true,
+  "no_valid_pixel_event_count": 1824,
+  "cuda_exception": false,
+  "disk_bytes": 2881556,
+  "gpu_memory": {
+    "pool_used_bytes": 2000384,
+    "pool_reserved_bytes": 3718656,
+    "device_free_bytes": 9520021504,
+    "device_total_bytes": 10736893952,
+    "persistent_chunk_buffers_bytes": 1474560,
+    "model_a_lut_device_bytes": 524288,
+    "chunk_buffer_shapes": [
+      [
+        8,
+        1920,
+        3
+      ]
+    ]
+  },
+  "source_arrays_saved": false,
+  "full_luminance_planes_saved": false,
+  "residual_arrays_saved": false
+}

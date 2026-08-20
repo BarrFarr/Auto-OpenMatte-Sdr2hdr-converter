@@ -1,0 +1,154 @@
+{
+  "phase": "Phase 6 — Real Scene-Level Validation of Frozen MMR-1",
+  "status": "PREDECLARED BEFORE EXTRACTION",
+  "scope": {
+    "research_only": true,
+    "production_modified": false,
+    "p232_modified": false,
+    "source_decode_scope": "only four fixed anchors, a bounded HDR proxy window, and selected RGB48LE sample frames",
+    "full_film_processing": false,
+    "global_sync": false,
+    "geometry_refit": false,
+    "model_research": false,
+    "new_model_family": false,
+    "mmr2_created": false
+  },
+  "frozen_dependency_hashes_sha256": {
+    "mmr1_source": {
+      "path": "research/physical_validation/mmr_regrading/run_mmr_regrading.py",
+      "sha256": "BAEF76DBFABCEE3FA11656E8BD34B3DFA7E12E948386949910E17D6FC1F076F3"
+    },
+    "h0_and_output_helpers": {
+      "path": "research/physical_validation/scene_regrading/run_scene_regrading.py",
+      "sha256": "C24CB2BF7C88EC4FEF5ABD066736011E996D1810B721AD395E3E53DD34D2B9D0"
+    },
+    "local_shot_reference": {
+      "path": "dev/ffmpeg-build/validation/P234_shot_level_analysis.py",
+      "sha256": "136ABA708F2EDF4E393EC18B692CE8279EA63316040469682538D44E28D3FB94"
+    },
+    "p232_metrics": {
+      "path": "dev/ffmpeg-build/validation/P232_real_material_dataset/P232_dataset_metrics.json",
+      "sha256": "5FE61B8EA91E64A9168FCB7A41F881DB5430A85DD75195388110F64E5F156E8E"
+    },
+    "p232_manifest": {
+      "path": "dev/ffmpeg-build/validation/P232_real_material_dataset/P232_dataset_manifest.json",
+      "sha256": "E682AC5ABA2128D6B45B2DBBC20B3300ED8DF1FF5D46B02A5D0C1109AA85A7EF"
+    }
+  },
+  "frozen_mmr1_contract": {
+    "model": "MMR1",
+    "feature_names": ["constant", "Y_target_nits/100", "Ct_base", "Cp_base", "(Y_target_nits/100)*Ct_base", "(Y_target_nits/100)*Cp_base"],
+    "parameter_count": 12,
+    "ridge_formula": "(XᵀX/N + λI)⁻¹(XᵀC/N + λΘ_identity)",
+    "lambda_grid": [0.0001, 0.001, 0.01],
+    "chroma_component_bound": 0.5,
+    "luma_feature_scale_nits": 100.0,
+    "spatial_split": "((y//80+x//120)%5)==0",
+    "spatial_train_limit_per_frame": 4096,
+    "spatial_holdout_limit_per_frame": 2048,
+    "max_regularized_gram_condition": 1000000.0,
+    "max_identity_deviation_l2": 5.0,
+    "max_chroma_bound_pixel_fraction": 0.005,
+    "max_inverse_negative_pixel_fraction": 0.005,
+    "final_luminance_rule": "reimpose each frame's Model-E Y_target after ICtCp inverse",
+    "frozen_functions_reused_unchanged": ["features", "identity_coefficients", "apply_mmr", "objective", "map_luma_ratio", "metrics", "seam_metrics"]
+  },
+  "anchors": [
+    {
+      "material": "The Matrix",
+      "case_id": "the_matrix_temporal_stratum_08",
+      "role": "primary_development_anchor",
+      "hdr_anchor_frame": 73367,
+      "om_anchor_frame": 73348,
+      "offset_frames": -19,
+      "overlap_open_matte": [0, 140, 1920, 940],
+      "geometry_confidence": 1.0,
+      "conditional_geometry": false
+    },
+    {
+      "material": "The Matrix",
+      "case_id": "the_matrix_temporal_stratum_03",
+      "role": "primary_candidate",
+      "hdr_anchor_frame": 28382,
+      "om_anchor_frame": 28363,
+      "offset_frames": -19,
+      "overlap_open_matte": [0, 140, 1920, 940],
+      "geometry_confidence": 1.0,
+      "conditional_geometry": false
+    },
+    {
+      "material": "The Matrix",
+      "case_id": "the_matrix_temporal_stratum_12",
+      "role": "primary_candidate",
+      "hdr_anchor_frame": 111978,
+      "om_anchor_frame": 111959,
+      "offset_frames": -19,
+      "overlap_open_matte": [0, 140, 1920, 940],
+      "geometry_confidence": 1.0,
+      "conditional_geometry": false
+    },
+    {
+      "material": "BR2049",
+      "case_id": "br2049_temporal_stratum_01",
+      "role": "conditional_transformation_fidelity_robustness",
+      "hdr_anchor_frame": 11699,
+      "om_anchor_frame": 12866,
+      "offset_frames": 1167,
+      "overlap_open_matte": [0, 280, 3840, 1880],
+      "geometry_confidence": 0.9155,
+      "conditional_geometry": true,
+      "confirmatory_evidence": false
+    }
+  ],
+  "local_shot_grouping": {
+    "source": "HDR only; the paired OM frame is derived exclusively as HDR frame + fixed P2.32 offset",
+    "bounded_fast_seek": true,
+    "full_film_scan": false,
+    "local_half_window_seconds": 5.0,
+    "hard_max_half_window_seconds": 5.0,
+    "proxy_width": 320,
+    "fps": "24000/1001",
+    "score": {
+      "histogram_chi_square_weight": 0.4,
+      "mean_luminance_weight": 0.2,
+      "edge_ncc_change_weight": 0.4,
+      "histogram_bins": 64,
+      "hard_threshold": 0.3,
+      "gradual_threshold": 0.15,
+      "gradual_min_run_frames": 5
+    },
+    "anchor_near_cut_guard_frames": 12,
+    "local_shot_resolved_rule": "both the nearest preceding and following detected boundaries must lie inside the bounded window; no window expansion, inferred boundary, or alternate anchor is allowed",
+    "rejection_statuses": ["LOCAL_SHOT_UNRESOLVED", "SHOT_TOO_SHORT", "ANCHOR_NEAR_CUT", "INSUFFICIENT_SEPARATED_SAMPLES", "SOURCE_UNAVAILABLE", "SAMPLE_EXTRACTION_FAILED"]
+  },
+  "temporal_sampling_and_partition": {
+    "fractions": [[0.1, "10%"], [0.25, "25%"], [0.5, "50%"], [0.75, "75%"], [0.9, "90%"]],
+    "minimum_sample_separation_frames": 5,
+    "minimum_samples_required": 5,
+    "fallback_samples": "prohibited",
+    "training_labels": ["10%", "25%", "50%", "75%"],
+    "held_out_temporal_label": "90%",
+    "shared_transform_definition": "one Model-E H0 parameter set and one MMR-1 coefficient matrix are fit only from the four training frames; exactly those parameters are applied unchanged to every tested training and held-out frame",
+    "temporal_holdout_is_primary": true,
+    "frozen_spatial_holdout_is_secondary_diagnostic": true,
+    "independent_per_frame_fit_diagnostic_labels": ["90%"],
+    "independent_per_frame_fits": "diagnostic only; never used as output transform or model selection"
+  },
+  "extraction_and_provenance": {
+    "executable": "dev/ffmpeg-build/install/bin/ffmpeg.exe",
+    "pixel_format": "rgb48le",
+    "frame_selection": "timestamp = fixed frame/FPS; source and expected byte count are stored per extraction",
+    "geometry": "reuse the fixed P2.32 overlap and cv2.INTER_LINEAR HDR-to-overlap handling without change",
+    "scientific_arrays": "float32 normalized linear BT.2020 and source RGB48LE-derived artifacts, all under this Phase 6 directory",
+    "failure_rule": "If an input source is unavailable or a resolved shot cannot provide five separated samples, record INSUFFICIENT DATA; do not substitute old P2.32 one-frame arrays as temporal evidence."
+  },
+  "precheck": {
+    "ffmpeg_exists": true,
+    "ffprobe_exists": true,
+    "matrix_hdr_exists": true,
+    "matrix_om_exists_at_declared_p232_path": true,
+    "br2049_hdr_exists": true,
+    "br2049_om_exists": true,
+    "note": "Source existence was verified with a literal path because the source filename contains square brackets; PowerShell wildcard-mode checks are not admissible evidence for this path."
+  }
+}

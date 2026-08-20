@@ -1,0 +1,917 @@
+{
+  "experiment": {
+    "name": "P2.22 GPU -> NVENC streaming prototype",
+    "frames_requested": 10,
+    "frames_limit": 10,
+    "full_film_rendered": false,
+    "dtype": "float64",
+    "width": 3840,
+    "height": 2160,
+    "roi": {
+      "x": 0,
+      "y": 1600,
+      "width": 3840,
+      "height": 560
+    },
+    "fps": "24000/1001",
+    "transform_math_unchanged": true,
+    "production_default_changed": false
+  },
+  "environment": {
+    "ffmpeg": "C:\\ffmpeg\\bin\\ffmpeg.EXE",
+    "ffprobe": "C:\\ffmpeg\\bin\\ffprobe.EXE",
+    "cupy_available": true
+  },
+  "input": {
+    "path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_probe_input_10f.mkv",
+    "command": "C:\\ffmpeg\\bin\\ffmpeg.EXE -v error -nostdin -y -f lavfi -i testsrc2=size=3840x2160:rate=24000/1001 -frames:v 10 -an -c:v ffv1 -pix_fmt yuv420p G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_probe_input_10f.mkv",
+    "frames": 10,
+    "width": 3840,
+    "height": 2160,
+    "generation_wall_ms": 446.40939999953844,
+    "bytes": 3937278
+  },
+  "gpu_initialization": {
+    "memory_before_buffers": {
+      "pool_used_bytes": 1050624,
+      "pool_reserved_bytes": 1050624,
+      "device_free_bytes": 9532604416,
+      "device_total_bytes": 10736893952,
+      "persistent_roi_buffers_bytes": 0,
+      "curve_lut_device_bytes": 524288,
+      "pq_lut_device_bytes": 524288,
+      "matrix_device_bytes": 72,
+      "color_matrix_device_bytes": 0,
+      "persistent_bytes_total": 1048648,
+      "workspace_allocations": 0
+    },
+    "memory_after_buffers": {
+      "pool_used_bytes": 850458624,
+      "pool_reserved_bytes": 850458624,
+      "device_free_bytes": 8649703424,
+      "device_total_bytes": 10736893952,
+      "persistent_roi_buffers_bytes": 849408000,
+      "curve_lut_device_bytes": 524288,
+      "pq_lut_device_bytes": 524288,
+      "matrix_device_bytes": 72,
+      "color_matrix_device_bytes": 0,
+      "persistent_bytes_total": 850456648,
+      "workspace_allocations": 1
+    },
+    "workspace_allocations": 1
+  },
+  "variants": {
+    "A": {
+      "label": "A_cpu_transform",
+      "frames_requested": 10,
+      "frames_completed": 10,
+      "input_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_probe_input_10f.mkv",
+      "output_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_A_cpu_nvenc_10f.mkv",
+      "encoder_command": "C:\\ffmpeg\\bin\\ffmpeg.EXE -v error -nostdin -y -f rawvideo -pix_fmt rgb48le -s 3840x560 -r 24000/1001 -i pipe:0 -frames:v 10 -vf format=p010le,setparams=color_primaries=bt2020:color_trc=smpte2084:colorspace=bt2020nc:range=tv -an -c:v hevc_nvenc -preset p5 -rc vbr -cq 18 -pix_fmt p010le -color_range tv -color_primaries bt2020 -color_trc smpte2084 -colorspace bt2020nc G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_A_cpu_nvenc_10f.mkv",
+      "decoder_returncode": 0,
+      "decoder_error": "",
+      "encoder_returncode": 0,
+      "encoder_error": "",
+      "encoder_write_error": "",
+      "stages_ms": {
+        "decode_read": {
+          "count": 10,
+          "median_ms": 141.34269999976823,
+          "mean_ms": 144.60594999964087,
+          "min_ms": 138.9910999987478,
+          "max_ms": 166.43959999964864,
+          "p10_ms": 139.70218999947974,
+          "p90_ms": 150.85699999908684,
+          "p95_ms": 158.6482999993677,
+          "p99_ms": 164.88133999959246,
+          "fps_from_median": 7.075002812325219,
+          "samples_ms": [
+            166.43959999964864,
+            149.12559999902442,
+            144.06609999969078,
+            140.07950000086566,
+            144.84389999961422,
+            141.83349999984785,
+            140.8518999996886,
+            139.78119999956107,
+            138.9910999987478,
+            140.04709999971965
+          ]
+        },
+        "host_rgb16_to_float": {
+          "count": 10,
+          "median_ms": 63.15249999988737,
+          "mean_ms": 63.918589999957476,
+          "min_ms": 61.252699999386095,
+          "max_ms": 68.54569999995874,
+          "p10_ms": 61.74940999990213,
+          "p90_ms": 67.65182000053755,
+          "p95_ms": 68.09876000024815,
+          "p99_ms": 68.45631200001662,
+          "fps_from_median": 15.834685879447107,
+          "samples_ms": [
+            62.704399999347515,
+            67.55250000060187,
+            64.20860000071116,
+            64.29469999966386,
+            61.252699999386095,
+            63.249099999666214,
+            62.51770000017132,
+            63.05590000010852,
+            61.804599999959464,
+            68.54569999995874
+          ]
+        },
+        "roi_preparation": {
+          "count": 10,
+          "median_ms": 6.951000000299246,
+          "mean_ms": 6.389679999847431,
+          "min_ms": 0.012599999536178075,
+          "max_ms": 8.1583999999566,
+          "p10_ms": 5.4274500007522875,
+          "p90_ms": 7.872739998856559,
+          "p95_ms": 8.01556999940658,
+          "p99_ms": 8.129833999846596,
+          "fps_from_median": 143.86419219636733,
+          "samples_ms": [
+            0.012599999536178075,
+            7.840999998734333,
+            7.073099999615806,
+            7.492500000807922,
+            6.828900000982685,
+            6.665099999736412,
+            7.200199999715551,
+            8.1583999999566,
+            6.029100000887411,
+            6.595899998501409
+          ]
+        },
+        "cpu_transform": {
+          "count": 10,
+          "median_ms": 339.77505000075325,
+          "mean_ms": 339.46509000033984,
+          "min_ms": 326.2099000003218,
+          "max_ms": 363.0533000014111,
+          "p10_ms": 329.3432500002382,
+          "p90_ms": 344.9289200001658,
+          "p95_ms": 353.99111000078847,
+          "p99_ms": 361.2408620012866,
+          "fps_from_median": 2.943123693154583,
+          "samples_ms": [
+            326.2099000003218,
+            329.6914000002289,
+            341.0031000003073,
+            342.91510000002745,
+            341.14990000125545,
+            363.0533000014111,
+            340.699800000948,
+            332.98849999846425,
+            338.08959999987565,
+            338.8503000005585
+          ]
+        },
+        "gpu_upload_event": null,
+        "gpu_upload_sync": null,
+        "gpu_transform_event": null,
+        "gpu_transform_sync": null,
+        "gpu_download_event": null,
+        "gpu_download_sync": null,
+        "rgb_pack": {
+          "count": 10,
+          "median_ms": 34.86399999928835,
+          "mean_ms": 34.561630000098376,
+          "min_ms": 33.19090000150027,
+          "max_ms": 35.291599999254686,
+          "p10_ms": 33.705519999239186,
+          "p90_ms": 35.21942000134004,
+          "p95_ms": 35.25551000029736,
+          "p99_ms": 35.28438199946322,
+          "fps_from_median": 28.682882056574464,
+          "samples_ms": [
+            34.20120000009774,
+            34.875299999839626,
+            35.21140000157175,
+            34.866299998611794,
+            33.19090000150027,
+            33.762699998987955,
+            35.105400000247755,
+            35.291599999254686,
+            34.24980000090727,
+            34.86169999996491
+          ]
+        },
+        "cpu_to_nvenc_pipe_write": {
+          "count": 10,
+          "median_ms": 1.1523000002853223,
+          "mean_ms": 1.6107300001749536,
+          "min_ms": 1.1257000005571172,
+          "max_ms": 3.808499999649939,
+          "p10_ms": 1.1266000008617993,
+          "p90_ms": 2.9037299991614414,
+          "p95_ms": 3.3561149994056896,
+          "p99_ms": 3.7180229996010894,
+          "fps_from_median": 867.8295580598706,
+          "samples_ms": [
+            3.808499999649939,
+            1.1362999994162237,
+            1.1360000007698545,
+            1.3092000008327886,
+            1.1391000007279217,
+            1.126700000895653,
+            2.8031999991071643,
+            1.165499999842723,
+            1.1257000005571172,
+            1.357099999950151
+          ]
+        },
+        "frame_wall": {
+          "count": 10,
+          "median_ms": 590.2487999992445,
+          "mean_ms": 590.5607400000008,
+          "min_ms": 580.3020000003016,
+          "max_ms": 609.696299999996,
+          "p10_ms": 580.432139999175,
+          "p90_ms": 595.0245899990477,
+          "p95_ms": 602.3604449995219,
+          "p99_ms": 608.2291289999011,
+          "fps_from_median": 1.6942008183689319,
+          "samples_ms": [
+            593.3943999989424,
+            590.2340999982698,
+            592.7038999998331,
+            590.9644000003027,
+            588.4166000014375,
+            609.696299999996,
+            589.185600001656,
+            580.4465999990498,
+            580.3020000003016,
+            590.2635000002192
+          ]
+        }
+      },
+      "encoder_finalize_wait_ms": 74.43880000028003,
+      "loop_wall_ms": 6034.650099998544,
+      "total_pipeline_ms": 6109.088899998824,
+      "total_per_frame_ms": 610.9088899998824,
+      "pipeline_fps": 1.6369053002325642,
+      "copy_audit": {
+        "decoded_full_frame_bytes": 49766400,
+        "host_rgb16_to_float64_copy": true,
+        "roi_view_copy_bytes": 0,
+        "rgb48_output_bytes_per_frame": 12902400,
+        "gpu_to_cpu_output_bytes_per_frame": 0,
+        "implicit_ffmpeg_encoder_input_upload": true,
+        "direct_cupy_to_avframe": false
+      },
+      "rgb_to_yuv_conversion": {
+        "status": "separate_bounded_probe",
+        "probe": {
+          "status": "passed",
+          "returncode": 0,
+          "command": "C:\\ffmpeg\\bin\\ffmpeg.EXE -v error -nostdin -f rawvideo -pix_fmt rgb48le -s 3840x560 -r 24000/1001 -i pipe:0 -frames:v 10 -vf format=p010le,setparams=color_primaries=bt2020:color_trc=smpte2084:colorspace=bt2020nc:range=tv -f null -",
+          "frames": 10,
+          "wall_ms": 99.01510000054259,
+          "per_frame_ms": 9.901510000054259,
+          "stderr": "",
+          "note": "This is a separate bounded software conversion probe. The A/B main pipeline performs the same conversion inside its FFmpeg encoder graph, so this value is not added to total timing."
+        },
+        "included_in_main_pipeline_total": false
+      },
+      "first_packed_frame_available": true,
+      "ffprobe": {
+        "exists": true,
+        "path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_A_cpu_nvenc_10f.mkv",
+        "returncode": 0,
+        "file_bytes": 170589,
+        "stream": {
+          "codec_name": "hevc",
+          "profile": "Main 10",
+          "pix_fmt": "yuv420p10le",
+          "color_range": "tv",
+          "color_primaries": "bt2020",
+          "color_transfer": "smpte2084",
+          "color_space": "bt2020nc",
+          "width": 3840,
+          "height": 560,
+          "nb_frames": null,
+          "nb_read_frames": "10"
+        },
+        "format": {
+          "filename": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_A_cpu_nvenc_10f.mkv",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "start_time": "0.000000",
+          "duration": "0.417000",
+          "size": "170589",
+          "bit_rate": "3272690",
+          "probe_score": 100,
+          "tags": {
+            "ENCODER": "Lavf61.7.100"
+          }
+        }
+      }
+    },
+    "B": {
+      "label": "B_gpu_transform",
+      "frames_requested": 10,
+      "frames_completed": 10,
+      "input_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_probe_input_10f.mkv",
+      "output_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_B_gpu_download_nvenc_10f.mkv",
+      "encoder_command": "C:\\ffmpeg\\bin\\ffmpeg.EXE -v error -nostdin -y -f rawvideo -pix_fmt rgb48le -s 3840x560 -r 24000/1001 -i pipe:0 -frames:v 10 -vf format=p010le,setparams=color_primaries=bt2020:color_trc=smpte2084:colorspace=bt2020nc:range=tv -an -c:v hevc_nvenc -preset p5 -rc vbr -cq 18 -pix_fmt p010le -color_range tv -color_primaries bt2020 -color_trc smpte2084 -colorspace bt2020nc G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_B_gpu_download_nvenc_10f.mkv",
+      "decoder_returncode": 0,
+      "decoder_error": "",
+      "encoder_returncode": 0,
+      "encoder_error": "",
+      "encoder_write_error": "",
+      "stages_ms": {
+        "decode_read": {
+          "count": 10,
+          "median_ms": 140.83790000040608,
+          "mean_ms": 143.43676999978925,
+          "min_ms": 133.16579999991518,
+          "max_ms": 180.53669999972044,
+          "p10_ms": 133.1712899991544,
+          "p90_ms": 150.81761999899754,
+          "p95_ms": 165.67715999935896,
+          "p99_ms": 177.56479199964815,
+          "fps_from_median": 7.100361479382443,
+          "samples_ms": [
+            180.53669999972044,
+            147.51549999891722,
+            146.04989999861573,
+            141.96559999982128,
+            133.17189999906986,
+            133.80289999986417,
+            133.51740000143764,
+            139.71020000099088,
+            144.9317999995401,
+            133.16579999991518
+          ]
+        },
+        "host_rgb16_to_float": {
+          "count": 10,
+          "median_ms": 63.85579999914626,
+          "mean_ms": 65.72945999960211,
+          "min_ms": 61.40479999885429,
+          "max_ms": 73.7976999989769,
+          "p10_ms": 61.5903799991429,
+          "p90_ms": 71.11506999972335,
+          "p95_ms": 72.45638499935012,
+          "p99_ms": 73.52943699905154,
+          "fps_from_median": 15.66028457890074,
+          "samples_ms": [
+            61.88330000077258,
+            63.95349999911559,
+            61.40479999885429,
+            62.530400000468944,
+            67.00889999956416,
+            70.81699999980628,
+            63.75809999917692,
+            61.610999999174965,
+            70.5299000001105,
+            73.7976999989769
+          ]
+        },
+        "roi_preparation": {
+          "count": 10,
+          "median_ms": 7.673399999475805,
+          "mean_ms": 6.774880000011763,
+          "min_ms": 0.01320000046689529,
+          "max_ms": 8.345700000063516,
+          "p10_ms": 5.465220001497073,
+          "p90_ms": 8.303400000477268,
+          "p95_ms": 8.324550000270392,
+          "p99_ms": 8.341470000104891,
+          "fps_from_median": 130.32032737356494,
+          "samples_ms": [
+            0.01320000046689529,
+            7.9752000001462875,
+            6.780899999284884,
+            6.071000001611537,
+            6.881699999212287,
+            8.345700000063516,
+            7.700799998929142,
+            7.646000000022468,
+            8.035599999857368,
+            8.29870000052324
+          ]
+        },
+        "cpu_transform": null,
+        "gpu_upload_event": {
+          "count": 10,
+          "median_ms": 7.448496103286743,
+          "mean_ms": 7.419868850708008,
+          "min_ms": 6.80463981628418,
+          "max_ms": 8.312000274658203,
+          "p10_ms": 6.975337743759155,
+          "p90_ms": 7.811369609832764,
+          "p95_ms": 8.061684942245483,
+          "p99_ms": 8.26193720817566,
+          "fps_from_median": 134.25528940784938,
+          "samples_ms": [
+            7.060480117797852,
+            7.04150390625,
+            7.746975898742676,
+            7.755743980407715,
+            6.994304180145264,
+            7.548384189605713,
+            6.80463981628418,
+            7.586048126220703,
+            7.348608016967773,
+            8.312000274658203
+          ]
+        },
+        "gpu_upload_sync": {
+          "count": 20,
+          "median_ms": 3.4868999991886085,
+          "mean_ms": 3.7745149998045235,
+          "min_ms": 0.03079999987676274,
+          "max_ms": 8.428400000411784,
+          "p10_ms": 0.03316000002087094,
+          "p90_ms": 7.831800000167277,
+          "p95_ms": 7.865049999782059,
+          "p99_ms": 8.31573000028584,
+          "fps_from_median": 286.7876911390338,
+          "samples_ms": [
+            0.03749999996216502,
+            7.161800000176299,
+            0.03079999987676274,
+            7.128799999918556,
+            0.03599999945436139,
+            7.835399999748915,
+            0.03280000055383425,
+            7.831400000213762,
+            0.036299999919719994,
+            7.078900000124122,
+            0.033999998777289875,
+            7.649499999388354,
+            0.03319999996165279,
+            6.936299998415052,
+            0.035600000046542846,
+            7.673899999645073,
+            0.03330000072310213,
+            7.422599999699742,
+            0.033799999073380604,
+            8.428400000411784
+          ]
+        },
+        "gpu_transform_event": {
+          "count": 10,
+          "median_ms": 15.260079860687256,
+          "mean_ms": 21.646780967712402,
+          "min_ms": 13.993120193481445,
+          "max_ms": 80.99369812011719,
+          "p10_ms": 14.596624088287353,
+          "p90_ms": 21.995110225677468,
+          "p95_ms": 51.49440417289727,
+          "p99_ms": 75.09383933067323,
+          "fps_from_median": 65.53045653294267,
+          "samples_ms": [
+            80.99369812011719,
+            15.24185562133789,
+            15.112768173217773,
+            15.11631965637207,
+            14.663680076599121,
+            15.332736015319824,
+            15.295616149902344,
+            15.439711570739746,
+            15.278304100036621,
+            13.993120193481445
+          ]
+        },
+        "gpu_transform_sync": {
+          "count": 10,
+          "median_ms": 15.290499999537133,
+          "mean_ms": 21.670289999929082,
+          "min_ms": 14.016400000400608,
+          "max_ms": 81.01389999865205,
+          "p10_ms": 14.618590000281984,
+          "p90_ms": 22.020520000114608,
+          "p95_ms": 51.51720999938327,
+          "p99_ms": 75.11456199879832,
+          "fps_from_median": 65.4000850220903,
+          "samples_ms": [
+            81.01389999865205,
+            15.279699999155127,
+            15.130100000533275,
+            15.137399999730405,
+            14.685500000268803,
+            15.353099999629194,
+            15.319800000725081,
+            15.465700000277138,
+            15.301299999919138,
+            14.016400000400608
+          ]
+        },
+        "gpu_download_event": {
+          "count": 10,
+          "median_ms": 7.129503965377808,
+          "mean_ms": 6.965119981765747,
+          "min_ms": 6.300928115844727,
+          "max_ms": 7.600863933563232,
+          "p10_ms": 6.32120304107666,
+          "p90_ms": 7.589891338348389,
+          "p95_ms": 7.595377635955811,
+          "p99_ms": 7.599766674041748,
+          "fps_from_median": 140.2622124703465,
+          "samples_ms": [
+            7.600863933563232,
+            6.934847831726074,
+            6.300928115844727,
+            6.392255783081055,
+            7.415359973907471,
+            7.324160099029541,
+            6.323455810546875,
+            6.435967922210693,
+            7.334688186645508,
+            7.588672161102295
+          ]
+        },
+        "gpu_download_sync": {
+          "count": 10,
+          "median_ms": 7.156249998843123,
+          "mean_ms": 6.99209999966115,
+          "min_ms": 6.3265999997383915,
+          "max_ms": 7.619699999850127,
+          "p10_ms": 6.349369999588816,
+          "p90_ms": 7.615559999430843,
+          "p95_ms": 7.617629999640485,
+          "p99_ms": 7.6192859998081985,
+          "fps_from_median": 139.73799128896556,
+          "samples_ms": [
+            7.619699999850127,
+            6.959799999094685,
+            6.3265999997383915,
+            6.420499999876483,
+            7.445700000971556,
+            7.352699998591561,
+            6.351899999572197,
+            6.4640000000508735,
+            7.36499999948137,
+            7.615099999384256
+          ]
+        },
+        "rgb_pack": {
+          "count": 10,
+          "median_ms": 33.268850001149985,
+          "mean_ms": 33.662160000312724,
+          "min_ms": 31.4195999999356,
+          "max_ms": 37.86690000015369,
+          "p10_ms": 31.818749999183638,
+          "p90_ms": 35.41593000009016,
+          "p95_ms": 36.641415000121924,
+          "p99_ms": 37.62180300014734,
+          "fps_from_median": 30.058147485273267,
+          "samples_ms": [
+            32.60740000041551,
+            31.863099999100086,
+            31.4195999999356,
+            34.39600000092469,
+            33.286200001384714,
+            34.08589999889955,
+            33.25150000091526,
+            32.70140000131505,
+            37.86690000015369,
+            35.1436000000831
+          ]
+        },
+        "cpu_to_nvenc_pipe_write": {
+          "count": 10,
+          "median_ms": 1.1551999996299855,
+          "mean_ms": 1.4186700002028374,
+          "min_ms": 1.1200999997527106,
+          "max_ms": 3.676399999676505,
+          "p10_ms": 1.1208200003238744,
+          "p90_ms": 1.5270200008671955,
+          "p95_ms": 2.601710000271848,
+          "p99_ms": 3.4614619997955747,
+          "fps_from_median": 865.6509698063568,
+          "samples_ms": [
+            3.676399999676505,
+            1.133200001277146,
+            1.1500999989948468,
+            1.1918000000150641,
+            1.1402000000089174,
+            1.1603000002651243,
+            1.120900000387337,
+            1.1200999997527106,
+            1.2055000006512273,
+            1.2882000009994954
+          ]
+        },
+        "frame_wall": {
+          "count": 10,
+          "median_ms": 277.4061000000074,
+          "mean_ms": 287.2829300002195,
+          "min_ms": 268.0345999997371,
+          "max_ms": 374.6251000011398,
+          "p10_ms": 270.5129300002227,
+          "p90_ms": 300.9367900000143,
+          "p95_ms": 337.78094500057693,
+          "p99_ms": 367.25626900102725,
+          "fps_from_median": 3.604823397899229,
+          "samples_ms": [
+            374.6251000011398,
+            281.89130000100704,
+            276.1692000003677,
+            275.61659999992116,
+            270.78830000027665,
+            278.64299999964715,
+            268.0345999997371,
+            272.47609999903943,
+            292.74919999988924,
+            281.83590000116965
+          ]
+        }
+      },
+      "encoder_finalize_wait_ms": 75.79160000022966,
+      "loop_wall_ms": 3007.289299999684,
+      "total_pipeline_ms": 3083.0808999999135,
+      "total_per_frame_ms": 308.30808999999135,
+      "pipeline_fps": 3.2435087901846105,
+      "copy_audit": {
+        "decoded_full_frame_bytes": 49766400,
+        "host_rgb16_to_float64_copy": true,
+        "roi_view_copy_bytes": 0,
+        "rgb48_output_bytes_per_frame": 12902400,
+        "gpu_to_cpu_output_bytes_per_frame": 51609600,
+        "implicit_ffmpeg_encoder_input_upload": true,
+        "direct_cupy_to_avframe": false
+      },
+      "rgb_to_yuv_conversion": {
+        "status": "separate_bounded_probe",
+        "probe": {
+          "status": "passed",
+          "returncode": 0,
+          "command": "C:\\ffmpeg\\bin\\ffmpeg.EXE -v error -nostdin -f rawvideo -pix_fmt rgb48le -s 3840x560 -r 24000/1001 -i pipe:0 -frames:v 10 -vf format=p010le,setparams=color_primaries=bt2020:color_trc=smpte2084:colorspace=bt2020nc:range=tv -f null -",
+          "frames": 10,
+          "wall_ms": 99.01510000054259,
+          "per_frame_ms": 9.901510000054259,
+          "stderr": "",
+          "note": "This is a separate bounded software conversion probe. The A/B main pipeline performs the same conversion inside its FFmpeg encoder graph, so this value is not added to total timing."
+        },
+        "included_in_main_pipeline_total": false
+      },
+      "first_packed_frame_available": true,
+      "memory_after_variant": {
+        "pool_used_bytes": 850458624,
+        "pool_reserved_bytes": 919271424,
+        "device_free_bytes": 8570011648,
+        "device_total_bytes": 10736893952,
+        "persistent_roi_buffers_bytes": 849408000,
+        "curve_lut_device_bytes": 524288,
+        "pq_lut_device_bytes": 524288,
+        "matrix_device_bytes": 72,
+        "color_matrix_device_bytes": 0,
+        "persistent_bytes_total": 850456648,
+        "workspace_allocations": 1
+      },
+      "workspace_allocations_after_variant": 1,
+      "ffprobe": {
+        "exists": true,
+        "path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_B_gpu_download_nvenc_10f.mkv",
+        "returncode": 0,
+        "file_bytes": 170589,
+        "stream": {
+          "codec_name": "hevc",
+          "profile": "Main 10",
+          "pix_fmt": "yuv420p10le",
+          "color_range": "tv",
+          "color_primaries": "bt2020",
+          "color_transfer": "smpte2084",
+          "color_space": "bt2020nc",
+          "width": 3840,
+          "height": 560,
+          "nb_frames": null,
+          "nb_read_frames": "10"
+        },
+        "format": {
+          "filename": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_B_gpu_download_nvenc_10f.mkv",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "start_time": "0.000000",
+          "duration": "0.417000",
+          "size": "170589",
+          "bit_rate": "3272690",
+          "probe_score": 100,
+          "tags": {
+            "ENCODER": "Lavf61.7.100"
+          }
+        }
+      }
+    }
+  },
+  "correctness": {
+    "frames_compared": 10,
+    "decoder_returncode": 0,
+    "decoder_error": "",
+    "max_rgb_difference": 1.1102230246251565e-16,
+    "mean_rgb_difference": 1.5965006061536254e-19,
+    "max_luminance_difference_nits": 4.163336342344337e-14,
+    "mean_luminance_difference_nits": 2.3676755414063565e-18,
+    "acceptance": {
+      "rgb_limit": 1e-05,
+      "luminance_limit_nits": 0.01,
+      "pass": true
+    },
+    "hdr_overlap_invariant": {
+      "cpu_hdr_region_unchanged": true,
+      "gpu_hdr_region_unchanged": true,
+      "cpu_gpu_max_difference": 5.551115123125783e-17,
+      "pass": true
+    },
+    "jacket_roi": {
+      "source_coordinates": {
+        "rows": [
+          1900,
+          2050
+        ],
+        "columns": [
+          1500,
+          2500
+        ]
+      },
+      "roi_coordinates": {
+        "rows": [
+          300,
+          450
+        ],
+        "columns": [
+          1500,
+          2500
+        ]
+      },
+      "frames_aggregated": 10,
+      "max_luminance_nits": 0.9699909213125034,
+      "p50_luminance_nits": 0.3543729831033014,
+      "pixels_over_400_nits": 0,
+      "plateau_fraction_rounded_0_001": 0.58,
+      "note": "Synthetic testsrc2 input; not a real jacket source audit."
+    },
+    "white_dot_probe": {
+      "inputs": [
+        0.0,
+        1e-08,
+        1e-07,
+        1e-06
+      ],
+      "max_luminance_nits": 4.674578313730861e-13,
+      "pass": true
+    }
+  },
+  "variant_C": {
+    "status": "host_upload_cuda_path_succeeded",
+    "direct_cupy_to_avframe": false,
+    "returncode": 0,
+    "command": "C:\\ffmpeg\\bin\\ffmpeg.EXE -v error -nostdin -y -f rawvideo -pix_fmt rgb48le -s 3840x560 -r 24000/1001 -i pipe:0 -frames:v 1 -vf format=gbrp16le,hwupload_cuda,scale_cuda=format=p010le -c:v hevc_nvenc -pix_fmt cuda -bsf:v hevc_metadata=video_full_range_flag=0:colour_primaries=9:transfer_characteristics=16:matrix_coefficients=9 -color_range tv -color_primaries bt2020 -color_trc smpte2084 -colorspace bt2020nc G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_C_host_hwupload_probe.mkv",
+    "wall_ms": 341.4836000010837,
+    "stderr": "",
+    "ffprobe": {
+      "exists": true,
+      "path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_C_host_hwupload_probe.mkv",
+      "returncode": 0,
+      "file_bytes": 12341,
+      "stream": {
+        "codec_name": "hevc",
+        "profile": "Main 10",
+        "pix_fmt": "yuv420p10le",
+        "color_range": "tv",
+        "color_primaries": "bt2020",
+        "color_transfer": "smpte2084",
+        "color_space": "bt2020nc",
+        "width": 3840,
+        "height": 560,
+        "nb_frames": null,
+        "nb_read_frames": "1"
+      },
+      "format": {
+        "filename": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_C_host_hwupload_probe.mkv",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "matroska,webm",
+        "format_long_name": "Matroska / WebM",
+        "duration": "0.042000",
+        "size": "12341",
+        "bit_rate": "2350666",
+        "probe_score": 100,
+        "tags": {
+          "ENCODER": "Lavf61.7.100"
+        }
+      }
+    },
+    "explanation": "This proves only FFmpeg system-memory upload to CUDA/NVENC. The input still originates from a host pipe and is not a CuPy device pointer."
+  },
+  "outputs": {
+    "A": {
+      "exists": true,
+      "path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_A_cpu_nvenc_10f.mkv",
+      "returncode": 0,
+      "file_bytes": 170589,
+      "stream": {
+        "codec_name": "hevc",
+        "profile": "Main 10",
+        "pix_fmt": "yuv420p10le",
+        "color_range": "tv",
+        "color_primaries": "bt2020",
+        "color_transfer": "smpte2084",
+        "color_space": "bt2020nc",
+        "width": 3840,
+        "height": 560,
+        "nb_frames": null,
+        "nb_read_frames": "10"
+      },
+      "format": {
+        "filename": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_A_cpu_nvenc_10f.mkv",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "matroska,webm",
+        "format_long_name": "Matroska / WebM",
+        "start_time": "0.000000",
+        "duration": "0.417000",
+        "size": "170589",
+        "bit_rate": "3272690",
+        "probe_score": 100,
+        "tags": {
+          "ENCODER": "Lavf61.7.100"
+        }
+      }
+    },
+    "B": {
+      "exists": true,
+      "path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_B_gpu_download_nvenc_10f.mkv",
+      "returncode": 0,
+      "file_bytes": 170589,
+      "stream": {
+        "codec_name": "hevc",
+        "profile": "Main 10",
+        "pix_fmt": "yuv420p10le",
+        "color_range": "tv",
+        "color_primaries": "bt2020",
+        "color_transfer": "smpte2084",
+        "color_space": "bt2020nc",
+        "width": 3840,
+        "height": 560,
+        "nb_frames": null,
+        "nb_read_frames": "10"
+      },
+      "format": {
+        "filename": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_B_gpu_download_nvenc_10f.mkv",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "matroska,webm",
+        "format_long_name": "Matroska / WebM",
+        "start_time": "0.000000",
+        "duration": "0.417000",
+        "size": "170589",
+        "bit_rate": "3272690",
+        "probe_score": 100,
+        "tags": {
+          "ENCODER": "Lavf61.7.100"
+        }
+      }
+    },
+    "C": {
+      "exists": true,
+      "path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_C_host_hwupload_probe.mkv",
+      "returncode": 0,
+      "file_bytes": 12341,
+      "stream": {
+        "codec_name": "hevc",
+        "profile": "Main 10",
+        "pix_fmt": "yuv420p10le",
+        "color_range": "tv",
+        "color_primaries": "bt2020",
+        "color_transfer": "smpte2084",
+        "color_space": "bt2020nc",
+        "width": 3840,
+        "height": 560,
+        "nb_frames": null,
+        "nb_read_frames": "1"
+      },
+      "format": {
+        "filename": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\P2.22_outputs\\P2.22_variant_C_host_hwupload_probe.mkv",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "matroska,webm",
+        "format_long_name": "Matroska / WebM",
+        "duration": "0.042000",
+        "size": "12341",
+        "bit_rate": "2350666",
+        "probe_score": 100,
+        "tags": {
+          "ENCODER": "Lavf61.7.100"
+        }
+      }
+    }
+  }
+}
