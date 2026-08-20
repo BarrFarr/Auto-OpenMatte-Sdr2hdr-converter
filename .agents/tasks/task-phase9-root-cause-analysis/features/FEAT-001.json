@@ -1,0 +1,23 @@
+{
+  "id": "FEAT-001",
+  "type": "chore",
+  "description": "Environment setup and baseline verification. Install dependencies with Python 3.12, run existing production test suite to confirm baseline is green.",
+  "status": "completed",
+  "steps": [
+    "Run python3.12 -m pip install -e '.[dev]' in /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter",
+    "Run python3.12 -m pytest tests/ -x --tb=short -q to confirm all 311 production tests pass",
+    "Create directory research/physical_validation/root_cause/ for the deliverable",
+    "Verify research module imports work: python3.12 -c \"import sys; sys.path.insert(0, 'research'); import models, color_utils, metrics, synthetic_scenes; print('OK')\""
+  ],
+  "acceptance_criteria": [
+    "All 311 production tests pass",
+    "research/physical_validation/root_cause/ directory exists",
+    "Research module imports succeed (models, color_utils, metrics, synthetic_scenes)"
+  ],
+  "verification": [
+    "python3.12 -m pytest tests/ -x --tb=short -q passes all tests",
+    "ls research/physical_validation/root_cause/ succeeds"
+  ],
+  "blocked_reason": null,
+  "findings": "All 311 production tests pass (50.61s). Dependencies already installed. Research module imports all succeed. Directory created at research/physical_validation/root_cause/. 3 HLG RuntimeWarnings in test suite are pre-existing and benign (log of negative values in edge case)."
+}

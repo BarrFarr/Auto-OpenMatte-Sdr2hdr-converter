@@ -1,0 +1,46 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Create the comprehensive root-cause analysis script and markdown report. This is the main deliverable: a Python script that performs all analytical experiments on synthetic data that simulates the Matrix creative-regrade failure conditions, then generates research/physical_validation/root_cause/ROOT_CAUSE_ANALYSIS.md with full results.",
+  "status": "completed",
+  "steps": [
+    "Create research/physical_validation/__init__.py (empty)",
+    "Create research/physical_validation/root_cause/__init__.py (empty)",
+    "Create research/physical_validation/root_cause/run_analysis.py - the main analysis script that:",
+    "  (a) Generates synthetic scenes that simulate The Matrix scenario: a strong CONTENT-DEPENDENT creative regrade where different content classes (skin/green-tinted backgrounds/dark clothing/saturated lights/neutral highlights) have materially different SDR-to-HDR relationships. This is the KEY insight: the synthetic tonemap in synthetic_scenes.py uses a UNIFORM Reinhard-like mapping, but a real creative regrade applies DIFFERENT adjustments to different content classes.",
+    "  (b) Creates a 'creative regrade' synthetic scene generator that applies content-dependent (hue/luminance/chroma conditional) different tone curves and color shifts to different pixel classes - mimicking how The Matrix HDR remaster treats green-tinted midtones differently from skin tones differently from saturated practical lights.",
+    "  (c) Fits ModelE (the luminance component of MMR-1) and a simple ICtCp MMR-style regression to the overlap region of this creative-regrade scene.",
+    "  (d) Performs the content-group analysis (Section 6 of requirements): partitions pixels by luminance groups (5 bands), chroma groups (3 bands), hue sectors (6), and combined groups. For each group computes pixel count, H0 mean deltaE, model mean deltaE, chroma error, hue error, signed RGB residual.",
+    "  (e) Performs the diagnostic content-group experiment (Section 9): independently fits small diagnostic transforms to each content/color subset and compares the fitted parameters between groups to determine if different pixel classes require materially different transformations.",
+    "  (f) Simulates the Matrix 05 pathological fit scenario: creates a scene with insufficient color diversity / strong multimodal grading and demonstrates why the fit becomes unstable.",
+    "  (g) Performs spatial residual analysis: identifies where errors concentrate (by content region, by luminance zone, by chroma zone).",
+    "  (h) Performs conceptual performance profiling: measures time spent in each pipeline stage (color-space conversion, ICtCp, luminance mapping, transform application, PQ encoding) to determine if performance problem is fundamental or implementation-level.",
+    "  (i) Compares observed failure structure with established non-AI techniques (Dolby backward reshaping, segment-based MMR, piecewise chroma reshaping) from published literature.",
+    "  (j) Answers all 8 final questions from Section 16 of the requirements with concrete evidence.",
+    "  (k) Writes the complete ROOT_CAUSE_ANALYSIS.md document including: visual failure analysis, numerical tables, content-group analysis, residual-vs-luminance/chroma/hue correlations, spatial analysis, Matrix 05 failure diagnosis, performance breakdown, non-AI literature comparison, and explicit conclusion about whether the global T_scene assumption is valid.",
+    "The script must import from research/color_utils.py, research/metrics.py, research/models.py, and research/synthetic_scenes.py using sys.path manipulation (following the pattern in research/run_comparison.py).",
+    "The analysis must be rigorous: actually run numerical experiments on synthetic data, produce real numbers, not just theoretical discussion.",
+    "The ICtCp MMR-1 chroma transform to simulate should be: convert to ICtCp space, fit a multivariate regression (3x3 matrix + offset in ICtCp), then apply. This matches the 'compact ICtCp MMR-1 chroma transform' described in the briefing.",
+    "H0 (null hypothesis baseline) is defined as: apply ONLY the luminance curve (Model E), with simple ratio scaling to RGB, NO chroma correction. This matches the production pipeline in src/auto_openmatte/processing/transform.py.",
+    "The creative regrade synthetic scene must clearly demonstrate content-dependent behavior: e.g., green-tinted background gets a DIFFERENT color shift than skin tones, saturated practicals get a DIFFERENT treatment than neutral highlights. A global transform CANNOT satisfy all groups simultaneously."
+  ],
+  "acceptance_criteria": [
+    "research/physical_validation/root_cause/run_analysis.py exists and runs without errors",
+    "research/physical_validation/root_cause/ROOT_CAUSE_ANALYSIS.md is generated with full content",
+    "The report contains numerical tables showing content-group deltaE differences",
+    "The report contains the diagnostic experiment showing different groups require materially different transforms",
+    "The report answers all 8 questions from Section 16 explicitly",
+    "The report contains performance breakdown analysis",
+    "The report contains literature comparison section",
+    "The report explicitly concludes whether the global T_scene assumption is valid",
+    "Running the analysis script completes in under 120 seconds",
+    "Production tests still pass (no src/ modifications)"
+  ],
+  "verification": [
+    "cd /projects/sandbox/Auto-OpenMatte-Sdr2hdr-converter && python3.12 research/physical_validation/root_cause/run_analysis.py",
+    "Confirm research/physical_validation/root_cause/ROOT_CAUSE_ANALYSIS.md exists and contains substantive content (>5000 words)",
+    "python3.12 -m pytest tests/ -x --tb=short -q still passes all 311 tests"
+  ],
+  "blocked_reason": null,
+  "findings": "Script completes in 1.8s (well under 120s limit). Report is 5339 words. H0 deltaE=12.42, MMR-1 deltaE=9.13, per-group oracle deltaE~3.56. Analysis conclusively demonstrates that global T_scene assumption is invalid for content-dependent creative regrades, with per-group oracles showing 61% improvement over global MMR-1. All 311 production tests pass."
+}
