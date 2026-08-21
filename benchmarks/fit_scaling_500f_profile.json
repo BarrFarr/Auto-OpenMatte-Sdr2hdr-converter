@@ -1,0 +1,44 @@
+{
+  "schema": "openmatte-hdr-input-profile/v1",
+  "name": "br2049_t2714_500f_fit_scaling",
+  "description": "Non-production native V5 fit-only scaling benchmark. This extends the 300-frame throughput window to 500 frames while preserving the source, geometry, sync, and frozen fitting configuration. It is not a quality gate and must not be used for production rendering.",
+  "throughput_test": "fit_scaling_100_250_500",
+  "quality_gate": false,
+  "hdr": "G:\\Filmy\\Blade.Runner.2049.2017.2160p.UHD.Bluray.x265.HDR10.HEVC.DTS-HDMA.5.1-4K4U\\Blade.Runner.2049.2017.UHD.BluRay.2160p.DDP.7.1.DV.HDR.x265-hallowed.mkv",
+  "om": "G:\\Filmy\\Blade.Runner.2049.2017.2160p.UHD.Bluray.x265.HDR10.HEVC.DTS-HDMA.5.1-4K4U\\Blade.Runner.2049.2017.Open.Matte.RUS.SDR.2160p.mkv",
+  "ffmpeg": "dev/ffmpeg-build/install/bin/ffmpeg.exe",
+  "shot_start": 65071,
+  "shot_end": 65571,
+  "expected_frame_count": 500,
+  "om_start_frame": 66238,
+  "offset_frames": 1167,
+  "fps": "24000/1001",
+  "hdr_size": [3840, 1600],
+  "om_size": [3840, 2160],
+  "overlap": [0, 280, 3840, 1880],
+  "seam_band": 48,
+  "feather": 24,
+  "cache_root": "benchmarks/forbidden_v04_cache_not_used",
+  "review_regions": [["left", 160], ["left_mid", 960], ["right_mid", 2080], ["right", 3200]],
+  "legacy_sync": {
+    "equation": "om_frame = hdr_frame + 1167",
+    "frame_offset": 1167,
+    "offset_seconds_at_24000_1001": 48.673625,
+    "status": "LOCKED",
+    "frame_locked": true,
+    "confidence": 0.9745,
+    "historical_time_seconds": 2714.0
+  },
+  "legacy_geometry": {
+    "scale": [1.0, 1.0],
+    "offset": [0, 280],
+    "overlap": [0, 280, 3840, 1880],
+    "confidence": 0.9155,
+    "status": "inherited_from_locked_BR2049_contract"
+  },
+  "limitations": [
+    "Benchmark-only 500-frame extension of the previous 300-frame throughput window.",
+    "No rendering, encoding, composite, output video, or frame cache is permitted.",
+    "It may cross shot boundaries; no image-quality conclusion may be drawn from it."
+  ]
+}
