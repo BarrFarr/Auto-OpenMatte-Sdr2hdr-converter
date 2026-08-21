@@ -1,0 +1,155 @@
+{
+  "schema": "openmatte-hdr-phase16-reviewed-shot-segmentation/v1",
+  "status": "CONFIRMED_FROM_ACTUAL_FRAME_REVIEW",
+  "decision_scope": "Matrix-08 only; this record segments the already bounded HDR interval and is not a full-film scan or generalization claim.",
+  "analysis_interval": {
+    "start_frame": 73274,
+    "end_frame_exclusive": 73460,
+    "frame_count": 186
+  },
+  "frame_convention": {
+    "segments": "[start_frame, end_frame_exclusive)",
+    "boundary_frame": "the first frame belonging to the following actual shot"
+  },
+  "input_identity": {
+    "boundary_confirmation": "boundary_confirmation.json",
+    "input_profile": "matrix08_boundary_confirmation.json",
+    "cached_source_frame_hashes": {
+      "first": {
+        "hdr": "38739765CEDAF4C2834FE5F39CBD1C5FC148F65FD2BF51F1AE3D2FC72D72454E",
+        "om": "19027AE21F307A7188A5060B372FA1074121E068A5F82FD152098F6FA8B911CE"
+      },
+      "last": {
+        "hdr": "6DB9BA0AC3E536961D4AFDFCE96D90FF4D7CE477CC099260BBF689EEF79A76E6",
+        "om": "DAE36C24F2000DBE5AB5FBCABD94ACA84E8680E6282D61E02BC52D44215F9768"
+      }
+    },
+    "sync": "om_frame = hdr_frame - 19",
+    "geometry": "overlap [0, 140, 1920, 940]"
+  },
+  "review_method": {
+    "primary": "Chronological review of cached actual HDR frames, including every frame in the bounded interval.",
+    "supporting_diagnostics": [
+      "unchanged cached-frame boundary score in boundary_confirmation.json",
+      "bounded FFmpeg scene-score diagnostic over source frames [73247, 73488)",
+      "chat-safe chronological and transition review artifacts"
+    ],
+    "detector_rule": "No threshold detector auto-promotes a candidate to a verified shot boundary; visual continuity/discontinuity decides the final record.",
+    "reviewer": "Kiro local actual-frame review",
+    "reviewed_after_user_instruction": "Do not pool actual cuts; confirm boundaries before Phase 16 fitting."
+  },
+  "accepted_boundaries": [
+    {
+      "boundary_frame": 73295,
+      "transition": "73294 -> 73295",
+      "classification": "HARD_CUT",
+      "decision": "ACCEPTED",
+      "evidence": {
+        "actual_frame_review": "review_73289_73301.jpg shows a discontinuity from the low legs/floor composition to the Neo medium framing.",
+        "cached_boundary_score": {
+          "score": 0.438755,
+          "histogram": 0.06102,
+          "luminance": 0.030149,
+          "edge_ncc_change": 1.020794,
+          "robust_z": 1.679
+        },
+        "bounded_source_scene_score": 0.240236,
+        "source_keyframe": true
+      }
+    },
+    {
+      "boundary_frame": 73434,
+      "transition": "73433 -> 73434",
+      "classification": "HARD_CUT",
+      "decision": "ACCEPTED",
+      "evidence": {
+        "actual_frame_review": "review_73428_73440.jpg shows the cut from the tight two-person composition to the wide airborne-Neo composition at frame 73434.",
+        "cached_boundary_score": {
+          "score": 0.511408,
+          "histogram": 0.233796,
+          "luminance": 0.067982,
+          "edge_ncc_change": 1.010733,
+          "robust_z": 5.113
+        },
+        "bounded_source_scene_score": 0.136159,
+        "source_keyframe": false,
+        "detector_note": "The predeclared robust threshold was z >= 6.0, so detector non-acceptance does not override the directly observed hard composition discontinuity."
+      }
+    }
+  ],
+  "reviewed_non_boundaries": [
+    {
+      "frame": 73328,
+      "decision": "REJECTED_AS_CUT",
+      "reason": "Morpheus entering the foreground remains visually continuous across review_73322_73340.jpg; it is action within the second shot.",
+      "bounded_source_scene_score": 0.030512
+    },
+    {
+      "frame": 73441,
+      "decision": "REJECTED_AS_CUT",
+      "reason": "review_73437_73448.jpg shows continuous motion within the wide airborne-Neo shot that begins at frame 73434.",
+      "bounded_source_scene_score": 0.001672
+    }
+  ],
+  "shots": [
+    {
+      "shot_id": "Matrix-08-01",
+      "start_frame": 73274,
+      "end_frame_exclusive": 73295,
+      "frame_count": 21,
+      "segmentation_status": "VERIFIED",
+      "phase16_fit_status": "ELIGIBLE_NOT_RUN",
+      "per_frame_fit_weight": "1 / 21",
+      "boundary_provenance": {
+        "opening": "inherited bounded Matrix-08 interval start",
+        "closing": 73295
+      }
+    },
+    {
+      "shot_id": "Matrix-08-02",
+      "start_frame": 73295,
+      "end_frame_exclusive": 73434,
+      "frame_count": 139,
+      "segmentation_status": "VERIFIED",
+      "phase16_fit_status": "ELIGIBLE_NOT_RUN",
+      "per_frame_fit_weight": "1 / 139",
+      "boundary_provenance": {
+        "opening": 73295,
+        "closing": 73434
+      }
+    },
+    {
+      "shot_id": "Matrix-08-03",
+      "start_frame": 73434,
+      "end_frame_exclusive": 73460,
+      "frame_count": 26,
+      "segmentation_status": "VERIFIED",
+      "phase16_fit_status": "ELIGIBLE_NOT_RUN",
+      "per_frame_fit_weight": "1 / 26",
+      "boundary_provenance": {
+        "opening": 73434,
+        "closing": "inherited bounded Matrix-08 interval end"
+      }
+    }
+  ],
+  "coverage_validation": {
+    "ordered": true,
+    "non_overlapping": true,
+    "gap_free": true,
+    "frame_count_sum": 186,
+    "matches_analysis_interval": true
+  },
+  "short_shot_rule": {
+    "minimum_fit_frames": 8,
+    "origin": "Predeclared boundary-confirmation minimum segment length (ROBUST_MIN_SEGMENT_FRAMES = 8).",
+    "result": "All three verified shots meet the eligibility threshold. A future segment below 8 frames must be marked UNRESOLVED_TOO_SHORT and excluded; it must never be merged with another shot."
+  },
+  "fit_gate": {
+    "phase16_fit_started": false,
+    "allowed_only_when": [
+      "this segmentation record is used as the exclusive Matrix-08 temporal partition",
+      "each shot is fitted independently under the per-shot amendment",
+      "no field, alpha, gain, chroma threshold, or sample is pooled across these boundaries"
+    ]
+  }
+}

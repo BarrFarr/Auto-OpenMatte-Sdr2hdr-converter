@@ -1,0 +1,452 @@
+{
+  "evaluation": {
+    "hdr_centre_max_abs_residual": {
+      "A": 0.0,
+      "B": 0.0
+    },
+    "metrics": {
+      "A": {
+        "holdout": {
+          "chroma_absolute_error": {
+            "mean": 0.016397099387827737
+          },
+          "deltaE2000_auxiliary_203nit": {
+            "P95": 25.713308334350586,
+            "mean": 7.629023551940918
+          },
+          "deltaE_ITP": {
+            "P95": 138.2404022216797,
+            "mean": 41.45542111360034
+          },
+          "hue_absolute_error_degrees": {
+            "high_chroma_P90": 4.111167201711858,
+            "high_chroma_valid_samples": 48939,
+            "low_chroma_P50": 14.947113384149564,
+            "low_chroma_valid_samples": 252165
+          },
+          "low_frequency_chroma_residual": {
+            "mean": 0.016255821886558327
+          },
+          "luminance_nits": {
+            "MAE": 7.572148009164809,
+            "RMSE": 23.321471952154084
+          },
+          "sample_count": 499200
+        },
+        "train": {
+          "chroma_absolute_error": {
+            "mean": 0.016624440754944136
+          },
+          "deltaE2000_auxiliary_203nit": {
+            "P95": 26.137136459350586,
+            "mean": 7.717134475708008
+          },
+          "deltaE_ITP": {
+            "P95": 139.4055633544922,
+            "mean": 41.59575341140432
+          },
+          "hue_absolute_error_degrees": {
+            "high_chroma_P90": 4.151114880067216,
+            "high_chroma_valid_samples": 199681,
+            "low_chroma_P50": 14.830155240970056,
+            "low_chroma_valid_samples": 998397
+          },
+          "low_frequency_chroma_residual": {
+            "mean": 0.016436733938719448
+          },
+          "luminance_nits": {
+            "MAE": 8.139560650411843,
+            "RMSE": 27.29030284889766
+          },
+          "sample_count": 1996800
+        }
+      },
+      "B": {
+        "holdout": {
+          "chroma_absolute_error": {
+            "mean": 0.014665629406732465
+          },
+          "deltaE2000_auxiliary_203nit": {
+            "P95": 25.492692947387695,
+            "mean": 7.610152721405029
+          },
+          "deltaE_ITP": {
+            "P95": 138.13522338867188,
+            "mean": 41.20706736404768
+          },
+          "hue_absolute_error_degrees": {
+            "high_chroma_P90": 2.981885180522816,
+            "high_chroma_valid_samples": 48939,
+            "low_chroma_P50": 12.221394071019999,
+            "low_chroma_valid_samples": 252164
+          },
+          "low_frequency_chroma_residual": {
+            "mean": 0.014351767171559516
+          },
+          "luminance_nits": {
+            "MAE": 7.575867704617332,
+            "RMSE": 23.318150315728214
+          },
+          "sample_count": 499200
+        },
+        "train": {
+          "chroma_absolute_error": {
+            "mean": 0.01489744714013991
+          },
+          "deltaE2000_auxiliary_203nit": {
+            "P95": 25.883975982666016,
+            "mean": 7.699163436889648
+          },
+          "deltaE_ITP": {
+            "P95": 139.31045532226562,
+            "mean": 41.346688590132615
+          },
+          "hue_absolute_error_degrees": {
+            "high_chroma_P90": 3.0079936549002824,
+            "high_chroma_valid_samples": 199681,
+            "low_chroma_P50": 12.202385033221928,
+            "low_chroma_valid_samples": 998396
+          },
+          "low_frequency_chroma_residual": {
+            "mean": 0.014562884665402223
+          },
+          "luminance_nits": {
+            "MAE": 8.143116000119136,
+            "RMSE": 27.28509757466802
+          },
+          "sample_count": 1996800
+        }
+      }
+    },
+    "range": {
+      "A": {
+        "I_change_max_after_clip": 7.063150405883789e-06,
+        "above_peak_rgb_fraction_before_clip_mean": 0.0,
+        "negative_rgb_fraction_before_clip_mean": 0.0
+      },
+      "B": {
+        "I_change_max_after_clip": 5.232635885477066e-05,
+        "above_peak_rgb_fraction_before_clip_mean": 0.0,
+        "negative_rgb_fraction_before_clip_mean": 0.0
+      }
+    },
+    "seam": {
+      "A": {
+        "bottom": {
+          "chroma_step_mean": 0.017384273931384087,
+          "hue_step_degrees_mean": 5.116337299346924,
+          "hue_valid_samples": 49920,
+          "luminance_step_nits_P95": 26.00001335144043,
+          "luminance_step_nits_mean": 8.458502769470215
+        },
+        "top": {
+          "chroma_step_mean": 0.01763758808374405,
+          "hue_step_degrees_mean": 15.056745529174805,
+          "hue_valid_samples": 49916,
+          "luminance_step_nits_P95": 175.3385009765625,
+          "luminance_step_nits_mean": 28.521957397460938
+        }
+      },
+      "B": {
+        "bottom": {
+          "chroma_step_mean": 0.018482903018593788,
+          "hue_step_degrees_mean": 5.064857006072998,
+          "hue_valid_samples": 49920,
+          "luminance_step_nits_P95": 26.018083572387695,
+          "luminance_step_nits_mean": 8.463430404663086
+        },
+        "top": {
+          "chroma_step_mean": 0.017228174954652786,
+          "hue_step_degrees_mean": 9.670421600341797,
+          "hue_valid_samples": 49920,
+          "luminance_step_nits_P95": 175.1383056640625,
+          "luminance_step_nits_mean": 28.512367248535156
+        }
+      }
+    },
+    "timing": {
+      "application_seconds": 35.020610899999156,
+      "application_seconds_per_frame": 1.3469465730768906,
+      "evaluation_seconds": 54.29476950000026
+    },
+    "visual_artifacts": {
+      "amplified_composite_difference": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\results\\matrix08_phase16_per_shot\\shots\\Matrix-08-03\\visual\\residual_maps\\amplified_B_minus_A_composite.png",
+      "contact_sheet": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\results\\matrix08_phase16_per_shot\\shots\\Matrix-08-03\\visual\\contact_sheet.png",
+      "high_chroma_selection": {
+        "height": 216,
+        "mean_reference_chroma": 0.09699225498659444,
+        "measurement": "mean sigma-16 ICtCp chroma magnitude",
+        "overlap_x": 961,
+        "overlap_y": 75,
+        "selection_tiebreak": "first maximum in row-major overlap order",
+        "source": "HDR reference only",
+        "width": 384
+      },
+      "highest_chroma_window": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\results\\matrix08_phase16_per_shot\\shots\\Matrix-08-03\\visual\\review_windows\\highest_chroma_hdr_reference_only.png",
+      "lowpass_residual_A": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\results\\matrix08_phase16_per_shot\\shots\\Matrix-08-03\\visual\\residual_maps\\lowpass_chroma_A_overlap.png",
+      "lowpass_residual_B": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\results\\matrix08_phase16_per_shot\\shots\\Matrix-08-03\\visual\\residual_maps\\lowpass_chroma_B_overlap.png",
+      "manual_review_targets": [
+        "rice paper",
+        "skin",
+        "walls",
+        "dark clothing",
+        "green and cyan regions",
+        "red regions",
+        "saturated highlights",
+        "top seam",
+        "bottom seam"
+      ],
+      "seam_map": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\results\\matrix08_phase16_per_shot\\shots\\Matrix-08-03\\visual\\seam_maps\\top_bottom_A_B_context.png",
+      "visual_manifest": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\results\\matrix08_phase16_per_shot\\shots\\Matrix-08-03\\visual\\visual_manifest.json"
+    }
+  },
+  "fit": {
+    "alpha_p": {
+      "applied": 0.001225597878170748,
+      "raw": 0.0012868777720792856,
+      "shrunk": 0.001225597878170748
+    },
+    "alpha_t": {
+      "applied": 0.008605455496027429,
+      "raw": 0.0090357282708288,
+      "shrunk": 0.008605455496027429
+    },
+    "fit": {
+      "alpha_bound": 0.25,
+      "alpha_formula": "mean_train(unit_rms_shape * lowpass_residual)",
+      "alpha_p_clamped": false,
+      "alpha_shrinkage": 0.05,
+      "alpha_t_clamped": false,
+      "cache_indices_used": [
+        160,
+        186
+      ],
+      "frame_weight": 0.038461538461538464,
+      "frames_used": 26,
+      "holdout_samples_used": 0,
+      "normal_matrix": [
+        [
+          0.9999999999999996,
+          -0.0015625000000000187,
+          -0.002187499999999873,
+          0.333334327980324,
+          0.0005351019965277745,
+          0.3333794270833335
+        ],
+        [
+          -0.0015625000000000187,
+          0.333334327980324,
+          0.0005351019965277736,
+          -0.0015624970330132435,
+          0.0002864222491228467,
+          -0.0005824016655816021
+        ],
+        [
+          -0.002187499999999873,
+          0.0005351019965277736,
+          0.3333794270833335,
+          0.0002864222491228585,
+          -0.0005824016655816013,
+          -0.002234893066406452
+        ],
+        [
+          0.333334327980324,
+          -0.0015624970330132435,
+          0.0002864222491228585,
+          0.20000198928754043,
+          0.0005506896760581458,
+          0.11115267567450923
+        ],
+        [
+          0.0005351019965277745,
+          0.0002864222491228467,
+          -0.0005824016655816013,
+          0.0005506896760581458,
+          0.11115267567450923,
+          0.0005281281661139571
+        ],
+        [
+          0.3333794270833335,
+          -0.0005824016655816021,
+          -0.002234893066406452,
+          0.11115267567450923,
+          0.0005281281661139571,
+          0.2000884132913413
+        ]
+      ],
+      "normal_matrix_trace": 2.177956833317048,
+      "raw_shape_coefficients": {
+        "Cp": [
+          -0.0007936499077132476,
+          0.0018542831282866174,
+          -0.0006222535078017634,
+          8.03538413446781e-05,
+          -0.00035489166221116576,
+          0.000555524881150703
+        ],
+        "Ct": [
+          -0.007214801770291719,
+          0.0010383153564517684,
+          0.0017797898176539464,
+          -0.006558351059323678,
+          0.0006839454640940107,
+          0.0020650198196285616
+        ]
+      },
+      "seconds": 30.127182000000175,
+      "shape_ridge": 3.6299280555284126e-07,
+      "shape_ridge_relative": 1e-06,
+      "temporal_aggregation": "equal frame weight within this shot only",
+      "train_lowpass_residual_rms": [
+        0.01764080574341222,
+        0.011186558404973838
+      ],
+      "train_reference_chroma_thresholds": {
+        "P50_low": 0.059273265302181244,
+        "P90_high": 0.09976650029420853,
+        "sample_count": 1996800
+      },
+      "train_samples_per_frame": 76800,
+      "train_total_samples": 1996800,
+      "unit_rms": {
+        "Cp": 1.0,
+        "Ct": 1.0
+      },
+      "unit_rms_shape_coefficients": {
+        "Cp": [
+          -0.6167258279910045,
+          1.4409178234737485,
+          -0.48353790013670006,
+          0.06244099426451331,
+          -0.2757775841679616,
+          0.43168472517615203
+        ],
+        "Ct": [
+          -0.7984752187599745,
+          0.11491224676449352,
+          0.19697257239273386,
+          -0.7258246260293924,
+          0.07569348700765152,
+          0.22853949487720016
+        ]
+      }
+    },
+    "gain": {
+      "bottom_profile_range_stops": [
+        -6.323422449840542,
+        -5.38878821333725
+      ],
+      "bottom_profile_sha256": "A67FD763FD68F8DEF803A4EB9FB1B42732B4C7041F6DB6700D92F18825C66361",
+      "frames_used": 26,
+      "seconds": 1.0419082999978855,
+      "shot_gain_stops": -6.040424585342407,
+      "top_profile_range_stops": [
+        -6.783194103800131,
+        -5.855382143798322
+      ],
+      "top_profile_sha256": "2C681B8C399DFDDBA6323D34D711757977E3B615AC7ECE21A2BF66D9963555B1"
+    },
+    "new_residual_field": {
+      "basis": [
+        "1",
+        "x",
+        "y",
+        "x^2",
+        "x*y",
+        "y^2"
+      ],
+      "coefficient_Cp": [
+        -0.6167258279910045,
+        1.4409178234737485,
+        -0.48353790013670006,
+        0.06244099426451331,
+        -0.2757775841679616,
+        0.43168472517615203
+      ],
+      "coefficient_Ct": [
+        -0.7984752187599745,
+        0.11491224676449352,
+        0.19697257239273386,
+        -0.7258246260293924,
+        0.07569348700765152,
+        0.22853949487720016
+      ],
+      "degree": 2,
+      "unit_rms_region": "spatial TRAIN only"
+    },
+    "train_reference_chroma_thresholds": {
+      "P50_low": 0.059273265302181244,
+      "P90_high": 0.09976650029420853
+    }
+  },
+  "frozen_baseline": {
+    "field_coefficients_highest_order_first": {
+      "bottom": [
+        [
+          -0.10628870667090953,
+          0.24730720016313007
+        ],
+        [
+          0.18304545676816794,
+          -0.28803223009901846
+        ],
+        [
+          0.896842039792481,
+          0.06737601648224092
+        ]
+      ],
+      "top": [
+        [
+          -0.31893196059291284,
+          0.28029977418402097
+        ],
+        [
+          0.40399432055086665,
+          -0.3572551034178238
+        ],
+        [
+          0.7610643617525099,
+          0.04732633754025932
+        ]
+      ]
+    },
+    "field_parameter_count": 12,
+    "field_sha256": "1B431FB3FFE87DA6162680CFF3800087049129CDCD9F07DBE823797688318815",
+    "field_source": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\openmatte_hdr_chroma_field\\matrix08_gpu_milestone.json",
+    "field_z_shot": [
+      0.9183723074559053,
+      -0.017991850088942912
+    ],
+    "intensity_controls": {
+      "hue_slope_radians": 0.0,
+      "intensity_centre": 0.2737827739241617,
+      "intensity_normalization": 0.16570554081191413,
+      "log_saturation_slope": 0.17093341556958339
+    },
+    "intensity_source": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\openmatte_hdr_chroma_field\\matrix08_intensity_iteration.json",
+    "rule": "Historical frozen baseline constants; not refitted, averaged, selected, or used to estimate the Phase 16 residual."
+  },
+  "plan": {
+    "cache_indices": [
+      160,
+      186
+    ],
+    "frame_count": 26,
+    "interval": [
+      73434,
+      73460
+    ],
+    "per_frame_fit_weight": 0.038461538461538464,
+    "shot_id": "Matrix-08-03"
+  },
+  "previsual_verdict": {
+    "alpha_comfort_limit": 0.125,
+    "alpha_comfortable": true,
+    "holdout_high_chroma_hue_improvement_fraction": 0.27468647364155313,
+    "holdout_low_frequency_chroma_improvement_fraction": 0.11713063346081827,
+    "holdout_luminance_MAE_change_fraction": 0.0004912338543860972,
+    "previsual_status": "METRIC_GATE_PASS__VISUAL_REVIEW_REQUIRED",
+    "seam_chroma_step_change_fraction": 0.019679592073680308
+  },
+  "schema": "openmatte-hdr-phase16-per-shot-result/v1"
+}

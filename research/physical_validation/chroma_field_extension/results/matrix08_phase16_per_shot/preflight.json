@@ -1,0 +1,218 @@
+{
+  "context": {
+    "backend": "numpy/cpu x16",
+    "cache": {
+      "fingerprint": "CA88DF5325F51BA760648F5E5E1B1E935E77139E6D76E6F0BFAF20C578A59AED",
+      "gigabytes": 8.0566272,
+      "path": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\tools\\openmatte_hdr\\cache\\73274_186",
+      "reused": true,
+      "source_frame_hashes": {
+        "first": {
+          "hdr": "38739765CEDAF4C2834FE5F39CBD1C5FC148F65FD2BF51F1AE3D2FC72D72454E",
+          "om": "19027AE21F307A7188A5060B372FA1074121E068A5F82FD152098F6FA8B911CE"
+        },
+        "last": {
+          "hdr": "6DB9BA0AC3E536961D4AFDFCE96D90FF4D7CE477CC099260BBF689EEF79A76E6",
+          "om": "DAE36C24F2000DBE5AB5FBCABD94ACA84E8680E6282D61E02BC52D44215F9768"
+        }
+      }
+    },
+    "execution_lock": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\PHASE16_EXECUTION_LOCK.json",
+    "plans": [
+      {
+        "cache_indices": [
+          0,
+          21
+        ],
+        "frame_count": 21,
+        "interval": [
+          73274,
+          73295
+        ],
+        "per_frame_fit_weight": 0.047619047619047616,
+        "shot_id": "Matrix-08-01"
+      },
+      {
+        "cache_indices": [
+          21,
+          160
+        ],
+        "frame_count": 139,
+        "interval": [
+          73295,
+          73434
+        ],
+        "per_frame_fit_weight": 0.007194244604316547,
+        "shot_id": "Matrix-08-02"
+      },
+      {
+        "cache_indices": [
+          160,
+          186
+        ],
+        "frame_count": 26,
+        "interval": [
+          73434,
+          73460
+        ],
+        "per_frame_fit_weight": 0.038461538461538464,
+        "shot_id": "Matrix-08-03"
+      }
+    ],
+    "profile": {
+      "cache_root": "tools/openmatte_hdr/cache",
+      "description": "Matrix-08 bounded interval, used to confirm actual shot boundaries before Phase 16.",
+      "expected_frame_count": 186,
+      "feather": 24,
+      "ffmpeg": "dev/ffmpeg-build/install/bin/ffmpeg.exe",
+      "fps": "24000/1001",
+      "hdr": "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+      "hdr_size": [
+        3840,
+        1600
+      ],
+      "legacy_geometry": {
+        "confidence": 1.0,
+        "offset": [
+          0,
+          140
+        ],
+        "overlap": [
+          0,
+          140,
+          1920,
+          940
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "status": "preserved geometry contract"
+      },
+      "legacy_sync": {
+        "confidence": 0.940513,
+        "equation": "om_frame = hdr_frame - 19",
+        "frame_locked": true,
+        "frame_offset": -19,
+        "frame_rounding": "inherited from the verified Matrix-08 anchor",
+        "historical_time_seconds": 3060.0152916666666,
+        "offset_seconds_at_24000_1001": -0.7924583333333333,
+        "status": "LOCKED"
+      },
+      "limitations": [
+        "Boundary confirmation only."
+      ],
+      "name": "matrix08_boundary_confirmation",
+      "offset_frames": -19,
+      "om": "G:\\Filmy\\IMAX format (open matte)\\The Matrix (1999) [OPEN MATTE] [WEB-DL 1080p 10bit DD5.1 x265].mkv",
+      "om_size": [
+        1920,
+        1080
+      ],
+      "om_start_frame": 73255,
+      "overlap": [
+        0,
+        140,
+        1920,
+        940
+      ],
+      "schema": "openmatte-hdr-input-profile/v1",
+      "seam_band": 48,
+      "shot_end": 73460,
+      "shot_start": 73274
+    },
+    "profile_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\matrix08_boundary_confirmation.json",
+    "segmentation": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\matrix08_verified_segmentation.json"
+  },
+  "frozen_baseline": {
+    "field_coefficients_highest_order_first": {
+      "bottom": [
+        [
+          -0.10628870667090953,
+          0.24730720016313007
+        ],
+        [
+          0.18304545676816794,
+          -0.28803223009901846
+        ],
+        [
+          0.896842039792481,
+          0.06737601648224092
+        ]
+      ],
+      "top": [
+        [
+          -0.31893196059291284,
+          0.28029977418402097
+        ],
+        [
+          0.40399432055086665,
+          -0.3572551034178238
+        ],
+        [
+          0.7610643617525099,
+          0.04732633754025932
+        ]
+      ]
+    },
+    "field_parameter_count": 12,
+    "field_sha256": "1B431FB3FFE87DA6162680CFF3800087049129CDCD9F07DBE823797688318815",
+    "field_source": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\openmatte_hdr_chroma_field\\matrix08_gpu_milestone.json",
+    "field_z_shot": [
+      0.9183723074559053,
+      -0.017991850088942912
+    ],
+    "intensity_controls": {
+      "hue_slope_radians": 0.0,
+      "intensity_centre": 0.2737827739241617,
+      "intensity_normalization": 0.16570554081191413,
+      "log_saturation_slope": 0.17093341556958339
+    },
+    "intensity_source": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\openmatte_hdr_chroma_field\\matrix08_intensity_iteration.json",
+    "rule": "Historical frozen baseline constants; not refitted, averaged, selected, or used to estimate the Phase 16 residual."
+  },
+  "invariants": {
+    "alpha_zero_equals_A": true,
+    "cache_partition": [
+      [
+        0,
+        21
+      ],
+      [
+        21,
+        160
+      ],
+      [
+        160,
+        186
+      ]
+    ],
+    "cache_reused_without_build": true,
+    "cross_shot_fit_disallowed": true,
+    "hdr_centre_exact_copy_contract": true,
+    "holdout_never_enters_fit": true,
+    "luminance_ICtCp_I_copied_before_rgb_clip": true,
+    "preflight_gain_scope": "Matrix-08-01",
+    "shot_count": 3
+  },
+  "schema": "openmatte-hdr-phase16-per-shot-preflight/v1",
+  "spatial_sampling": {
+    "block_size": [
+      40,
+      40
+    ],
+    "holdout_basis_sha256": "BC689DC043269129DCA1609E8798322880EC8B82329317710E426E61FF9FD651",
+    "holdout_position_sha256": "8BCCBB2181EE2C1FF68752BC47364E59843E7EE0E4BC12C0A8975CB0436FDA6D",
+    "holdout_rule": "((block_x + block_y) mod 5) == 2",
+    "holdout_samples_per_frame": 19200,
+    "overlap_size": [
+      1920,
+      800
+    ],
+    "pixel_stride": 4,
+    "train_basis_sha256": "64DC0E8251629B4A5679C7D6FCC777DD42338691DBFD3C52741F2C353556F491",
+    "train_position_sha256": "23FC9ECAE31DB335A1ABFA357C73E1979A1BF73A166779BC6A36E88F4D660A64",
+    "train_samples_per_frame": 76800
+  },
+  "status": "PASS"
+}

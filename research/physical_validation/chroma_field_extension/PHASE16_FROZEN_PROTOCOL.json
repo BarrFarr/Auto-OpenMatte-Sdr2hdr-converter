@@ -1,0 +1,170 @@
+{
+  "phase": "Phase 16 — low-frequency chroma-field extension",
+  "status": "PREDECLARED BEFORE EXTRACTION",
+  "question": "Can a low-frequency spatial chroma residual field, applied after the existing shot adaptation and before detail reconstruction, produce a materially better visual match to the HDR reference in the overlap while remaining spatially smooth and temporally stable?",
+  "material": "The Matrix, shot Matrix-08 only, HDR frames [73274, 73460), 186 frames, 1920x1080, overlap [0, 140, 1920, 940]",
+  "forbidden": [
+    "LUT of any resolution",
+    "MMR of any order",
+    "temporal fusion or any temporal state",
+    "AI",
+    "segmentation or semantic masks",
+    "per-pixel unrestricted residual fitting",
+    "higher-order spatial polynomials beyond degree 2",
+    "retuning any frozen baseline parameter",
+    "raising the alpha bounds",
+    "modifying the luminance path",
+    "modifying geometry or synchronization",
+    "modifying production code",
+    "running Matrix-02, Matrix-05, BR2049 or the whole film",
+    "any generalization claim"
+  ],
+  "frozen_baseline": {
+    "base": "GaussianBlur(SDR, sigma=16)",
+    "detail": "clip(SDR / max(base, eps), 0.25, 4.0)",
+    "detail_exponent": 0.85,
+    "shot_adaptation": "existing boundary-conditioned gain, 48 px seam band, smooth sigma 128, clamp +/-1.5 stops",
+    "existing_chroma_field": "existing accepted 12-control low-frequency ICtCp field plus the accepted saturation-only intensity slope, unchanged",
+    "intensity_hue_slope_enabled": false,
+    "no_parameter_may_be_retuned": true
+  },
+  "variant_under_test": {
+    "A": "frozen baseline exactly as above",
+    "B": "A plus one bounded low-frequency chroma residual field",
+    "only_difference": "the new bounded residual field",
+    "form": "corrected_Ct = base_Ct + alpha_t * field_Ct(x, y); corrected_Cp = base_Cp + alpha_p * field_Cp(x, y)",
+    "field_basis": "single degree-2 spatial polynomial in normalized (x, y): [1, x, y, x^2, x*y, y^2], six coefficients per chroma channel",
+    "field_normalization": "each channel field is normalized to unit RMS over the fit region, so its scale is carried entirely by the corresponding alpha",
+    "alpha_semantics": "alpha_t and alpha_p are shot-global scalars expressed directly in ICtCp chroma units, so alpha = 0 is exactly the frozen baseline",
+    "applied_to": "the low-frequency chroma component of the shot-adapted frame, with chroma detail re-added unchanged",
+    "intensity_untouched": true,
+    "luminance_untouched": true
+  },
+  "training_representation": {
+    "residual_measured": "base(HDR overlap) ICtCp chroma minus base(SDR' after shot adaptation) ICtCp chroma",
+    "base_definition": "Gaussian sigma 16, identical to the frozen definition",
+    "never_fitted_against_raw_full_resolution_chroma": true,
+    "rationale": "preserves the Phase 11 to 14 lesson that high-frequency disagreement between different masters must not enter the fit"
+  },
+  "central_change": {
+    "statement": "The residual field is estimated from the ENTIRE overlap, not only the seam bands.",
+    "reason": "The existing shot gain is derived mainly from the seam region, which gives level continuity but leaves the overlap interior insufficiently corrected.",
+    "seam_role": "continuity and quality control only; the seam is not the sole source of the chroma correction"
+  },
+  "sampling": {
+    "region": "full overlap, 1920 x 800",
+    "pixel_stride": 4,
+    "frames": "all 186",
+    "deterministic": true,
+    "identical_geometry_for_every_variant": true,
+    "no_hue_selected_patches": true,
+    "no_semantic_masks": true
+  },
+  "holdout": {
+    "type": "deterministic spatial split of the overlap, declared before fitting",
+    "rule": "the overlap is tiled into 40 x 40 pixel blocks; a block is holdout when (block_x + block_y) mod 5 == 2",
+    "fit_fraction": 0.8,
+    "holdout_fraction": 0.2,
+    "spatially_interleaved": true,
+    "no_parameter_tuning_on_holdout": true,
+    "purpose": "decide whether the additional chroma field generalizes within the same shot"
+  },
+  "solver": {
+    "type": "regularized linear least squares, ridge",
+    "prior": "alpha_t = 0 and alpha_p = 0, the frozen baseline, is the safe fallback",
+    "shape_ridge_relative": 1e-06,
+    "shape_ridge_purpose": "numerical conditioning of the 6x6 normal matrix only",
+    "alpha_shrinkage": 0.05,
+    "alpha_shrinkage_declared_before_fitting": true,
+    "no_sweep": true,
+    "alpha_bound": 0.25,
+    "bound_semantics": "absolute ICtCp chroma amplitude; if the solution wants to hit the bound extensively that is evidence the model is being asked to do too much, and the bound must not be raised"
+  },
+  "color_representation": {
+    "space": "ICtCp",
+    "modified_components": ["Ct", "Cp"],
+    "untouched_components": ["I"],
+    "no_rgb_to_rgb_fitting": true,
+    "no_new_color_transform_family": true
+  },
+  "metrics": {
+    "overlap": [
+      "mean deltaE2000",
+      "P95 deltaE2000",
+      "deltaE_ITP mean and P95",
+      "low-frequency chroma residual",
+      "hue residual",
+      "luminance MAE and RMSE",
+      "seam residual"
+    ],
+    "reported_separately_for": ["fit region", "holdout region"],
+    "hue_must_be_split": {
+      "low_chroma": "reference base chroma below its 50th percentile",
+      "high_chroma": "reference base chroma above its 90th percentile",
+      "reason": "near-neutral pixels must not dominate the hue statistic"
+    },
+    "deltaE2000_white_reference_nits": 203.0,
+    "deltaE2000_caveat": "deltaE2000 assumes a reflective SDR reference white; it is reported with a declared 203 nit white per BT.2408 and is secondary to deltaE_ITP for HDR material",
+    "local_regions": ["high-chroma", "dark clothing", "neutral and light materials", "coloured surfaces", "top seam", "bottom seam"]
+  },
+  "visual_test": {
+    "required_videos": [
+      "Matrix08_A_baseline_hdr10.mkv",
+      "Matrix08_B_extended_chroma_hdr10.mkv",
+      "Matrix08_A_vs_B_hdr10.mkv"
+    ],
+    "required_stills": ["contact_sheet.png", "residual_maps/", "seam_maps/"],
+    "mandatory_targets": [
+      "rice paper",
+      "skin",
+      "walls",
+      "dark clothing",
+      "green and cyan regions",
+      "red regions",
+      "saturated highlights",
+      "top seam",
+      "bottom seam"
+    ],
+    "coloured_region_location_rule": "the highest-chroma window is located deterministically from the HDR reference only, never from any result",
+    "primary_success_criterion": "visual coherence, not mean deltaE alone"
+  },
+  "hdr_centre": {
+    "must_remain_untouched_in_both_A_and_B": true,
+    "verification": "amplified residual map must be exactly zero across the overlap rows of the composite"
+  },
+  "performance": {
+    "gpu_path": "existing CuPy path",
+    "no_disk_wide_cache": true,
+    "reuses_existing_matrix08_cache": true,
+    "must_report": ["fitting time", "application time per frame", "total render time"],
+    "reference_point_seconds_per_frame": 0.069
+  },
+  "success_gate": {
+    "verdict_requires_all_of": [
+      "B improves holdout chroma and hue materially over A",
+      "B does not materially degrade luminance",
+      "B creates no new cyan, purple or yellow artifacts",
+      "B improves the visually problematic regions",
+      "alpha_t and alpha_p stay comfortably inside the bounds",
+      "seams do not materially worsen",
+      "the correction is spatially smooth"
+    ],
+    "material_threshold_fraction": 0.05,
+    "material_threshold_note": "a 5 percent improvement on the holdout low-frequency chroma residual and on high-chroma hue is the predeclared bar for 'materially better'",
+    "luminance_degradation_limit_fraction": 0.01,
+    "seam_degradation_limit_fraction": 0.02,
+    "alpha_comfort_fraction_of_bound": 0.5,
+    "verdicts": [
+      "CHROMA FIELD VALUE CONFIRMED",
+      "VISUAL FAILURE",
+      "NO VALUE DEMONSTRATED",
+      "MODEL SATURATION / FAIL"
+    ],
+    "mapping": {
+      "metrics_improve_but_video_worse": "VISUAL FAILURE",
+      "alpha_saturates_bounds": "MODEL SATURATION / FAIL",
+      "holdout_does_not_improve": "NO VALUE DEMONSTRATED"
+    }
+  },
+  "hard_stop": "After the Matrix-08 comparison, stop. Do not create another model, change the field degree, raise the alpha bounds, add a LUT, add temporal fusion, or run additional shots."
+}

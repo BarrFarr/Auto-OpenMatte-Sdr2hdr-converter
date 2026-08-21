@@ -1,0 +1,62 @@
+{
+  "cache_root": "tools/openmatte_hdr/cache",
+  "description": "Matrix-08 bounded interval, used to confirm actual shot boundaries before Phase 16.",
+  "expected_frame_count": 186,
+  "feather": 24,
+  "ffmpeg": "dev/ffmpeg-build/install/bin/ffmpeg.exe",
+  "fps": "24000/1001",
+  "hdr": "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+  "hdr_size": [
+    3840,
+    1600
+  ],
+  "legacy_geometry": {
+    "confidence": 1.0,
+    "offset": [
+      0,
+      140
+    ],
+    "overlap": [
+      0,
+      140,
+      1920,
+      940
+    ],
+    "scale": [
+      0.5,
+      0.5
+    ],
+    "status": "preserved geometry contract"
+  },
+  "legacy_sync": {
+    "confidence": 0.940513,
+    "equation": "om_frame = hdr_frame - 19",
+    "frame_locked": true,
+    "frame_offset": -19,
+    "frame_rounding": "inherited from the verified Matrix-08 anchor",
+    "historical_time_seconds": 3060.0152916666666,
+    "offset_seconds_at_24000_1001": -0.7924583333333333,
+    "status": "LOCKED"
+  },
+  "limitations": [
+    "Boundary confirmation only."
+  ],
+  "name": "matrix08_boundary_confirmation",
+  "offset_frames": -19,
+  "om": "G:\\Filmy\\IMAX format (open matte)\\The Matrix (1999) [OPEN MATTE] [WEB-DL 1080p 10bit DD5.1 x265].mkv",
+  "om_size": [
+    1920,
+    1080
+  ],
+  "om_start_frame": 73255,
+  "overlap": [
+    0,
+    140,
+    1920,
+    940
+  ],
+  "schema": "openmatte-hdr-input-profile/v1",
+  "seam_band": 48,
+  "shot_end": 73460,
+  "shot_start": 73274
+}

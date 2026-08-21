@@ -1,0 +1,86 @@
+{
+  "schema": "openmatte-hdr-phase16-per-shot-amendment/v1",
+  "status": "BOUNDARIES_CONFIRMED__FIT_NOT_RUN",
+  "amends": "PHASE16_FROZEN_PROTOCOL.json",
+  "segmentation_record": "matrix08_verified_segmentation.json",
+  "reason": "The frozen protocol's description of Matrix-08 as one 186-frame shot is superseded by the confirmed actual-shot partition. This amendment is a temporal isolation correction only; it does not introduce a new color model or relax a frozen prohibition.",
+  "scope": {
+    "material": "The Matrix, Matrix-08 only",
+    "analysis_interval": [73274, 73460],
+    "actual_shots": [
+      {"shot_id": "Matrix-08-01", "frames": [73274, 73295], "frame_count": 21},
+      {"shot_id": "Matrix-08-02", "frames": [73295, 73434], "frame_count": 139},
+      {"shot_id": "Matrix-08-03", "frames": [73434, 73460], "frame_count": 26}
+    ],
+    "no_additional_shots_or_material": true
+  },
+  "per_shot_execution_contract": {
+    "fit_unit": "one verified actual shot at a time",
+    "per_shot": [
+      "fit that shot's existing boundary-conditioned gain using only frames belonging to that shot",
+      "fit that shot's bounded low-frequency ICtCp chroma residual field using only frames belonging to that shot",
+      "freeze that shot's gain, field shape, alpha_t, alpha_p, and train-derived chroma threshold across that shot's frames",
+      "evaluate that shot independently before any cross-shot reporting aggregation"
+    ],
+    "forbidden": [
+      "pooling frames, pixels, gain samples, field-shape samples, alpha samples, or chroma-threshold samples across actual cuts",
+      "averaging alpha_t, alpha_p, polynomial fields, or gain parameters across shots",
+      "using a value fitted in one verified shot to transform another verified shot",
+      "merging a short or unresolved shot with another shot"
+    ]
+  },
+  "train_holdout_contract": {
+    "partition": "Use the frozen deterministic 80/20 spatial overlap split independently within every shot.",
+    "train_only": [
+      "degree-2 field shape coefficients for Ct and Cp",
+      "alpha_t and alpha_p, including declared shrinkage and bound projection",
+      "high/low chroma threshold = median(HDR base chroma | that shot's spatial TRAIN pixels)"
+    ],
+    "holdout_only": "HOLDOUT is used exclusively for evaluation. The frozen per-shot threshold is applied unchanged to both that shot's TRAIN and HOLDOUT pixels.",
+    "no_holdout_tuning": true
+  },
+  "model_contract": {
+    "unchanged_from_frozen_protocol": [
+      "degree-2 basis [1, x, y, x^2, x*y, y^2], six coefficients per chroma channel",
+      "shape_ridge_relative = 1e-06",
+      "alpha_shrinkage = 0.05",
+      "absolute alpha_t and alpha_p bounds of 0.25",
+      "ICtCp Ct/Cp-only low-frequency residual; I/luminance path untouched",
+      "frozen baseline, geometry, synchronization, and detail reconstruction"
+    ],
+    "still_forbidden": [
+      "LUT", "MMR", "temporal fusion or state", "AI", "semantic segmentation or masks",
+      "per-pixel unrestricted residual fitting", "field degree above 2", "raising alpha bounds",
+      "retuning frozen baseline parameters", "altering luminance, geometry, or synchronization"
+    ]
+  },
+  "frame_weighting_and_reporting": {
+    "within_shot_fit_weight": "Each frame in a shot receives exactly 1 / shot_frame_count total temporal weight; per-pixel samples within a frame retain the frozen spatial sampling rule.",
+    "weights": {
+      "Matrix-08-01": "1 / 21",
+      "Matrix-08-02": "1 / 139",
+      "Matrix-08-03": "1 / 26"
+    },
+    "reporting": [
+      "Report A versus B TRAIN and HOLDOUT metrics separately for every actual shot.",
+      "Primary criteria remain deltaE_ITP, chroma error, hue error, luminance error, and seam residual; deltaE2000 remains auxiliary only.",
+      "Only after the per-shot report, publish an equal-shot macro aggregate for descriptive reporting. Do not derive, select, or modify any fit parameter from that aggregate.",
+      "Do not report or use an averaged field or averaged alpha_t/alpha_p."
+    ]
+  },
+  "short_shot_handling": {
+    "minimum_fit_frames": 8,
+    "rule": "A verified shot below 8 frames is UNRESOLVED_TOO_SHORT and excluded from Phase 16 fitting/report aggregation. It is never merged or pooled with another shot.",
+    "current_result": "All three confirmed Matrix-08 shots are eligible: 21, 139, and 26 frames."
+  },
+  "implementation_gate": {
+    "required_preflight": [
+      "Load and validate matrix08_verified_segmentation.json: exact [73274, 73460) coverage, ordered, gap-free, non-overlapping, and all selected shots VERIFIED/eligible.",
+      "Construct and solve every fit only from a single shot's frames and its spatial TRAIN pixels.",
+      "Refuse execution if a requested frame is outside its shot, if any shot is unresolved, or if a cross-shot parameter aggregate is attempted."
+    ],
+    "phase16_runner_created": false,
+    "phase16_fit_run": false,
+    "authorization_state": "STOPPED_AFTER_BOUNDARY_CONFIRMATION"
+  }
+}

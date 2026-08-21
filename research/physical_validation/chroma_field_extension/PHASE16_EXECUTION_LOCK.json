@@ -1,0 +1,76 @@
+{
+  "schema": "openmatte-hdr-phase16-execution-lock/v1",
+  "status": "PREDECLARED_BEFORE_PHASE16_FIT",
+  "scope": {
+    "material": "The Matrix, Matrix-08 only",
+    "analysis_interval": [73274, 73460],
+    "segmentation_record": "matrix08_verified_segmentation.json",
+    "shots": [
+      {"shot_id": "Matrix-08-01", "frames": [73274, 73295]},
+      {"shot_id": "Matrix-08-02", "frames": [73295, 73434]},
+      {"shot_id": "Matrix-08-03", "frames": [73434, 73460]}
+    ]
+  },
+  "frozen_baseline": {
+    "existing_spatial_field": {
+      "source": "research/physical_validation/openmatte_hdr_chroma_field/matrix08_gpu_milestone.json",
+      "parameter_path": "accelerated_full_run.chroma_field",
+      "rule": "Load the accepted 12-control field unchanged. It is a historical frozen baseline parameter and is never refitted, altered, averaged, or used to fit the Phase 16 residual."
+    },
+    "accepted_intensity_saturation": {
+      "source": "research/physical_validation/openmatte_hdr_chroma_field/matrix08_intensity_iteration.json",
+      "parameter_path": "new_bounded_controls",
+      "rule": "Load centre, normalization, and accepted saturation-only slope unchanged; hue slope is exactly zero. These controls are not refitted."
+    },
+    "boundary_conditioned_gain": {
+      "rule": "Fit the existing gain procedure independently for each verified shot from every frame belonging to that shot, stride 1. It is a frozen baseline adaptation, not a Phase 16 residual-field fit."
+    }
+  },
+  "temporal_isolation": {
+    "cache_rule": "Open the existing [73274,73460) cache once; use only strict views [0:21], [21:160], and [160:186]. Never build a sub-shot cache.",
+    "field_fit_rule": "Every normal-equation accumulator, threshold sample collection, alpha calculation, metric accumulator, gain fit, and output parameter record has exactly one shot_id.",
+    "forbidden": [
+      "cross-shot data concatenation",
+      "cross-shot parameter reuse other than the frozen historical baseline constants",
+      "averaged field, gain, alpha, threshold, or coefficient parameters",
+      "temporal state, fusion, smoothing, or pooling"
+    ]
+  },
+  "spatial_train_holdout": {
+    "overlap_size": [1920, 800],
+    "pixel_stride": 4,
+    "block_size": [40, 40],
+    "holdout_rule": "((block_x + block_y) mod 5) == 2",
+    "expected_train_samples_per_frame": 76800,
+    "expected_holdout_samples_per_frame": 19200,
+    "thresholds": "P50 and P90 of HDR low-frequency ICtCp chroma over that shot's TRAIN samples only; P50 labels low chroma and P90 labels high chroma for both TRAIN and HOLDOUT evaluation."
+  },
+  "new_residual_field": {
+    "basis": "[1, x, y, x^2, x*y, y^2]",
+    "coordinate_mapping": "x = 2*((column+0.5)/1920)-1; y = 2*((overlap_row+0.5)/800)-1",
+    "shape_ridge_relative": 1e-06,
+    "shape_ridge_formula": "ridge = shape_ridge_relative * trace(train_normal_matrix) / 6",
+    "shape_normalization": "Normalize each Ct/Cp shape to unit RMS over that shot's stride-4 spatial TRAIN samples.",
+    "alpha_formula": "alpha_raw = mean_train(unit_rms_shape * lowpass_residual); alpha_shrunk = alpha_raw / (1 + 0.05); alpha = clip(alpha_shrunk, -0.25, 0.25).",
+    "alpha_shrinkage": 0.05,
+    "alpha_bound": 0.25,
+    "application": "Apply alpha_t*field_Ct and alpha_p*field_Cp additively to the sigma-16 Ct/Cp base after frozen baseline A, then re-add unchanged Ct/Cp detail. I is copied unchanged. For extension rows, y is clipped to [-1,1] before basis evaluation, so the field extends continuously from the nearest overlap boundary without extrapolating a higher-order polynomial."
+  },
+  "metrics": {
+    "primary": ["deltaE_ITP", "low_frequency_chroma_residual", "chroma_error", "hue_error", "luminance", "seam"],
+    "deltaE_ITP": "720 * sqrt(dI^2 + (0.5*dCt)^2 + dCp^2)",
+    "deltaE2000": "Auxiliary only; BT.2020 is converted to BT.709 and normalized to the frozen 203 nit white before Lab/CIEDE2000.",
+    "seam": "Measure top/bottom chroma and hue steps plus luminance mean/P95 across the exact HDR-centre composite boundary.",
+    "composite": "Copy HDR exactly into every overlap row [140,940) for both A and B. This makes the amplified A/B residual exactly zero in the HDR centre; only extension and seam rows can differ."
+  },
+  "reporting": {
+    "order": ["Matrix-08-01", "Matrix-08-02", "Matrix-08-03", "equal-shot descriptive macro aggregate"],
+    "per_shot_mandatory": ["alpha_t", "alpha_p", "TRAIN metrics", "HOLDOUT metrics", "seam", "visual artifacts"],
+    "aggregate_rule": "Calculate only equal-shot descriptive metric means after all independent shot reports. Never aggregate or use model parameters."
+  },
+  "prohibitions": [
+    "LUT", "MMR", "AI", "temporal state", "semantic masks", "parameter sweeps", "holdout tuning",
+    "field degree above 2", "raising alpha bounds", "luminance-path changes", "geometry/synchronization changes",
+    "additional materials or shots", "generalization claims"
+  ]
+}
