@@ -20,7 +20,6 @@ import argparse
 import importlib.util
 import json
 import math
-import subprocess
 import sys
 import time
 from pathlib import Path
@@ -283,6 +282,7 @@ def apply_intensity_conditioned(
     spatial_magnitude: Any,
     spatial_angle: Any,
     controls: dict[str, float],
+    collect_diagnostics: bool = True,
 ) -> tuple[Any, Any, float, float]:
     """Apply a low-frequency factor that depends only on low-frequency predicted I."""
     ictcp = be.to_ictcp(predicted * fastcore.PEAK_NITS)
@@ -294,8 +294,12 @@ def apply_intensity_conditioned(
     corrected = v2.complex_transform(be, base, real, imag)
     ictcp[..., 1:] = corrected + detail
     raw = be.from_ictcp(ictcp) / fastcore.PEAK_NITS
-    negative = float(be.tohost(be.xp.mean(raw < -1e-4)))
-    above_peak = float(be.tohost(be.xp.mean(raw > 1.0001)))
+    if collect_diagnostics:
+        negative = float(be.tohost(be.xp.mean(raw < -1e-4)))
+        above_peak = float(be.tohost(be.xp.mean(raw > 1.0001)))
+    else:
+        negative = 0.0
+        above_peak = 0.0
     return be.xp.clip(raw, 0.0, 1.0), corrected, negative, above_peak
 
 

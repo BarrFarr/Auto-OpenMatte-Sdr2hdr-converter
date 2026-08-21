@@ -40,6 +40,71 @@ PQ_C1, PQ_C2, PQ_C3 = 3424.0 / 4096.0, 2413.0 / 4096.0 * 32.0, 2392.0 / 4096.0 *
 BT2020_LUMA = (0.2627, 0.6780, 0.0593)
 
 
+_cupy_nvrtc_headers_ready = False
+
+
+def configure_cupy_nvrtc_headers(cupy: Any) -> None:
+    """Make CuPy 14's complete bundled headers visible to Windows NVRTC.
+
+    The installed wheel contains the headers, but its generated include map
+    omits nested CCCL headers on this CUDA 13 runtime.  Supplying the existing
+    files through NVRTC's in-memory header API fixes compilation without
+    changing the virtual environment or writing frame data anywhere.
+    """
+    global _cupy_nvrtc_headers_ready
+    if _cupy_nvrtc_headers_ready:
+        return
+    import cupy.cuda.compiler as compiler
+
+    if getattr(compiler._NVRTCProgram.__init__, "_v05_complete_headers", False):
+        _cupy_nvrtc_headers_ready = True
+        return
+    include_root = Path(cupy.__file__).resolve().parent / "_core" / "include"
+    cuda_include_root = Path(cupy.cuda.get_cuda_path()).resolve() / "include"
+    roots = (
+        include_root,
+        include_root / "cupy" / "_cccl" / "cub",
+        include_root / "cupy" / "_cccl" / "thrust",
+        include_root / "cupy" / "_cccl" / "libcudacxx",
+        cuda_include_root,
+    )
+    header_map: dict[str, bytes] = {}
+    for root in roots:
+        if not root.is_dir():
+            continue
+        for path in root.rglob("*"):
+            if path.is_file():
+                header_map.setdefault(path.relative_to(root).as_posix(), path.read_bytes())
+    if not header_map:
+        raise RuntimeError(f"CuPy include tree is empty: {include_root}")
+    all_headers = tuple(header_map.values())
+    all_names = tuple(name.encode("utf-8") for name in header_map)
+    original_init = compiler._NVRTCProgram.__init__
+
+    def patched_init(
+        self: Any,
+        src: Any,
+        name: Any = "default_program",
+        headers: Any = (),
+        include_names: Any = (),
+        name_expressions: Any = None,
+        method: str = "ptx",
+    ) -> None:
+        original_init(
+            self,
+            src,
+            name,
+            headers or all_headers,
+            include_names or all_names,
+            name_expressions,
+            method,
+        )
+
+    setattr(patched_init, "_v05_complete_headers", True)
+    compiler._NVRTCProgram.__init__ = patched_init
+    _cupy_nvrtc_headers_ready = True
+
+
 def gpu_available() -> bool:
     try:
         import cupy
@@ -56,6 +121,8 @@ class Backend:
         self.gpu = bool(use_gpu)
         if self.gpu:
             import cupy as xp
+
+            configure_cupy_nvrtc_headers(xp)
             from cupyx.scipy.ndimage import gaussian_filter
 
             self.xp = xp
@@ -63,7 +130,13 @@ class Backend:
         else:
             self.xp = np
             self._gaussian = None
-        from reshaping_research.utils.color_spaces import BT2020_TO_LMS, BT709_TO_BT2020, ICTCP_TO_LMS, LMS_TO_BT2020, LMS_TO_ICTCP
+        from reshaping_research.utils.color_spaces import (
+            BT709_TO_BT2020,
+            BT2020_TO_LMS,
+            ICTCP_TO_LMS,
+            LMS_TO_BT2020,
+            LMS_TO_ICTCP,
+        )
 
         self.m_rgb_lms = self.asarray(BT2020_TO_LMS.astype(np.float32))
         self.m_lms_ictcp = self.asarray(LMS_TO_ICTCP.astype(np.float32))
@@ -113,9 +186,25 @@ class Backend:
     def from_ictcp(self, ictcp: Any) -> Any:
         return self.matrix(self.m_lms_rgb, self.pq_eotf(self.matrix(self.m_ictcp_lms, ictcp)))
 
-    def to_pq16(self, normalized: Any) -> np.ndarray:
+    def to_pq16(
+        self,
+        normalized: Any,
+        out: np.ndarray | None = None,
+        stream: Any = None,
+        blocking: bool = True,
+    ) -> np.ndarray:
         signal = self.pq_oetf(self.xp.clip(normalized, 0.0, 1.0) * PEAK_NITS)
-        return self.tohost(self.xp.round(signal * 65535.0).astype(self.xp.uint16))
+        codes = self.xp.round(signal * 65535.0).astype(self.xp.uint16)
+        if not self.gpu:
+            result = np.asarray(codes)
+            if out is None:
+                return result
+            np.copyto(out, result)
+            return out
+        if out is None:
+            return self.xp.asnumpy(codes, stream=stream, blocking=blocking)
+        self.xp.asnumpy(codes, out=out, stream=stream, blocking=blocking)
+        return out
 
     def percentile(self, values: Any, q: float) -> float:
         return float(self.tohost(self.xp.percentile(values, q)))
