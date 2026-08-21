@@ -1,0 +1,435 @@
+{
+  "bands": {
+    "0_10": {
+      "bottom": {
+        "chroma_delta_ictcp": {
+          "frame_p95_of_p95": 0.03920581582933663,
+          "max": 0.09137459223469098,
+          "mean": 0.009285274582604567,
+          "p95": 0.021934169189383585
+        },
+        "chroma_magnitude_delta_ictcp": {
+          "frame_p95_of_p95": 0.03180501656606793,
+          "max": 0.09096404785911243,
+          "mean": 0.007243328378535807,
+          "p95": 0.0182894851701955
+        },
+        "chroma_ratio_corrected_over_hdr": {
+          "frame_p95_of_p95": 4.524909591674804,
+          "max": 226.4688917795817,
+          "mean": 1.1531669596831005,
+          "p95": 2.648539731899897
+        },
+        "hue_abs_delta_degrees": {
+          "frame_p95_of_p95": 92.72400932312011,
+          "max": 179.26259231567383,
+          "mean": 18.11975685755412,
+          "p95": 83.44829940795898
+        },
+        "hue_valid_fraction": 0.9439930555555556,
+        "luminance_abs_nits": {
+          "frame_p95_of_p95": 2.6280760407447814,
+          "max": 7.119768540064494,
+          "mean": 0.4902570496002833,
+          "p95": 2.470482269922892
+        },
+        "luminance_signed_nits": {
+          "mean": 0.30139414966106415,
+          "p05": -0.623184343179067,
+          "p95": 2.3942152857780457
+        }
+      },
+      "top": {
+        "chroma_delta_ictcp": {
+          "frame_p95_of_p95": 0.024594005569815634,
+          "max": 0.15552609165509543,
+          "mean": 0.009964186698198318,
+          "p95": 0.02202615017692248
+        },
+        "chroma_magnitude_delta_ictcp": {
+          "frame_p95_of_p95": 0.02024086397141218,
+          "max": 0.14598180850346884,
+          "mean": 0.008030064675646523,
+          "p95": 0.017774921997139852
+        },
+        "chroma_ratio_corrected_over_hdr": {
+          "frame_p95_of_p95": 2.3478447794914246,
+          "max": 355.3682330449422,
+          "mean": 1.190490315357844,
+          "p95": 2.3007337550322213
+        },
+        "hue_abs_delta_degrees": {
+          "frame_p95_of_p95": 78.99377784729003,
+          "max": 168.9618123372396,
+          "mean": 15.189650932947794,
+          "p95": 75.83755048116048
+        },
+        "hue_valid_fraction": 0.9888975694444443,
+        "luminance_abs_nits": {
+          "frame_p95_of_p95": 8.735197925567627,
+          "max": 15.44090986251831,
+          "mean": 2.449473718802134,
+          "p95": 8.007999142011007
+        },
+        "luminance_signed_nits": {
+          "mean": 1.9379819929599762,
+          "p05": -1.9085864226023357,
+          "p95": 7.978438854217529
+        }
+      }
+    },
+    "10_25": {
+      "bottom": {
+        "chroma_delta_ictcp": {
+          "frame_p95_of_p95": 0.04311916455626487,
+          "max": 0.09216868877410889,
+          "mean": 0.009740128414705396,
+          "p95": 0.02571301953867078
+        },
+        "chroma_magnitude_delta_ictcp": {
+          "frame_p95_of_p95": 0.03756735175848007,
+          "max": 0.09197894483804703,
+          "mean": 0.007712704090711971,
+          "p95": 0.021582105895504355
+        },
+        "chroma_ratio_corrected_over_hdr": {
+          "frame_p95_of_p95": 4.904349780082702,
+          "max": 228.82851346333823,
+          "mean": 1.2103924850622814,
+          "p95": 3.0088233153025308
+        },
+        "hue_abs_delta_degrees": {
+          "frame_p95_of_p95": 87.91274566650391,
+          "max": 178.41390228271484,
+          "mean": 17.014160712560017,
+          "p95": 82.3191146850586
+        },
+        "hue_valid_fraction": 0.9453038194444446,
+        "luminance_abs_nits": {
+          "frame_p95_of_p95": 2.304735732078552,
+          "max": 6.548742771148682,
+          "mean": 0.4488331452012062,
+          "p95": 2.2013805508613586
+        },
+        "luminance_signed_nits": {
+          "mean": 0.3001987934112549,
+          "p05": -0.4497935672601064,
+          "p95": 2.1528632442156472
+        }
+      },
+      "top": {
+        "chroma_delta_ictcp": {
+          "frame_p95_of_p95": 0.02478525564074516,
+          "max": 0.15228495001792908,
+          "mean": 0.00999031689328452,
+          "p95": 0.022643959304938715
+        },
+        "chroma_magnitude_delta_ictcp": {
+          "frame_p95_of_p95": 0.019920445419847964,
+          "max": 0.14541097357869148,
+          "mean": 0.008048874132024745,
+          "p95": 0.017850848225255806
+        },
+        "chroma_ratio_corrected_over_hdr": {
+          "frame_p95_of_p95": 2.350323235988617,
+          "max": 430.18180624643963,
+          "mean": 1.231119414170583,
+          "p95": 2.3328930536905923
+        },
+        "hue_abs_delta_degrees": {
+          "frame_p95_of_p95": 79.62743682861328,
+          "max": 175.21842320760092,
+          "mean": 14.746734778086344,
+          "p95": 75.03729057312012
+        },
+        "hue_valid_fraction": 0.9837326388888888,
+        "luminance_abs_nits": {
+          "frame_p95_of_p95": 8.627688932418824,
+          "max": 15.314734617869059,
+          "mean": 2.346031884352366,
+          "p95": 7.784395496050517
+        },
+        "luminance_signed_nits": {
+          "mean": 1.7944975296656291,
+          "p05": -2.100547343492508,
+          "p95": 7.754165808359782
+        }
+      }
+    },
+    "25_50": {
+      "bottom": {
+        "chroma_delta_ictcp": {
+          "frame_p95_of_p95": 0.038700589910149574,
+          "max": 0.09631781280040741,
+          "mean": 0.01031811876843373,
+          "p95": 0.029554751235991716
+        },
+        "chroma_magnitude_delta_ictcp": {
+          "frame_p95_of_p95": 0.031812775693833825,
+          "max": 0.09518683205048244,
+          "mean": 0.008328343198324243,
+          "p95": 0.024301761062815785
+        },
+        "chroma_ratio_corrected_over_hdr": {
+          "frame_p95_of_p95": 4.76911096572876,
+          "max": 320.55575434366864,
+          "mean": 1.3026451766490936,
+          "p95": 3.0126399199167886
+        },
+        "hue_abs_delta_degrees": {
+          "frame_p95_of_p95": 88.03368301391602,
+          "max": 173.40343856811523,
+          "mean": 14.192160924275717,
+          "p95": 72.77022234598796
+        },
+        "hue_valid_fraction": 0.9169895833333332,
+        "luminance_abs_nits": {
+          "frame_p95_of_p95": 2.096650683879852,
+          "max": 6.0076366265614825,
+          "mean": 0.4344596366087596,
+          "p95": 2.049243579308192
+        },
+        "luminance_signed_nits": {
+          "mean": 0.32609859853982925,
+          "p05": -0.2798394560813904,
+          "p95": 2.0206091105937958
+        }
+      },
+      "top": {
+        "chroma_delta_ictcp": {
+          "frame_p95_of_p95": 0.027762123476713894,
+          "max": 0.15022999048233032,
+          "mean": 0.01042899078068634,
+          "p95": 0.025923041471590597
+        },
+        "chroma_magnitude_delta_ictcp": {
+          "frame_p95_of_p95": 0.021589931473135947,
+          "max": 0.14332471415400505,
+          "mean": 0.008450549251089493,
+          "p95": 0.01980831241235137
+        },
+        "chroma_ratio_corrected_over_hdr": {
+          "frame_p95_of_p95": 2.3370519399642946,
+          "max": 648.9151318868002,
+          "mean": 1.2253925104935963,
+          "p95": 2.326563040415446
+        },
+        "hue_abs_delta_degrees": {
+          "frame_p95_of_p95": 77.89365997314454,
+          "max": 176.7803751627604,
+          "mean": 13.725152413050333,
+          "p95": 72.38589859008789
+        },
+        "hue_valid_fraction": 0.9588541666666665,
+        "luminance_abs_nits": {
+          "frame_p95_of_p95": 7.960033345222473,
+          "max": 13.957544167836508,
+          "mean": 2.120262920856476,
+          "p95": 7.11510972181956
+        },
+        "luminance_signed_nits": {
+          "mean": 1.4799005885918934,
+          "p05": -2.3970172703266144,
+          "p95": 7.0720729033152265
+        }
+      }
+    },
+    "50_100": {
+      "bottom": {
+        "chroma_delta_ictcp": {
+          "frame_p95_of_p95": 0.03157195644453168,
+          "max": 0.10158067755401134,
+          "mean": 0.010197912420456609,
+          "p95": 0.0261249717635413
+        },
+        "chroma_magnitude_delta_ictcp": {
+          "frame_p95_of_p95": 0.02601158721372485,
+          "max": 0.09886048299570878,
+          "mean": 0.008158508765821656,
+          "p95": 0.021787130118658144
+        },
+        "chroma_ratio_corrected_over_hdr": {
+          "frame_p95_of_p95": 2.3465718150138852,
+          "max": 391.6800715128581,
+          "mean": 1.2157252728939056,
+          "p95": 1.665857623020808
+        },
+        "hue_abs_delta_degrees": {
+          "frame_p95_of_p95": 51.85114440917969,
+          "max": 179.84283447265625,
+          "mean": 8.962984244028727,
+          "p95": 40.50874010721842
+        },
+        "hue_valid_fraction": 0.8489878472222222,
+        "luminance_abs_nits": {
+          "frame_p95_of_p95": 2.1644683718681335,
+          "max": 6.099705298741658,
+          "mean": 0.4563460399707158,
+          "p95": 2.0773278971513114
+        },
+        "luminance_signed_nits": {
+          "mean": 0.34210724631945294,
+          "p05": -0.32542644689480466,
+          "p95": 2.053479810555776
+        }
+      },
+      "top": {
+        "chroma_delta_ictcp": {
+          "frame_p95_of_p95": 0.03074809368699789,
+          "max": 0.14247267320752144,
+          "mean": 0.011521666931609312,
+          "p95": 0.029217849640796583
+        },
+        "chroma_magnitude_delta_ictcp": {
+          "frame_p95_of_p95": 0.023259733337908983,
+          "max": 0.13578367481629053,
+          "mean": 0.00915624643675983,
+          "p95": 0.021880121280749638
+        },
+        "chroma_ratio_corrected_over_hdr": {
+          "frame_p95_of_p95": 2.3611783266067503,
+          "max": 730.0073776245117,
+          "mean": 1.286180814107259,
+          "p95": 2.3449834982554116
+        },
+        "hue_abs_delta_degrees": {
+          "frame_p95_of_p95": 68.08943214416504,
+          "max": 176.44441350301108,
+          "mean": 12.343924840291342,
+          "p95": 64.62032286326091
+        },
+        "hue_valid_fraction": 0.9399657118055554,
+        "luminance_abs_nits": {
+          "frame_p95_of_p95": 7.558822727203369,
+          "max": 15.079843203226725,
+          "mean": 1.9820773998896282,
+          "p95": 6.8318231503168745
+        },
+        "luminance_signed_nits": {
+          "mean": 0.9850186208883921,
+          "p05": -3.3607104818026223,
+          "p95": 6.701319535573323
+        }
+      }
+    }
+  },
+  "comparison_space": {
+    "chroma": "ICtCp Ct/Cp Euclidean delta and magnitude delta; values are native ICtCp units",
+    "corrected_open_matte": "full corrected_rgb returned by the existing apply_intensity_conditioned before composite/PQ encoding",
+    "hdr": "native HDR frame returned by the existing NVDEC source, aligned to the overlap rows",
+    "hue": "circular Ct/Cp angle delta in degrees; pixels with both chroma magnitudes <= 1e-4 are excluded",
+    "luminance": "BT.2020 RGB luma from the existing Backend, reported in nits"
+  },
+  "distance_definition": {
+    "bands": {
+      "0_10": [
+        0,
+        10
+      ],
+      "10_25": [
+        10,
+        25
+      ],
+      "25_50": [
+        25,
+        50
+      ],
+      "50_100": [
+        50,
+        100
+      ]
+    },
+    "bottom": "d=0 is HDR last row / corrected Open Matte output row y2-1; increasing d moves upward into overlap",
+    "top": "d=0 is HDR row 0 / corrected Open Matte output row y1; increasing d moves downward into overlap"
+  },
+  "fit": {
+    "fit_frame_count": 300,
+    "fit_not_modified": true,
+    "fit_scale": 0.5,
+    "render_model": {
+      "hue_slope_radians": 0.054553510270162225,
+      "intensity_centre": 0.33664859090277854,
+      "intensity_normalization": 0.17374640583768058,
+      "log_saturation_slope": 0.08074241654012528,
+      "name": "intensity_joint"
+    }
+  },
+  "limitations": [
+    "This is a diagnostic rerun of the existing fit in memory; no renderer/fitting source was modified.",
+    "The requested segment profile is throughput-only and crosses a declared shot window; results diagnose this output only.",
+    "A seam cause ranking is based on measured RGB/ICtCp discontinuity and field boundary steps, not a perceptual display assessment."
+  ],
+  "overlap": [
+    0,
+    280,
+    3840,
+    1880
+  ],
+  "profile": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\tools\\openmatte_hdr\\profiles\\br2049_t2714_300f_throughput.json",
+  "rendered_frames_for_analysis": 12,
+  "schema": "openmatte-hdr-v05-seam-analysis/v1",
+  "segment": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\benchmarks\\v05_gpu_native_segmented_test300\\segments\\segment_000004.mkv",
+  "segment_contract": {
+    "frame_count": true,
+    "hdr10_metadata_matches_source": false,
+    "timestamps_monotonic": true
+  },
+  "segment_index": 4,
+  "source_frame_interval": [
+    65359,
+    65371
+  ],
+  "spatial_gain_boundary": {
+    "bottom": {
+      "boundary_rows": [
+        1879,
+        1880
+      ],
+      "gain_inside_mean": 0.025409565377049147,
+      "gain_outside_mean": 0.025411040589096955,
+      "gain_step_stops": {
+        "max": 0.0005606405214887828,
+        "mean": 0.00014074458725072455,
+        "p95": 0.0005330263678679723
+      },
+      "spatial_angle_step_degrees": {
+        "max": 0.030141862938168715,
+        "mean": 0.007808556886952898,
+        "p95": 0.024714269280785416
+      },
+      "spatial_magnitude_inside_mean": 1.0537892693318354,
+      "spatial_magnitude_outside_mean": 1.0537260949036609,
+      "spatial_magnitude_step": {
+        "max": 0.0005030223993982563,
+        "mean": 0.0001712949518471303,
+        "p95": 0.0004460513264800014
+      }
+    },
+    "top": {
+      "boundary_rows": [
+        279,
+        280
+      ],
+      "gain_inside_mean": 0.024662687390324813,
+      "gain_outside_mean": 0.024663880772520012,
+      "gain_step_stops": {
+        "max": 0.0005369981802704554,
+        "mean": 0.0001911144853111323,
+        "p95": 0.00048222494164163794
+      },
+      "spatial_angle_step_degrees": {
+        "max": 0.051281868406053754,
+        "mean": 0.011189631369450467,
+        "p95": 0.04117680762739565
+      },
+      "spatial_magnitude_inside_mean": 1.0507755420069809,
+      "spatial_magnitude_outside_mean": 1.0508434053156936,
+      "spatial_magnitude_step": {
+        "max": 0.0005323426988912416,
+        "mean": 0.00014817045047239356,
+        "p95": 0.00046740527518711593
+      }
+    }
+  },
+  "status": "PASS"
+}

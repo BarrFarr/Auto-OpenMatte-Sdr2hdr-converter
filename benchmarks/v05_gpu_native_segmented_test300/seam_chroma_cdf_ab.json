@@ -1,0 +1,544 @@
+{
+  "I_max_abs_change": 0.0,
+  "cdf": {
+    "bottom": {
+      "Cp": {
+        "knot_count": 257,
+        "source_median": 0.08862318098545074,
+        "source_range": [
+          -0.0011034574126824737,
+          0.12677961587905884
+        ],
+        "target_median": 0.09426867216825485,
+        "target_range": [
+          -0.0024022941943258047,
+          0.12321177870035172
+        ]
+      },
+      "Ct": {
+        "knot_count": 257,
+        "source_median": -0.1433006227016449,
+        "source_range": [
+          -0.2158355861902237,
+          -0.016932014375925064
+        ],
+        "target_median": -0.16684821248054504,
+        "target_range": [
+          -0.22210811078548431,
+          -0.02160780318081379
+        ]
+      },
+      "fit_sample_count": 2784928
+    },
+    "top": {
+      "Cp": {
+        "knot_count": 257,
+        "source_median": 0.09936822205781937,
+        "source_range": [
+          0.011616338975727558,
+          0.12953484058380127
+        ],
+        "target_median": 0.1001308262348175,
+        "target_range": [
+          -0.0027385305147618055,
+          0.12081179767847061
+        ]
+      },
+      "Ct": {
+        "knot_count": 257,
+        "source_median": -0.21643681824207306,
+        "source_range": [
+          -0.2399008572101593,
+          -0.019183123484253883
+        ],
+        "target_median": -0.21786576509475708,
+        "target_range": [
+          -0.25213950872421265,
+          0.02239699475467205
+        ]
+      },
+      "fit_sample_count": 3080502
+    }
+  },
+  "correction_definition": {
+    "I_unchanged": true,
+    "cdf_channels": [
+      "Ct",
+      "Cp"
+    ],
+    "chroma_blend": "clip((magnitude - 0.05) / (0.20 - 0.05), 0, 1)",
+    "low_chroma_correction": 0.0,
+    "mapping": "empirical OM CDF to HDR CDF, 257 quantile knots, separate TOP/BOTTOM and Ct/Cp",
+    "outside_overlap": "same LUT with 64-pixel spatial fade; no HDR texture copy",
+    "space": "ICtCp"
+  },
+  "experiment": {
+    "bottom_modified_only_in_experiment": true,
+    "composite_run": false,
+    "correction_regions": [
+      "TOP overlap",
+      "BOTTOM overlap"
+    ],
+    "encoder_run": false,
+    "fit_frame_count": 12,
+    "fit_in_memory_only": true,
+    "fit_scale": 0.5,
+    "fit_stride": 1,
+    "fitting_modified": false,
+    "frame_count": 12,
+    "gain_field_modified": false,
+    "nvdec_cuda_nvenc_modified": false,
+    "outside_overlap_lut_fade_rows": 64,
+    "pq_output_run": false,
+    "production_renderer_modified": false,
+    "profile": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\tools\\openmatte_hdr\\profiles\\br2049_t2714_300f_throughput.json",
+    "profile_rows": 100,
+    "segment_index": 4,
+    "shared_cdf_across_all_frames": true,
+    "source_frame_interval": [
+      65359,
+      65371
+    ],
+    "spatial_field_modified": false,
+    "texture_copy_from_hdr": false,
+    "top_modified_only_in_experiment": true
+  },
+  "low_chroma_max_abs_CtCp_change": {
+    "bottom": 0.0,
+    "top": 0.0
+  },
+  "metrics": {
+    "bottom": {
+      "all_valid": {
+        "adaptive": {
+          "chroma_delta_ictcp": {
+            "max": 0.12534157931804657,
+            "mean": 0.010459478944540024,
+            "p95": 0.037338946014642715
+          },
+          "hue_delta_degrees": {
+            "max": 179.99794006347656,
+            "mean": 6.633754253387451,
+            "p95": 30.787837982177734
+          },
+          "luminance_delta_nits": {
+            "max": 8.669408798217773,
+            "mean": 0.5901540517807007,
+            "p95": 2.3384974002838135
+          }
+        },
+        "baseline": {
+          "chroma_delta_ictcp": {
+            "max": 0.10935740917921066,
+            "mean": 0.011662561446428299,
+            "p95": 0.03904382884502411
+          },
+          "hue_delta_degrees": {
+            "max": 179.99794006347656,
+            "mean": 6.8589677810668945,
+            "p95": 30.787837982177734
+          },
+          "luminance_delta_nits": {
+            "max": 8.667135238647461,
+            "mean": 0.5901745557785034,
+            "p95": 2.3391082286834717
+          }
+        },
+        "change_range": {
+          "Cp_abs": {
+            "max": 0.008984096348285675,
+            "mean": 0.0014391849981620908,
+            "p95": 0.004595889709889889
+          },
+          "Ct_abs": {
+            "max": 0.027463555335998535,
+            "mean": 0.0036332851741462946,
+            "p95": 0.01213912945240736
+          },
+          "I_abs": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "chroma_vector_abs": {
+            "max": 0.027678944170475006,
+            "mean": 0.004082788247615099,
+            "p95": 0.012612228281795979
+          }
+        },
+        "improvement": {
+          "chroma_mean_ictcp": 0.0012030825018882751,
+          "chroma_p95_ictcp": 0.0017048828303813934,
+          "hue_mean_degrees": 0.22521352767944336,
+          "hue_p95_degrees": 0.0,
+          "luminance_mean_nits": 2.0503997802734375e-05,
+          "luminance_p95_nits": 0.0006108283996582031
+        },
+        "pixel_count": 3514895
+      },
+      "eligible": {
+        "adaptive": {
+          "chroma_delta_ictcp": {
+            "max": 0.12534157931804657,
+            "mean": 0.00978630967438221,
+            "p95": 0.03511577099561691
+          },
+          "hue_delta_degrees": {
+            "max": 41.58351516723633,
+            "mean": 2.1531143188476562,
+            "p95": 8.261423110961914
+          },
+          "luminance_delta_nits": {
+            "max": 8.669408798217773,
+            "mean": 0.7297482490539551,
+            "p95": 2.608966588973999
+          }
+        },
+        "baseline": {
+          "chroma_delta_ictcp": {
+            "max": 0.10935740917921066,
+            "mean": 0.01130473893135786,
+            "p95": 0.03646997734904289
+          },
+          "hue_delta_degrees": {
+            "max": 41.27861404418945,
+            "mean": 2.437359571456909,
+            "p95": 8.332620620727539
+          },
+          "luminance_delta_nits": {
+            "max": 8.667135238647461,
+            "mean": 0.7297740578651428,
+            "p95": 2.6111221313476562
+          }
+        },
+        "change_range": {
+          "Cp_abs": {
+            "max": 0.008984096348285675,
+            "mean": 0.001816414762288332,
+            "p95": 0.004974496550858021
+          },
+          "Ct_abs": {
+            "max": 0.027463555335998535,
+            "mean": 0.004585618153214455,
+            "p95": 0.014281771145761013
+          },
+          "I_abs": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "chroma_vector_abs": {
+            "max": 0.027678944170475006,
+            "mean": 0.005152942147105932,
+            "p95": 0.014608347788453102
+          }
+        },
+        "improvement": {
+          "chroma_mean_ictcp": 0.0015184292569756508,
+          "chroma_p95_ictcp": 0.0013542063534259796,
+          "hue_mean_degrees": 0.28424525260925293,
+          "hue_p95_degrees": 0.071197509765625,
+          "luminance_mean_nits": 2.580881118774414e-05,
+          "luminance_p95_nits": 0.0021555423736572266
+        },
+        "pixel_count": 2784928
+      },
+      "low_chroma": {
+        "adaptive": {
+          "chroma_delta_ictcp": {
+            "max": 0.09920752793550491,
+            "mean": 0.013027713634073734,
+            "p95": 0.04335891827940941
+          },
+          "hue_delta_degrees": {
+            "max": 179.99794006347656,
+            "mean": 23.728031158447266,
+            "p95": 76.61639404296875
+          },
+          "luminance_delta_nits": {
+            "max": 6.957984447479248,
+            "mean": 0.0575825572013855,
+            "p95": 0.18857096135616302
+          }
+        },
+        "baseline": {
+          "chroma_delta_ictcp": {
+            "max": 0.09920752793550491,
+            "mean": 0.013027713634073734,
+            "p95": 0.04335891827940941
+          },
+          "hue_delta_degrees": {
+            "max": 179.99794006347656,
+            "mean": 23.728031158447266,
+            "p95": 76.61639404296875
+          },
+          "luminance_delta_nits": {
+            "max": 6.957984924316406,
+            "mean": 0.05758257955312729,
+            "p95": 0.18856985867023468
+          }
+        },
+        "change_range": {
+          "Cp_abs": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "Ct_abs": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "I_abs": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "chroma_vector_abs": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          }
+        },
+        "improvement": {
+          "chroma_mean_ictcp": 0.0,
+          "chroma_p95_ictcp": 0.0,
+          "hue_mean_degrees": 0.0,
+          "hue_p95_degrees": 0.0,
+          "luminance_mean_nits": 2.2351741790771484e-08,
+          "luminance_p95_nits": -1.1026859283447266e-06
+        },
+        "pixel_count": 729967
+      }
+    },
+    "top": {
+      "all_valid": {
+        "adaptive": {
+          "chroma_delta_ictcp": {
+            "max": 0.16271302103996277,
+            "mean": 0.009957268834114075,
+            "p95": 0.021758994087576866
+          },
+          "hue_delta_degrees": {
+            "max": 179.99209594726562,
+            "mean": 4.865670680999756,
+            "p95": 26.437131881713867
+          },
+          "luminance_delta_nits": {
+            "max": 27.63477325439453,
+            "mean": 2.509065866470337,
+            "p95": 7.2021684646606445
+          }
+        },
+        "baseline": {
+          "chroma_delta_ictcp": {
+            "max": 0.16271302103996277,
+            "mean": 0.010904273949563503,
+            "p95": 0.02375095710158348
+          },
+          "hue_delta_degrees": {
+            "max": 179.99209594726562,
+            "mean": 5.039600372314453,
+            "p95": 26.4359188079834
+          },
+          "luminance_delta_nits": {
+            "max": 27.594608306884766,
+            "mean": 2.509511947631836,
+            "p95": 7.202906608581543
+          }
+        },
+        "change_range": {
+          "Cp_abs": {
+            "max": 0.016283951699733734,
+            "mean": 0.0007892221910879016,
+            "p95": 0.0027840882539749146
+          },
+          "Ct_abs": {
+            "max": 0.0312923938035965,
+            "mean": 0.002051573945209384,
+            "p95": 0.004840552806854248
+          },
+          "I_abs": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "chroma_vector_abs": {
+            "max": 0.03129390627145767,
+            "mean": 0.0022916123270988464,
+            "p95": 0.005037383176386356
+          }
+        },
+        "improvement": {
+          "chroma_mean_ictcp": 0.0009470051154494286,
+          "chroma_p95_ictcp": 0.0019919630140066147,
+          "hue_mean_degrees": 0.17392969131469727,
+          "hue_p95_degrees": -0.00121307373046875,
+          "luminance_mean_nits": 0.00044608116149902344,
+          "luminance_p95_nits": 0.0007381439208984375
+        },
+        "pixel_count": 3555989
+      },
+      "eligible": {
+        "adaptive": {
+          "chroma_delta_ictcp": {
+            "max": 0.1449234038591385,
+            "mean": 0.00836922787129879,
+            "p95": 0.020624475553631783
+          },
+          "hue_delta_degrees": {
+            "max": 159.850830078125,
+            "mean": 1.5452347993850708,
+            "p95": 7.182895660400391
+          },
+          "luminance_delta_nits": {
+            "max": 27.63477325439453,
+            "mean": 2.88116192817688,
+            "p95": 7.5339579582214355
+          }
+        },
+        "baseline": {
+          "chroma_delta_ictcp": {
+            "max": 0.15331771969795227,
+            "mean": 0.009462405927479267,
+            "p95": 0.022970568388700485
+          },
+          "hue_delta_degrees": {
+            "max": 159.02871704101562,
+            "mean": 1.7460110187530518,
+            "p95": 7.9848408699035645
+          },
+          "luminance_delta_nits": {
+            "max": 27.594608306884766,
+            "mean": 2.88167667388916,
+            "p95": 7.534388542175293
+          }
+        },
+        "change_range": {
+          "Cp_abs": {
+            "max": 0.016283951699733734,
+            "mean": 0.0009110415703617036,
+            "p95": 0.002898349892348051
+          },
+          "Ct_abs": {
+            "max": 0.0312923938035965,
+            "mean": 0.0023682420141994953,
+            "p95": 0.004864349961280823
+          },
+          "I_abs": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "chroma_vector_abs": {
+            "max": 0.03129390627145767,
+            "mean": 0.0026453312020748854,
+            "p95": 0.005185057409107685
+          }
+        },
+        "improvement": {
+          "chroma_mean_ictcp": 0.0010931780561804771,
+          "chroma_p95_ictcp": 0.0023460928350687027,
+          "hue_mean_degrees": 0.20077621936798096,
+          "hue_p95_degrees": 0.8019452095031738,
+          "luminance_mean_nits": 0.0005147457122802734,
+          "luminance_p95_nits": 0.0004305839538574219
+        },
+        "pixel_count": 3080502
+      },
+      "low_chroma": {
+        "adaptive": {
+          "chroma_delta_ictcp": {
+            "max": 0.16271302103996277,
+            "mean": 0.020245589315891266,
+            "p95": 0.08225685358047485
+          },
+          "hue_delta_degrees": {
+            "max": 179.99209594726562,
+            "mean": 26.377531051635742,
+            "p95": 49.319549560546875
+          },
+          "luminance_delta_nits": {
+            "max": 4.033958435058594,
+            "mean": 0.09839600324630737,
+            "p95": 0.41976791620254517
+          }
+        },
+        "baseline": {
+          "chroma_delta_ictcp": {
+            "max": 0.16271302103996277,
+            "mean": 0.020245589315891266,
+            "p95": 0.08225685358047485
+          },
+          "hue_delta_degrees": {
+            "max": 179.99209594726562,
+            "mean": 26.377531051635742,
+            "p95": 49.319549560546875
+          },
+          "luminance_delta_nits": {
+            "max": 4.034000396728516,
+            "mean": 0.09839601069688797,
+            "p95": 0.41976097226142883
+          }
+        },
+        "change_range": {
+          "Cp_abs": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "Ct_abs": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "I_abs": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "chroma_vector_abs": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          }
+        },
+        "improvement": {
+          "chroma_mean_ictcp": 0.0,
+          "chroma_p95_ictcp": 0.0,
+          "hue_mean_degrees": 0.0,
+          "hue_p95_degrees": 0.0,
+          "luminance_mean_nits": 7.450580596923828e-09,
+          "luminance_p95_nits": -6.943941116333008e-06
+        },
+        "pixel_count": 475487
+      }
+    }
+  },
+  "metrics_definition": {
+    "chroma_delta": "Euclidean Ct/Cp distance to HDR",
+    "groups": "low < 0.05; eligible >= 0.05; all_valid >= 0.01, using geometric mean HDR/OM chroma",
+    "hue_delta": "corrected OM hue - HDR hue, wrapped to [-180, 180]",
+    "luminance_delta": "absolute BT.2020 RGB luma distance in nits",
+    "pass_rule": "TOP and BOTTOM all_valid chroma mean/p95 decrease >=1%, hue mean/p95 do not increase, luminance mean/p95 change <=0.01 nits, low chroma and I unchanged",
+    "reference": "aligned native HDR 100-row profile versus existing corrected_rgb before CDF"
+  },
+  "qualification": {
+    "candidate_for_further_test": false,
+    "production_deployment": false,
+    "reasons": [
+      "top: hue p95 increased"
+    ]
+  },
+  "schema": "openmatte-hdr-v05-local-chroma-cdf-ab/v1",
+  "status": "PASS",
+  "visual": {
+    "frame_sequence": 0,
+    "panels": [
+      "HDR reference",
+      "A corrected OM",
+      "B CDF OM"
+    ],
+    "png": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\benchmarks\\v05_gpu_native_segmented_test300\\seam_chroma_cdf_ab.png"
+  }
+}
