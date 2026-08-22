@@ -1,0 +1,1473 @@
+{
+  "status": "COMPLETE",
+  "scope": "Research-only Model H; no Model G, no production/P2 modification, no full-video decode.",
+  "matrix_anchor": {
+    "case_id": "the_matrix_temporal_stratum_08",
+    "anchor": {
+      "material": "The Matrix",
+      "case_id": "the_matrix_temporal_stratum_08",
+      "selection_index": 8,
+      "selection_fraction": 0.3741477171313319,
+      "selection_basis": "predeclared evenly spaced temporal strata over 5%..95% of known HDR duration; no performance metric used",
+      "scene_id": "the_matrix_scene_unverified_08",
+      "scene_category": "unverified_temporal_stratum",
+      "scene_independence_verified": false,
+      "hdr_frame": 73367,
+      "om_frame": 73348,
+      "hdr_timestamp_seconds": 3060.0152916666666,
+      "om_timestamp_seconds": 3059.2228333333333,
+      "offset_frames": -19,
+      "offset_seconds": -0.7924583333333333,
+      "known_verified_anchor": true,
+      "hdr_source": "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+      "om_source": "G:\\Filmy\\IMAX format (open matte)\\The Matrix (1999) [OPEN MATTE] [WEB-DL 1080p 10bit DD5.1 x265].mkv",
+      "hdr_resolution": [
+        3840,
+        1600
+      ],
+      "om_resolution": [
+        1920,
+        1080
+      ],
+      "fps": "24000/1001",
+      "fps_float": 23.976023976023978,
+      "hdr_start_pts_seconds": 0.0,
+      "om_start_pts_seconds": 0.005,
+      "sync_confidence": 0.940513,
+      "sync_status": "LOCKED",
+      "sync_method": "previously accepted bounded local image synchronization; fixed offset reused without rerun",
+      "sync_validation_method": "preserved start/middle/end local windows, all offset -19, spread 0",
+      "geometry": {
+        "scale_x": 0.5,
+        "scale_y": 0.5,
+        "offset_x": 0,
+        "offset_y": 140,
+        "overlap": [
+          0,
+          140,
+          1920,
+          940
+        ],
+        "confidence": 1.0,
+        "status": "preserved geometry contract"
+      },
+      "hdr_decode": {
+        "command": [
+          "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\install\\bin\\ffmpeg.exe",
+          "-hide_banner",
+          "-loglevel",
+          "error",
+          "-nostdin",
+          "-ss",
+          "3060.015291667",
+          "-i",
+          "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+          "-map",
+          "0:v:0",
+          "-frames:v",
+          "1",
+          "-pix_fmt",
+          "rgb48le",
+          "-vsync",
+          "0",
+          "-f",
+          "rawvideo",
+          "pipe:1"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout_bytes": 36864000,
+        "expected_bytes": 36864000,
+        "stream": "0:v:0",
+        "pixel_format": "rgb48le"
+      },
+      "om_decode": {
+        "command": [
+          "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\install\\bin\\ffmpeg.exe",
+          "-hide_banner",
+          "-loglevel",
+          "error",
+          "-nostdin",
+          "-ss",
+          "3059.222833333",
+          "-i",
+          "G:\\Filmy\\IMAX format (open matte)\\The Matrix (1999) [OPEN MATTE] [WEB-DL 1080p 10bit DD5.1 x265].mkv",
+          "-map",
+          "0:v:0",
+          "-frames:v",
+          "1",
+          "-pix_fmt",
+          "rgb48le",
+          "-vsync",
+          "0",
+          "-f",
+          "rawvideo",
+          "pipe:1"
+        ],
+        "returncode": 0,
+        "stderr": "[matroska,webm @ 0000021CBF521EC0] Unsupported encoding type\r\n    Last message repeated 1 times\r\n",
+        "stdout_bytes": 12441600,
+        "expected_bytes": 12441600,
+        "stream": "0:v:0",
+        "pixel_format": "rgb48le"
+      },
+      "hdr_rgb_u16_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\raw_rgb_u16\\the_matrix\\the_matrix_temporal_stratum_08_hdr_rgb_u16.npy",
+      "om_rgb_u16_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\raw_rgb_u16\\the_matrix\\the_matrix_temporal_stratum_08_om_rgb_u16.npy",
+      "sdr_luminance_nits_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\luminance_overlap_nits\\the_matrix\\the_matrix_temporal_stratum_08_sdr_luminance_nits.npy",
+      "hdr_luminance_nits_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\luminance_overlap_nits\\the_matrix\\the_matrix_temporal_stratum_08_hdr_luminance_nits.npy",
+      "hdr_rgb_shape": [
+        1600,
+        3840,
+        3
+      ],
+      "om_rgb_shape": [
+        1080,
+        1920,
+        3
+      ],
+      "overlap": {
+        "bbox_open_matte_coordinates": [
+          0,
+          140,
+          1920,
+          940
+        ],
+        "shape": [
+          800,
+          1920,
+          3
+        ],
+        "resize_applied_to_hdr": true
+      },
+      "sample_count": 1536000,
+      "sdr_luminance_stats": {
+        "count": 1536000,
+        "minimum": 0.02334730513393879,
+        "median": 81.5302734375,
+        "P95": 3356.0888671875,
+        "P99": 5032.16845703125,
+        "maximum": 7813.65478515625
+      },
+      "hdr_luminance_stats": {
+        "count": 1536000,
+        "minimum": 0.0,
+        "median": 1.7716362476348877,
+        "P95": 60.884002685546875,
+        "P99": 103.25154113769531,
+        "maximum": 214.76898193359375
+      },
+      "finite": {
+        "hdr_rgb": true,
+        "om_rgb": true,
+        "sdr_luminance": true,
+        "hdr_luminance": true
+      },
+      "extraction_scope": "bounded one-frame source extraction; no full scan"
+    },
+    "input_files": {
+      "hdr_rgb": "G:\\Auto-OpenMatte-Sdr2hdr-converter — kopia\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\raw_rgb_u16\\the_matrix\\the_matrix_temporal_stratum_08_hdr_rgb_u16.npy",
+      "om_rgb": "G:\\Auto-OpenMatte-Sdr2hdr-converter — kopia\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\raw_rgb_u16\\the_matrix\\the_matrix_temporal_stratum_08_om_rgb_u16.npy"
+    },
+    "bbox": [
+      0,
+      140,
+      1920,
+      940
+    ],
+    "fit_mask": {
+      "definition": "SDR ∩ HDR only",
+      "pixel_count": 1536000
+    },
+    "model_definition": "H0: Model E luminance-only + safe ratio scaling; H1: selected regularized 3x3 matrix on H0",
+    "luminance_fit": {
+      "reported_parameter_count": 12,
+      "scene_luminance_parameters_effective": 10,
+      "fit_seconds_cpu": 0.07439220000014757,
+      "parameters": {
+        "lut_x": [
+          0.0,
+          0.012402613437829413,
+          0.024805226875658826,
+          0.03720784031348824,
+          0.04961045375131765,
+          0.062013067189147064,
+          0.07441568062697648,
+          0.08681829406480589,
+          0.0992209075026353,
+          0.11162352094046472,
+          0.12402613437829413,
+          0.13642874781612355,
+          0.14883136125395297,
+          0.16123397469178238,
+          0.17363658812961177,
+          0.1860392015674412,
+          0.1984418150052706,
+          0.21084442844310003,
+          0.22324704188092945,
+          0.23564965531875884,
+          0.24805226875658826,
+          0.2604548821944177,
+          0.2728574956322471,
+          0.2852601090700765,
+          0.29766272250790593,
+          0.3100653359457353,
+          0.32246794938356477,
+          0.33487056282139416,
+          0.34727317625922355,
+          0.359675789697053,
+          0.3720784031348824,
+          0.38448101657271183,
+          0.3968836300105412,
+          0.4092862434483706,
+          0.42168885688620006,
+          0.43409147032402945,
+          0.4464940837618589,
+          0.4588966971996883,
+          0.4712993106375177,
+          0.4837019240753471,
+          0.4961045375131765,
+          0.508507150951006,
+          0.5209097643888354,
+          0.5333123778266647,
+          0.5457149912644942,
+          0.5581176047023236,
+          0.570520218140153,
+          0.5829228315779824,
+          0.5953254450158119,
+          0.6077280584536412,
+          0.6201306718914706,
+          0.6325332853293001,
+          0.6449358987671295,
+          0.6573385122049589,
+          0.6697411256427883,
+          0.6821437390806178,
+          0.6945463525184471,
+          0.7069489659562765,
+          0.719351579394106,
+          0.7317541928319353,
+          0.7441568062697648,
+          0.7565594197075942,
+          0.7689620331454237,
+          0.781364646583253
+        ],
+        "lut_y": [
+          8.527843092097824e-05,
+          0.0003401835821403619,
+          0.0005256321956665718,
+          0.0007764759867118574,
+          0.0009318274605128599,
+          0.001162060367919513,
+          0.001353896526656284,
+          0.0015171263274807788,
+          0.0016689045825937013,
+          0.0018105205654919574,
+          0.0019537589195586396,
+          0.002099756424460286,
+          0.0022650159907483,
+          0.0024462892799439855,
+          0.0026287407109195355,
+          0.0028366130824602413,
+          0.003016767366876972,
+          0.0032069226524069658,
+          0.0033919033421048344,
+          0.003592097401715212,
+          0.003811748199287968,
+          0.004036762716955667,
+          0.0042706077717697384,
+          0.00452252561956525,
+          0.0047819097879653145,
+          0.005038466275257451,
+          0.0053011138210458915,
+          0.005551609255101616,
+          0.005807095981292821,
+          0.006071192061076626,
+          0.0063267710179062304,
+          0.006585086928536685,
+          0.00687359901645029,
+          0.007163927088451431,
+          0.0074491990913496215,
+          0.007757577797493846,
+          0.008031033950955054,
+          0.008276743864335625,
+          0.008485664693166266,
+          0.008706958591175635,
+          0.008931604118682206,
+          0.009213264653262316,
+          0.009539759417625856,
+          0.009901200810668592,
+          0.010299821577593887,
+          0.01068601667690008,
+          0.011055337484725515,
+          0.011431967239007064,
+          0.011798192304656003,
+          0.012160902855504231,
+          0.012563811605464787,
+          0.01290475533070109,
+          0.01333587357223581,
+          0.013742421838507289,
+          0.014037647396083137,
+          0.014361407802408018,
+          0.014827407163020844,
+          0.015395121547369866,
+          0.015987674411615076,
+          0.01690026114290408,
+          0.017721107750586704,
+          0.01811204707852267,
+          0.018674774091684398,
+          0.019899122768091436
+        ],
+        "correction_coeffs": [
+          8.63317556942227e-05,
+          -0.0007047344971326098,
+          -0.00041890430914846394,
+          -0.00025119195645854453
+        ],
+        "sigmoid_params": [
+          -0.0002724356658692335,
+          0.33333506607488533,
+          0.10000146064116543,
+          -0.0006432020281241591,
+          0.6666635111452449,
+          0.10000484782650254
+        ],
+        "chroma_gain": 1.0,
+        "chroma_slope": 0.0
+      },
+      "convergence": "Model E does not expose OptimizeResult"
+    },
+    "matrix_fit": {
+      "selected": {
+        "constraint_family": "A_unconstrained_regularized",
+        "lambda": 0.001,
+        "matrix": [
+          [
+            0.6315911152843587,
+            0.4723791735896113,
+            -0.2566610123553688
+          ],
+          [
+            0.16441661124484283,
+            0.6947884938240748,
+            -0.037679694280059836
+          ],
+          [
+            0.2805168757513693,
+            -0.3087711914019621,
+            0.9101822280248217
+          ]
+        ],
+        "determinant": 0.3794291049052593,
+        "condition_number": 2.9777816184576213,
+        "deviation_from_identity_frobenius": 0.8534900752451925,
+        "optimizer_success": true,
+        "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+        "optimizer_iterations": 86,
+        "fit_seconds_cpu": 4.245889800000441,
+        "holdout_terms": {
+          "luma_mse_scaled": 0.01007167378287492,
+          "chroma_mse_scaled": 0.2579535108990193,
+          "hue_mse_scaled": 1.1729553334420102,
+          "deltaE_mse_scaled": 0.13584085470747023
+        },
+        "holdout_objective": 0.32439551367762176,
+        "stable": true
+      },
+      "candidates": [
+        {
+          "constraint_family": "A_unconstrained_regularized",
+          "lambda": 0.001,
+          "matrix": [
+            [
+              0.6315911152843587,
+              0.4723791735896113,
+              -0.2566610123553688
+            ],
+            [
+              0.16441661124484283,
+              0.6947884938240748,
+              -0.037679694280059836
+            ],
+            [
+              0.2805168757513693,
+              -0.3087711914019621,
+              0.9101822280248217
+            ]
+          ],
+          "determinant": 0.3794291049052593,
+          "condition_number": 2.9777816184576213,
+          "deviation_from_identity_frobenius": 0.8534900752451925,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+          "optimizer_iterations": 86,
+          "fit_seconds_cpu": 4.245889800000441,
+          "holdout_terms": {
+            "luma_mse_scaled": 0.01007167378287492,
+            "chroma_mse_scaled": 0.2579535108990193,
+            "hue_mse_scaled": 1.1729553334420102,
+            "deltaE_mse_scaled": 0.13584085470747023
+          },
+          "holdout_objective": 0.32439551367762176,
+          "stable": true
+        },
+        {
+          "constraint_family": "A_unconstrained_regularized",
+          "lambda": 0.01,
+          "matrix": [
+            [
+              0.6758806590393983,
+              0.3913865409760346,
+              -0.14146415118450048
+            ],
+            [
+              0.13666330099392449,
+              0.7419714032106483,
+              0.010525541238480773
+            ],
+            [
+              0.2494573959866562,
+              -0.2765527323424634,
+              0.9785254431168958
+            ]
+          ],
+          "determinant": 0.4729007003058512,
+          "condition_number": 2.3959285167268307,
+          "deviation_from_identity_frobenius": 0.7090746378923191,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_iterations": 73,
+          "fit_seconds_cpu": 3.815440500000477,
+          "holdout_terms": {
+            "luma_mse_scaled": 0.010293949612790617,
+            "chroma_mse_scaled": 0.26851758630127265,
+            "hue_mse_scaled": 1.1806671917605942,
+            "deltaE_mse_scaled": 0.1351143550221009
+          },
+          "holdout_objective": 0.33224629515339654,
+          "stable": true
+        },
+        {
+          "constraint_family": "A_unconstrained_regularized",
+          "lambda": 0.1,
+          "matrix": [
+            [
+              0.9062426721927203,
+              0.13872125805592334,
+              0.031495657686674824
+            ],
+            [
+              0.07821576175420826,
+              0.9425549571309317,
+              -0.016081650126491657
+            ],
+            [
+              0.1524957223165942,
+              -0.0880395482891477,
+              1.0076797324111093
+            ]
+          ],
+          "determinant": 0.8434427044216507,
+          "condition_number": 1.3802433214897354,
+          "deviation_from_identity_frobenius": 0.26413470785345544,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+          "optimizer_iterations": 39,
+          "fit_seconds_cpu": 2.0808852999998635,
+          "holdout_terms": {
+            "luma_mse_scaled": 0.011192278579799974,
+            "chroma_mse_scaled": 0.3173948580493693,
+            "hue_mse_scaled": 1.2362090061554498,
+            "deltaE_mse_scaled": 0.13808585248131575
+          },
+          "holdout_objective": 0.3561362478535058,
+          "stable": true
+        },
+        {
+          "constraint_family": "B_positive_diagonal",
+          "lambda": 0.001,
+          "matrix": [
+            [
+              0.6316167399230749,
+              0.472221024401871,
+              -0.2566443617650966
+            ],
+            [
+              0.1644628630782568,
+              0.6946130779309158,
+              -0.03765589281891862
+            ],
+            [
+              0.28054923067645404,
+              -0.3088361551409473,
+              0.91009209713913
+            ]
+          ],
+          "determinant": 0.37931821325203563,
+          "condition_number": 2.9776966018204116,
+          "deviation_from_identity_frobenius": 0.8535007293124119,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_iterations": 58,
+          "fit_seconds_cpu": 3.1155048000000534,
+          "holdout_terms": {
+            "luma_mse_scaled": 0.010071210986498125,
+            "chroma_mse_scaled": 0.2579441787260047,
+            "hue_mse_scaled": 1.1729726101537188,
+            "deltaE_mse_scaled": 0.13583983449714473
+          },
+          "holdout_objective": 0.3243967037404421,
+          "stable": true
+        },
+        {
+          "constraint_family": "B_positive_diagonal",
+          "lambda": 0.01,
+          "matrix": [
+            [
+              0.6758342257988459,
+              0.39142036755297566,
+              -0.14155764723827943
+            ],
+            [
+              0.13662158839854618,
+              0.7419969006338192,
+              0.010442147094522937
+            ],
+            [
+              0.24941281964881168,
+              -0.27645015094300807,
+              0.9783383170660276
+            ]
+          ],
+          "determinant": 0.4728002305600198,
+          "condition_number": 2.3957143661935527,
+          "deviation_from_identity_frobenius": 0.709064655722264,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+          "optimizer_iterations": 56,
+          "fit_seconds_cpu": 2.7929033000000345,
+          "holdout_terms": {
+            "luma_mse_scaled": 0.010293531194241203,
+            "chroma_mse_scaled": 0.26851006778594777,
+            "hue_mse_scaled": 1.1806954957549731,
+            "deltaE_mse_scaled": 0.13511313661930272
+          },
+          "holdout_objective": 0.33224985964093967,
+          "stable": true
+        },
+        {
+          "constraint_family": "B_positive_diagonal",
+          "lambda": 0.1,
+          "matrix": [
+            [
+              0.906239210321251,
+              0.13868409246058627,
+              0.031514884539480585
+            ],
+            [
+              0.07821877721400185,
+              0.9425128558503577,
+              -0.016061955676562517
+            ],
+            [
+              0.15250197726554934,
+              -0.08806853357258901,
+              1.0076815876969822
+            ]
+          ],
+          "determinant": 0.8434037307000619,
+          "condition_number": 1.3802700822625735,
+          "deviation_from_identity_frobenius": 0.2641408958622309,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+          "optimizer_iterations": 32,
+          "fit_seconds_cpu": 1.597381900000073,
+          "holdout_terms": {
+            "luma_mse_scaled": 0.011192014465831677,
+            "chroma_mse_scaled": 0.3173929976628655,
+            "hue_mse_scaled": 1.236205722062285,
+            "deltaE_mse_scaled": 0.13808471443463693
+          },
+          "holdout_objective": 0.3561351689034207,
+          "stable": true
+        },
+        {
+          "constraint_family": "C_limited_cross_channel",
+          "lambda": 0.001,
+          "matrix": [
+            [
+              0.6251178189896194,
+              0.25,
+              -0.15942705023241915
+            ],
+            [
+              0.1485172796982936,
+              0.5727935485386834,
+              -0.0349185140668979
+            ],
+            [
+              0.22588357001162274,
+              -0.25,
+              0.764936584522689
+            ]
+          ],
+          "determinant": 0.26461216553189776,
+          "condition_number": 2.300798518470829,
+          "deviation_from_identity_frobenius": 0.7765396755129491,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+          "optimizer_iterations": 44,
+          "fit_seconds_cpu": 2.1816352999994706,
+          "holdout_terms": {
+            "luma_mse_scaled": 0.009842238642470398,
+            "chroma_mse_scaled": 0.2641932165835527,
+            "hue_mse_scaled": 1.1978033365035134,
+            "deltaE_mse_scaled": 0.13569021459885472
+          },
+          "holdout_objective": 0.3303696616596373,
+          "stable": true
+        },
+        {
+          "constraint_family": "C_limited_cross_channel",
+          "lambda": 0.01,
+          "matrix": [
+            [
+              0.7191674693023035,
+              0.25,
+              -0.07554836761558395
+            ],
+            [
+              0.13959422825229376,
+              0.7007442792474774,
+              0.0082511856781705
+            ],
+            [
+              0.2313421723815166,
+              -0.25,
+              0.9287703044749784
+            ]
+          ],
+          "determinant": 0.4524878755488914,
+          "condition_number": 2.022990540206218,
+          "deviation_from_identity_frobenius": 0.6142279327935188,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+          "optimizer_iterations": 47,
+          "fit_seconds_cpu": 2.4675735000000714,
+          "holdout_terms": {
+            "luma_mse_scaled": 0.010086003867201914,
+            "chroma_mse_scaled": 0.2757439059083192,
+            "hue_mse_scaled": 1.1985852012083011,
+            "deltaE_mse_scaled": 0.1337559938608039
+          },
+          "holdout_objective": 0.3356076807762837,
+          "stable": true
+        },
+        {
+          "constraint_family": "C_limited_cross_channel",
+          "lambda": 0.1,
+          "matrix": [
+            [
+              0.9062536899481132,
+              0.13871826314472413,
+              0.031495792627041566
+            ],
+            [
+              0.07821531207110897,
+              0.9425601287247005,
+              -0.016078780250480304
+            ],
+            [
+              0.152497776873087,
+              -0.08804422191424507,
+              1.007688762628468
+            ]
+          ],
+          "determinant": 0.8434658986359436,
+          "condition_number": 1.380239734418772,
+          "deviation_from_identity_frobenius": 0.26413081454983967,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+          "optimizer_iterations": 32,
+          "fit_seconds_cpu": 1.5976041999992958,
+          "holdout_terms": {
+            "luma_mse_scaled": 0.011192347361463857,
+            "chroma_mse_scaled": 0.3173950323023408,
+            "hue_mse_scaled": 1.2362091303329839,
+            "deltaE_mse_scaled": 0.13808643407594884
+          },
+          "holdout_objective": 0.35613627134204073,
+          "stable": true
+        }
+      ],
+      "training_sample_count": 4096,
+      "holdout_sample_count": 2048,
+      "objective": "0.35*luminance_MSE_scaled + 0.20*ICtCp_chroma_MSE_scaled + 0.20*nonneutral_hue_MSE_scaled + 0.25*DeltaE2000_MSE_scaled + lambda*||M-I||_F^2"
+    },
+    "parameter_count": {
+      "luminance_compact_controls": 10,
+      "rgb_matrix": 9,
+      "total_effective_scene_parameters": 19,
+      "note": "65 sampled LUT ordinates are representation samples, not independent scene parameters."
+    },
+    "H0": {
+      "common_metrics": {
+        "RGB_MSE_normalized": 2.8122151108872593e-06,
+        "luminance": {
+          "MAE_nits": 8.554623612133987,
+          "RMSE_nits": 17.72270640464349,
+          "median_absolute_error_nits": 1.5602203679237896,
+          "P95_absolute_error_nits": 41.762769766002975
+        },
+        "deltaE2000": {
+          "count": 1536000,
+          "mean": 0.9464170003322566,
+          "median": 0.2897771468022312,
+          "p95": 3.776334483353466
+        },
+        "deltaEICtCp": {
+          "count": 1536000,
+          "mean": 0.08361008896644179,
+          "median": 0.06990855711688299,
+          "p95": 0.20335206206556278
+        },
+        "chroma_error_ICtCp_signed": {
+          "count": 1536000,
+          "mean": 0.016294756089862552,
+          "median": 0.019480572062296087,
+          "p95": 0.05950227740931275
+        },
+        "chroma_error_ICtCp_absolute": {
+          "count": 1536000,
+          "mean": 0.02814790199735387,
+          "median": 0.02463600974339901,
+          "p95": 0.0628778630987783
+        },
+        "hue_error_degrees_signed_non_neutral": {
+          "count": 1535927,
+          "mean": 10.704649069057064,
+          "median": 3.49369603877943,
+          "p95": 86.69966170679265
+        },
+        "hue_error_degrees_absolute_non_neutral": {
+          "count": 1535927,
+          "mean": 20.8047638559891,
+          "median": 10.012679216190007,
+          "p95": 89.4901068885701
+        },
+        "hue_excluded_neutral_reference_pixels": 73
+      },
+      "seam": {
+        "definition": "HDR-center composite continuity proxy; not unseen-region ground truth",
+        "boundaries": [
+          {
+            "boundary": "top",
+            "luma_mean_nits": 7.039245801417498,
+            "luma_P95_nits": 24.868833620566953,
+            "chroma_ICtCp": 0.03438622196506214,
+            "hue_degrees": 7.17321821997252,
+            "gradient_nits_per_pixel": 0.9345594327272891
+          },
+          {
+            "boundary": "bottom",
+            "luma_mean_nits": 5.494013753517481,
+            "luma_P95_nits": 20.977492964212285,
+            "chroma_ICtCp": 0.022206068248002888,
+            "hue_degrees": 19.858664969699948,
+            "gradient_nits_per_pixel": 0.0
+          }
+        ]
+      },
+      "range": {
+        "finite": true,
+        "min": 6.574246502835514e-06,
+        "max": 0.022762352781155584,
+        "negative_count": 0,
+        "above_peak_count": 0,
+        "above_peak_fraction": 0.0
+      }
+    },
+    "H1": {
+      "common_metrics": {
+        "RGB_MSE_normalized": 2.6750693275387145e-06,
+        "luminance": {
+          "MAE_nits": 8.346681921496609,
+          "RMSE_nits": 17.291660961181307,
+          "median_absolute_error_nits": 1.4241792996540985,
+          "P95_absolute_error_nits": 40.44042998277915
+        },
+        "deltaE2000": {
+          "count": 1536000,
+          "mean": 0.9119867819723866,
+          "median": 0.20813809277786172,
+          "p95": 3.878250824992401
+        },
+        "deltaEICtCp": {
+          "count": 1536000,
+          "mean": 0.07822446377478372,
+          "median": 0.0629996775027417,
+          "p95": 0.20038166073593622
+        },
+        "chroma_error_ICtCp_signed": {
+          "count": 1536000,
+          "mean": -0.0009524826331757828,
+          "median": 0.005408380260784357,
+          "p95": 0.034186931470954966
+        },
+        "chroma_error_ICtCp_absolute": {
+          "count": 1536000,
+          "mean": 0.02026002706299912,
+          "median": 0.015821305002970236,
+          "p95": 0.0522086164809419
+        },
+        "hue_error_degrees_signed_non_neutral": {
+          "count": 1535927,
+          "mean": 1.7938275615645634,
+          "median": -4.02773068369006,
+          "p95": 65.39729329756418
+        },
+        "hue_error_degrees_absolute_non_neutral": {
+          "count": 1535927,
+          "mean": 19.525826409549623,
+          "median": 9.798640445238819,
+          "p95": 74.85255316856082
+        },
+        "hue_excluded_neutral_reference_pixels": 73
+      },
+      "seam": {
+        "definition": "HDR-center composite continuity proxy; not unseen-region ground truth",
+        "boundaries": [
+          {
+            "boundary": "top",
+            "luma_mean_nits": 6.545289703518208,
+            "luma_P95_nits": 22.948664506794344,
+            "chroma_ICtCp": 0.019021659855612424,
+            "hue_degrees": 7.596727037899382,
+            "gradient_nits_per_pixel": 0.8893777362646457
+          },
+          {
+            "boundary": "bottom",
+            "luma_mean_nits": 5.24689820790094,
+            "luma_P95_nits": 20.752904347958232,
+            "chroma_ICtCp": 0.014074420889122937,
+            "hue_degrees": 19.039593042645834,
+            "gradient_nits_per_pixel": 0.0
+          }
+        ]
+      },
+      "range": {
+        "pre_nonnegative_clip": {
+          "finite": true,
+          "min": -0.0001419585308155148,
+          "max": 0.020391313039796896,
+          "negative_count": 801,
+          "above_peak_count": 0,
+          "above_peak_fraction": 0.0
+        },
+        "post_nonnegative_clip": {
+          "finite": true,
+          "min": 0.0,
+          "max": 0.020391313039796896,
+          "negative_count": 0,
+          "above_peak_count": 0,
+          "above_peak_fraction": 0.0
+        }
+      },
+      "apply_seconds_cpu": 0.09716320000006817
+    }
+  },
+  "synthetic": {
+    "definition": "Known full HDR -> SDR/DVD-style grade; H0/H1 fit only central HDR crop",
+    "geometry": {
+      "full_shape": [
+        360,
+        640,
+        3
+      ],
+      "central_crop_y": [
+        72,
+        288
+      ]
+    },
+    "truth_matrix": null,
+    "matrix_fit": {
+      "selected": {
+        "constraint_family": "C_limited_cross_channel",
+        "lambda": 0.001,
+        "matrix": [
+          [
+            1.0557200721976032,
+            -0.04685023048163103,
+            0.00868813315093069
+          ],
+          [
+            -0.02791951440800192,
+            1.0161623401574156,
+            0.0002897928689095043
+          ],
+          [
+            0.02016693199679546,
+            -0.026764212652937075,
+            1.0723565151833543
+          ]
+        ],
+        "determinant": 1.1488394981983887,
+        "condition_number": 1.1020489754829896,
+        "deviation_from_identity_frobenius": 0.11302412228440378,
+        "optimizer_success": true,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "optimizer_iterations": 81,
+        "fit_seconds_cpu": 4.028055200000381,
+        "holdout_terms": {
+          "luma_mse_scaled": 1.2186483542954173e-05,
+          "chroma_mse_scaled": 6.9390999872263884e-06,
+          "hue_mse_scaled": 2.0795047621713775e-06,
+          "deltaE_mse_scaled": 2.8772500263192005e-05
+        },
+        "holdout_objective": 2.6036567473871373e-05,
+        "stable": true
+      },
+      "candidates": [
+        {
+          "constraint_family": "A_unconstrained_regularized",
+          "lambda": 0.001,
+          "matrix": [
+            [
+              1.0557223165182794,
+              -0.04687884744247357,
+              0.008713353796689404
+            ],
+            [
+              -0.02789593624389679,
+              1.0161243666616018,
+              0.0003021320280092692
+            ],
+            [
+              0.02019183686361488,
+              -0.026793865817767215,
+              1.0723582613417362
+            ]
+          ],
+          "determinant": 1.1488007888390672,
+          "condition_number": 1.1021035918780118,
+          "deviation_from_identity_frobenius": 0.1130404117065854,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+          "optimizer_iterations": 63,
+          "fit_seconds_cpu": 3.2089826000001267,
+          "holdout_terms": {
+            "luma_mse_scaled": 1.2217326253551942e-05,
+            "chroma_mse_scaled": 7.0040812824583355e-06,
+            "hue_mse_scaled": 2.0583863434613655e-06,
+            "deltaE_mse_scaled": 2.8934313558178375e-05
+          },
+          "holdout_objective": 2.6100270782266043e-05,
+          "stable": true
+        },
+        {
+          "constraint_family": "A_unconstrained_regularized",
+          "lambda": 0.01,
+          "matrix": [
+            [
+              1.0516901726024122,
+              -0.04124259199935882,
+              0.007218905545702104
+            ],
+            [
+              -0.028942300810434158,
+              1.0190649565373777,
+              -0.0015171289348718552
+            ],
+            [
+              0.018967436731483812,
+              -0.020851542520487248,
+              1.0675584659622497
+            ]
+          ],
+          "determinant": 1.1427041929337571,
+          "condition_number": 1.0919663704776774,
+          "deviation_from_identity_frobenius": 0.10481920513325918,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_iterations": 71,
+          "fit_seconds_cpu": 3.5820255999997244,
+          "holdout_terms": {
+            "luma_mse_scaled": 1.3987724843001745e-05,
+            "chroma_mse_scaled": 2.2582181634707476e-05,
+            "hue_mse_scaled": 2.7690190045994427e-06,
+            "deltaE_mse_scaled": 7.571035232090467e-05
+          },
+          "holdout_objective": 0.00013876418955082083,
+          "stable": true
+        },
+        {
+          "constraint_family": "A_unconstrained_regularized",
+          "lambda": 0.1,
+          "matrix": [
+            [
+              1.0353665667092495,
+              -0.020524074966157893,
+              0.002800688189799166
+            ],
+            [
+              -0.028325103313212606,
+              1.0248754529668742,
+              -0.008271903846477063
+            ],
+            [
+              0.019354858861245206,
+              -0.0010271505180626797,
+              1.0461887122531526
+            ]
+          ],
+          "determinant": 1.1094644444596247,
+          "condition_number": 1.0579412976814402,
+          "deviation_from_identity_frobenius": 0.07535557258052952,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_iterations": 64,
+          "fit_seconds_cpu": 3.183606200000213,
+          "holdout_terms": {
+            "luma_mse_scaled": 8.405131660031815e-05,
+            "chroma_mse_scaled": 0.00028781909884251125,
+            "hue_mse_scaled": 2.188158356332459e-05,
+            "deltaE_mse_scaled": 0.0009507853876340514
+          },
+          "holdout_objective": 0.0008969006760937367,
+          "stable": true
+        },
+        {
+          "constraint_family": "B_positive_diagonal",
+          "lambda": 0.001,
+          "matrix": [
+            [
+              1.055775683869122,
+              -0.04696040798385422,
+              0.008739955256205354
+            ],
+            [
+              -0.027875340334128564,
+              1.0160559709491008,
+              0.0003482454131689329
+            ],
+            [
+              0.020139634382635458,
+              -0.026868721017003133,
+              1.0724902991601215
+            ]
+          ],
+          "determinant": 1.148922822235273,
+          "condition_number": 1.102255658793652,
+          "deviation_from_identity_frobenius": 0.11318091817160737,
+          "optimizer_success": false,
+          "optimizer_message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+          "optimizer_iterations": 90,
+          "fit_seconds_cpu": 4.543619699999908,
+          "holdout_terms": {
+            "luma_mse_scaled": 1.2273337368173063e-05,
+            "chroma_mse_scaled": 6.847440805960434e-06,
+            "hue_mse_scaled": 2.1222877835412306e-06,
+            "deltaE_mse_scaled": 2.8671349277549212e-05
+          },
+          "holdout_objective": 2.6067371354316295e-05,
+          "stable": true
+        },
+        {
+          "constraint_family": "B_positive_diagonal",
+          "lambda": 0.01,
+          "matrix": [
+            [
+              1.0517007579885433,
+              -0.04128656127422712,
+              0.007251447588043591
+            ],
+            [
+              -0.028939320121383925,
+              1.0190487341408463,
+              -0.001502437312047707
+            ],
+            [
+              0.018940731325839937,
+              -0.02083244619971144,
+              1.0675705842370893
+            ]
+          ],
+          "determinant": 1.1427091669620721,
+          "condition_number": 1.0920052580719084,
+          "deviation_from_identity_frobenius": 0.10483918075728606,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_iterations": 86,
+          "fit_seconds_cpu": 4.072725899999568,
+          "holdout_terms": {
+            "luma_mse_scaled": 1.3949648756344535e-05,
+            "chroma_mse_scaled": 2.2616876693327345e-05,
+            "hue_mse_scaled": 2.8654948544156587e-06,
+            "deltaE_mse_scaled": 7.574586201151198e-05
+          },
+          "holdout_objective": 0.0001388278550957362,
+          "stable": true
+        },
+        {
+          "constraint_family": "B_positive_diagonal",
+          "lambda": 0.1,
+          "matrix": [
+            [
+              1.0353735289387929,
+              -0.020532265162922923,
+              0.0028020377807248423
+            ],
+            [
+              -0.028319292676804612,
+              1.024865633325186,
+              -0.008268016480194538
+            ],
+            [
+              0.01935952261942159,
+              -0.0010369658831439362,
+              1.0461938206350763
+            ]
+          ],
+          "determinant": 1.1094664543771222,
+          "condition_number": 1.0579524160599874,
+          "deviation_from_identity_frobenius": 0.07535973402343582,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_iterations": 56,
+          "fit_seconds_cpu": 2.7246249999998327,
+          "holdout_terms": {
+            "luma_mse_scaled": 8.392533158279766e-05,
+            "chroma_mse_scaled": 0.0002878361168531957,
+            "hue_mse_scaled": 2.1889563218455577e-05,
+            "deltaE_mse_scaled": 0.0009507229636330397
+          },
+          "holdout_objective": 0.0008969086941848684,
+          "stable": true
+        },
+        {
+          "constraint_family": "C_limited_cross_channel",
+          "lambda": 0.001,
+          "matrix": [
+            [
+              1.0557200721976032,
+              -0.04685023048163103,
+              0.00868813315093069
+            ],
+            [
+              -0.02791951440800192,
+              1.0161623401574156,
+              0.0002897928689095043
+            ],
+            [
+              0.02016693199679546,
+              -0.026764212652937075,
+              1.0723565151833543
+            ]
+          ],
+          "determinant": 1.1488394981983887,
+          "condition_number": 1.1020489754829896,
+          "deviation_from_identity_frobenius": 0.11302412228440378,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_iterations": 81,
+          "fit_seconds_cpu": 4.028055200000381,
+          "holdout_terms": {
+            "luma_mse_scaled": 1.2186483542954173e-05,
+            "chroma_mse_scaled": 6.9390999872263884e-06,
+            "hue_mse_scaled": 2.0795047621713775e-06,
+            "deltaE_mse_scaled": 2.8772500263192005e-05
+          },
+          "holdout_objective": 2.6036567473871373e-05,
+          "stable": true
+        },
+        {
+          "constraint_family": "C_limited_cross_channel",
+          "lambda": 0.01,
+          "matrix": [
+            [
+              1.0516690663730348,
+              -0.0414049599206031,
+              0.007424183213251061
+            ],
+            [
+              -0.02898637979804873,
+              1.0189724358348506,
+              -0.0013594431056024663
+            ],
+            [
+              0.018952637430644535,
+              -0.021094108228495053,
+              1.0678436588437625
+            ]
+          ],
+          "determinant": 1.1428749998312078,
+          "condition_number": 1.0923951470381639,
+          "deviation_from_identity_frobenius": 0.10511003356471321,
+          "optimizer_success": false,
+          "optimizer_message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+          "optimizer_iterations": 90,
+          "fit_seconds_cpu": 4.494688699999642,
+          "holdout_terms": {
+            "luma_mse_scaled": 1.3834354274594158e-05,
+            "chroma_mse_scaled": 2.211165679442319e-05,
+            "hue_mse_scaled": 2.512824144008171e-06,
+            "deltaE_mse_scaled": 7.442577731708847e-05
+          },
+          "holdout_objective": 0.00013885455607281773,
+          "stable": true
+        },
+        {
+          "constraint_family": "C_limited_cross_channel",
+          "lambda": 0.1,
+          "matrix": [
+            [
+              1.0352569668987774,
+              -0.020445371236907806,
+              0.0028453139469179845
+            ],
+            [
+              -0.02841625400179849,
+              1.0249341543617692,
+              -0.008226664539242593
+            ],
+            [
+              0.019259995715758944,
+              -0.0009964251376326108,
+              1.046266588626536
+            ]
+          ],
+          "determinant": 1.1094931292360872,
+          "condition_number": 1.0579171428579959,
+          "deviation_from_identity_frobenius": 0.07535631232490456,
+          "optimizer_success": true,
+          "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "optimizer_iterations": 55,
+          "fit_seconds_cpu": 2.700669399999242,
+          "holdout_terms": {
+            "luma_mse_scaled": 8.514862591334614e-05,
+            "chroma_mse_scaled": 0.00028739578358521947,
+            "hue_mse_scaled": 2.1894533786674727e-05,
+            "deltaE_mse_scaled": 0.0009512204284210591
+          },
+          "holdout_objective": 0.0008973225703701709,
+          "stable": true
+        }
+      ],
+      "training_sample_count": 4096,
+      "holdout_sample_count": 2048,
+      "objective": "0.35*luminance_MSE_scaled + 0.20*ICtCp_chroma_MSE_scaled + 0.20*nonneutral_hue_MSE_scaled + 0.25*DeltaE2000_MSE_scaled + lambda*||M-I||_F^2"
+    },
+    "H0": {
+      "common": {
+        "RGB_MSE_normalized": 2.4402923605697424e-05,
+        "luminance": {
+          "MAE_nits": 1.3131007773978431,
+          "RMSE_nits": 1.9701239786504559,
+          "median_absolute_error_nits": 0.827506065197263,
+          "P95_absolute_error_nits": 4.999654467735035
+        },
+        "deltaE2000": {
+          "count": 138240,
+          "mean": 2.2577051455168866,
+          "median": 2.0652315894888833,
+          "p95": 3.8234517318492487
+        },
+        "deltaEICtCp": {
+          "count": 138240,
+          "mean": 0.012179364979519334,
+          "median": 0.011941226769954641,
+          "p95": 0.015573487760987463
+        },
+        "chroma_error_ICtCp_signed": {
+          "count": 138240,
+          "mean": -0.00696504132133226,
+          "median": -0.010352954778617703,
+          "p95": 0.007938785550409236
+        },
+        "chroma_error_ICtCp_absolute": {
+          "count": 138240,
+          "mean": 0.009250904856815564,
+          "median": 0.01036079336364594,
+          "p95": 0.01284316829144123
+        },
+        "hue_error_degrees_signed_non_neutral": {
+          "count": 138240,
+          "mean": 1.6983867916336366,
+          "median": 0.7989001903688591,
+          "p95": 21.638667996156432
+        },
+        "hue_error_degrees_absolute_non_neutral": {
+          "count": 138240,
+          "mean": 11.570351958607919,
+          "median": 8.432475095980692,
+          "p95": 34.250075650954635
+        },
+        "hue_excluded_neutral_reference_pixels": 0
+      },
+      "hidden": {
+        "RGB_MSE_normalized": 1.211499690398839e-05,
+        "luminance": {
+          "MAE_nits": 2.171249285544677,
+          "RMSE_nits": 4.870290238788343,
+          "median_absolute_error_nits": 1.3402289758682358,
+          "P95_absolute_error_nits": 5.045023738979304
+        },
+        "deltaE2000": {
+          "count": 92160,
+          "mean": 1.8933670447906574,
+          "median": 1.9192952523954965,
+          "p95": 2.539370470901383
+        },
+        "deltaEICtCp": {
+          "count": 92160,
+          "mean": 0.011786225754503736,
+          "median": 0.011465428671917459,
+          "p95": 0.015633329338491743
+        },
+        "chroma_error_ICtCp_signed": {
+          "count": 92160,
+          "mean": -0.0034023905863964842,
+          "median": -0.006138777303804332,
+          "p95": 0.009940449115820494
+        },
+        "chroma_error_ICtCp_absolute": {
+          "count": 92160,
+          "mean": 0.008607883917976657,
+          "median": 0.009720921299796879,
+          "p95": 0.012880810847546236
+        },
+        "hue_error_degrees_signed_non_neutral": {
+          "count": 92160,
+          "mean": -4.708343718340858,
+          "median": -0.25890915200006503,
+          "p95": 12.025884475224004
+        },
+        "hue_error_degrees_absolute_non_neutral": {
+          "count": 92160,
+          "mean": 10.886309204348972,
+          "median": 6.5251189906010545,
+          "p95": 36.65729315886153
+        },
+        "hue_excluded_neutral_reference_pixels": 0
+      }
+    },
+    "H1": {
+      "common": {
+        "RGB_MSE_normalized": 2.8607047816743963e-08,
+        "luminance": {
+          "MAE_nits": 1.1055485853110465,
+          "RMSE_nits": 1.4725926792742485,
+          "median_absolute_error_nits": 0.8436793791504262,
+          "P95_absolute_error_nits": 3.0602842409655753
+        },
+        "deltaE2000": {
+          "count": 138240,
+          "mean": 0.027912358668015724,
+          "median": 0.025575503690833046,
+          "p95": 0.05394537250632167
+        },
+        "deltaEICtCp": {
+          "count": 138240,
+          "mean": 0.00022726592941546125,
+          "median": 0.00018568306777197108,
+          "p95": 0.0005626765618999415
+        },
+        "chroma_error_ICtCp_signed": {
+          "count": 138240,
+          "mean": -4.062370814415866e-05,
+          "median": -4.73835700190179e-05,
+          "p95": 0.00014886178935066813
+        },
+        "chroma_error_ICtCp_absolute": {
+          "count": 138240,
+          "mean": 8.187596636571024e-05,
+          "median": 6.434083645817656e-05,
+          "p95": 0.0001979722780596136
+        },
+        "hue_error_degrees_signed_non_neutral": {
+          "count": 138240,
+          "mean": -0.0042192330733571365,
+          "median": -0.004352233169855191,
+          "p95": 0.04934680209011477
+        },
+        "hue_error_degrees_absolute_non_neutral": {
+          "count": 138240,
+          "mean": 0.035009976678022026,
+          "median": 0.03129079769407785,
+          "p95": 0.09744786835942508
+        },
+        "hue_excluded_neutral_reference_pixels": 0
+      },
+      "hidden": {
+        "RGB_MSE_normalized": 1.9402053951472163e-07,
+        "luminance": {
+          "MAE_nits": 1.8855853576797037,
+          "RMSE_nits": 4.738794374922964,
+          "median_absolute_error_nits": 0.811881176676979,
+          "P95_absolute_error_nits": 3.9052005405985883
+        },
+        "deltaE2000": {
+          "count": 92160,
+          "mean": 0.06280724105846688,
+          "median": 0.03009398960541698,
+          "p95": 0.07340085740507253
+        },
+        "deltaEICtCp": {
+          "count": 92160,
+          "mean": 0.0007395814246491606,
+          "median": 0.00022512696650362854,
+          "p95": 0.0007543020272641321
+        },
+        "chroma_error_ICtCp_signed": {
+          "count": 92160,
+          "mean": -6.343280148548085e-05,
+          "median": -5.104828335474997e-05,
+          "p95": 0.00016297708459427353
+        },
+        "chroma_error_ICtCp_absolute": {
+          "count": 92160,
+          "mean": 0.0001235755956056575,
+          "median": 9.129359854744695e-05,
+          "p95": 0.00037203555975662587
+        },
+        "hue_error_degrees_signed_non_neutral": {
+          "count": 92160,
+          "mean": -0.005253711368020521,
+          "median": -0.0011587991592209982,
+          "p95": 0.04829429673978174
+        },
+        "hue_error_degrees_absolute_non_neutral": {
+          "count": 92160,
+          "mean": 0.0367879513587081,
+          "median": 0.03687696603573683,
+          "p95": 0.0810800186879186
+        },
+        "hue_excluded_neutral_reference_pixels": 0
+      },
+      "range": {
+        "pre_nonnegative_clip": {
+          "finite": true,
+          "min": 0.011514135949675154,
+          "max": 0.5547970569713121,
+          "negative_count": 0,
+          "above_peak_count": 0,
+          "above_peak_fraction": 0.0
+        },
+        "post_nonnegative_clip": {
+          "finite": true,
+          "min": 0.011514135949675154,
+          "max": 0.5547970569713121,
+          "negative_count": 0,
+          "above_peak_count": 0,
+          "above_peak_fraction": 0.0
+        }
+      }
+    }
+  },
+  "matrix_success_gate": {
+    "H1_deltaE2000_improves_H0_by_at_least_5_percent": false,
+    "H0_deltaE2000": 0.9464170003322566,
+    "H1_deltaE2000": 0.9119867819723866
+  },
+  "multi_temporal": {
+    "performed": false
+  }
+}

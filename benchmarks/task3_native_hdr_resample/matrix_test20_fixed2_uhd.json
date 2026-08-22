@@ -1,0 +1,827 @@
+{
+  "bridge": "C:\\Users\\xroki\\v5build\\E_fixed2_task3_uhd.dll",
+  "bridge_sha256": "B281C1456AF98D62579B78C7943E5ADE32B35F562E76D850AB7C701C35F82E7A",
+  "build_identity": {
+    "active_bridge_path": "C:\\Users\\xroki\\v5build\\E_fixed2_task3_uhd.dll",
+    "active_bridge_sha256": "B281C1456AF98D62579B78C7943E5ADE32B35F562E76D850AB7C701C35F82E7A",
+    "existing_task3_expected_sha256": "2890C7ACB77A6EE25BCEAD056A5973F9DAA06A5F5DF49ED8E93E153FA565EBB7",
+    "existing_task3_path": "C:\\Users\\xroki\\v5build\\D_task3_resample.dll",
+    "existing_task3_sha256": "2890C7ACB77A6EE25BCEAD056A5973F9DAA06A5F5DF49ED8E93E153FA565EBB7",
+    "existing_task3_unchanged": true,
+    "fixed2_baseline_expected_sha256": "FF1BB6C9F34E91D48F6671404552BE664DFE4556BF2E4E05F011B4205F79882C",
+    "fixed2_baseline_path": "C:\\Users\\xroki\\v5build\\B_fixed2.dll",
+    "fixed2_baseline_sha256": "FF1BB6C9F34E91D48F6671404552BE664DFE4556BF2E4E05F011B4205F79882C",
+    "fixed2_baseline_unchanged": true,
+    "identity_method": "explicit absolute bridge path + SHA-256 + selected source SHA-256; no HMODULE/GetModuleFileNameW probe",
+    "source_symbols": {
+      "fixed_point_yuv_to_working_rgb": true,
+      "native_gpu_p010_encode": true,
+      "native_hdr_resample": true,
+      "native_p010_surface": true
+    },
+    "source_symbols_present": true,
+    "task3_source_path": "C:\\Users\\xroki\\v5build\\task3_src\\v5_gpu_bridge.cu",
+    "task3_source_sha256": "F43AF10AD51E545DCBF6BA3D54DA3D48DEF30F568C29841CFAFE2F6B395F3236"
+  },
+  "configuration": {
+    "device_index": 0,
+    "encoder_qp": 18,
+    "fit_scale": 0.5,
+    "fit_stride": 1,
+    "fps": "24000/1001",
+    "hdr_decoded_geometry": [
+      3840,
+      1600
+    ],
+    "hdr_decoder": "hevc_cuvid",
+    "hdr_interval": [
+      73357,
+      73377
+    ],
+    "hdr_target_geometry": [
+      1920,
+      800
+    ],
+    "offset_frames": -19,
+    "om_decoder": "hevc_cuvid",
+    "om_geometry": [
+      1920,
+      1080
+    ],
+    "om_interval": [
+      73338,
+      73358
+    ],
+    "output_geometry": [
+      3840,
+      2160
+    ],
+    "overlap": [
+      0,
+      140,
+      1920,
+      940
+    ],
+    "processing_geometry": [
+      1920,
+      1080
+    ],
+    "render_model": "default",
+    "ring_size_per_source": 4
+  },
+  "cuda": {
+    "available": true,
+    "compute_capability": "86",
+    "cupy_version": "14.1.1",
+    "device_count": 1,
+    "device_id": 0,
+    "device_name": "NVIDIA GeForce RTX 3080",
+    "free_vram_bytes": 9536798720,
+    "runtime_error": null,
+    "runtime_ready": true,
+    "total_vram_bytes": 10736893952
+  },
+  "ffprobe": {
+    "command": [
+      "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\dev\\ffmpeg-build\\install\\bin\\ffprobe.exe",
+      "-v",
+      "error",
+      "-count_frames",
+      "-select_streams",
+      "v:0",
+      "-show_entries",
+      "stream=codec_name,profile,width,height,pix_fmt,color_range,color_space,color_transfer,color_primaries,sample_aspect_ratio,nb_read_frames,side_data_list",
+      "-of",
+      "json",
+      "C:\\Users\\xroki\\v5build\\task3_out\\matrix_test20_fixed2_uhd.mkv"
+    ],
+    "stderr": "",
+    "stream": {
+      "codec_name": "hevc",
+      "color_primaries": "bt2020",
+      "color_range": "tv",
+      "color_space": "bt2020nc",
+      "color_transfer": "smpte2084",
+      "height": 2160,
+      "nb_read_frames": "20",
+      "pix_fmt": "yuv420p10le",
+      "profile": "Main 10",
+      "sample_aspect_ratio": "1:1",
+      "width": 3840
+    }
+  },
+  "fit": {
+    "fit_profile": {
+      "architecture": "gpu_shot_fitter_v4_single_pass_feature_tape",
+      "batch_host_frames_bounded": true,
+      "batch_policy": "automatic_free_vram_70_percent_capped_at_4",
+      "batch_size": 4,
+      "batch_size_range": [
+        1,
+        4
+      ],
+      "candidate_gpu": 0.07045189999917056,
+      "capture_batches": 5,
+      "capture_gpu": 0.11932459998934064,
+      "capture_seconds": 0.5565864000091096,
+      "cpu_decode": 0.0,
+      "cpu_rgb_transport": false,
+      "d2h": 0.000202499984879978,
+      "d2h_calls": 4,
+      "d2h_compact": 0.0,
+      "d2h_compact_calls": 0,
+      "d2h_final": 0.000202499984879978,
+      "d2h_final_calls": 4,
+      "d2h_gain_row_calls": 0,
+      "d2h_gain_rows": 0.0,
+      "decoded_frames": 20,
+      "decoded_individual_images": 40,
+      "decoded_pairs": 20,
+      "estimated_batch_working_bytes": 519782400,
+      "estimated_working_bytes_per_frame": 129945600,
+      "feature_tape_blur_radius": 32,
+      "feature_tape_bottom_patch_rows": 89,
+      "feature_tape_detail_dtype": "float32",
+      "feature_tape_device_bytes": 48998400,
+      "feature_tape_frames": 20,
+      "feature_tape_full_frame": false,
+      "feature_tape_gain_dtype": "float64",
+      "feature_tape_reference_dtype": "float32",
+      "feature_tape_top_patch_rows": 89,
+      "ffmpeg_openings": 2,
+      "fit_batch_path": "native_cuda_device_area_batches",
+      "fit_direct_fill_batches": 5,
+      "fit_ffmpeg_openings": 2,
+      "fit_geometry": {
+        "fit": {
+          "base_sigma_px": 8.0,
+          "chroma_sigma_px": 8.0,
+          "effective_scale_x": 0.5,
+          "effective_scale_y": 0.5,
+          "fit_scale": 0.5,
+          "gain_smooth_sigma_px": 64.0,
+          "hdr_size": [
+            960,
+            400
+          ],
+          "intensity_sigma_px": 8.0,
+          "om_size": [
+            960,
+            540
+          ],
+          "overlap": [
+            0,
+            70,
+            960,
+            470
+          ],
+          "resize_interpolation": "cv2.INTER_AREA",
+          "seam_band_px": 24,
+          "source_geometry_unchanged": true
+        },
+        "source": {
+          "base_sigma_px": 16.0,
+          "chroma_sigma_px": 16.0,
+          "gain_smooth_sigma_px": 128.0,
+          "hdr_size": [
+            3840,
+            1600
+          ],
+          "intensity_sigma_px": 16.0,
+          "om_size": [
+            1920,
+            1080
+          ],
+          "overlap": [
+            0,
+            140,
+            1920,
+            940
+          ],
+          "seam_band_px": 48
+        }
+      },
+      "fit_grid": {
+        "base_sigma_px": 8.0,
+        "chroma_sigma_px": 8.0,
+        "effective_scale_x": 0.5,
+        "effective_scale_y": 0.5,
+        "fit_scale": 0.5,
+        "gain_smooth_sigma_px": 64.0,
+        "hdr_size": [
+          960,
+          400
+        ],
+        "intensity_sigma_px": 8.0,
+        "om_size": [
+          960,
+          540
+        ],
+        "overlap": [
+          0,
+          70,
+          960,
+          470
+        ],
+        "resize_interpolation": "cv2.INTER_AREA",
+        "seam_band_px": 24,
+        "source_geometry_unchanged": true
+      },
+      "fit_hash_mode": "native_no_host_rgb_hash",
+      "fit_prepare_frames": 20,
+      "fit_prepare_seconds": 0.0,
+      "fit_producer_seconds": 0.0,
+      "fit_queue_consumer_wait_events": 0,
+      "fit_queue_consumer_wait_seconds": 0.0,
+      "fit_queue_depth": 2,
+      "fit_queue_high_water_mark": 0,
+      "fit_queue_producer_wait_events": 0,
+      "fit_queue_producer_wait_seconds": 0.0,
+      "fit_resize_frames": 20,
+      "fit_resize_images": 40,
+      "fit_resize_seconds": 0.007340300013311207,
+      "fit_scale_effective": 0.5,
+      "fit_scale_requested": 0.5,
+      "fit_source_traversals": 1,
+      "fit_stack_batches": 0,
+      "fit_total": 0.8419235000037588,
+      "free_vram_at_fit_start_bytes": 9532604416,
+      "full_frame_d2h": 0,
+      "gain_reduce_seconds": 0.008606500006862916,
+      "h2d": 0.006600299995625392,
+      "h2d_batches": 0,
+      "h2d_calls": 11,
+      "intensity_gpu": 0.1350514999794541,
+      "io": 0.0,
+      "native_device_batches": 5,
+      "native_h2d_calls": 0,
+      "native_source": {
+        "full_frame_cpu_rgb_transport": false,
+        "hdr_decoded_geometry": [
+          3840,
+          1600
+        ],
+        "hdr_decoder": "hevc_cuvid",
+        "hdr_expected_software_format": "P010LE",
+        "hdr_geometry": [
+          1920,
+          800
+        ],
+        "hdr_resample_active": true,
+        "hdr_resample_contract": "pre-PQ INTER_LINEAR on normalized RGB48 codes, native GPU, no-op when the decoded master already fills the overlap",
+        "hdr_software_format": 158,
+        "hdr_target_geometry": [
+          1920,
+          800
+        ],
+        "om_decoder": "hevc_cuvid",
+        "om_expected_software_format": "NV12",
+        "om_geometry": [
+          1920,
+          1080
+        ],
+        "om_software_format": 158,
+        "ring_size_per_source": 4
+      },
+      "pass_capture": 0.5565864000091096,
+      "pass_replay_candidates": 0.07143530000757892,
+      "pass_replay_intensity": 0.1359671999962302,
+      "pass_replay_spatial": 0.05490950000239536,
+      "peak_vram_bytes": 2196832256,
+      "peak_vram_mib": 2095.0625,
+      "per_frame_d2h": 0,
+      "renderer_geometry": {
+        "fields_upsampled_before_renderer": true,
+        "om_size": [
+          1920,
+          1080
+        ],
+        "overlap": [
+          0,
+          140,
+          1920,
+          940
+        ]
+      },
+      "replay_candidate_batches": 1,
+      "replay_intensity_batches": 4,
+      "replay_pass_names": [
+        "spatial_and_intensity_centre",
+        "intensity_slopes",
+        "candidates"
+      ],
+      "replay_passes": 3,
+      "replay_spatial_batches": 4,
+      "returned_gain_field_shape": [
+        1080,
+        1920
+      ],
+      "returned_spatial_field_shape": [
+        1080,
+        1920
+      ],
+      "solver_cpu": 0.06715439999243245,
+      "source_geometry": {
+        "base_sigma_px": 16.0,
+        "chroma_sigma_px": 16.0,
+        "gain_smooth_sigma_px": 128.0,
+        "hdr_size": [
+          3840,
+          1600
+        ],
+        "intensity_sigma_px": 16.0,
+        "om_size": [
+          1920,
+          1080
+        ],
+        "overlap": [
+          0,
+          140,
+          1920,
+          940
+        ],
+        "seam_band_px": 48
+      },
+      "source_pass_names": [
+        "capture"
+      ],
+      "source_passes": 1,
+      "source_profiler": {
+        "first_hashes": {},
+        "frames": 20,
+        "last_hashes": {},
+        "stages": {
+          "native_decode": {
+            "P50_seconds": 0.005883350000658538,
+            "P95_seconds": 0.021885350011143764,
+            "P99_seconds": 0.19806475000499602,
+            "count": 20,
+            "max_seconds": 0.2421096000034595,
+            "mean_seconds": 0.017309519999980694,
+            "min_seconds": 0.00047819998872000724,
+            "sample_count": 20,
+            "sample_policy": "bounded cyclic sample, max 4096",
+            "total_seconds": 0.3461903999996139
+          }
+        }
+      },
+      "spatial_gpu": 0.05449679998855572,
+      "total_vram_bytes": 10736893952,
+      "vram_samples": [
+        {
+          "free_bytes": 9532604416,
+          "stage": "fit_start",
+          "total_bytes": 10736893952,
+          "used_bytes": 1204289536
+        },
+        {
+          "free_bytes": 9482272768,
+          "stage": "feature_tape_allocated",
+          "total_bytes": 10736893952,
+          "used_bytes": 1254621184
+        },
+        {
+          "free_bytes": 8540061696,
+          "stage": "capture_batch",
+          "total_bytes": 10736893952,
+          "used_bytes": 2196832256
+        },
+        {
+          "free_bytes": 8540061696,
+          "stage": "capture_batch",
+          "total_bytes": 10736893952,
+          "used_bytes": 2196832256
+        },
+        {
+          "free_bytes": 8540061696,
+          "stage": "capture_batch",
+          "total_bytes": 10736893952,
+          "used_bytes": 2196832256
+        },
+        {
+          "free_bytes": 8540061696,
+          "stage": "capture_batch",
+          "total_bytes": 10736893952,
+          "used_bytes": 2196832256
+        },
+        {
+          "free_bytes": 8540061696,
+          "stage": "capture_batch",
+          "total_bytes": 10736893952,
+          "used_bytes": 2196832256
+        },
+        {
+          "free_bytes": 9178185728,
+          "stage": "gain_field_allocated",
+          "total_bytes": 10736893952,
+          "used_bytes": 1558708224
+        },
+        {
+          "free_bytes": 9178185728,
+          "stage": "replay_batch",
+          "total_bytes": 10736893952,
+          "used_bytes": 1558708224
+        },
+        {
+          "free_bytes": 9178185728,
+          "stage": "replay_batch",
+          "total_bytes": 10736893952,
+          "used_bytes": 1558708224
+        },
+        {
+          "free_bytes": 9178185728,
+          "stage": "replay_batch",
+          "total_bytes": 10736893952,
+          "used_bytes": 1558708224
+        },
+        {
+          "free_bytes": 9178185728,
+          "stage": "replay_batch",
+          "total_bytes": 10736893952,
+          "used_bytes": 1558708224
+        },
+        {
+          "free_bytes": 9178185728,
+          "stage": "field_parts_allocated",
+          "total_bytes": 10736893952,
+          "used_bytes": 1558708224
+        },
+        {
+          "free_bytes": 9178185728,
+          "stage": "replay_batch",
+          "total_bytes": 10736893952,
+          "used_bytes": 1558708224
+        },
+        {
+          "free_bytes": 9178185728,
+          "stage": "replay_batch",
+          "total_bytes": 10736893952,
+          "used_bytes": 1558708224
+        },
+        {
+          "free_bytes": 9178185728,
+          "stage": "replay_batch",
+          "total_bytes": 10736893952,
+          "used_bytes": 1558708224
+        },
+        {
+          "free_bytes": 9178185728,
+          "stage": "replay_batch",
+          "total_bytes": 10736893952,
+          "used_bytes": 1558708224
+        },
+        {
+          "free_bytes": 9178185728,
+          "stage": "candidate_models_allocated",
+          "total_bytes": 10736893952,
+          "used_bytes": 1558708224
+        },
+        {
+          "free_bytes": 9178185728,
+          "stage": "replay_batch",
+          "total_bytes": 10736893952,
+          "used_bytes": 1558708224
+        }
+      ],
+      "vram_telemetry_available": true
+    },
+    "fit_seconds": 0.8419235000037588,
+    "frozen_fitter": "NativeV4GpuShotFitter, unmodified"
+  },
+  "fixed2_guard_pass": true,
+  "limitations": {
+    "authorization": "Only TEST 10 and TEST 20 are permitted in this task; no TEST 80/full-film render.",
+    "benchmark_targets": "Requested ~1.6067 ms/frame YUV and ~87.144 ms/frame whole GPU kernel timings were not independently measured by this runner.",
+    "hdr10_static_metadata": "Source has no Mastering Display or Content Light Level side data; no metadata was fabricated or injected.",
+    "loaded_dll_proof": "Absolute path + SHA-256 recorded from explicit ctypes bridge_path; no dedicated HMODULE/GetModuleFileNameW probe."
+  },
+  "output": "C:\\Users\\xroki\\v5build\\task3_out\\matrix_test20_fixed2_uhd.mkv",
+  "output_contract": {
+    "bt2020_primaries": true,
+    "bt2020nc": true,
+    "codec_hevc": true,
+    "d2h_zero": true,
+    "decoded_frame_d2h_zero": true,
+    "encoded_geometry": true,
+    "encoded_geometry_3840x2160": true,
+    "frame_count": true,
+    "gpu_resize_active": true,
+    "h2d_zero": true,
+    "main10": true,
+    "p010_path": true,
+    "pix_fmt_yuv420p10le": true,
+    "processing_geometry": true,
+    "render_output_d2h_zero": true,
+    "sar_1_1": true,
+    "smpte2084_pq": true,
+    "tv_range": true,
+    "zero_copy_nvenc": true
+  },
+  "prior_artifact_comparison": {
+    "actual_sha256": "E5A5BEE98C189F481F755671F1FE8E7FC9493EE785FA49E20E9D0EC7EC231482",
+    "available": true,
+    "exact_match": true,
+    "expected_sha256": "E5A5BEE98C189F481F755671F1FE8E7FC9493EE785FA49E20E9D0EC7EC231482",
+    "path": "C:\\Users\\xroki\\v5build\\task3_out\\matrix_test20_uhd.mkv",
+    "scope": "prior D_task3_resample Matrix UHD artifact; exact encoded hash comparison"
+  },
+  "profile": {
+    "cache_root": "tools/openmatte_hdr/cache/matrix_film_look/matrix_scene_s08_bridge_guard_20f",
+    "description": "Twenty-frame Matrix 08 numerical-regression guard window for V5 native bridge performance work. The window lies strictly inside the reviewed actual shot Matrix-08-02 [73295, 73434) and is a centred subset of the already accepted matrix_scene_s08_30f window [73352, 73382), so it never crosses a verified cut.",
+    "expected_frame_count": 20,
+    "feather": 24,
+    "ffmpeg": "dev/ffmpeg-build/install/bin/ffmpeg.exe",
+    "fps": "24000/1001",
+    "guard_contract": {
+      "acceptance": "max abs 10-bit code difference 0 across Y, U and V planes; a systematic shift is a regression",
+      "comparison_point": "pre-NVENC GPU P010 buffers for every frame, compared in process",
+      "decoders": {
+        "hdr": "hevc_cuvid",
+        "om": "hevc_cuvid"
+      },
+      "encoded_output": "not produced; the Matrix HDR source exposes no Mastering display or Content light level side data, so the production Phase 2 NVENC/HDR10 remux path refuses this material",
+      "frames": 20,
+      "hdr_interval": [
+        73357,
+        73377
+      ],
+      "om_interval": [
+        73338,
+        73358
+      ],
+      "purpose": "before/after P010 plane comparison for the yuv_to_working_rgb performance fix"
+    },
+    "hdr": "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+    "hdr_size": [
+      3840,
+      1600
+    ],
+    "legacy_geometry": {
+      "confidence": 1.0,
+      "offset": [
+        0,
+        140
+      ],
+      "overlap": [
+        0,
+        140,
+        1920,
+        940
+      ],
+      "scale": [
+        0.5,
+        0.5
+      ],
+      "status": "preserved geometry contract"
+    },
+    "legacy_sync": {
+      "confidence": 0.940513,
+      "equation": "om_frame = hdr_frame -19",
+      "frame_locked": true,
+      "frame_offset": -19,
+      "frame_rounding": "inherited from the P2.34 anchor, not recomputed",
+      "historical_time_seconds": 3060.0152916666666,
+      "offset_seconds_at_24000_1001": -0.7924583333333333,
+      "status": "LOCKED"
+    },
+    "limitations": [
+      "Synchronization and geometry are inherited from the P2.34 anchor and are not revalidated here.",
+      "Scene independence was never verified for this stratum (p2_32_scene_independence_verified is false).",
+      "The window is a bounded 20-frame guard sample inside one reviewed actual shot, not the whole shot and not a Phase 16 train/holdout benchmark.",
+      "The Open Matte source stream is HEVC, so the h264_cuvid default must be overridden with hevc_cuvid.",
+      "v04 feather remains 24 px."
+    ],
+    "name": "matrix_scene_s08_bridge_guard_20f",
+    "offset_frames": -19,
+    "om": "G:\\Filmy\\IMAX format (open matte)\\The Matrix (1999) [OPEN MATTE] [WEB-DL 1080p 10bit DD5.1 x265].mkv",
+    "om_size": [
+      1920,
+      1080
+    ],
+    "om_start_frame": 73338,
+    "output_size": [
+      3840,
+      2160
+    ],
+    "overlap": [
+      0,
+      140,
+      1920,
+      940
+    ],
+    "review_regions": [
+      [
+        "wall_wood",
+        40
+      ],
+      [
+        "dark_clothing",
+        300
+      ],
+      [
+        "skin_head",
+        780
+      ],
+      [
+        "rice_paper_screens",
+        1400
+      ]
+    ],
+    "scene_provenance": {
+      "anchor_hdr_frame": 73367,
+      "anchor_near_cut": false,
+      "anchor_om_frame": 73348,
+      "bounded_analysis_interval": [
+        73274,
+        73460
+      ],
+      "case_id": "the_matrix_temporal_stratum_08",
+      "p2_32_scene_independence_verified": false,
+      "parent_window": {
+        "hdr_interval": [
+          73352,
+          73382
+        ],
+        "profile": "tools/openmatte_hdr/profiles/matrix_film_look/matrix_scene_s08_30f.json"
+      },
+      "reviewed_actual_shot": {
+        "frame_count": 139,
+        "frames": [
+          73295,
+          73434
+        ],
+        "record": "research/physical_validation/chroma_field_extension/matrix08_verified_segmentation.json",
+        "shot_id": "Matrix-08-02"
+      },
+      "reviewed_cuts_avoided": [
+        73295,
+        73434
+      ],
+      "selection_index": 8,
+      "shot_status": "LOCAL_SHOT_RESOLVED"
+    },
+    "schema": "openmatte-hdr-input-profile/v1",
+    "seam_band": 48,
+    "shot_end": 73377,
+    "shot_start": 73357
+  },
+  "profile_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\tools\\openmatte_hdr\\profiles\\matrix_film_look\\matrix_scene_s08_bridge_guard_20f.json",
+  "render": {
+    "encoded_geometry": [
+      3840,
+      2160
+    ],
+    "extension_contract": {
+      "bottom_extension_mean_abs_signal": 0.0010874314466491342,
+      "bottom_extension_rows": [
+        940,
+        1080
+      ],
+      "bottom_predicted_max_abs_error": 0.00030157226137816906,
+      "center_hdr_max_abs_error_excluding_feather": 0.0,
+      "extended_open_matte_pass": false,
+      "finite": true,
+      "output_geometry": [
+        1920,
+        1080
+      ],
+      "overlap": [
+        0,
+        140,
+        1920,
+        940
+      ],
+      "top_extension_mean_abs_signal": 0.0005498806131072342,
+      "top_extension_rows": [
+        0,
+        140
+      ],
+      "top_predicted_max_abs_error": 0.00024148589000105858,
+      "validation_scope": "GPU compositing contract; no independent HDR ground truth exists for extension rows"
+    },
+    "fps": 17.15962405662544,
+    "frames": 20,
+    "output_boundary": {
+      "d2h_bytes": 0,
+      "decoded_frame_d2h_bytes": 0,
+      "encoded_bitstream_host_retrieval": true,
+      "gpu_output_resize_active": true,
+      "gpu_output_resize_contract": "INTER_LINEAR-equivalent bilinear on normalized working RGB before PQ/P010",
+      "h2d_bytes": 0,
+      "mode": "CUDA P010 AVHWFramesContext -> hevc_nvenc -> Matroska",
+      "p010_device_bytes_per_frame": 24883200,
+      "render_output_d2h_bytes": 0,
+      "zero_copy_nvenc": true
+    },
+    "overlap_contract": {
+      "bounded_decode_queue": 3,
+      "bounded_encode_queue": 3,
+      "decode_stage": "NVDEC N+1",
+      "enabled": true,
+      "encode_stage": "NVENC N-1",
+      "global_cuda_synchronization": false,
+      "ordered_single_nvenc_consumer": true,
+      "render_stage": "CUDA V5 render N"
+    },
+    "pipeline_seconds": 1.1661138000054052,
+    "processing_geometry": [
+      1920,
+      1080
+    ],
+    "profiler": {
+      "first_hashes": {},
+      "frames": 20,
+      "last_hashes": {},
+      "stages": {
+        "native_decode": {
+          "P50_seconds": 0.02752619999955641,
+          "P95_seconds": 0.043740130001970245,
+          "P99_seconds": 0.20186466599727254,
+          "count": 20,
+          "max_seconds": 0.2413957999960985,
+          "mean_seconds": 0.03347815999950399,
+          "min_seconds": 0.0006643999950028956,
+          "sample_count": 20,
+          "sample_policy": "bounded cyclic sample, max 4096",
+          "total_seconds": 0.6695631999900797
+        },
+        "nvenc": {
+          "P50_seconds": 0.018511050002416596,
+          "P95_seconds": 0.022926619998906973,
+          "P99_seconds": 0.024401324002683394,
+          "count": 20,
+          "max_seconds": 0.0247700000036275,
+          "mean_seconds": 0.01797024000043166,
+          "min_seconds": 0.00027189998945686966,
+          "sample_count": 20,
+          "sample_policy": "bounded cyclic sample, max 4096",
+          "total_seconds": 0.3594048000086332
+        }
+      }
+    },
+    "quality": {
+      "above_peak_rgb_fraction_before_clip": {
+        "P95": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      },
+      "bottom_chroma_step": {
+        "P95": 0.0016865500365383923,
+        "max": 0.0017038116930052638,
+        "mean": 0.0012867158948211
+      },
+      "bottom_hue_step_degrees": {
+        "P95": 0.901167469024658,
+        "max": 0.9454395294189453,
+        "mean": 0.6052927017211914
+      },
+      "bottom_hue_valid_fraction": {
+        "P95": 1.0,
+        "max": 1.0,
+        "mean": 1.0
+      },
+      "bottom_lowpass_chroma_residual": {
+        "P95": 0.009145177435129881,
+        "max": 0.00920865498483181,
+        "mean": 0.008100193575955927
+      },
+      "diagnostic_frames": 4,
+      "negative_rgb_fraction_before_clip": {
+        "P95": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      },
+      "top_chroma_step": {
+        "P95": 0.0020048780483193696,
+        "max": 0.0020082422997802496,
+        "mean": 0.0018779966339934617
+      },
+      "top_hue_step_degrees": {
+        "P95": 0.8756215445200602,
+        "max": 0.8764851252237956,
+        "mean": 0.8018015861511231
+      },
+      "top_hue_valid_fraction": {
+        "P95": 1.0,
+        "max": 1.0,
+        "mean": 1.0
+      },
+      "top_lowpass_chroma_residual": {
+        "P95": 0.005577429989352822,
+        "max": 0.005624567158520222,
+        "mean": 0.005122427945025265
+      }
+    },
+    "wall_seconds": 1.1655267000023741
+  },
+  "schema": "openmatte-hdr-task3-matrix-fixed2-uhd-test/v1",
+  "status": "PASS",
+  "test": 20,
+  "timing": {
+    "fit_seconds": 0.8419235000037588,
+    "render_fps": 17.15962405662544,
+    "render_ms_per_frame": 58.276335000118706,
+    "render_seconds": 1.1655267000023741,
+    "total_seconds": 3.9655500999942888
+  }
+}

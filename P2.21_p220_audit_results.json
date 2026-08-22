@@ -1,0 +1,2198 @@
+{
+  "implementation": "P2.20 current persistent-buffer backend",
+  "warmups": 5,
+  "timed_runs": 20,
+  "roi": [
+    560,
+    3840,
+    3
+  ],
+  "dtype": "float64",
+  "primary_input": {
+    "generator": "np.random.default_rng(2192).random",
+    "c_contiguous": true,
+    "dtype": "float64",
+    "bytes": 51609600
+  },
+  "timing_ms": {
+    "staged_upload_event": {
+      "count": 20,
+      "median_ms": 4.239055871963501,
+      "mean_ms": 4.450315189361572,
+      "min_ms": 4.16374397277832,
+      "max_ms": 5.320831775665283,
+      "p10_ms": 4.17084813117981,
+      "p90_ms": 5.1609728813171385,
+      "p95_ms": 5.316819143295288,
+      "p99_ms": 5.320029249191284,
+      "samples_ms": [
+        5.31660795211792,
+        4.447391986846924,
+        4.187647819519043,
+        4.1877121925354,
+        5.143680095672607,
+        4.5193281173706055,
+        4.173984050750732,
+        4.182688236236572,
+        4.516128063201904,
+        4.214943885803223,
+        4.16374397277832,
+        4.2933759689331055,
+        5.320831775665283,
+        4.181856155395508,
+        4.302591800689697,
+        4.171264171600342,
+        5.076863765716553,
+        4.263167858123779,
+        4.1671037673950195,
+        4.175392150878906
+      ]
+    },
+    "staged_transform_cuda_event": {
+      "count": 20,
+      "median_ms": 14.62931203842163,
+      "mean_ms": 14.403809547424316,
+      "min_ms": 13.554559707641602,
+      "max_ms": 15.036640167236328,
+      "p10_ms": 13.559027290344238,
+      "p90_ms": 14.908422374725342,
+      "p95_ms": 14.925832080841065,
+      "p99_ms": 15.014478549957275,
+      "samples_ms": [
+        14.717632293701172,
+        14.920000076293945,
+        15.036640167236328,
+        14.713760375976562,
+        14.657024383544922,
+        14.063263893127441,
+        14.688896179199219,
+        14.69660758972168,
+        13.556320190429688,
+        14.670751571655273,
+        14.182815551757812,
+        14.236063957214355,
+        14.907135963439941,
+        14.895711898803711,
+        13.559328079223633,
+        14.60159969329834,
+        14.154047966003418,
+        13.554559707641602,
+        14.169983863830566,
+        14.094047546386719
+      ]
+    },
+    "staged_download_event": {
+      "count": 20,
+      "median_ms": 7.415888071060181,
+      "mean_ms": 7.286683201789856,
+      "min_ms": 6.335072040557861,
+      "max_ms": 8.384544372558594,
+      "p10_ms": 6.539091014862061,
+      "p90_ms": 8.025328159332275,
+      "p95_ms": 8.338913249969483,
+      "p99_ms": 8.37541814804077,
+      "samples_ms": [
+        6.335072040557861,
+        7.732831954956055,
+        7.637631893157959,
+        6.471871852874756,
+        7.370304107666016,
+        8.336511611938477,
+        7.25167989730835,
+        7.526688098907471,
+        7.468160152435303,
+        6.7557759284973145,
+        7.152927875518799,
+        7.461472034454346,
+        8.384544372558594,
+        6.546559810638428,
+        7.559552192687988,
+        6.834080219268799,
+        7.521471977233887,
+        6.798175811767578,
+        7.990752220153809,
+        6.597599983215332
+      ]
+    },
+    "staged_total_wall": {
+      "count": 20,
+      "median_ms": 26.191949999883946,
+      "mean_ms": 26.259374999790452,
+      "min_ms": 24.715899999137037,
+      "max_ms": 28.767699999662,
+      "p10_ms": 25.42275999985577,
+      "p90_ms": 27.237749999767402,
+      "p95_ms": 27.396754999699624,
+      "p99_ms": 28.49351099966952,
+      "samples_ms": [
+        26.467100000445498,
+        27.228099999774713,
+        26.958799999192706,
+        25.474199999734992,
+        27.324599999701604,
+        27.087500000561704,
+        26.226699999824632,
+        26.54400000028545,
+        25.65630000026431,
+        25.744999999005813,
+        25.595099999918602,
+        26.15719999994326,
+        28.767699999662,
+        25.72630000031495,
+        25.514699998893775,
+        25.701299999127514,
+        26.903800000582123,
+        24.715899999137037,
+        26.433399998495588,
+        24.959800000942778
+      ]
+    },
+    "public_backend_transform_roi_wall": {
+      "count": 20,
+      "median_ms": 26.971550000780553,
+      "mean_ms": 27.039090000289434,
+      "min_ms": 25.342099999761558,
+      "max_ms": 29.60220000022673,
+      "p10_ms": 25.81670999989001,
+      "p90_ms": 28.432099999736238,
+      "p95_ms": 28.962564999346796,
+      "p99_ms": 29.474273000050744,
+      "samples_ms": [
+        25.74300000014773,
+        26.35030000055849,
+        27.05740000055812,
+        28.928899999300484,
+        26.96950000063225,
+        27.97430000100576,
+        28.376899999784655,
+        27.052700001149788,
+        27.056500000981032,
+        26.973600000928855,
+        28.099000001020613,
+        29.60220000022673,
+        26.43549999993411,
+        26.600799999869196,
+        27.327499999955762,
+        26.697200000853627,
+        25.824899999861373,
+        25.933499999155174,
+        25.342099999761558,
+        26.436000000103377
+      ]
+    }
+  },
+  "stage_profile": {
+    "runs": 3,
+    "instrumentation": "selected module-level CuPy functions wrapped with non-blocking CUDA events; array-method assignments/fill are reported separately.",
+    "samples": [
+      {
+        "call_count": 41,
+        "expected_traced_call_count": 41,
+        "calls": [
+          {
+            "name": "clip",
+            "elapsed_ms": 0.3919999897480011
+          },
+          {
+            "name": "power",
+            "elapsed_ms": 3.3464319705963135
+          },
+          {
+            "name": "matmul",
+            "elapsed_ms": 5.954559803009033
+          },
+          {
+            "name": "maximum",
+            "elapsed_ms": 0.15564799308776855
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.10342399775981903
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.10239999741315842
+          },
+          {
+            "name": "add",
+            "elapsed_ms": 0.07782399654388428
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.10239999741315842
+          },
+          {
+            "name": "add",
+            "elapsed_ms": 0.0798719972372055
+          },
+          {
+            "name": "greater",
+            "elapsed_ms": 0.03481600061058998
+          },
+          {
+            "name": "less",
+            "elapsed_ms": 0.03276799991726875
+          },
+          {
+            "name": "logical_and",
+            "elapsed_ms": 0.01740800030529499
+          },
+          {
+            "name": "divide",
+            "elapsed_ms": 0.08191999793052673
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.055296000093221664
+          },
+          {
+            "name": "copyto",
+            "elapsed_ms": 0.01740800030529499
+          },
+          {
+            "name": "greater_equal",
+            "elapsed_ms": 0.03481600061058998
+          },
+          {
+            "name": "subtract",
+            "elapsed_ms": 0.053247999399900436
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.05427199974656105
+          },
+          {
+            "name": "clip",
+            "elapsed_ms": 0.055296000093221664
+          },
+          {
+            "name": "clip",
+            "elapsed_ms": 0.055296000093221664
+          },
+          {
+            "name": "take",
+            "elapsed_ms": 0.05632000043988228
+          },
+          {
+            "name": "copyto",
+            "elapsed_ms": 0.05939200147986412
+          },
+          {
+            "name": "greater",
+            "elapsed_ms": 0.03481600061058998
+          },
+          {
+            "name": "copyto",
+            "elapsed_ms": 0.058368001133203506
+          },
+          {
+            "name": "divide",
+            "elapsed_ms": 0.08396799862384796
+          },
+          {
+            "name": "copyto",
+            "elapsed_ms": 0.058368001133203506
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.1802240014076233
+          },
+          {
+            "name": "maximum",
+            "elapsed_ms": 0.15462400019168854
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.15667200088500977
+          },
+          {
+            "name": "clip",
+            "elapsed_ms": 0.15667200088500977
+          },
+          {
+            "name": "sqrt",
+            "elapsed_ms": 0.24268800020217896
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.15564799308776855
+          },
+          {
+            "name": "clip",
+            "elapsed_ms": 0.15667200088500977
+          },
+          {
+            "name": "subtract",
+            "elapsed_ms": 0.22937600314617157
+          },
+          {
+            "name": "add",
+            "elapsed_ms": 0.15462400019168854
+          },
+          {
+            "name": "take",
+            "elapsed_ms": 0.15769599378108978
+          },
+          {
+            "name": "take",
+            "elapsed_ms": 0.15667200088500977
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.2303999960422516
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.2303999960422516
+          },
+          {
+            "name": "add",
+            "elapsed_ms": 0.2303999960422516
+          },
+          {
+            "name": "clip",
+            "elapsed_ms": 0.15462400019168854
+          }
+        ],
+        "stage_event_samples_ms": {
+          "B_bt1886_linearization": [
+            0.3919999897480011,
+            3.3464319705963135
+          ],
+          "C_bt709_to_bt2020_matrix": [
+            5.954559803009033,
+            0.15564799308776855
+          ],
+          "D_bt2020_luminance": [
+            0.10342399775981903,
+            0.10239999741315842,
+            0.07782399654388428,
+            0.10239999741315842,
+            0.0798719972372055
+          ],
+          "E_luminance_curve_lut": [
+            0.03481600061058998,
+            0.03276799991726875,
+            0.01740800030529499,
+            0.08191999793052673,
+            0.055296000093221664,
+            0.01740800030529499,
+            0.03481600061058998,
+            0.053247999399900436,
+            0.05427199974656105,
+            0.055296000093221664,
+            0.055296000093221664,
+            0.05632000043988228,
+            0.05939200147986412
+          ],
+          "F_ratio": [
+            0.03481600061058998,
+            0.058368001133203506,
+            0.08396799862384796,
+            0.058368001133203506
+          ],
+          "G_rgb_times_ratio": [
+            0.1802240014076233
+          ],
+          "H_rgb_clamp": [
+            0.15462400019168854
+          ],
+          "I_pq_sqrt_lut": [
+            0.15667200088500977,
+            0.15667200088500977,
+            0.24268800020217896,
+            0.15564799308776855,
+            0.15667200088500977,
+            0.22937600314617157,
+            0.15462400019168854,
+            0.15769599378108978,
+            0.15667200088500977,
+            0.2303999960422516,
+            0.2303999960422516,
+            0.2303999960422516,
+            0.15462400019168854
+          ],
+          "unassigned_calls": []
+        },
+        "stage_event_sum_ms": {
+          "B_bt1886_linearization": 3.7384319603443146,
+          "C_bt709_to_bt2020_matrix": 6.110207796096802,
+          "D_bt2020_luminance": 0.46591998636722565,
+          "E_luminance_curve_lut": 0.6082560010254383,
+          "F_ratio": 0.23552000150084496,
+          "G_rgb_times_ratio": 0.1802240014076233,
+          "H_rgb_clamp": 0.15462400019168854,
+          "I_pq_sqrt_lut": 2.4125439822673798,
+          "unassigned_calls": 0.0
+        },
+        "untraced_device_operations": [
+          "buffers.mapped_luminance.fill(0.0)",
+          "buffers.lower[...] = buffers.position * (lut_size - 1)",
+          "buffers.pq_lower[...] = buffers.pq_position"
+        ],
+        "outer_transform_event_ms": 14.464320182800293
+      },
+      {
+        "call_count": 41,
+        "expected_traced_call_count": 41,
+        "calls": [
+          {
+            "name": "clip",
+            "elapsed_ms": 0.2969279885292053
+          },
+          {
+            "name": "power",
+            "elapsed_ms": 2.6808319091796875
+          },
+          {
+            "name": "matmul",
+            "elapsed_ms": 5.953536033630371
+          },
+          {
+            "name": "maximum",
+            "elapsed_ms": 0.15564799308776855
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.10239999741315842
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.1013759970664978
+          },
+          {
+            "name": "add",
+            "elapsed_ms": 0.0798719972372055
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.10239999741315842
+          },
+          {
+            "name": "add",
+            "elapsed_ms": 0.0798719972372055
+          },
+          {
+            "name": "greater",
+            "elapsed_ms": 0.03481600061058998
+          },
+          {
+            "name": "less",
+            "elapsed_ms": 0.03276799991726875
+          },
+          {
+            "name": "logical_and",
+            "elapsed_ms": 0.020479999482631683
+          },
+          {
+            "name": "divide",
+            "elapsed_ms": 0.08191999793052673
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.055296000093221664
+          },
+          {
+            "name": "copyto",
+            "elapsed_ms": 0.018432000651955605
+          },
+          {
+            "name": "greater_equal",
+            "elapsed_ms": 0.03481600061058998
+          },
+          {
+            "name": "subtract",
+            "elapsed_ms": 0.053247999399900436
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.05427199974656105
+          },
+          {
+            "name": "clip",
+            "elapsed_ms": 0.05632000043988228
+          },
+          {
+            "name": "clip",
+            "elapsed_ms": 0.055296000093221664
+          },
+          {
+            "name": "take",
+            "elapsed_ms": 0.05734400078654289
+          },
+          {
+            "name": "copyto",
+            "elapsed_ms": 0.058368001133203506
+          },
+          {
+            "name": "greater",
+            "elapsed_ms": 0.03379200026392937
+          },
+          {
+            "name": "copyto",
+            "elapsed_ms": 0.05939200147986412
+          },
+          {
+            "name": "divide",
+            "elapsed_ms": 0.08191999793052673
+          },
+          {
+            "name": "copyto",
+            "elapsed_ms": 0.05939200147986412
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.1802240014076233
+          },
+          {
+            "name": "maximum",
+            "elapsed_ms": 0.15667200088500977
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.15564799308776855
+          },
+          {
+            "name": "clip",
+            "elapsed_ms": 0.15564799308776855
+          },
+          {
+            "name": "sqrt",
+            "elapsed_ms": 0.24268800020217896
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.15667200088500977
+          },
+          {
+            "name": "clip",
+            "elapsed_ms": 0.15667200088500977
+          },
+          {
+            "name": "subtract",
+            "elapsed_ms": 0.22835199534893036
+          },
+          {
+            "name": "add",
+            "elapsed_ms": 0.15462400019168854
+          },
+          {
+            "name": "take",
+            "elapsed_ms": 0.15564799308776855
+          },
+          {
+            "name": "take",
+            "elapsed_ms": 0.15564799308776855
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.23244799673557281
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.2303999960422516
+          },
+          {
+            "name": "add",
+            "elapsed_ms": 0.22937600314617157
+          },
+          {
+            "name": "clip",
+            "elapsed_ms": 0.15462400019168854
+          }
+        ],
+        "stage_event_samples_ms": {
+          "B_bt1886_linearization": [
+            0.2969279885292053,
+            2.6808319091796875
+          ],
+          "C_bt709_to_bt2020_matrix": [
+            5.953536033630371,
+            0.15564799308776855
+          ],
+          "D_bt2020_luminance": [
+            0.10239999741315842,
+            0.1013759970664978,
+            0.0798719972372055,
+            0.10239999741315842,
+            0.0798719972372055
+          ],
+          "E_luminance_curve_lut": [
+            0.03481600061058998,
+            0.03276799991726875,
+            0.020479999482631683,
+            0.08191999793052673,
+            0.055296000093221664,
+            0.018432000651955605,
+            0.03481600061058998,
+            0.053247999399900436,
+            0.05427199974656105,
+            0.05632000043988228,
+            0.055296000093221664,
+            0.05734400078654289,
+            0.058368001133203506
+          ],
+          "F_ratio": [
+            0.03379200026392937,
+            0.05939200147986412,
+            0.08191999793052673,
+            0.05939200147986412
+          ],
+          "G_rgb_times_ratio": [
+            0.1802240014076233
+          ],
+          "H_rgb_clamp": [
+            0.15667200088500977
+          ],
+          "I_pq_sqrt_lut": [
+            0.15564799308776855,
+            0.15564799308776855,
+            0.24268800020217896,
+            0.15667200088500977,
+            0.15667200088500977,
+            0.22835199534893036,
+            0.15462400019168854,
+            0.15564799308776855,
+            0.15564799308776855,
+            0.23244799673557281,
+            0.2303999960422516,
+            0.22937600314617157,
+            0.15462400019168854
+          ],
+          "unassigned_calls": []
+        },
+        "stage_event_sum_ms": {
+          "B_bt1886_linearization": 2.977759897708893,
+          "C_bt709_to_bt2020_matrix": 6.10918402671814,
+          "D_bt2020_luminance": 0.46591998636722565,
+          "E_luminance_curve_lut": 0.6133760008960962,
+          "F_ratio": 0.23449600115418434,
+          "G_rgb_times_ratio": 0.1802240014076233,
+          "H_rgb_clamp": 0.15667200088500977,
+          "I_pq_sqrt_lut": 2.408447965979576,
+          "unassigned_calls": 0.0
+        },
+        "untraced_device_operations": [
+          "buffers.mapped_luminance.fill(0.0)",
+          "buffers.lower[...] = buffers.position * (lut_size - 1)",
+          "buffers.pq_lower[...] = buffers.pq_position"
+        ],
+        "outer_transform_event_ms": 13.699199676513672
+      },
+      {
+        "call_count": 41,
+        "expected_traced_call_count": 41,
+        "calls": [
+          {
+            "name": "clip",
+            "elapsed_ms": 0.3039360046386719
+          },
+          {
+            "name": "power",
+            "elapsed_ms": 2.6798079013824463
+          },
+          {
+            "name": "matmul",
+            "elapsed_ms": 5.952511787414551
+          },
+          {
+            "name": "maximum",
+            "elapsed_ms": 0.15564799308776855
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.10342399775981903
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.10239999741315842
+          },
+          {
+            "name": "add",
+            "elapsed_ms": 0.08089599758386612
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.10239999741315842
+          },
+          {
+            "name": "add",
+            "elapsed_ms": 0.0798719972372055
+          },
+          {
+            "name": "greater",
+            "elapsed_ms": 0.03379200026392937
+          },
+          {
+            "name": "less",
+            "elapsed_ms": 0.03276799991726875
+          },
+          {
+            "name": "logical_and",
+            "elapsed_ms": 0.021503999829292297
+          },
+          {
+            "name": "divide",
+            "elapsed_ms": 0.08089599758386612
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.055296000093221664
+          },
+          {
+            "name": "copyto",
+            "elapsed_ms": 0.01740800030529499
+          },
+          {
+            "name": "greater_equal",
+            "elapsed_ms": 0.03379200026392937
+          },
+          {
+            "name": "subtract",
+            "elapsed_ms": 0.05222399905323982
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.055296000093221664
+          },
+          {
+            "name": "clip",
+            "elapsed_ms": 0.055296000093221664
+          },
+          {
+            "name": "clip",
+            "elapsed_ms": 0.05632000043988228
+          },
+          {
+            "name": "take",
+            "elapsed_ms": 0.05632000043988228
+          },
+          {
+            "name": "copyto",
+            "elapsed_ms": 0.058368001133203506
+          },
+          {
+            "name": "greater",
+            "elapsed_ms": 0.03481600061058998
+          },
+          {
+            "name": "copyto",
+            "elapsed_ms": 0.05939200147986412
+          },
+          {
+            "name": "divide",
+            "elapsed_ms": 0.08294399827718735
+          },
+          {
+            "name": "copyto",
+            "elapsed_ms": 0.058368001133203506
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.18227200210094452
+          },
+          {
+            "name": "maximum",
+            "elapsed_ms": 0.15564799308776855
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.15667200088500977
+          },
+          {
+            "name": "clip",
+            "elapsed_ms": 0.15564799308776855
+          },
+          {
+            "name": "sqrt",
+            "elapsed_ms": 0.24268800020217896
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.15462400019168854
+          },
+          {
+            "name": "clip",
+            "elapsed_ms": 0.15564799308776855
+          },
+          {
+            "name": "subtract",
+            "elapsed_ms": 0.2303999960422516
+          },
+          {
+            "name": "add",
+            "elapsed_ms": 0.15667200088500977
+          },
+          {
+            "name": "take",
+            "elapsed_ms": 0.1802240014076233
+          },
+          {
+            "name": "take",
+            "elapsed_ms": 0.9328640103340149
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.6113280057907104
+          },
+          {
+            "name": "multiply",
+            "elapsed_ms": 0.2303999960422516
+          },
+          {
+            "name": "add",
+            "elapsed_ms": 0.2314240038394928
+          },
+          {
+            "name": "clip",
+            "elapsed_ms": 0.15564799308776855
+          }
+        ],
+        "stage_event_samples_ms": {
+          "B_bt1886_linearization": [
+            0.3039360046386719,
+            2.6798079013824463
+          ],
+          "C_bt709_to_bt2020_matrix": [
+            5.952511787414551,
+            0.15564799308776855
+          ],
+          "D_bt2020_luminance": [
+            0.10342399775981903,
+            0.10239999741315842,
+            0.08089599758386612,
+            0.10239999741315842,
+            0.0798719972372055
+          ],
+          "E_luminance_curve_lut": [
+            0.03379200026392937,
+            0.03276799991726875,
+            0.021503999829292297,
+            0.08089599758386612,
+            0.055296000093221664,
+            0.01740800030529499,
+            0.03379200026392937,
+            0.05222399905323982,
+            0.055296000093221664,
+            0.055296000093221664,
+            0.05632000043988228,
+            0.05632000043988228,
+            0.058368001133203506
+          ],
+          "F_ratio": [
+            0.03481600061058998,
+            0.05939200147986412,
+            0.08294399827718735,
+            0.058368001133203506
+          ],
+          "G_rgb_times_ratio": [
+            0.18227200210094452
+          ],
+          "H_rgb_clamp": [
+            0.15564799308776855
+          ],
+          "I_pq_sqrt_lut": [
+            0.15667200088500977,
+            0.15564799308776855,
+            0.24268800020217896,
+            0.15462400019168854,
+            0.15564799308776855,
+            0.2303999960422516,
+            0.15667200088500977,
+            0.1802240014076233,
+            0.9328640103340149,
+            0.6113280057907104,
+            0.2303999960422516,
+            0.2314240038394928,
+            0.15564799308776855
+          ],
+          "unassigned_calls": []
+        },
+        "stage_event_sum_ms": {
+          "B_bt1886_linearization": 2.983743906021118,
+          "C_bt709_to_bt2020_matrix": 6.108159780502319,
+          "D_bt2020_luminance": 0.4689919874072075,
+          "E_luminance_curve_lut": 0.6092799995094538,
+          "F_ratio": 0.23552000150084496,
+          "G_rgb_times_ratio": 0.18227200210094452,
+          "H_rgb_clamp": 0.15564799308776855,
+          "I_pq_sqrt_lut": 3.5942399948835373,
+          "unassigned_calls": 0.0
+        },
+        "untraced_device_operations": [
+          "buffers.mapped_luminance.fill(0.0)",
+          "buffers.lower[...] = buffers.position * (lut_size - 1)",
+          "buffers.pq_lower[...] = buffers.pq_position"
+        ],
+        "outer_transform_event_ms": 14.905407905578613
+      }
+    ],
+    "stage_median_ms": {
+      "B_bt1886_linearization": 2.983743906021118,
+      "C_bt709_to_bt2020_matrix": 6.10918402671814,
+      "D_bt2020_luminance": 0.46591998636722565,
+      "E_luminance_curve_lut": 0.6092799995094538,
+      "F_ratio": 0.23552000150084496,
+      "G_rgb_times_ratio": 0.1802240014076233,
+      "H_rgb_clamp": 0.15564799308776855,
+      "I_pq_sqrt_lut": 2.4125439822673798
+    },
+    "outer_transform_median_ms": 14.464320182800293
+  },
+  "initialization": {
+    "prepare_shot_wall_ms": 43.00619999958144,
+    "memory_before_prepare": {
+      "pool_used_bytes": 0,
+      "pool_reserved_bytes": 0,
+      "device_free_bytes": 9536798720,
+      "device_total_bytes": 10736893952
+    },
+    "memory_after_prepare": {
+      "pool_used_bytes": 1050624,
+      "pool_reserved_bytes": 1050624,
+      "device_free_bytes": 9532604416,
+      "device_total_bytes": 10736893952
+    },
+    "first_shape_upload_and_allocation_wall_ms": 28.526400001283037,
+    "memory_after_first_shape_allocation": {
+      "pool_used_bytes": 850458624,
+      "pool_reserved_bytes": 850458624,
+      "device_free_bytes": 8649703424,
+      "device_total_bytes": 10736893952
+    },
+    "workspace_allocations_after_primary": 1,
+    "curve_lut_entries": 65536,
+    "pq_lut_entries": 65536,
+    "curve_lut_bytes": 524288,
+    "pq_lut_bytes": 524288
+  },
+  "copy_audit": {
+    "host_to_gpu_input_bytes_per_timed_roi": 51609600,
+    "gpu_to_host_output_bytes_per_timed_roi": 51609600,
+    "host_normalization_copy_bytes": 0,
+    "host_normalization_reason": "C-contiguous float64 input; np.asarray(order='C') returns a same-layout view/reference.",
+    "reshape_copy_bytes": 0,
+    "reshape_reason": "reshape(-1, 3) is a view for the contiguous input.",
+    "gpu_lut_setup_bytes": {
+      "curve_lut": 524288,
+      "pq_lut": 524288,
+      "matrix": 72,
+      "curve_scalars": 24
+    },
+    "gpu_to_gpu_operations": [
+      "buffers.lower[...] assignment: N int64 indices",
+      "buffers.pq_lower[...] assignment: N*3 int64 indices",
+      "three curve copyto masked writes: N float64 values",
+      "two PQ take writes: N*3 float64 values",
+      "two PQ weighted multiply writes and one output add: N*3 float64 values"
+    ],
+    "additional_full_roi_host_copies_in_steady_state": 0
+  },
+  "synchronization_audit": {
+    "per_timed_staged_roi": [
+      "one null-stream synchronize before staged timing",
+      "one end-event synchronize after upload",
+      "one end-event synchronize after transform",
+      "one end-event synchronize after download",
+      "one null-stream synchronize after staged timing"
+    ],
+    "public_backend_transform_roi": [
+      "one null-stream synchronize inside GPUTransformBackend.transform_roi after _transform_device and before asnumpy",
+      "cp.asnumpy implicitly waits/materializes the output"
+    ],
+    "initialization_only": [
+      "prepare_shot uses Device context and one Stream.null.synchronize after LUT/matrix setup",
+      "first shape allocation is asynchronous until the explicit audit synchronize"
+    ],
+    "stage_trace_policy": "per-function events are recorded without synchronizing after each function; one final event wait is used.",
+    "static_inventory": {
+      "bench_p2192_gpu_transform.py": [
+        {
+          "line": 67,
+          "pattern": "cp.asarray(",
+          "text": "GPU_MATRIX = cp.asarray(_M_709_TO_2020, dtype=cp.float64)"
+        },
+        {
+          "line": 93,
+          "pattern": "cp.asarray(",
+          "text": "curve_lut_gpu = cp.asarray(curve_lut[\"lut\"], dtype=cp.float64)"
+        },
+        {
+          "line": 94,
+          "pattern": "cp.asarray(",
+          "text": "pq_lut_gpu = cp.asarray(pq_lut, dtype=cp.float64)"
+        },
+        {
+          "line": 96,
+          "pattern": "cp.asarray(",
+          "text": "\"start\": cp.asarray(curve_lut[\"curve_start_linear\"], dtype=cp.float64),"
+        },
+        {
+          "line": 97,
+          "pattern": "cp.asarray(",
+          "text": "\"start_hdr\": cp.asarray(curve_lut[\"curve_start_hdr_linear\"], dtype=cp.float64),"
+        },
+        {
+          "line": 98,
+          "pattern": "cp.asarray(",
+          "text": "\"inv_range\": cp.asarray(curve_lut[\"inv_range\"], dtype=cp.float64),"
+        },
+        {
+          "line": 100,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 100,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 197,
+          "pattern": "cp.asarray(",
+          "text": "matrix_gpu = cp.asarray(matrix, dtype=cp.float64)"
+        },
+        {
+          "line": 260,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 260,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 266,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 266,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 267,
+          "pattern": "Event(",
+          "text": "start_event = cp.cuda.Event()"
+        },
+        {
+          "line": 268,
+          "pattern": "Event(",
+          "text": "end_event = cp.cuda.Event()"
+        },
+        {
+          "line": 272,
+          "pattern": ".synchronize()",
+          "text": "end_event.synchronize()"
+        },
+        {
+          "line": 281,
+          "pattern": "cp.asarray(",
+          "text": "value = cp.asarray(frame, dtype=cp.float64)"
+        },
+        {
+          "line": 282,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 282,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 286,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 286,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 288,
+          "pattern": "cp.asarray(",
+          "text": "value = cp.asarray(frame, dtype=cp.float64)"
+        },
+        {
+          "line": 289,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 289,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 298,
+          "pattern": "asnumpy(",
+          "text": "value = cp.asnumpy(output_gpu)"
+        },
+        {
+          "line": 299,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 299,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 303,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 303,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 305,
+          "pattern": "asnumpy(",
+          "text": "value = cp.asnumpy(output_gpu)"
+        },
+        {
+          "line": 306,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 306,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 319,
+          "pattern": "cp.asarray(",
+          "text": "frame_gpu = cp.asarray(frame, dtype=cp.float64)"
+        },
+        {
+          "line": 321,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 321,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 322,
+          "pattern": "asnumpy(",
+          "text": "output_cpu = cp.asnumpy(output_gpu)"
+        },
+        {
+          "line": 328,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 328,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 331,
+          "pattern": "cp.asarray(",
+          "text": "frame_gpu = cp.asarray(frame, dtype=cp.float64)"
+        },
+        {
+          "line": 333,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 333,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 334,
+          "pattern": "asnumpy(",
+          "text": "output_cpu = cp.asnumpy(output_gpu)"
+        },
+        {
+          "line": 335,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 335,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 373,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 373,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 377,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 377,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 381,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 381,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 446,
+          "pattern": "cp.asarray(",
+          "text": "frame_gpu = cp.asarray(frame, dtype=cp.float64)"
+        },
+        {
+          "line": 448,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 448,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 449,
+          "pattern": "asnumpy(",
+          "text": "gpu_output = cp.asnumpy(gpu_output_gpu)"
+        },
+        {
+          "line": 506,
+          "pattern": "cp.asarray(",
+          "text": "shadow_gpu_frame = cp.asarray(shadow_frame, dtype=cp.float64)"
+        },
+        {
+          "line": 507,
+          "pattern": "asnumpy(",
+          "text": "shadow_gpu = cp.asnumpy(gpu_apply_shot_transform(shadow_gpu_frame, setup))"
+        },
+        {
+          "line": 514,
+          "pattern": "cp.asarray(",
+          "text": "white_gpu_frame = cp.asarray(white_frame, dtype=cp.float64)"
+        },
+        {
+          "line": 516,
+          "pattern": "asnumpy(",
+          "text": "cp.asnumpy(gpu_apply_shot_transform(white_gpu_frame, setup))"
+        },
+        {
+          "line": 616,
+          "pattern": "cp.asarray(",
+          "text": "frame_gpu = cp.asarray(frame, dtype=cp.float64)"
+        },
+        {
+          "line": 617,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 617,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 622,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 622,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 679,
+          "pattern": "cp.asarray(",
+          "text": "frame_gpu = cp.asarray(frame, dtype=cp.float64)"
+        },
+        {
+          "line": 680,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 680,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 682,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 682,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 683,
+          "pattern": "asnumpy(",
+          "text": "gpu_output = cp.asnumpy(gpu_output_gpu)"
+        },
+        {
+          "line": 695,
+          "pattern": "cp.asarray(",
+          "text": "real_gpu_frame = cp.asarray(real_roi, dtype=cp.float64)"
+        },
+        {
+          "line": 696,
+          "pattern": "asnumpy(",
+          "text": "real_gpu = cp.asnumpy(gpu_apply_shot_transform(real_gpu_frame, setup))"
+        },
+        {
+          "line": 697,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 697,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        }
+      ],
+      "bench_p220_gpu_backend.py": [
+        {
+          "line": 73,
+          "pattern": "Event(",
+          "text": "start = cp.cuda.Event()"
+        },
+        {
+          "line": 74,
+          "pattern": "Event(",
+          "text": "end = cp.cuda.Event()"
+        },
+        {
+          "line": 78,
+          "pattern": ".synchronize()",
+          "text": "end.synchronize()"
+        },
+        {
+          "line": 205,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 205,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 216,
+          "pattern": "Stream.null.synchronize",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 216,
+          "pattern": ".synchronize()",
+          "text": "cp.cuda.Stream.null.synchronize()"
+        }
+      ],
+      "src\\auto_openmatte\\processing\\transform_backend.py": [
+        {
+          "line": 326,
+          "pattern": "Device(self.device_id)",
+          "text": "with cupy.cuda.Device(self.device_id):"
+        },
+        {
+          "line": 366,
+          "pattern": "Device(self.device_id)",
+          "text": "with cupy.cuda.Device(self.device_id):"
+        },
+        {
+          "line": 374,
+          "pattern": "cupy.asarray(",
+          "text": "curve_lut_gpu = cupy.asarray(curve_lut[\"lut\"], dtype=cupy.float64)"
+        },
+        {
+          "line": 375,
+          "pattern": "cupy.asarray(",
+          "text": "curve_start_gpu = cupy.asarray("
+        },
+        {
+          "line": 378,
+          "pattern": "cupy.asarray(",
+          "text": "curve_start_hdr_gpu = cupy.asarray("
+        },
+        {
+          "line": 381,
+          "pattern": "cupy.asarray(",
+          "text": "curve_inv_range_gpu = cupy.asarray("
+        },
+        {
+          "line": 386,
+          "pattern": "cupy.asarray(",
+          "text": "self._pq_lut_gpu = cupy.asarray("
+        },
+        {
+          "line": 390,
+          "pattern": "cupy.asarray(",
+          "text": "self._matrix_gpu = cupy.asarray("
+        },
+        {
+          "line": 399,
+          "pattern": "cupy.asarray(",
+          "text": "color_matrix_gpu = cupy.asarray(color_matrix, dtype=cupy.float64)"
+        },
+        {
+          "line": 400,
+          "pattern": "Stream.null.synchronize",
+          "text": "cupy.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 400,
+          "pattern": ".synchronize()",
+          "text": "cupy.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 503,
+          "pattern": ".set(",
+          "text": "buffers.input_flat.set(host_frame.reshape(-1, 3))"
+        },
+        {
+          "line": 687,
+          "pattern": "asnumpy(",
+          "text": "output = workspace.cupy.asnumpy(buffers.output_flat)"
+        },
+        {
+          "line": 720,
+          "pattern": "Device(self.device_id)",
+          "text": "with workspace.cupy.cuda.Device(self.device_id):"
+        },
+        {
+          "line": 723,
+          "pattern": "Stream.null.synchronize",
+          "text": "workspace.cupy.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 723,
+          "pattern": ".synchronize()",
+          "text": "workspace.cupy.cuda.Stream.null.synchronize()"
+        },
+        {
+          "line": 735,
+          "pattern": "Device(self.device_id)",
+          "text": "free_bytes, total_bytes = cupy.cuda.Device(self.device_id).mem_info"
+        }
+      ]
+    }
+  },
+  "telemetry": {
+    "samples_during_timed_loop": [
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 36.0,
+            "memory_utilization_percent": 7.0,
+            "power_watts": 97.37,
+            "sm_clock_mhz": 1755.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2684.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 36.0,
+            "memory_utilization_percent": 7.0,
+            "power_watts": 97.37,
+            "sm_clock_mhz": 1755.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2684.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 36.0,
+            "memory_utilization_percent": 7.0,
+            "power_watts": 97.37,
+            "sm_clock_mhz": 1755.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2682.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 36.0,
+            "memory_utilization_percent": 7.0,
+            "power_watts": 97.37,
+            "sm_clock_mhz": 1755.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2674.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 36.0,
+            "memory_utilization_percent": 7.0,
+            "power_watts": 97.37,
+            "sm_clock_mhz": 1755.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2674.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 36.0,
+            "memory_utilization_percent": 7.0,
+            "power_watts": 97.37,
+            "sm_clock_mhz": 1800.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2674.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 27.0,
+            "memory_utilization_percent": 6.0,
+            "power_watts": 105.17,
+            "sm_clock_mhz": 1800.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2674.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 27.0,
+            "memory_utilization_percent": 6.0,
+            "power_watts": 105.17,
+            "sm_clock_mhz": 1800.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2674.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 27.0,
+            "memory_utilization_percent": 6.0,
+            "power_watts": 105.17,
+            "sm_clock_mhz": 1800.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2674.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 27.0,
+            "memory_utilization_percent": 6.0,
+            "power_watts": 105.17,
+            "sm_clock_mhz": 1800.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2674.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 27.0,
+            "memory_utilization_percent": 6.0,
+            "power_watts": 105.17,
+            "sm_clock_mhz": 1800.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2674.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 27.0,
+            "memory_utilization_percent": 6.0,
+            "power_watts": 105.17,
+            "sm_clock_mhz": 1800.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2674.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 40.0,
+            "memory_utilization_percent": 12.0,
+            "power_watts": 110.78,
+            "sm_clock_mhz": 1800.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2674.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 40.0,
+            "memory_utilization_percent": 12.0,
+            "power_watts": 110.78,
+            "sm_clock_mhz": 1800.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2673.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 40.0,
+            "memory_utilization_percent": 12.0,
+            "power_watts": 110.78,
+            "sm_clock_mhz": 1800.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2673.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 40.0,
+            "memory_utilization_percent": 12.0,
+            "power_watts": 110.78,
+            "sm_clock_mhz": 1800.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2643.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 40.0,
+            "memory_utilization_percent": 12.0,
+            "power_watts": 110.78,
+            "sm_clock_mhz": 1800.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2643.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 40.0,
+            "memory_utilization_percent": 12.0,
+            "power_watts": 110.78,
+            "sm_clock_mhz": 1800.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2643.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 40.0,
+            "memory_utilization_percent": 12.0,
+            "power_watts": 110.78,
+            "sm_clock_mhz": 1800.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2643.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      },
+      {
+        "available": true,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 3080",
+            "gpu_utilization_percent": 39.0,
+            "memory_utilization_percent": 9.0,
+            "power_watts": 108.77,
+            "sm_clock_mhz": 1800.0,
+            "memory_clock_mhz": 9251.0,
+            "memory_used_mib": 2643.0,
+            "memory_total_mib": 10240.0
+          }
+        ]
+      }
+    ],
+    "before_scaling": {
+      "available": true,
+      "gpus": [
+        {
+          "name": "NVIDIA GeForce RTX 3080",
+          "gpu_utilization_percent": 33.0,
+          "memory_utilization_percent": 11.0,
+          "power_watts": 53.37,
+          "sm_clock_mhz": 1185.0,
+          "memory_clock_mhz": 5001.0,
+          "memory_used_mib": 3511.0,
+          "memory_total_mib": 10240.0
+        }
+      ]
+    }
+  },
+  "memory": {
+    "before_scaling": {
+      "pool_used_bytes": 850458624,
+      "pool_reserved_bytes": 919271424,
+      "device_free_bytes": 8570011648,
+      "device_total_bytes": 10736893952
+    },
+    "after_scaling": {
+      "pool_used_bytes": 820122624,
+      "pool_reserved_bytes": 1872359424,
+      "device_free_bytes": 7575961600,
+      "device_total_bytes": 10736893952
+    },
+    "workspace_persistent_bytes_before_scaling": 850456648,
+    "workspace_persistent_bytes_after_scaling": 820120648,
+    "workspace_report_before_scaling": {
+      "pool_used_bytes": 850458624,
+      "pool_reserved_bytes": 919271424,
+      "device_free_bytes": 8570011648,
+      "device_total_bytes": 10736893952,
+      "persistent_roi_buffers_bytes": 849408000,
+      "curve_lut_device_bytes": 524288,
+      "pq_lut_device_bytes": 524288,
+      "matrix_device_bytes": 72,
+      "color_matrix_device_bytes": 0,
+      "persistent_bytes_total": 850456648,
+      "workspace_allocations": 1
+    },
+    "workspace_report_after_scaling": {
+      "pool_used_bytes": 820122624,
+      "pool_reserved_bytes": 1872359424,
+      "device_free_bytes": 7575961600,
+      "device_total_bytes": 10736893952,
+      "persistent_roi_buffers_bytes": 819072000,
+      "curve_lut_device_bytes": 524288,
+      "pq_lut_device_bytes": 524288,
+      "matrix_device_bytes": 72,
+      "color_matrix_device_bytes": 0,
+      "persistent_bytes_total": 820120648,
+      "workspace_allocations": 4
+    }
+  },
+  "scaling": [
+    {
+      "height": 280,
+      "width": 3840,
+      "pixels": 1075200,
+      "cpu_transform": {
+        "count": 20,
+        "median_ms": 179.80790000092384,
+        "mean_ms": 180.95021500021176,
+        "min_ms": 172.1256999990146,
+        "max_ms": 197.32700000167824,
+        "p10_ms": 174.21461999983876,
+        "p90_ms": 187.21210000076098,
+        "p95_ms": 188.23511999862603,
+        "p99_ms": 195.5086240010678,
+        "samples_ms": [
+          183.24260000008508,
+          177.93340000025637,
+          186.92660000124306,
+          178.63860000034038,
+          172.67939999874216,
+          187.15160000101605,
+          178.51399999926798,
+          182.5965999996697,
+          174.3851999999606,
+          179.46410000149626,
+          187.7565999984654,
+          185.53240000073856,
+          175.97159999968426,
+          178.04310000065016,
+          197.32700000167824,
+          180.1517000003514,
+          172.1256999990146,
+          182.6520000013261,
+          176.36510000011185,
+          181.5470000001369
+        ]
+      },
+      "gpu_transform_cuda_events": {
+        "count": 20,
+        "median_ms": 7.341552019119263,
+        "mean_ms": 7.4824271440505985,
+        "min_ms": 6.9692158699035645,
+        "max_ms": 8.29964828491211,
+        "p10_ms": 7.030508613586425,
+        "p90_ms": 8.050498962402344,
+        "p95_ms": 8.154092741012573,
+        "p99_ms": 8.270537176132201,
+        "samples_ms": [
+          7.563807964324951,
+          7.033919811248779,
+          7.98089599609375,
+          6.9692158699035645,
+          7.679168224334717,
+          8.146431922912598,
+          8.039839744567871,
+          8.003711700439453,
+          6.999807834625244,
+          8.29964828491211,
+          7.111936092376709,
+          7.110079765319824,
+          7.736127853393555,
+          7.097439765930176,
+          7.104671955108643,
+          7.689023971557617,
+          7.077631950378418,
+          7.802656173706055,
+          7.0832319259643555,
+          7.119296073913574
+        ]
+      },
+      "gpu_total_wall": {
+        "count": 20,
+        "median_ms": 14.930299999832641,
+        "mean_ms": 15.042509999966569,
+        "min_ms": 13.748999999734224,
+        "max_ms": 16.41899999958696,
+        "p10_ms": 13.924769999539421,
+        "p90_ms": 16.05568999875686,
+        "p95_ms": 16.144735000398214,
+        "p99_ms": 16.36414699974921,
+        "samples_ms": [
+          14.955099999497179,
+          13.941499999418738,
+          15.959700000166777,
+          14.419700000871671,
+          15.374299999166396,
+          16.41899999958696,
+          15.849200000957353,
+          15.785499999765307,
+          14.76129999900877,
+          16.13030000044091,
+          14.905500000168104,
+          13.77420000062557,
+          15.744099999210448,
+          14.211400000931462,
+          14.555100000507082,
+          14.848900000288268,
+          14.252400000259513,
+          16.047399998569745,
+          15.166600000156905,
+          13.748999999734224
+        ]
+      },
+      "workspace_allocations": 2,
+      "memory": {
+        "pool_used_bytes": 425754624,
+        "pool_reserved_bytes": 1275162624,
+        "device_free_bytes": 8179941376,
+        "device_total_bytes": 10736893952
+      }
+    },
+    {
+      "height": 560,
+      "width": 3840,
+      "pixels": 2150400,
+      "cpu_transform": {
+        "count": 20,
+        "median_ms": 371.64264999955776,
+        "mean_ms": 374.6586750003189,
+        "min_ms": 353.5524000017176,
+        "max_ms": 410.57069999988016,
+        "p10_ms": 359.42598000074213,
+        "p90_ms": 391.7832699997234,
+        "p95_ms": 394.4460649996472,
+        "p99_ms": 407.34577299983357,
+        "samples_ms": [
+          393.59739999963494,
+          387.87950000005367,
+          391.58169999973325,
+          359.8137000008137,
+          385.82120000137365,
+          367.0590000001539,
+          410.57069999988016,
+          369.88360000032117,
+          379.8409000009997,
+          367.72040000141715,
+          353.5524000017176,
+          372.6829999995971,
+          367.35070000031556,
+          362.71750000014435,
+          355.936500000098,
+          379.30150000102003,
+          372.104500000205,
+          374.7935999999754,
+          371.1807999989105,
+          369.7849000000133
+        ]
+      },
+      "gpu_transform_cuda_events": {
+        "count": 20,
+        "median_ms": 22.870031356811523,
+        "mean_ms": 39.40955352783203,
+        "min_ms": 13.798303604125977,
+        "max_ms": 118.47859191894531,
+        "p10_ms": 14.345267295837402,
+        "p90_ms": 99.8198097229004,
+        "p95_ms": 105.33284225463868,
+        "p99_ms": 115.84944198608396,
+        "samples_ms": [
+          13.798303604125977,
+          14.318367958068848,
+          14.34825611114502,
+          14.377887725830078,
+          29.489471435546875,
+          33.86991882324219,
+          38.30694580078125,
+          118.47859191894531,
+          99.28412628173828,
+          21.471263885498047,
+          21.70832061767578,
+          22.687679290771484,
+          21.437759399414062,
+          31.64143943786621,
+          104.64096069335938,
+          96.3214111328125,
+          23.052383422851562,
+          22.644224166870117,
+          22.629087448120117,
+          23.68467140197754
+        ]
+      },
+      "gpu_total_wall": {
+        "count": 20,
+        "median_ms": 39.702699999907054,
+        "mean_ms": 55.31895499998427,
+        "min_ms": 28.015899999445537,
+        "max_ms": 136.36829999995825,
+        "p10_ms": 29.830739999488287,
+        "p90_ms": 117.70456999929593,
+        "p95_ms": 122.52860500047974,
+        "p99_ms": 133.60036100006252,
+        "samples_ms": [
+          28.289399999266607,
+          31.11200000057579,
+          28.015899999445537,
+          30.00199999951292,
+          44.417799999791896,
+          48.77459999988787,
+          52.583600001526065,
+          136.36829999995825,
+          117.24949999916134,
+          36.46449999905599,
+          37.507999999434105,
+          37.04300000026706,
+          37.730699999883655,
+          47.08600000049046,
+          121.80020000050717,
+          113.78440000044066,
+          40.172000000893604,
+          39.826199999879464,
+          39.579199999934644,
+          38.57179999977234
+        ]
+      },
+      "workspace_allocations": 3,
+      "memory": {
+        "pool_used_bytes": 850458624,
+        "pool_reserved_bytes": 1275162624,
+        "device_free_bytes": 8179941376,
+        "device_total_bytes": 10736893952
+      }
+    },
+    {
+      "height": 1080,
+      "width": 1920,
+      "pixels": 2073600,
+      "cpu_transform": {
+        "count": 20,
+        "median_ms": 355.0601499991899,
+        "mean_ms": 355.1238549998743,
+        "min_ms": 338.23800000027404,
+        "max_ms": 380.7488000002195,
+        "p10_ms": 342.5899699986985,
+        "p90_ms": 367.1120400003929,
+        "p95_ms": 376.9256200009295,
+        "p99_ms": 379.9841640003615,
+        "samples_ms": [
+          350.8228999999119,
+          357.25280000042403,
+          348.75759999886213,
+          358.09169999993173,
+          362.8451999993558,
+          380.7488000002195,
+          361.03369999909773,
+          345.99640000124054,
+          366.0440000003291,
+          338.23800000027404,
+          347.06940000069153,
+          347.6796999984799,
+          376.72440000096685,
+          359.64050000075076,
+          353.25769999872136,
+          341.8885999999475,
+          359.1840000008233,
+          342.66789999855973,
+          347.67119999924034,
+          356.8625999996584
+        ]
+      },
+      "gpu_transform_cuda_events": {
+        "count": 20,
+        "median_ms": 29.5022554397583,
+        "mean_ms": 43.20386710166931,
+        "min_ms": 13.111200332641602,
+        "max_ms": 100.15116882324219,
+        "p10_ms": 13.754854011535645,
+        "p90_ms": 99.43700103759765,
+        "p95_ms": 99.76609382629394,
+        "p99_ms": 100.07415382385254,
+        "samples_ms": [
+          13.588735580444336,
+          13.844063758850098,
+          13.773311614990234,
+          13.111200332641602,
+          29.80531120300293,
+          31.505695343017578,
+          45.68947219848633,
+          44.73827362060547,
+          37.72345733642578,
+          100.15116882324219,
+          99.4026870727539,
+          81.00678253173828,
+          28.670719146728516,
+          24.114879608154297,
+          29.199199676513672,
+          23.079008102416992,
+          99.7458267211914,
+          87.76220703125,
+          22.305023193359375,
+          24.860319137573242
+        ]
+      },
+      "gpu_total_wall": {
+        "count": 20,
+        "median_ms": 44.03210000054969,
+        "mean_ms": 58.26373500030968,
+        "min_ms": 26.626800001395168,
+        "max_ms": 118.56830000033369,
+        "p10_ms": 27.360740000585793,
+        "p90_ms": 114.98943000096915,
+        "p95_ms": 116.8085199997222,
+        "p99_ms": 118.2163440002114,
+        "samples_ms": [
+          27.299899998979527,
+          27.367500000764267,
+          26.626800001395168,
+          27.94499999981781,
+          47.65460000089661,
+          44.156600000860635,
+          58.83229999926698,
+          59.201399999437854,
+          51.758699999481905,
+          114.79760000111128,
+          118.56830000033369,
+          101.45179999926768,
+          43.503700000655954,
+          37.522500000704895,
+          43.907600000238745,
+          37.70460000123421,
+          116.71589999969001,
+          103.66310000063095,
+          35.74850000040897,
+          40.84830000101647
+        ]
+      },
+      "workspace_allocations": 4,
+      "memory": {
+        "pool_used_bytes": 820122624,
+        "pool_reserved_bytes": 1872359424,
+        "device_free_bytes": 7575961600,
+        "device_total_bytes": 10736893952
+      }
+    }
+  ]
+}

@@ -1,0 +1,278 @@
+{
+  "chroma_tertile_edges": {
+    "low_to_medium": 0.05459817126393318,
+    "medium_to_high": 0.1970682442188263
+  },
+  "definition": {
+    "I": "mean of HDR and corrected Open Matte ICtCp I channels",
+    "I_groups": "equal-population tertiles within each chroma group",
+    "chroma_epsilon": 0.001,
+    "chroma_groups": "equal-population tertiles over valid pixels across all 12 frames",
+    "chroma_magnitude": "geometric mean sqrt(hdr_magnitude * corrected_om_magnitude)",
+    "circular_median": "median after unwrapping around the circular mean direction",
+    "comparison": "native HDR last 32 rows versus corrected Open Matte rows y2-32:y2 before composite/PQ",
+    "delta_hue": "wrapped corrected_Open_Matte_hue - HDR_hue in degrees"
+  },
+  "experiment": {
+    "bottom_distance_pixels": [
+      0,
+      32
+    ],
+    "composite_or_encoder_run": false,
+    "correction_applied": false,
+    "fit_frame_count": 12,
+    "fit_in_memory_only": true,
+    "fit_scale": 0.5,
+    "fit_stride": 1,
+    "frame_count": 12,
+    "production_files_modified": false,
+    "profile": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\tools\\openmatte_hdr\\profiles\\br2049_t2714_300f_throughput.json",
+    "segment_index": 4,
+    "source_frame_interval": [
+      65359,
+      65371
+    ]
+  },
+  "groups": {
+    "high_chroma": {
+      "I_ictcp": {
+        "median": 0.3466690480709076,
+        "p10": 0.31118905544281006,
+        "p90": 0.3658472001552582
+      },
+      "I_tertiles_within_chroma_group": {
+        "high_I": {
+          "I_ictcp": {
+            "median": 0.361827552318573,
+            "p10": 0.3545706868171692,
+            "p90": 0.37088996171951294
+          },
+          "chroma": {
+            "median": 0.22811761498451233,
+            "p10": 0.22555342316627502,
+            "p90": 0.23103463649749756
+          },
+          "delta_hue": {
+            "absolute_median_degrees": 0.6508896946907043,
+            "circular_median_absolute_degrees": 0.6338756680488586,
+            "circular_median_degrees": 0.0987781957767244,
+            "median_degrees": 0.09878502041101456
+          },
+          "pixel_count": 131866
+        },
+        "low_I": {
+          "I_ictcp": {
+            "median": 0.3178280293941498,
+            "p10": 0.3024926781654358,
+            "p90": 0.3340466022491455
+          },
+          "chroma": {
+            "median": 0.20708239078521729,
+            "p10": 0.19952765107154846,
+            "p90": 0.21659447252750397
+          },
+          "delta_hue": {
+            "absolute_median_degrees": 1.1704075336456299,
+            "circular_median_absolute_degrees": 0.9766896963119507,
+            "circular_median_degrees": -0.8032712275285195,
+            "median_degrees": -0.8032711744308472
+          },
+          "pixel_count": 131867
+        },
+        "medium_I": {
+          "I_ictcp": {
+            "median": 0.34666907787323,
+            "p10": 0.3396327793598175,
+            "p90": 0.35191160440444946
+          },
+          "chroma": {
+            "median": 0.22372221946716309,
+            "p10": 0.21875743567943573,
+            "p90": 0.225900799036026
+          },
+          "delta_hue": {
+            "absolute_median_degrees": 0.9877545833587646,
+            "circular_median_absolute_degrees": 0.7963863611221313,
+            "circular_median_degrees": -0.7924112267481993,
+            "median_degrees": -0.792411208152771
+          },
+          "pixel_count": 131867
+        }
+      },
+      "chroma": {
+        "median": 0.22354091703891754,
+        "p10": 0.20405258238315582,
+        "p90": 0.22954615950584412
+      },
+      "delta_hue": {
+        "absolute_median_degrees": 0.8698381781578064,
+        "circular_median_absolute_degrees": 0.8708012700080872,
+        "circular_median_degrees": -0.4375145974743368,
+        "median_degrees": -0.4375145733356476
+      },
+      "pixel_count": 395600
+    },
+    "low_chroma": {
+      "I_ictcp": {
+        "median": 0.06898371875286102,
+        "p10": 0.03053930401802063,
+        "p90": 0.10526728630065918
+      },
+      "I_tertiles_within_chroma_group": {
+        "high_I": {
+          "I_ictcp": {
+            "median": 0.0969499722123146,
+            "p10": 0.08020418137311935,
+            "p90": 0.1150495857000351
+          },
+          "chroma": {
+            "median": 0.022561363875865936,
+            "p10": 0.011456219479441643,
+            "p90": 0.05226391181349754
+          },
+          "delta_hue": {
+            "absolute_median_degrees": 11.727734565734863,
+            "circular_median_absolute_degrees": 11.891386032104492,
+            "circular_median_degrees": 1.6242463053857121,
+            "median_degrees": 1.5912017822265625
+          },
+          "pixel_count": 131867
+        },
+        "low_I": {
+          "I_ictcp": {
+            "median": 0.038674499839544296,
+            "p10": 0.024015750735998154,
+            "p90": 0.05377979949116707
+          },
+          "chroma": {
+            "median": 0.008057740516960621,
+            "p10": 0.0030959255527704954,
+            "p90": 0.01435226108878851
+          },
+          "delta_hue": {
+            "absolute_median_degrees": 63.64327621459961,
+            "circular_median_absolute_degrees": 63.369056701660156,
+            "circular_median_degrees": -0.9837931272919566,
+            "median_degrees": -0.9923990964889526
+          },
+          "pixel_count": 131867
+        },
+        "medium_I": {
+          "I_ictcp": {
+            "median": 0.06898371875286102,
+            "p10": 0.06036532670259476,
+            "p90": 0.07632511854171753
+          },
+          "chroma": {
+            "median": 0.019973184913396835,
+            "p10": 0.010508669540286064,
+            "p90": 0.033151283860206604
+          },
+          "delta_hue": {
+            "absolute_median_degrees": 20.142431259155273,
+            "circular_median_absolute_degrees": 17.719934463500977,
+            "circular_median_degrees": -6.472410200909143,
+            "median_degrees": -6.439467906951904
+          },
+          "pixel_count": 131866
+        }
+      },
+      "chroma": {
+        "median": 0.01533583365380764,
+        "p10": 0.005553199909627438,
+        "p90": 0.04872302711009979
+      },
+      "delta_hue": {
+        "absolute_median_degrees": 26.77715492248535,
+        "circular_median_absolute_degrees": 26.8399715423584,
+        "circular_median_degrees": -1.2366603907441687,
+        "median_degrees": -1.2400139570236206
+      },
+      "pixel_count": 395600
+    },
+    "medium_chroma": {
+      "I_ictcp": {
+        "median": 0.15638071298599243,
+        "p10": 0.11413725465536118,
+        "p90": 0.2863125205039978
+      },
+      "I_tertiles_within_chroma_group": {
+        "high_I": {
+          "I_ictcp": {
+            "median": 0.24983230233192444,
+            "p10": 0.19782578945159912,
+            "p90": 0.29704856872558594
+          },
+          "chroma": {
+            "median": 0.15406689047813416,
+            "p10": 0.10322652757167816,
+            "p90": 0.19499774277210236
+          },
+          "delta_hue": {
+            "absolute_median_degrees": 1.86296808719635,
+            "circular_median_absolute_degrees": 1.8302446603775024,
+            "circular_median_degrees": 0.35654953505300563,
+            "median_degrees": 0.3565495014190674
+          },
+          "pixel_count": 131866
+        },
+        "low_I": {
+          "I_ictcp": {
+            "median": 0.11772176623344421,
+            "p10": 0.10870513319969177,
+            "p90": 0.12716375291347504
+          },
+          "chroma": {
+            "median": 0.05774205923080444,
+            "p10": 0.055479057133197784,
+            "p90": 0.06351283937692642
+          },
+          "delta_hue": {
+            "absolute_median_degrees": 2.7962656021118164,
+            "circular_median_absolute_degrees": 2.530393600463867,
+            "circular_median_degrees": 2.0470350150095014,
+            "median_degrees": 2.047034978866577
+          },
+          "pixel_count": 131867
+        },
+        "medium_I": {
+          "I_ictcp": {
+            "median": 0.1563814878463745,
+            "p10": 0.13502410054206848,
+            "p90": 0.18653272092342377
+          },
+          "chroma": {
+            "median": 0.08394406735897064,
+            "p10": 0.05742238461971283,
+            "p90": 0.12444648891687393
+          },
+          "delta_hue": {
+            "absolute_median_degrees": 2.932138681411743,
+            "circular_median_absolute_degrees": 2.804379940032959,
+            "circular_median_degrees": 1.354166965225068,
+            "median_degrees": 1.3541737794876099
+          },
+          "pixel_count": 131866
+        }
+      },
+      "chroma": {
+        "median": 0.08112101256847382,
+        "p10": 0.056365836411714554,
+        "p90": 0.19081608951091766
+      },
+      "delta_hue": {
+        "absolute_median_degrees": 2.431793212890625,
+        "circular_median_absolute_degrees": 2.3403096199035645,
+        "circular_median_degrees": 1.2236966916994845,
+        "median_degrees": 1.2236965894699097
+      },
+      "pixel_count": 395599
+    }
+  },
+  "schema": "openmatte-hdr-v05-bottom-hue-dependency/v1",
+  "status": "PASS",
+  "valid_pixels": {
+    "count": 1186799,
+    "fraction_of_bottom_0_32": 0.8048495822482639
+  }
+}

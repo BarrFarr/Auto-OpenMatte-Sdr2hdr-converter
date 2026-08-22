@@ -1,0 +1,100 @@
+{
+  "phase": "Phase 8 — Cross-Scene Sanity Check and First Full-Shot Render",
+  "status": "PREDECLARED BEFORE EXTRACTION",
+  "purpose": "Determine whether frozen Model E luminance plus ratio scaling plus frozen MMR-1 chroma regrading, fitted once from four representative full-resolution paired frames with 5,000 paired rows per training frame, is practically stable across automatically bounded real shots and can render a complete bounded Matrix shot without per-frame fitting.",
+  "scope": {
+    "research_validation_only": true,
+    "mmr1_modified": false,
+    "production_modified": false,
+    "synchronization_modified": false,
+    "geometry_modified": false,
+    "new_model_created": false,
+    "sampling_sweep": false,
+    "sample_budget_optimized": false,
+    "global_sync_search": false,
+    "geometry_refit": false,
+    "manual_frame_adjustment": false,
+    "manual_grading": false,
+    "full_film_processing": false,
+    "full_shot_render": true,
+    "maximum_matrix_full_shot_renders": 3,
+    "br2049_full_shot_render": false
+  },
+  "pinned_dependencies_sha256": {
+    "frozen_mmr1": {"path": "research/physical_validation/mmr_regrading/run_mmr_regrading.py", "sha256": "BAEF76DBFABCEE3FA11656E8BD34B3DFA7E12E948386949910E17D6FC1F076F3"},
+    "h0_helpers": {"path": "research/physical_validation/scene_regrading/run_scene_regrading.py", "sha256": "C24CB2BF7C88EC4FEF5ABD066736011E996D1810B721AD395E3E53DD34D2B9D0"},
+    "model_e": {"path": "research/src/reshaping_research/models/model_e_cdf_regularized.py", "sha256": "EF994087F660930D3650088DA7C901D41A217F75FD72AD69587E1286BD73F1C5"},
+    "phase6_harness": {"path": "research/physical_validation/scene_level_validation/run_scene_level_validation.py", "sha256": "6FE58610B0AFF240D7DB3E314D54AF2BE7A9D04FB11CAB8FAB64E090706464FE"},
+    "phase6_protocol": {"path": "research/physical_validation/scene_level_validation/PHASE6_FROZEN_PROTOCOL.json", "sha256": "9ACAD01B4D1A8D596615EC484854F0E7FC777D5F9FF02AFF0DE923475776A0F8"},
+    "sampling_audit_harness": {"path": "research/physical_validation/sampling_audit/run_sampling_audit.py", "sha256": "F5B5F8831B437D324E248FE0E15A7FF8DEF585A7CA30DF34854398777FDCE69F"},
+    "sampling_audit_protocol": {"path": "research/physical_validation/sampling_audit/SAMPLING_AUDIT_PROTOCOL.json", "sha256": "30F276F60B9F79429C3D34FA2C1E48532FA376C08D7B396D851C6A9CBD53D512"},
+    "p232_metrics": {"path": "dev/ffmpeg-build/validation/P232_real_material_dataset/P232_dataset_metrics.json", "sha256": "5FE61B8EA91E64A9168FCB7A41F881DB5430A85DD75195388110F64E5F156E8E"},
+    "p232_manifest": {"path": "dev/ffmpeg-build/validation/P232_real_material_dataset/P232_dataset_manifest.json", "sha256": "E682AC5ABA2128D6B45B2DBBC20B3300ED8DF1FF5D46B02A5D0C1109AA85A7EF"}
+  },
+  "frozen_transform": {
+    "name": "Model E luminance + ratio scaling + frozen MMR-1 chroma regrading",
+    "mmr_model": "MMR1",
+    "parameter_count": 12,
+    "feature_names": ["constant", "Y_target_nits/100", "Ct_base", "Cp_base", "(Y_target_nits/100)*Ct_base", "(Y_target_nits/100)*Cp_base"],
+    "lambda_grid": [0.0001, 0.001, 0.01],
+    "chroma_component_bound": 0.5,
+    "final_luminance_rule": "Reimpose the Model-E target luminance after the frozen MMR-1 ICtCp inverse.",
+    "forbidden": ["new model", "coefficient tuning", "per-frame fit", "scene-specific exception", "manual correction"]
+  },
+  "automatic_candidate_selection": {
+    "source_pool": "All existing P2.32 selected_cases for The Matrix and BR2049; no source-duration scan and no new candidate generation.",
+    "required_case_input_status": ["sync_status == LOCKED", "finite.hdr_rgb == true", "finite.om_rgb == true", "geometry.overlap is present"],
+    "local_shot_grouping": {
+      "implementation": "Exact reused Phase 6 HDR-only bounded discovery.",
+      "local_half_window_seconds": 5.0,
+      "proxy_width": 320,
+      "hard_threshold": 0.3,
+      "gradual_threshold": 0.15,
+      "gradual_min_run_frames": 5,
+      "anchor_near_cut_guard_frames": 12,
+      "require_both_boundaries_in_window": true,
+      "window_expansion": false,
+      "manual_frame_adjustment": false
+    },
+    "temporal_positions": [[0.10, "10%"], [0.25, "25%"], [0.50, "50%"], [0.75, "75%"], [0.90, "90%"]],
+    "minimum_sample_separation_frames": 5,
+    "selection_order": {
+      "matrix": "Use Matrix 08 when it resolves, then add the first non-overlapping locally resolved Matrix temporal strata in ascending P2.32 selection_index until three total shots are selected. Selection is independent of fit metrics.",
+      "br2049": "Use the first locally resolved BR2049 temporal stratum in ascending P2.32 selection_index. Its result remains conditional when geometry confidence is below 0.95.",
+      "shortfall": "Record INSUFFICIENT_ELIGIBLE_SHOTS; do not relax any gate or substitute manually chosen frames."
+    }
+  },
+  "sampling": {
+    "training_labels": ["10%", "25%", "50%", "75%"],
+    "temporal_holdout_label": "90%",
+    "representative_frames_per_shot": 4,
+    "paired_train_rows_per_frame": 5000,
+    "paired_train_rows_per_shot": 20000,
+    "lambda_holdout_rows_per_frame": 2048,
+    "common_grid_rule": "Use every case's preserved P2.32 overlap as the full-resolution coordinate universe. Samples are deterministic rows from the unchanged block partition ((y//80+x//120)%5)==0 and its complement, with no post-geometry image downsampling and no independent SDR/HDR selection.",
+    "h0_fit_rule": "Fit Model E only from the same 5,000 paired full-resolution common-grid luminance rows from each of the four training frames.",
+    "temporal_holdout_rule": "The 90% frame is excluded from H0 fit, MMR-1 ridge fit, and lambda selection; apply the single chosen transform to it only after fitting."
+  },
+  "validation": {
+    "compare": "frozen MMR-1 versus the same-shot Model E ratio-scaled H0 baseline in full overlap",
+    "measure": ["fit time", "coefficient matrix/hash and lambda", "full-overlap deltaE2000 mean/P95", "luminance MAE/RMSE", "ICtCp chroma error", "non-neutral hue error", "top/bottom seam continuity", "output range", "chroma clipping", "inverse-negative pixels", "temporal one-transform stability"],
+    "numerical_output_requirements": {"finite": true, "max_chroma_bound_fraction": 0.005, "max_inverse_negative_fraction": 0.005, "max_luminance_reimposition_error_nits": 0.00001},
+    "full_shot_render_gate": "Only selected Matrix shots whose five-frame result satisfies numerical output requirements are rendered. Visual artifacts are recorded for human review, never hidden or auto-corrected.",
+    "br2049_interpretation": "Transformation-fidelity/near-identity only; do not judge it as an equal creative-regrading test. Geometry confidence below 0.95 makes it conditional/non-confirmatory."
+  },
+  "render": {
+    "rendered_material": "The Matrix only",
+    "render_interval": "Every frame in the automatically resolved bounded local shot interval, never a partial interval.",
+    "transform_application": "One persisted H0 parameter set plus one persisted frozen MMR-1 coefficient matrix per shot; no per-frame fitting.",
+    "composition": "Generated full SDR Open Matte regrade with the original HDR target inserted unmodified in the preserved P2.32 overlap rectangle; no feathering or scene-specific composition adjustment.",
+    "output_encoding": "Lossless FFV1 Matroska, 16-bit RGB PQ code values with BT.2020/SMPTE2084 tags.",
+    "streaming_equivalence": "Before application, compare first and final streamed raw HDR/OM frames against independent exact Phase-6-style RGB48LE extraction. Abort that render if either byte hash differs."
+  },
+  "outputs": {
+    "root": "research/physical_validation/final_scene_validation",
+    "metrics": "results/final_scene_validation_metrics.json",
+    "report": "FINAL_SCENE_VALIDATION_REPORT.md",
+    "render_subdirectory": "results/renders"
+  },
+  "hard_stop": "After automatic candidate screening, fixed-configuration validations, up to three Matrix bounded full-shot renders, and the final report, stop. Do not start another model/sampling experiment or a full-film process."
+}

@@ -1,1 +1,1 @@
-"""Core data structures, configuration, and exceptions."""
+"""Core module — models, config, exceptions, transfer functions."""

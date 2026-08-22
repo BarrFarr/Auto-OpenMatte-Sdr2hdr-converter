@@ -1,0 +1,231 @@
+{
+  "phase": "P2.34",
+  "case_id": "br2049_temporal_stratum_15",
+  "material": "BR2049",
+  "sample": {
+    "label": "50%",
+    "fraction": 0.5,
+    "hdr_frame": 166870,
+    "om_frame": 168037,
+    "hdr_timestamp_seconds": 6959.869583333333,
+    "om_timestamp_seconds": 7008.543208333333
+  },
+  "curve": {
+    "name": "Frame-specific 50%",
+    "kind": "empirical_log_bin_median",
+    "definition": {
+      "type": "empirical SDR-to-HDR curve",
+      "fixed_bins": [
+        "<0.01",
+        "0.01–0.1",
+        "0.1–0.5",
+        "0.5–1",
+        "1–2",
+        "2–5",
+        "5–10",
+        "10–20",
+        "20–50",
+        "50–100",
+        "100–200",
+        "200–500",
+        "500–1000",
+        ">1000"
+      ],
+      "target_statistic": "HDR median/P50",
+      "spread": [
+        "P10",
+        "P50",
+        "P90"
+      ],
+      "monotonic_projection": "PAVA",
+      "interpolation": "linear in log10 domain",
+      "outside_domain": "clamp; no extrapolation",
+      "fit_sample_count": 100000
+    },
+    "x_log": [
+      1.6741311513975634,
+      1.8930579464104706,
+      2.169435803426891,
+      2.518929904145931,
+      2.8737182411038127,
+      3.3301930879385786
+    ],
+    "y_log": [
+      0.05622516588350192,
+      0.25434390342832547,
+      0.5337502803720243,
+      0.8892028395126896,
+      1.234460146913946,
+      1.6621127611602604
+    ]
+  },
+  "diagnostic_bins": [
+    {
+      "label": "<0.01",
+      "low_nits": 0.0,
+      "high_nits": 0.01,
+      "count": 0,
+      "P10": null,
+      "P50": null,
+      "P90": null,
+      "P90_minus_P10": null
+    },
+    {
+      "label": "0.01–0.1",
+      "low_nits": 0.01,
+      "high_nits": 0.1,
+      "count": 0,
+      "P10": null,
+      "P50": null,
+      "P90": null,
+      "P90_minus_P10": null
+    },
+    {
+      "label": "0.1–0.5",
+      "low_nits": 0.1,
+      "high_nits": 0.5,
+      "count": 0,
+      "P10": null,
+      "P50": null,
+      "P90": null,
+      "P90_minus_P10": null
+    },
+    {
+      "label": "0.5–1",
+      "low_nits": 0.5,
+      "high_nits": 1.0,
+      "count": 0,
+      "P10": null,
+      "P50": null,
+      "P90": null,
+      "P90_minus_P10": null
+    },
+    {
+      "label": "1–2",
+      "low_nits": 1.0,
+      "high_nits": 2.0,
+      "count": 0,
+      "P10": null,
+      "P50": null,
+      "P90": null,
+      "P90_minus_P10": null
+    },
+    {
+      "label": "2–5",
+      "low_nits": 2.0,
+      "high_nits": 5.0,
+      "count": 0,
+      "P10": null,
+      "P50": null,
+      "P90": null,
+      "P90_minus_P10": null
+    },
+    {
+      "label": "5–10",
+      "low_nits": 5.0,
+      "high_nits": 10.0,
+      "count": 0,
+      "P10": null,
+      "P50": null,
+      "P90": null,
+      "P90_minus_P10": null
+    },
+    {
+      "label": "10–20",
+      "low_nits": 10.0,
+      "high_nits": 20.0,
+      "count": 0,
+      "P10": null,
+      "P50": null,
+      "P90": null,
+      "P90_minus_P10": null
+    },
+    {
+      "label": "20–50",
+      "low_nits": 20.0,
+      "high_nits": 50.0,
+      "count": 27,
+      "P10": 1.0096189975738525,
+      "P50": 1.138216257095337,
+      "P90": 1.2656659603118898,
+      "P90_minus_P10": 0.2560469627380373
+    },
+    {
+      "label": "50–100",
+      "low_nits": 50.0,
+      "high_nits": 100.0,
+      "count": 4138,
+      "P10": 1.5214358925819398,
+      "P50": 1.7961543798446655,
+      "P90": 2.2233458518981934,
+      "P90_minus_P10": 0.7019099593162537
+    },
+    {
+      "label": "100–200",
+      "low_nits": 100.0,
+      "high_nits": 200.0,
+      "count": 10011,
+      "P10": 2.486309051513672,
+      "P50": 3.417827606201172,
+      "P90": 4.430047512054443,
+      "P90_minus_P10": 1.9437384605407715
+    },
+    {
+      "label": "200–500",
+      "low_nits": 200.0,
+      "high_nits": 500.0,
+      "count": 23142,
+      "P10": 5.356431484222412,
+      "P50": 7.748234987258911,
+      "P90": 11.031480884552005,
+      "P90_minus_P10": 5.675049400329593
+    },
+    {
+      "label": "500–1000",
+      "low_nits": 500.0,
+      "high_nits": 1000.0,
+      "count": 26875,
+      "P10": 12.833459281921387,
+      "P50": 17.15774154663086,
+      "P90": 21.286499786376954,
+      "P90_minus_P10": 8.453040504455567
+    },
+    {
+      "label": ">1000",
+      "low_nits": 1000.0,
+      "high_nits": null,
+      "count": 35807,
+      "P10": 28.023776626586915,
+      "P50": 45.931724548339844,
+      "P90": 59.37037658691406,
+      "P90_minus_P10": 31.346599960327147
+    }
+  ],
+  "fit_info": {
+    "filtering": {
+      "raw_sample_count": 6144000,
+      "accepted_sample_count": 6144000,
+      "rejection_percentage": 0.0,
+      "rejection_reasons": {
+        "nonfinite": 0,
+        "negative": 0,
+        "hard_clipping": 0,
+        "low_sdr_below_0.01_nits": 0,
+        "extreme_outlier": 0,
+        "motion_or_misalignment": 0
+      },
+      "fit_filter_policy": "finite/nonnegative; reject >=9900 nits; reject SDR <0.01 nits; no residual-based deletion; per-bin median and PAVA limit influence"
+    },
+    "diagnostics": {
+      "node_count": 6,
+      "raw_monotonicity_violations": 0,
+      "post_pava_monotonicity_violations": 0,
+      "pava_adjustment_max_abs_log10": 0.0,
+      "fit_sample_count": 100000,
+      "domain_sdr_nits": [
+        47.22056098120118,
+        2138.912840796874
+      ]
+    }
+  }
+}

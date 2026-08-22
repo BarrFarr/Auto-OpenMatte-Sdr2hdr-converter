@@ -1,0 +1,483 @@
+{
+  "calibration": {
+    "bottom": [
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 1.013487458229065,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": 0.18198356024581974,
+        "sequence": 0.0,
+        "valid_fraction": 0.8321533203125
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 1.0112807750701904,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": 0.026869964194830162,
+        "sequence": 1.0,
+        "valid_fraction": 0.8301839192708333
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 1.0122160911560059,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": 0.1475184256939354,
+        "sequence": 2.0,
+        "valid_fraction": 0.8172200520833334
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 1.013912558555603,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": 0.13566121729479325,
+        "sequence": 3.0,
+        "valid_fraction": 0.8250081380208333
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 1.014628529548645,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": 0.3056441351689006,
+        "sequence": 4.0,
+        "valid_fraction": 0.8215494791666667
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 1.0142158269882202,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": 0.27611722738693545,
+        "sequence": 5.0,
+        "valid_fraction": 0.81259765625
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 1.0168702602386475,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": 0.14964261452580935,
+        "sequence": 6.0,
+        "valid_fraction": 0.7920084635416667
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 1.0165778398513794,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": 0.040530342534855664,
+        "sequence": 7.0,
+        "valid_fraction": 0.7949300130208333
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 1.0190410614013672,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.029260530404334625,
+        "sequence": 8.0,
+        "valid_fraction": 0.7790771484375
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 1.0173546075820923,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.18139616397719863,
+        "sequence": 9.0,
+        "valid_fraction": 0.7787679036458334
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 1.0159417390823364,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.11726068767077891,
+        "sequence": 10.0,
+        "valid_fraction": 0.7873291015625
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 1.0157201290130615,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.33584723167869696,
+        "sequence": 11.0,
+        "valid_fraction": 0.7873697916666667
+      }
+    ],
+    "top": [
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 0.9889976978302002,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.32559511773450783,
+        "sequence": 0.0,
+        "valid_fraction": 0.827490234375
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 0.990985631942749,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.43974123914376095,
+        "sequence": 1.0,
+        "valid_fraction": 0.8499348958333334
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 0.9906952381134033,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.45161210792124307,
+        "sequence": 2.0,
+        "valid_fraction": 0.8389322916666667
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 0.9929093718528748,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.4204118037926248,
+        "sequence": 3.0,
+        "valid_fraction": 0.824609375
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 0.9906797409057617,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.49357679018180145,
+        "sequence": 4.0,
+        "valid_fraction": 0.8456461588541667
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 0.9912286996841431,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.37478614013693967,
+        "sequence": 5.0,
+        "valid_fraction": 0.8180257161458333
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 0.9911203384399414,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.4415580694629843,
+        "sequence": 6.0,
+        "valid_fraction": 0.8210367838541667
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 0.9890170097351074,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.5322629816407537,
+        "sequence": 7.0,
+        "valid_fraction": 0.83388671875
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 0.9903978109359741,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.4615841841094617,
+        "sequence": 8.0,
+        "valid_fraction": 0.8086018880208333
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 0.9894520044326782,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.4774370531730613,
+        "sequence": 9.0,
+        "valid_fraction": 0.8039225260416667
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 0.9898821711540222,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.3535852329532201,
+        "sequence": 10.0,
+        "valid_fraction": 0.8259684244791666
+      },
+      {
+        "calibration_i_max_abs": 0.0,
+        "chroma_scale": 0.9912628531455994,
+        "correction_i_max_abs": 0.0,
+        "hue_shift_degrees": -0.4661740712317103,
+        "sequence": 11.0,
+        "valid_fraction": 0.8176188151041667
+      }
+    ]
+  },
+  "correction": {
+    "I_unchanged": true,
+    "applied_to": "corrected_rgb_before_composite_and_PQ",
+    "beta": "max(0, 1 - distance_from_seam / 64)",
+    "bottom_seam_row": 1879,
+    "channels_changed": [
+      "Ct",
+      "Cp"
+    ],
+    "space": "ICtCp",
+    "top_seam_row": 280
+  },
+  "experiment": {
+    "calibration_rows": 32,
+    "chroma_epsilon": 0.001,
+    "fade_rows": 64,
+    "fit_frame_count": 12,
+    "fit_in_memory_only": true,
+    "fit_scale": 0.5,
+    "fit_stride": 1,
+    "frame_count": 12,
+    "production_files_modified": false,
+    "profile": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\tools\\openmatte_hdr\\profiles\\br2049_t2714_300f_throughput.json",
+    "segment_index": 4,
+    "source_frame_interval": [
+      65359,
+      65371
+    ],
+    "variants": [
+      "baseline",
+      "top_only",
+      "bottom_only"
+    ]
+  },
+  "metrics": {
+    "baseline": {
+      "bottom": {
+        "0_10": {
+          "chroma_delta_ictcp_mean": 0.008752105059102178,
+          "chroma_delta_ictcp_p95": 0.020567094286282856,
+          "hue_abs_delta_degrees_mean": 14.580241203308105,
+          "hue_abs_delta_degrees_p95": 75.95310846964519,
+          "hue_valid_fraction": 0.7983311631944444,
+          "luminance_abs_nits_mean": 0.4383675629893939,
+          "luminance_abs_nits_p95": 2.12678070863088
+        },
+        "10_25": {
+          "chroma_delta_ictcp_mean": 0.009050050905595223,
+          "chroma_delta_ictcp_p95": 0.023259565389404695,
+          "hue_abs_delta_degrees_mean": 13.628307422002157,
+          "hue_abs_delta_degrees_p95": 73.16977500915527,
+          "hue_valid_fraction": 0.8052459490740739,
+          "luminance_abs_nits_mean": 0.394584521651268,
+          "luminance_abs_nits_p95": 1.8898593386014302
+        },
+        "25_50": {
+          "chroma_delta_ictcp_mean": 0.010053486796095967,
+          "chroma_delta_ictcp_p95": 0.031388143543154,
+          "hue_abs_delta_degrees_mean": 11.728236198425293,
+          "hue_abs_delta_degrees_p95": 63.47939904530843,
+          "hue_valid_fraction": 0.8176892361111112,
+          "luminance_abs_nits_mean": 0.397357610364755,
+          "luminance_abs_nits_p95": 1.8289690017700195
+        },
+        "50_100": {
+          "chroma_delta_ictcp_mean": 0.01113860992093881,
+          "chroma_delta_ictcp_p95": 0.040694220612446465,
+          "hue_abs_delta_degrees_mean": 7.703815380732219,
+          "hue_abs_delta_degrees_p95": 35.187114556630455,
+          "hue_valid_fraction": 0.8152057291666667,
+          "luminance_abs_nits_mean": 0.5018949210643768,
+          "luminance_abs_nits_p95": 2.2615811427434287
+        }
+      },
+      "top": {
+        "0_10": {
+          "chroma_delta_ictcp_mean": 0.009560322000955543,
+          "chroma_delta_ictcp_p95": 0.02253972211231788,
+          "hue_abs_delta_degrees_mean": 7.257065335909526,
+          "hue_abs_delta_degrees_p95": 44.21433957417806,
+          "hue_valid_fraction": 0.8210785590277778,
+          "luminance_abs_nits_mean": 1.9743144710858662,
+          "luminance_abs_nits_p95": 6.759526371955872
+        },
+        "10_25": {
+          "chroma_delta_ictcp_mean": 0.00927385431714356,
+          "chroma_delta_ictcp_p95": 0.021345967582116526,
+          "hue_abs_delta_degrees_mean": 7.381484508514404,
+          "hue_abs_delta_degrees_p95": 44.13383038838705,
+          "hue_valid_fraction": 0.8297728587962961,
+          "luminance_abs_nits_mean": 1.9752930800120037,
+          "luminance_abs_nits_p95": 6.664230068524678
+        },
+        "25_50": {
+          "chroma_delta_ictcp_mean": 0.009196587605401874,
+          "chroma_delta_ictcp_p95": 0.02183447762702902,
+          "hue_abs_delta_degrees_mean": 7.168928305308024,
+          "hue_abs_delta_degrees_p95": 41.91563447316488,
+          "hue_valid_fraction": 0.8264418402777779,
+          "luminance_abs_nits_mean": 1.8804792960484822,
+          "luminance_abs_nits_p95": 6.303888281186421
+        },
+        "50_100": {
+          "chroma_delta_ictcp_mean": 0.00986823788844049,
+          "chroma_delta_ictcp_p95": 0.02268065356959899,
+          "hue_abs_delta_degrees_mean": 8.717885653177897,
+          "hue_abs_delta_degrees_p95": 46.443108240763344,
+          "hue_valid_fraction": 0.8613585069444444,
+          "luminance_abs_nits_mean": 1.9516353110472362,
+          "luminance_abs_nits_p95": 6.533312559127808
+        }
+      }
+    },
+    "bottom_only": {
+      "bottom": {
+        "0_10": {
+          "chroma_delta_ictcp_mean": 0.00841653203436484,
+          "chroma_delta_ictcp_p95": 0.020449761922160786,
+          "hue_abs_delta_degrees_mean": 14.607913970947266,
+          "hue_abs_delta_degrees_p95": 75.98997116088867,
+          "hue_valid_fraction": 0.7986957465277779,
+          "luminance_abs_nits_mean": 0.43833108991384506,
+          "luminance_abs_nits_p95": 2.1265531380971274
+        },
+        "10_25": {
+          "chroma_delta_ictcp_mean": 0.0087243407809486,
+          "chroma_delta_ictcp_p95": 0.023175941004107397,
+          "hue_abs_delta_degrees_mean": 13.645445108413696,
+          "hue_abs_delta_degrees_p95": 73.19571431477864,
+          "hue_valid_fraction": 0.8055005787037036,
+          "luminance_abs_nits_mean": 0.3945799469947815,
+          "luminance_abs_nits_p95": 1.889643410841624
+        },
+        "25_50": {
+          "chroma_delta_ictcp_mean": 0.00981799295792977,
+          "chroma_delta_ictcp_p95": 0.03127606865018606,
+          "hue_abs_delta_degrees_mean": 11.73197054862976,
+          "hue_abs_delta_degrees_p95": 63.50646464029948,
+          "hue_valid_fraction": 0.8177638888888888,
+          "luminance_abs_nits_mean": 0.3973518908023834,
+          "luminance_abs_nits_p95": 1.828819106022517
+        },
+        "50_100": {
+          "chroma_delta_ictcp_mean": 0.011117926798760891,
+          "chroma_delta_ictcp_p95": 0.04067054204642773,
+          "hue_abs_delta_degrees_mean": 7.703407009442647,
+          "hue_abs_delta_degrees_p95": 35.18809191385905,
+          "hue_valid_fraction": 0.8152065972222222,
+          "luminance_abs_nits_mean": 0.5018941387534142,
+          "luminance_abs_nits_p95": 2.2616690595944724
+        }
+      },
+      "top": {
+        "0_10": {
+          "chroma_delta_ictcp_mean": 0.009560343343764544,
+          "chroma_delta_ictcp_p95": 0.022539895648757618,
+          "hue_abs_delta_degrees_mean": 7.257079839706421,
+          "hue_abs_delta_degrees_p95": 44.214440981547035,
+          "hue_valid_fraction": 0.8210807291666667,
+          "luminance_abs_nits_mean": 1.9743146101633708,
+          "luminance_abs_nits_p95": 6.75971535841624
+        },
+        "10_25": {
+          "chroma_delta_ictcp_mean": 0.009273869140694538,
+          "chroma_delta_ictcp_p95": 0.021347797010093927,
+          "hue_abs_delta_degrees_mean": 7.381363073984782,
+          "hue_abs_delta_degrees_p95": 44.13281758626302,
+          "hue_valid_fraction": 0.829771412037037,
+          "luminance_abs_nits_mean": 1.9752934575080872,
+          "luminance_abs_nits_p95": 6.664311806360881
+        },
+        "25_50": {
+          "chroma_delta_ictcp_mean": 0.009196595521643758,
+          "chroma_delta_ictcp_p95": 0.021833518830438454,
+          "hue_abs_delta_degrees_mean": 7.168627738952637,
+          "hue_abs_delta_degrees_p95": 41.91532293955485,
+          "hue_valid_fraction": 0.8264340277777779,
+          "luminance_abs_nits_mean": 1.8804795145988464,
+          "luminance_abs_nits_p95": 6.3039612372716265
+        },
+        "50_100": {
+          "chroma_delta_ictcp_mean": 0.009868254885077477,
+          "chroma_delta_ictcp_p95": 0.022680537775158882,
+          "hue_abs_delta_degrees_mean": 8.71778416633606,
+          "hue_abs_delta_degrees_p95": 46.44285519917806,
+          "hue_valid_fraction": 0.8613563368055557,
+          "luminance_abs_nits_mean": 1.951635718345642,
+          "luminance_abs_nits_p95": 6.533519307772319
+        }
+      }
+    },
+    "top_only": {
+      "bottom": {
+        "0_10": {
+          "chroma_delta_ictcp_mean": 0.008752105990424752,
+          "chroma_delta_ictcp_p95": 0.020567254008104403,
+          "hue_abs_delta_degrees_mean": 14.581060568491617,
+          "hue_abs_delta_degrees_p95": 75.95351092020671,
+          "hue_valid_fraction": 0.7983376736111111,
+          "luminance_abs_nits_mean": 0.4383675704399745,
+          "luminance_abs_nits_p95": 2.1268260180950165
+        },
+        "10_25": {
+          "chroma_delta_ictcp_mean": 0.009050051759307584,
+          "chroma_delta_ictcp_p95": 0.023260323330760002,
+          "hue_abs_delta_degrees_mean": 13.626723051071167,
+          "hue_abs_delta_degrees_p95": 73.16703033447266,
+          "hue_valid_fraction": 0.8052387152777777,
+          "luminance_abs_nits_mean": 0.39458433787027997,
+          "luminance_abs_nits_p95": 1.889860560496648
+        },
+        "25_50": {
+          "chroma_delta_ictcp_mean": 0.010053486097604036,
+          "chroma_delta_ictcp_p95": 0.03138811824222406,
+          "hue_abs_delta_degrees_mean": 11.728556672732035,
+          "hue_abs_delta_degrees_p95": 63.48074150085449,
+          "hue_valid_fraction": 0.8176909722222222,
+          "luminance_abs_nits_mean": 0.3973575582106908,
+          "luminance_abs_nits_p95": 1.8289291163285573
+        },
+        "50_100": {
+          "chroma_delta_ictcp_mean": 0.011138608523954948,
+          "chroma_delta_ictcp_p95": 0.040694539435207844,
+          "hue_abs_delta_degrees_mean": 7.703547636667888,
+          "hue_abs_delta_degrees_p95": 35.18522866566976,
+          "hue_valid_fraction": 0.815204861111111,
+          "luminance_abs_nits_mean": 0.5018949210643768,
+          "luminance_abs_nits_p95": 2.2616090973218284
+        }
+      },
+      "top": {
+        "0_10": {
+          "chroma_delta_ictcp_mean": 0.009388069777439037,
+          "chroma_delta_ictcp_p95": 0.02119199512526393,
+          "hue_abs_delta_degrees_mean": 7.142966628074646,
+          "hue_abs_delta_degrees_p95": 43.66040547688802,
+          "hue_valid_fraction": 0.8201085069444445,
+          "luminance_abs_nits_mean": 1.9739998678366344,
+          "luminance_abs_nits_p95": 6.760793209075928
+        },
+        "10_25": {
+          "chroma_delta_ictcp_mean": 0.009218289439255992,
+          "chroma_delta_ictcp_p95": 0.020572209885964792,
+          "hue_abs_delta_degrees_mean": 7.304871439933777,
+          "hue_abs_delta_degrees_p95": 43.76429112752279,
+          "hue_valid_fraction": 0.8290827546296295,
+          "luminance_abs_nits_mean": 1.9752248326937358,
+          "luminance_abs_nits_p95": 6.664502541224162
+        },
+        "25_50": {
+          "chroma_delta_ictcp_mean": 0.00923811822819213,
+          "chroma_delta_ictcp_p95": 0.02171315873662631,
+          "hue_abs_delta_degrees_mean": 7.139453570048015,
+          "hue_abs_delta_degrees_p95": 41.712361653645836,
+          "hue_valid_fraction": 0.8261987847222221,
+          "luminance_abs_nits_mean": 1.8806855380535126,
+          "luminance_abs_nits_p95": 6.306291341781616
+        },
+        "50_100": {
+          "chroma_delta_ictcp_mean": 0.009877912156904737,
+          "chroma_delta_ictcp_p95": 0.02269662357866764,
+          "hue_abs_delta_degrees_mean": 8.716293374697367,
+          "hue_abs_delta_degrees_p95": 46.43054517110189,
+          "hue_valid_fraction": 0.8613420138888889,
+          "luminance_abs_nits_mean": 1.9516600966453552,
+          "luminance_abs_nits_p95": 6.533585111300151
+        }
+      }
+    }
+  },
+  "metrics_definition": {
+    "aggregates": "mean across 12 per-frame means/p95 values; max is max across frames",
+    "chroma": "Euclidean Ct/Cp delta in native ICtCp units",
+    "hue": "circular hue delta in degrees; both chroma magnitudes must exceed epsilon",
+    "luminance": "BT.2020 RGB luma delta in nits",
+    "reference": "aligned native HDR versus corrected Open Matte pre-PQ RGB/ICtCp"
+  },
+  "outputs": {
+    "report_json": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\benchmarks\\v05_gpu_native_segmented_test300\\seam_chroma_hue_ab.json",
+    "visual_png": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\benchmarks\\v05_gpu_native_segmented_test300\\seam_chroma_hue_ab.png"
+  },
+  "schema": "openmatte-hdr-v05-seam-chroma-hue-ab/v1",
+  "status": "PASS"
+}

@@ -1,0 +1,803 @@
+{
+  "configuration": {
+    "fit_scale": 0.5,
+    "fit_stride": 1,
+    "frame_count": 12,
+    "hdr_decoder": "hevc_cuvid",
+    "hdr_interval": [
+      65359,
+      65371
+    ],
+    "hdr_size": [
+      3840,
+      1600
+    ],
+    "offset_frames": 1167,
+    "om_decoder": "h264_cuvid",
+    "om_interval": [
+      66526,
+      66538
+    ],
+    "om_size": [
+      3840,
+      2160
+    ],
+    "overlap": [
+      0,
+      280,
+      3840,
+      1880
+    ]
+  },
+  "frozen_baseline": {
+    "default_model": {
+      "hue_slope_radians": 0.017262103612735544,
+      "intensity_centre": 0.3676159364489943,
+      "intensity_normalization": 0.12893608815955776,
+      "log_saturation_slope": 0.049597900226242435,
+      "name": "intensity_joint"
+    },
+    "fit": "NativeV4GpuShotFitter.fit_shot",
+    "fit_seconds": 1.5918393000029027,
+    "holdout_indices": [
+      0,
+      5,
+      10
+    ],
+    "no_model_or_image_modification": true,
+    "per_frame": "v1.predict -> v4.apply_intensity_conditioned(default_model)",
+    "training_indices": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      11
+    ]
+  },
+  "guarantees": {
+    "frame_cache_written": false,
+    "new_image_correction_applied": false,
+    "nvenc_invoked": false,
+    "output_video_written": false,
+    "production_files_modified": false,
+    "renderer_invoked": false
+  },
+  "metric_definition": {
+    "circular_median": "exact circular L1 median: minimizer of sum(abs(wrap(delta_h - candidate))) using angular slope events",
+    "compared": "corrected_rgb_OM versus HDR_reference in BT.2020 ICtCp",
+    "delta_h": "wrap(H_corrected_OM - H_HDR) in [-pi, pi), reported in degrees",
+    "delta_log_c": "natural_log(C_corrected_OM) - natural_log(C_HDR)",
+    "mask": "corrected_OM C >= 0.10 AND HDR C > 0, evaluated within each band only",
+    "per_band_fields": [
+      "sample_count",
+      "circular_median_delta_h_degrees",
+      "circular_absolute_median_delta_h_degrees",
+      "median_delta_log_c",
+      "p95_absolute_delta_h_degrees"
+    ]
+  },
+  "orientation": {
+    "bottom": "band 0 starts at physical HDR row 1500, i.e. distance zero from the lower edge",
+    "no_interpolation_or_extrapolation": true,
+    "physical_overlap": "one 1600-row HDR-to-OM overlap; TOP and BOTTOM are directional indexings of the same measured physical rows",
+    "top": "band 0 starts at physical HDR row 0"
+  },
+  "profile_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\tools\\openmatte_hdr\\profiles\\br2049_t2714_300f_throughput.json",
+  "schema": "openmatte-hdr-full-overlap-zonal-diagnostic/v1",
+  "startup": {
+    "bridge": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\dev\\v05-native\\v5_gpu_bridge.dll",
+    "cuda": {
+      "available": true,
+      "compute_capability": "86",
+      "cupy_version": "14.1.1",
+      "device_count": 1,
+      "device_id": 0,
+      "device_name": "NVIDIA GeForce RTX 3080",
+      "free_vram_bytes": 9536798720,
+      "runtime_error": null,
+      "runtime_ready": true,
+      "total_vram_bytes": 10736893952
+    },
+    "native_source": {
+      "full_frame_cpu_rgb_transport": false,
+      "hdr_decoder": "hevc_cuvid",
+      "hdr_expected_software_format": "P010LE",
+      "hdr_geometry": [
+        3840,
+        1600
+      ],
+      "hdr_software_format": 158,
+      "om_decoder": "h264_cuvid",
+      "om_expected_software_format": "NV12",
+      "om_geometry": [
+        3840,
+        2160
+      ],
+      "om_software_format": 23,
+      "ring_size_per_source": 4
+    }
+  },
+  "status": "PASS",
+  "zones": {
+    "bottom": [
+      {
+        "circular_absolute_median_delta_h_degrees": 1.2247485408316665,
+        "circular_median_delta_h_degrees": -0.631560271794399,
+        "corrected_om_rows": [
+          1780,
+          1880
+        ],
+        "distance_from_bottom_rows": [
+          0,
+          100
+        ],
+        "hdr_rows": [
+          1500,
+          1600
+        ],
+        "median_delta_log_c": -0.02206289768218994,
+        "p95_absolute_delta_h_degrees": 4.689599346394292,
+        "physical_band_index": 15,
+        "sample_count": 1967993,
+        "series": "BOTTOM"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.315672125784582,
+        "circular_median_delta_h_degrees": -0.7363216599232018,
+        "corrected_om_rows": [
+          1680,
+          1780
+        ],
+        "distance_from_bottom_rows": [
+          100,
+          200
+        ],
+        "hdr_rows": [
+          1400,
+          1500
+        ],
+        "median_delta_log_c": -0.0224226713180542,
+        "p95_absolute_delta_h_degrees": 5.096851083203595,
+        "physical_band_index": 14,
+        "sample_count": 2175893,
+        "series": "BOTTOM"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.332201076854307,
+        "circular_median_delta_h_degrees": -0.7543260919362083,
+        "corrected_om_rows": [
+          1580,
+          1680
+        ],
+        "distance_from_bottom_rows": [
+          200,
+          300
+        ],
+        "hdr_rows": [
+          1300,
+          1400
+        ],
+        "median_delta_log_c": -0.02157425880432129,
+        "p95_absolute_delta_h_degrees": 5.116426405364852,
+        "physical_band_index": 13,
+        "sample_count": 2159558,
+        "series": "BOTTOM"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.425405838268301,
+        "circular_median_delta_h_degrees": -0.7189457120355421,
+        "corrected_om_rows": [
+          1480,
+          1580
+        ],
+        "distance_from_bottom_rows": [
+          300,
+          400
+        ],
+        "hdr_rows": [
+          1200,
+          1300
+        ],
+        "median_delta_log_c": -0.01777416467666626,
+        "p95_absolute_delta_h_degrees": 5.538641805985183,
+        "physical_band_index": 12,
+        "sample_count": 1993222,
+        "series": "BOTTOM"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.4916859939741047,
+        "circular_median_delta_h_degrees": -0.6485264616927107,
+        "corrected_om_rows": [
+          1380,
+          1480
+        ],
+        "distance_from_bottom_rows": [
+          400,
+          500
+        ],
+        "hdr_rows": [
+          1100,
+          1200
+        ],
+        "median_delta_log_c": -0.01668703556060791,
+        "p95_absolute_delta_h_degrees": 5.60949605400078,
+        "physical_band_index": 11,
+        "sample_count": 2104104,
+        "series": "BOTTOM"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.559304866757231,
+        "circular_median_delta_h_degrees": -0.509381794560358,
+        "corrected_om_rows": [
+          1280,
+          1380
+        ],
+        "distance_from_bottom_rows": [
+          500,
+          600
+        ],
+        "hdr_rows": [
+          1000,
+          1100
+        ],
+        "median_delta_log_c": -0.015035510063171387,
+        "p95_absolute_delta_h_degrees": 5.27637577534821,
+        "physical_band_index": 10,
+        "sample_count": 2133011,
+        "series": "BOTTOM"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.7523532267367656,
+        "circular_median_delta_h_degrees": -0.35071655350181474,
+        "corrected_om_rows": [
+          1180,
+          1280
+        ],
+        "distance_from_bottom_rows": [
+          600,
+          700
+        ],
+        "hdr_rows": [
+          900,
+          1000
+        ],
+        "median_delta_log_c": -0.013580381870269775,
+        "p95_absolute_delta_h_degrees": 5.556564222367297,
+        "physical_band_index": 9,
+        "sample_count": 2111892,
+        "series": "BOTTOM"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.7906435873889743,
+        "circular_median_delta_h_degrees": -0.14123465165752366,
+        "corrected_om_rows": [
+          1080,
+          1180
+        ],
+        "distance_from_bottom_rows": [
+          700,
+          800
+        ],
+        "hdr_rows": [
+          800,
+          900
+        ],
+        "median_delta_log_c": -0.010828971862792969,
+        "p95_absolute_delta_h_degrees": 5.761688036634296,
+        "physical_band_index": 8,
+        "sample_count": 2169369,
+        "series": "BOTTOM"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.7894412606516406,
+        "circular_median_delta_h_degrees": 0.03312641747456184,
+        "corrected_om_rows": [
+          980,
+          1080
+        ],
+        "distance_from_bottom_rows": [
+          800,
+          900
+        ],
+        "hdr_rows": [
+          700,
+          800
+        ],
+        "median_delta_log_c": -0.008620858192443848,
+        "p95_absolute_delta_h_degrees": 5.740980183731287,
+        "physical_band_index": 7,
+        "sample_count": 2219480,
+        "series": "BOTTOM"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.7008673674949153,
+        "circular_median_delta_h_degrees": 0.07107494850315269,
+        "corrected_om_rows": [
+          880,
+          980
+        ],
+        "distance_from_bottom_rows": [
+          900,
+          1000
+        ],
+        "hdr_rows": [
+          600,
+          700
+        ],
+        "median_delta_log_c": -0.008199572563171387,
+        "p95_absolute_delta_h_degrees": 5.710010825373979,
+        "physical_band_index": 6,
+        "sample_count": 2307531,
+        "series": "BOTTOM"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.679926114221362,
+        "circular_median_delta_h_degrees": 0.034970568550465285,
+        "corrected_om_rows": [
+          780,
+          880
+        ],
+        "distance_from_bottom_rows": [
+          1000,
+          1100
+        ],
+        "hdr_rows": [
+          500,
+          600
+        ],
+        "median_delta_log_c": -0.0076100826263427734,
+        "p95_absolute_delta_h_degrees": 5.811124945846848,
+        "physical_band_index": 5,
+        "sample_count": 2314691,
+        "series": "BOTTOM"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.575929547197042,
+        "circular_median_delta_h_degrees": 0.24146082085786433,
+        "corrected_om_rows": [
+          680,
+          780
+        ],
+        "distance_from_bottom_rows": [
+          1100,
+          1200
+        ],
+        "hdr_rows": [
+          400,
+          500
+        ],
+        "median_delta_log_c": -0.00530695915222168,
+        "p95_absolute_delta_h_degrees": 6.746165463503724,
+        "physical_band_index": 4,
+        "sample_count": 2472310,
+        "series": "BOTTOM"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.728024199634886,
+        "circular_median_delta_h_degrees": 0.46786795814587345,
+        "corrected_om_rows": [
+          580,
+          680
+        ],
+        "distance_from_bottom_rows": [
+          1200,
+          1300
+        ],
+        "hdr_rows": [
+          300,
+          400
+        ],
+        "median_delta_log_c": -0.0030499696731567383,
+        "p95_absolute_delta_h_degrees": 7.832493817502734,
+        "physical_band_index": 3,
+        "sample_count": 2861658,
+        "series": "BOTTOM"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.5890435104034666,
+        "circular_median_delta_h_degrees": 0.22897526173550747,
+        "corrected_om_rows": [
+          480,
+          580
+        ],
+        "distance_from_bottom_rows": [
+          1300,
+          1400
+        ],
+        "hdr_rows": [
+          200,
+          300
+        ],
+        "median_delta_log_c": -0.008927583694458008,
+        "p95_absolute_delta_h_degrees": 8.839892078566255,
+        "physical_band_index": 2,
+        "sample_count": 2928474,
+        "series": "BOTTOM"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.2901543256020027,
+        "circular_median_delta_h_degrees": 0.3982273493684234,
+        "corrected_om_rows": [
+          380,
+          480
+        ],
+        "distance_from_bottom_rows": [
+          1400,
+          1500
+        ],
+        "hdr_rows": [
+          100,
+          200
+        ],
+        "median_delta_log_c": -0.006685137748718262,
+        "p95_absolute_delta_h_degrees": 4.368370853973539,
+        "physical_band_index": 1,
+        "sample_count": 2927453,
+        "series": "BOTTOM"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 0.8823785318564602,
+        "circular_median_delta_h_degrees": -0.06936739454054289,
+        "corrected_om_rows": [
+          280,
+          380
+        ],
+        "distance_from_bottom_rows": [
+          1500,
+          1600
+        ],
+        "hdr_rows": [
+          0,
+          100
+        ],
+        "median_delta_log_c": -0.006470918655395508,
+        "p95_absolute_delta_h_degrees": 3.0770409887823527,
+        "physical_band_index": 0,
+        "sample_count": 2932938,
+        "series": "BOTTOM"
+      }
+    ],
+    "top": [
+      {
+        "circular_absolute_median_delta_h_degrees": 0.8823785318564602,
+        "circular_median_delta_h_degrees": -0.06936739454054289,
+        "corrected_om_rows": [
+          280,
+          380
+        ],
+        "distance_from_top_rows": [
+          0,
+          100
+        ],
+        "hdr_rows": [
+          0,
+          100
+        ],
+        "median_delta_log_c": -0.006470918655395508,
+        "p95_absolute_delta_h_degrees": 3.0770409887823527,
+        "physical_band_index": 0,
+        "sample_count": 2932938,
+        "series": "TOP"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.2901543256020027,
+        "circular_median_delta_h_degrees": 0.3982273493684234,
+        "corrected_om_rows": [
+          380,
+          480
+        ],
+        "distance_from_top_rows": [
+          100,
+          200
+        ],
+        "hdr_rows": [
+          100,
+          200
+        ],
+        "median_delta_log_c": -0.006685137748718262,
+        "p95_absolute_delta_h_degrees": 4.368370853973539,
+        "physical_band_index": 1,
+        "sample_count": 2927453,
+        "series": "TOP"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.5890435104034666,
+        "circular_median_delta_h_degrees": 0.22897526173550747,
+        "corrected_om_rows": [
+          480,
+          580
+        ],
+        "distance_from_top_rows": [
+          200,
+          300
+        ],
+        "hdr_rows": [
+          200,
+          300
+        ],
+        "median_delta_log_c": -0.008927583694458008,
+        "p95_absolute_delta_h_degrees": 8.839892078566255,
+        "physical_band_index": 2,
+        "sample_count": 2928474,
+        "series": "TOP"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.728024199634886,
+        "circular_median_delta_h_degrees": 0.46786795814587345,
+        "corrected_om_rows": [
+          580,
+          680
+        ],
+        "distance_from_top_rows": [
+          300,
+          400
+        ],
+        "hdr_rows": [
+          300,
+          400
+        ],
+        "median_delta_log_c": -0.0030499696731567383,
+        "p95_absolute_delta_h_degrees": 7.832493817502734,
+        "physical_band_index": 3,
+        "sample_count": 2861658,
+        "series": "TOP"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.575929547197042,
+        "circular_median_delta_h_degrees": 0.24146082085786433,
+        "corrected_om_rows": [
+          680,
+          780
+        ],
+        "distance_from_top_rows": [
+          400,
+          500
+        ],
+        "hdr_rows": [
+          400,
+          500
+        ],
+        "median_delta_log_c": -0.00530695915222168,
+        "p95_absolute_delta_h_degrees": 6.746165463503724,
+        "physical_band_index": 4,
+        "sample_count": 2472310,
+        "series": "TOP"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.679926114221362,
+        "circular_median_delta_h_degrees": 0.034970568550465285,
+        "corrected_om_rows": [
+          780,
+          880
+        ],
+        "distance_from_top_rows": [
+          500,
+          600
+        ],
+        "hdr_rows": [
+          500,
+          600
+        ],
+        "median_delta_log_c": -0.0076100826263427734,
+        "p95_absolute_delta_h_degrees": 5.811124945846848,
+        "physical_band_index": 5,
+        "sample_count": 2314691,
+        "series": "TOP"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.7008673674949153,
+        "circular_median_delta_h_degrees": 0.07107494850315269,
+        "corrected_om_rows": [
+          880,
+          980
+        ],
+        "distance_from_top_rows": [
+          600,
+          700
+        ],
+        "hdr_rows": [
+          600,
+          700
+        ],
+        "median_delta_log_c": -0.008199572563171387,
+        "p95_absolute_delta_h_degrees": 5.710010825373979,
+        "physical_band_index": 6,
+        "sample_count": 2307531,
+        "series": "TOP"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.7894412606516406,
+        "circular_median_delta_h_degrees": 0.03312641747456184,
+        "corrected_om_rows": [
+          980,
+          1080
+        ],
+        "distance_from_top_rows": [
+          700,
+          800
+        ],
+        "hdr_rows": [
+          700,
+          800
+        ],
+        "median_delta_log_c": -0.008620858192443848,
+        "p95_absolute_delta_h_degrees": 5.740980183731287,
+        "physical_band_index": 7,
+        "sample_count": 2219480,
+        "series": "TOP"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.7906435873889743,
+        "circular_median_delta_h_degrees": -0.14123465165752366,
+        "corrected_om_rows": [
+          1080,
+          1180
+        ],
+        "distance_from_top_rows": [
+          800,
+          900
+        ],
+        "hdr_rows": [
+          800,
+          900
+        ],
+        "median_delta_log_c": -0.010828971862792969,
+        "p95_absolute_delta_h_degrees": 5.761688036634296,
+        "physical_band_index": 8,
+        "sample_count": 2169369,
+        "series": "TOP"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.7523532267367656,
+        "circular_median_delta_h_degrees": -0.35071655350181474,
+        "corrected_om_rows": [
+          1180,
+          1280
+        ],
+        "distance_from_top_rows": [
+          900,
+          1000
+        ],
+        "hdr_rows": [
+          900,
+          1000
+        ],
+        "median_delta_log_c": -0.013580381870269775,
+        "p95_absolute_delta_h_degrees": 5.556564222367297,
+        "physical_band_index": 9,
+        "sample_count": 2111892,
+        "series": "TOP"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.559304866757231,
+        "circular_median_delta_h_degrees": -0.509381794560358,
+        "corrected_om_rows": [
+          1280,
+          1380
+        ],
+        "distance_from_top_rows": [
+          1000,
+          1100
+        ],
+        "hdr_rows": [
+          1000,
+          1100
+        ],
+        "median_delta_log_c": -0.015035510063171387,
+        "p95_absolute_delta_h_degrees": 5.27637577534821,
+        "physical_band_index": 10,
+        "sample_count": 2133011,
+        "series": "TOP"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.4916859939741047,
+        "circular_median_delta_h_degrees": -0.6485264616927107,
+        "corrected_om_rows": [
+          1380,
+          1480
+        ],
+        "distance_from_top_rows": [
+          1100,
+          1200
+        ],
+        "hdr_rows": [
+          1100,
+          1200
+        ],
+        "median_delta_log_c": -0.01668703556060791,
+        "p95_absolute_delta_h_degrees": 5.60949605400078,
+        "physical_band_index": 11,
+        "sample_count": 2104104,
+        "series": "TOP"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.425405838268301,
+        "circular_median_delta_h_degrees": -0.7189457120355421,
+        "corrected_om_rows": [
+          1480,
+          1580
+        ],
+        "distance_from_top_rows": [
+          1200,
+          1300
+        ],
+        "hdr_rows": [
+          1200,
+          1300
+        ],
+        "median_delta_log_c": -0.01777416467666626,
+        "p95_absolute_delta_h_degrees": 5.538641805985183,
+        "physical_band_index": 12,
+        "sample_count": 1993222,
+        "series": "TOP"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.332201076854307,
+        "circular_median_delta_h_degrees": -0.7543260919362083,
+        "corrected_om_rows": [
+          1580,
+          1680
+        ],
+        "distance_from_top_rows": [
+          1300,
+          1400
+        ],
+        "hdr_rows": [
+          1300,
+          1400
+        ],
+        "median_delta_log_c": -0.02157425880432129,
+        "p95_absolute_delta_h_degrees": 5.116426405364852,
+        "physical_band_index": 13,
+        "sample_count": 2159558,
+        "series": "TOP"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.315672125784582,
+        "circular_median_delta_h_degrees": -0.7363216599232018,
+        "corrected_om_rows": [
+          1680,
+          1780
+        ],
+        "distance_from_top_rows": [
+          1400,
+          1500
+        ],
+        "hdr_rows": [
+          1400,
+          1500
+        ],
+        "median_delta_log_c": -0.0224226713180542,
+        "p95_absolute_delta_h_degrees": 5.096851083203595,
+        "physical_band_index": 14,
+        "sample_count": 2175893,
+        "series": "TOP"
+      },
+      {
+        "circular_absolute_median_delta_h_degrees": 1.2247485408316665,
+        "circular_median_delta_h_degrees": -0.631560271794399,
+        "corrected_om_rows": [
+          1780,
+          1880
+        ],
+        "distance_from_top_rows": [
+          1500,
+          1600
+        ],
+        "hdr_rows": [
+          1500,
+          1600
+        ],
+        "median_delta_log_c": -0.02206289768218994,
+        "p95_absolute_delta_h_degrees": 4.689599346394292,
+        "physical_band_index": 15,
+        "sample_count": 1967993,
+        "series": "TOP"
+      }
+    ]
+  }
+}

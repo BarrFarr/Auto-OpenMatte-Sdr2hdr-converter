@@ -1,0 +1,126 @@
+{
+  "status": "PASS",
+  "case_id": "the_matrix_temporal_stratum_08",
+  "material": "The Matrix",
+  "hdr_frame": 73367,
+  "om_frame": 73348,
+  "boundary": {
+    "case_id": "the_matrix_temporal_stratum_08",
+    "material": "The Matrix",
+    "anchor_hdr_frame": 73367,
+    "anchor_om_frame": 73348,
+    "anchor_timestamp_seconds": 3060.0152916666666,
+    "window": {
+      "half_window_seconds": 5.0,
+      "start_frame": 73247,
+      "end_frame_exclusive": 73488,
+      "requested_end_frame_exclusive": 73488,
+      "requested_frame_count": 241,
+      "decoded_frame_count": 241,
+      "proxy_shape": [
+        134,
+        320
+      ],
+      "frames_retained": 1,
+      "full_film_scan": false
+    },
+    "boundaries": [
+      {
+        "frame": 73274,
+        "timestamp_seconds": 3056.1364166666663,
+        "boundary_score": 0.1815855018556734,
+        "threshold": 0.15,
+        "type": "gradual",
+        "run_start_frame": 73271,
+        "run_end_frame": 73277
+      },
+      {
+        "frame": 73460,
+        "timestamp_seconds": 3063.8941666666665,
+        "boundary_score": 0.6211318310338708,
+        "threshold": 0.15,
+        "type": "gradual",
+        "run_start_frame": 73294,
+        "run_end_frame": 73460
+      }
+    ],
+    "boundary_count": 2,
+    "anchor_near_cut": false,
+    "nearest_boundary_distance_frames": 93,
+    "shot_status": "LOCAL_SHOT_RESOLVED",
+    "shot_start_frame": 73274,
+    "shot_end_frame_exclusive": 73460,
+    "shot_duration_frames": 186,
+    "shot_duration_seconds": 7.75775,
+    "boundary_detection": {
+      "algorithm": "deterministic streaming local frame difference",
+      "weights": {
+        "histogram": 0.4,
+        "mean_luminance": 0.2,
+        "edge_ncc_change": 0.4
+      },
+      "hard_threshold": 0.3,
+      "gradual_threshold": 0.15,
+      "gradual_min_run_frames": 5,
+      "full_film_scan": false,
+      "frames_retained_simultaneously": 1
+    },
+    "decode_command": [
+      "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\install\\bin\\ffmpeg.exe",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-nostdin",
+      "-ss",
+      "3055.010291667",
+      "-i",
+      "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+      "-map",
+      "0:v:0",
+      "-vf",
+      "scale=320:134:flags=bilinear,format=gray",
+      "-frames:v",
+      "241",
+      "-pix_fmt",
+      "gray",
+      "-vsync",
+      "0",
+      "-f",
+      "rawvideo",
+      "pipe:1"
+    ],
+    "case_offset_frames": -19
+  },
+  "sample_count": 5,
+  "sample_labels": [
+    "10%",
+    "25%",
+    "50%",
+    "75%",
+    "90%"
+  ],
+  "total_sample_pixels": 7680000,
+  "finite_values": true,
+  "pooled_curve_nodes": 13,
+  "pooled_curve_post_pava_violations": 0,
+  "online_prediction_splits": 2,
+  "elapsed_seconds": 26.311013800001092,
+  "memory": {
+    "tracemalloc_current_bytes": 25578699,
+    "tracemalloc_peak_bytes": 28556789,
+    "full_frame_buffers_saved": false,
+    "full_luminance_arrays_saved": false,
+    "full_residual_arrays_saved": false
+  },
+  "output_bytes": 68643,
+  "output_files": [
+    "boundary.json",
+    "online_prediction_metrics.json",
+    "samples\\sample_10pct.json",
+    "samples\\sample_25pct.json",
+    "samples\\sample_50pct.json",
+    "samples\\sample_75pct.json",
+    "samples\\sample_90pct.json",
+    "shot_pooled_curve.json"
+  ]
+}

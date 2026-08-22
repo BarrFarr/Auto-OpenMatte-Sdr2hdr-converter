@@ -1,1 +1,1 @@
-"""Output modules: preview generation and final render."""
+"""Output module — report generation, console formatting."""

@@ -1,16 +1,20 @@
-.PHONY: test lint typecheck format all
+.PHONY: install test lint format typecheck clean
+
+install:
+	pip install -e ".[dev]"
 
 test:
-	PYTHONPATH=src python -m pytest tests/ -v
+	pytest -v
 
 lint:
 	ruff check src/ tests/
 
-typecheck:
-	PYTHONPATH=src mypy src/
-
 format:
 	ruff format src/ tests/
-	isort src/ tests/
 
-all: lint typecheck test
+typecheck:
+	mypy src/
+
+clean:
+	rm -rf build/ dist/ *.egg-info/ .pytest_cache/ .mypy_cache/ .ruff_cache/
+	find . -type d -name __pycache__ -exec rm -rf {} +

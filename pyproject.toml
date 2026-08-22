@@ -1,28 +1,26 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
+requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "auto-openmatte"
 version = "0.1.0"
-description = "Automatically combine HDR 21:9 reference video with SDR 16:9 Open Matte to produce full 16:9 HDR output"
+description = "Automatic HDR Open Matte extension and SDR-to-HDR conversion"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
 dependencies = [
     "numpy>=1.24",
     "scipy>=1.10",
-    "opencv-python>=4.7",
-    "Pillow>=9.5",
+    "opencv-python-headless>=4.8",
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0",
+    "pytest-cov>=4.0",
     "ruff>=0.1",
-    "mypy>=1.0",
-    "black>=23.0",
-    "isort>=5.0",
+    "mypy>=1.5",
 ]
 
 [project.scripts]
@@ -31,17 +29,20 @@ auto_openmatte = "auto_openmatte.cli:main"
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
 [tool.ruff]
-line-length = 100
 target-version = "py310"
+line-length = 100
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I"]
 
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = ["E402"]
+
 [tool.mypy]
 python_version = "3.10"
-warn_return_any = true
-warn_unused_configs = true
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
+strict = true

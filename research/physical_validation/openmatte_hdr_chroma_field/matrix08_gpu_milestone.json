@@ -1,0 +1,143 @@
+{
+  "schema": "openmatte-hdr-chroma-field-milestone/v1",
+  "date": "2026-08-20",
+  "status": "engineering_checkpoint_not_visual_acceptance",
+  "implementation": {
+    "reference_runner": "tools/openmatte_hdr/poc_chroma_field.py",
+    "accelerated_runner": "tools/openmatte_hdr/fast_chroma_field.py",
+    "execution_core": "tools/openmatte_hdr/fastcore.py",
+    "backend": "cupy/gpu",
+    "cpu_fallback": "numpy/cpu configured with all logical CPU cores",
+    "gpu_cpu_parity": "visually near-equivalent; not bit-identical; occasional one-code 16-bit differences are expected"
+  },
+  "source_contract": {
+    "hdr_source": "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+    "sdr_open_matte_source": "G:\\Filmy\\IMAX format (open matte)\\The Matrix (1999) [OPEN MATTE] [WEB-DL 1080p 10bit DD5.1 x265].mkv",
+    "hdr_frame_interval": [73274, 73460],
+    "sdr_offset_frames": -19,
+    "frames": 186,
+    "fps": "24000/1001",
+    "output_size": [1920, 1080],
+    "overlap_xyxy": [0, 140, 1920, 940],
+    "decode_contract": "v0.1 rgb48le/BT.1886/PQ float32",
+    "source_frame_hashes": {
+      "first": {
+        "hdr": "38739765CEDAF4C2834FE5F39CBD1C5FC148F65FD2BF51F1AE3D2FC72D72454E",
+        "om": "19027AE21F307A7188A5060B372FA1074121E068A5F82FD152098F6FA8B911CE"
+      },
+      "last": {
+        "hdr": "6DB9BA0AC3E536961D4AFDFCE96D90FF4D7CE477CC099260BBF689EEF79A76E6",
+        "om": "DAE36C24F2000DBE5AB5FBCABD94ACA84E8680E6282D61E02BC52D44215F9768"
+      }
+    }
+  },
+  "frozen_model": {
+    "luminance": {
+      "gain_seam_band_px": 48,
+      "base_sigma_px": 16,
+      "detail_strength": 0.85,
+      "gain_measurement_stride": 3
+    },
+    "chroma": {
+      "colour_space": "ICtCp Ct/Cp complex similarity transform",
+      "lowpass_sigma_px": 16,
+      "spatial_field": "degree-2 x polynomial per top/bottom seam, vertically blended to shot-level factor",
+      "real_fitted_parameter_count": 12,
+      "scale_clamp": [0.5, 2.0],
+      "hue_rotation_clamp_degrees": 30,
+      "measurement_stride": 3,
+      "intensity_modified": false,
+      "chroma_detail_modified": false
+    },
+    "guarantees": {
+      "hdr_centre_regenerated": false,
+      "temporal_state": false,
+      "ai": false,
+      "lut": false,
+      "mmr": false
+    }
+  },
+  "accelerated_full_run": {
+    "cache": {
+      "path": "tools/openmatte_hdr/cache/73274_186/",
+      "gigabytes": 8.0566272,
+      "reused": false,
+      "fingerprint": "CA88DF5325F51BA760648F5E5E1B1E935E77139E6D76E6F0BFAF20C578A59AED"
+    },
+    "timing_seconds": {
+      "decode_cache": 154.1490687,
+      "gain_pass": 1.8697294,
+      "chroma_pass": 1.5089415,
+      "render_pass": 12.8282677,
+      "total": 170.4425747
+    },
+    "gain": {
+      "shot_gain_stops": -6.315400838851929,
+      "top_profile_range_stops": [-7.7177956090097695, -6.291944882270474],
+      "bottom_profile_range_stops": [-6.402977587780405, -5.809147815370279],
+      "frames_used": 62
+    },
+    "chroma_field": {
+      "band_chroma_error_before": 0.013673741212715545,
+      "band_chroma_error_after": 0.012711049568268561,
+      "z_shot": [0.9183723074559053, -0.017991850088942912],
+      "clamped_fraction": {"top": 0.0, "bottom": 0.0},
+      "coefficients_highest_order_first": {
+        "top": [[-0.31893196059291284, 0.28029977418402097], [0.40399432055086665, -0.3572551034178238], [0.7610643617525099, 0.04732633754025932]],
+        "bottom": [[-0.10628870667090953, 0.24730720016313007], [0.18304545676816794, -0.28803223009901846], [0.896842039792481, 0.06737601648224092]]
+      }
+    },
+    "seam_diagnostics": {
+      "gain_top_chroma_step": 0.0011312921781228074,
+      "chroma_top_chroma_step": 0.0011160301622904598,
+      "gain_bottom_chroma_step": 0.0011108169940510584,
+      "chroma_bottom_chroma_step": 0.001105580009490011,
+      "gain_top_hue_step_degrees": 0.5810703130499009,
+      "chroma_top_hue_step_degrees": 0.7058881992293943,
+      "gain_bottom_hue_step_degrees": 0.7137347099281126,
+      "chroma_bottom_hue_step_degrees": 0.7519018102076745
+    }
+  },
+  "reference_cpu_poc": {
+    "artifact_directory": "tools/openmatte_hdr/out/chroma_field_poc/",
+    "lowpass_band_chroma_error_before": 0.02114799,
+    "lowpass_band_chroma_error_after": 0.01271399,
+    "lowpass_band_chroma_error_reduction_percent": 39.9,
+    "negative_rgb_fraction_after_chroma": 0.0,
+    "hue_step_change_top_degrees": [0.615, 0.735],
+    "hue_step_change_bottom_degrees": [0.74, 0.777]
+  },
+  "verified_review_output": {
+    "path": "tools/openmatte_hdr/out/chroma_field_fast/v02_luminance_plus_chroma_hdr10.mkv",
+    "codec": "hevc",
+    "size": [1920, 1080],
+    "pix_fmt": "yuv420p10le",
+    "color_range": "tv",
+    "color_space": "bt2020nc",
+    "color_transfer": "smpte2084",
+    "color_primaries": "bt2020",
+    "decoded_frames": 186
+  },
+  "review_artifacts": [
+    "tools/openmatte_hdr/out/chroma_field_fast/v01_luminance_only_hdr10.mkv",
+    "tools/openmatte_hdr/out/chroma_field_fast/v02_luminance_plus_chroma_hdr10.mkv",
+    "tools/openmatte_hdr/out/chroma_field_fast/side_by_side_hdr10.mkv",
+    "tools/openmatte_hdr/out/chroma_field_fast/top_seam_regions.png",
+    "tools/openmatte_hdr/out/chroma_field_fast/bottom_seam_regions.png",
+    "tools/openmatte_hdr/out/chroma_field_poc/CHROMA_FIELD_POC.md"
+  ],
+  "limitations": [
+    "Open Matte extensions have no HDR ground truth; seam diagnostics do not establish a portable creative grade.",
+    "The fast run uses stride 3 for both gain and chroma measurements; run with stride 1 when exact full-frame measurement is required.",
+    "The cache validity check does not rehash source files at every reuse; rebuild after replacing a source in place.",
+    "The full CPU reference reports a hue-seam regression despite lower low-pass chroma disagreement; visual HDR review remains decisive."
+  ],
+  "next_iteration": {
+    "name": "bounded_hue_damping",
+    "formula": "z_damped(x,y) = abs(z(x,y)) * exp(i * lambda * arg(z(x,y)))",
+    "additional_fitted_controls": 1,
+    "lambda_domain": [0.0, 1.0],
+    "selection": "held-out overlap samples/frames using circular hue error, subject to no regression in low-pass chroma residual or RGB range safety",
+    "preserves": ["12-control spatial field", "lowpass sigma 16", "unmodified intensity", "unmodified chroma detail", "HDR centre copy", "no temporal state", "no AI", "no LUT", "no MMR"]
+  }
+}

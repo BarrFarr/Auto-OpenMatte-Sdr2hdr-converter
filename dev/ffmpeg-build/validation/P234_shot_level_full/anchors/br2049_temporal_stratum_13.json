@@ -1,0 +1,1880 @@
+{
+  "case_id": "br2049_temporal_stratum_13",
+  "material": "BR2049",
+  "selection_index": 13,
+  "hdr_frame": 144701,
+  "om_frame": 145868,
+  "offset_frames": 1167,
+  "offset_seconds": 48.673624999999994,
+  "sync_status": "LOCKED",
+  "sync_confidence": 0.9745,
+  "geometry": {
+    "scale_x": 1.0,
+    "scale_y": 1.0,
+    "offset_x": 0,
+    "offset_y": 280,
+    "overlap": [
+      0,
+      280,
+      3840,
+      1880
+    ],
+    "confidence": 0.9155,
+    "status": "preserved geometry warning below 0.95 gate"
+  },
+  "scene_id": "br2049_scene_unverified_13",
+  "scene_independence_verified": false,
+  "status": "FAILED",
+  "successful_samples": 5,
+  "failed_samples": [],
+  "online_prediction_splits": [],
+  "source_arrays_saved": false,
+  "residual_arrays_saved": false,
+  "boundary": {
+    "case_id": "br2049_temporal_stratum_13",
+    "material": "BR2049",
+    "anchor_hdr_frame": 144701,
+    "anchor_om_frame": 145868,
+    "anchor_timestamp_seconds": 6035.237541666666,
+    "window": {
+      "half_window_seconds": 5.0,
+      "start_frame": 144581,
+      "end_frame_exclusive": 144822,
+      "requested_end_frame_exclusive": 144822,
+      "requested_frame_count": 241,
+      "decoded_frame_count": 241,
+      "proxy_shape": [
+        134,
+        320
+      ],
+      "frames_retained": 1,
+      "full_film_scan": false
+    },
+    "boundaries": [
+      {
+        "frame": 144630,
+        "timestamp_seconds": 6032.27625,
+        "boundary_score": 0.7229802811054029,
+        "threshold": 0.15,
+        "type": "gradual",
+        "run_start_frame": 144629,
+        "run_end_frame": 144716
+      },
+      {
+        "frame": 144730,
+        "timestamp_seconds": 6036.447083333333,
+        "boundary_score": 0.20959183300781525,
+        "threshold": 0.15,
+        "type": "gradual",
+        "run_start_frame": 144725,
+        "run_end_frame": 144731
+      },
+      {
+        "frame": 144760,
+        "timestamp_seconds": 6037.698333333333,
+        "boundary_score": 0.5616707582005215,
+        "threshold": 0.3,
+        "type": "hard"
+      },
+      {
+        "frame": 144801,
+        "timestamp_seconds": 6039.408375,
+        "boundary_score": 0.48262063230807234,
+        "threshold": 0.3,
+        "type": "hard"
+      }
+    ],
+    "boundary_count": 4,
+    "anchor_near_cut": false,
+    "nearest_boundary_distance_frames": 29,
+    "shot_status": "LOCAL_SHOT_RESOLVED",
+    "shot_start_frame": 144630,
+    "shot_end_frame_exclusive": 144730,
+    "shot_duration_frames": 100,
+    "shot_duration_seconds": 4.170833333333333,
+    "boundary_detection": {
+      "algorithm": "deterministic streaming local frame difference",
+      "weights": {
+        "histogram": 0.4,
+        "mean_luminance": 0.2,
+        "edge_ncc_change": 0.4
+      },
+      "hard_threshold": 0.3,
+      "gradual_threshold": 0.15,
+      "gradual_min_run_frames": 5,
+      "full_film_scan": false,
+      "frames_retained_simultaneously": 1
+    },
+    "decode_command": [
+      "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\install\\bin\\ffmpeg.exe",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-nostdin",
+      "-ss",
+      "6030.232541667",
+      "-i",
+      "G:\\Filmy\\Blade.Runner.2049.2017.2160p.UHD.Bluray.x265.HDR10.HEVC.DTS-HDMA.5.1-4K4U\\Blade.Runner.2049.2017.UHD.BluRay.2160p.DDP.7.1.DV.HDR.x265-hallowed.mkv",
+      "-map",
+      "0:v:0",
+      "-vf",
+      "scale=320:134:flags=bilinear,format=gray",
+      "-frames:v",
+      "241",
+      "-pix_fmt",
+      "gray",
+      "-vsync",
+      "0",
+      "-f",
+      "rawvideo",
+      "pipe:1"
+    ],
+    "case_offset_frames": 1167
+  },
+  "compact_score_trace": [
+    0.045605084812874945,
+    0.058122602624040405,
+    0.04314650903861126,
+    0.05491002898188002,
+    0.03558068645015473,
+    0.044129536872227135,
+    0.03607123989266714,
+    0.030729251291471794,
+    0.033123536519660705,
+    0.05603654897640559,
+    0.044318050666545365,
+    0.025595697283152603,
+    0.06319943997277186,
+    0.06156623970424993,
+    0.053985202633829076,
+    0.05751408881555731,
+    0.031182560128754474,
+    0.0704067255054812,
+    0.04440666902608854,
+    0.03398906331756757,
+    0.028411085241263522,
+    0.04229566681584235,
+    0.0452008411306423,
+    0.01970500688929024,
+    0.022909734444616622,
+    0.022160447331379382,
+    0.020270881150105526,
+    0.01932992796952817,
+    0.018613881894083216,
+    0.006187188988365787,
+    0.01783768532032573,
+    0.012160267770538311,
+    0.016444848896014108,
+    0.014171348383822228,
+    0.010129279406590974,
+    0.014343962383650783,
+    0.007174349292950455,
+    0.0029351265587446522,
+    0.004889832314445307,
+    0.004576441346774197,
+    0.004259627537327544,
+    0.007214340714816199,
+    0.006923049292181893,
+    0.008265842781937373,
+    0.0042961770385475705,
+    0.010640222654339058,
+    0.004403910869670806,
+    0.005711926587302919,
+    0.7229802811054029,
+    0.4000050585640856,
+    0.4000052594790221,
+    0.4000107748774606,
+    0.40001430023620016,
+    0.40000272096367434,
+    0.40001519129593094,
+    0.40001218223826684,
+    0.4000015147881441,
+    0.40000202598072576,
+    0.4000099719490954,
+    0.4000016034147167,
+    0.40000261025819245,
+    0.40000637457379656,
+    0.40000021531694635,
+    0.40000186903678925,
+    0.40001120927385114,
+    0.4001599308799577,
+    0.4001750363034849,
+    0.4002010707671565,
+    0.4003838991618876,
+    0.40046077298669536,
+    0.3893871630484525,
+    0.38212685719155554,
+    0.3641849586412383,
+    0.3381890331127568,
+    0.31434596349319366,
+    0.30490335107243544,
+    0.3232666849267186,
+    0.3065984004349468,
+    0.34100720752058256,
+    0.3306676472697617,
+    0.31065504182456505,
+    0.30606296806935135,
+    0.2781180448900767,
+    0.2967661443904473,
+    0.285042767930177,
+    0.2752150968623828,
+    0.2853149106925574,
+    0.28053531168516355,
+    0.27133545960819183,
+    0.2629231058985854,
+    0.2601999226600704,
+    0.250264293365741,
+    0.25853712605864376,
+    0.2533861690144025,
+    0.2310514624808566,
+    0.271446877010757,
+    0.24599510796453883,
+    0.28027673979965634,
+    0.2613416424676317,
+    0.28229770817574457,
+    0.24566315308378034,
+    0.22034695053430764,
+    0.21125707834489008,
+    0.24303566339155758,
+    0.2500813660608662,
+    0.20186650031633988,
+    0.2092880533619878,
+    0.1976128400674481,
+    0.19321618510538113,
+    0.18637727980503027,
+    0.18966991495128532,
+    0.16226150879112317,
+    0.18788007918678534,
+    0.18661901116395035,
+    0.1774018349581679,
+    0.17353310058479346,
+    0.19911448112229946,
+    0.18913735588935474,
+    0.20571074409295054,
+    0.18426095105715337,
+    0.21493049119021995,
+    0.21188688062498023,
+    0.2331690113656753,
+    0.2140893682755054,
+    0.20888550006569997,
+    0.21279976930628944,
+    0.1922149033283011,
+    0.21368215168078972,
+    0.1954873968906515,
+    0.23572416602162746,
+    0.2156422912736036,
+    0.20784897331608612,
+    0.18770985632074705,
+    0.1748679808189747,
+    0.15090849788387106,
+    0.14300646008494367,
+    0.1403226815009887,
+    0.14216818768527129,
+    0.12416855773278541,
+    0.157294706708404,
+    0.21884428430549285,
+    0.18839319245174463,
+    0.18335996447218364,
+    0.14295801848855522,
+    0.15583953019129695,
+    0.1530982706787521,
+    0.16376031811364455,
+    0.18743077960239407,
+    0.20959183300781525,
+    0.15637539206309597,
+    0.14896075503973044,
+    0.17943762443846478,
+    0.21626788584087964,
+    0.1962375834453698,
+    0.16888227778319992,
+    0.1255752077964881,
+    0.10805631393668251,
+    0.11272450460046803,
+    0.09023181263347566,
+    0.0627190292592297,
+    0.0742529266796672,
+    0.09257859559223258,
+    0.1183610325817332,
+    0.1257502373592396,
+    0.1332590024686813,
+    0.11303361327318362,
+    0.09110846265401533,
+    0.11356732510659566,
+    0.15072041318876547,
+    0.1429331808187681,
+    0.12002200590393809,
+    0.10126310253928925,
+    0.09803399421832504,
+    0.07129508011540998,
+    0.09919383086901006,
+    0.12704634185038197,
+    0.15468437609532917,
+    0.1314380741814801,
+    0.5616707582005215,
+    0.041516528355001116,
+    0.0404791870779177,
+    0.037375184783404264,
+    0.049088429605148046,
+    0.046752912282847295,
+    0.07008033014666211,
+    0.06531906174737635,
+    0.056933129878343945,
+    0.04948713324733958,
+    0.030131486002594396,
+    0.02410601548023782,
+    0.03716003400440284,
+    0.03668249489222301,
+    0.05969329660461103,
+    0.03607135115013352,
+    0.032639672334031485,
+    0.0650927276372212,
+    0.052791975212352175,
+    0.042274848720434695,
+    0.06821032699367033,
+    0.08039781120308447,
+    0.07402510363990084,
+    0.04257602002221036,
+    0.053083237123146686,
+    0.03723060827623269,
+    0.04248419704697918,
+    0.038772701029538024,
+    0.047690686667211706,
+    0.041880518519770406,
+    0.06705726505867386,
+    0.08849026932316753,
+    0.10955598412531772,
+    0.12094207114478098,
+    0.13641724658594395,
+    0.11816758255710338,
+    0.10585761170267471,
+    0.1165356248579861,
+    0.09933208752387566,
+    0.10255272993372823,
+    0.11258352093653945,
+    0.48262063230807234,
+    0.06470449937203003,
+    0.058109346735303054,
+    0.04790726917469659,
+    0.050733161023539246,
+    0.04317449754039283,
+    0.043534091888613825,
+    0.03836607949877565,
+    0.0349746085858255,
+    0.03704837701861526,
+    0.033982475750340135,
+    0.04654875923877577,
+    0.0315932307025604,
+    0.03667600364790947,
+    0.027474483656287425,
+    0.031146263345136153,
+    0.027912719448346897,
+    0.03589376555990994,
+    0.03600215236883631,
+    0.04127552502426114,
+    0.037634508082894355
+  ],
+  "selected_samples": [
+    {
+      "label": "10%",
+      "fraction": 0.1,
+      "hdr_frame": 144640,
+      "om_frame": 145807,
+      "hdr_timestamp_seconds": 6032.693333333333,
+      "om_timestamp_seconds": 6081.366958333333
+    },
+    {
+      "label": "25%",
+      "fraction": 0.25,
+      "hdr_frame": 144655,
+      "om_frame": 145822,
+      "hdr_timestamp_seconds": 6033.318958333333,
+      "om_timestamp_seconds": 6081.992583333333
+    },
+    {
+      "label": "50%",
+      "fraction": 0.5,
+      "hdr_frame": 144680,
+      "om_frame": 145847,
+      "hdr_timestamp_seconds": 6034.361666666667,
+      "om_timestamp_seconds": 6083.035291666666
+    },
+    {
+      "label": "75%",
+      "fraction": 0.75,
+      "hdr_frame": 144704,
+      "om_frame": 145871,
+      "hdr_timestamp_seconds": 6035.362666666666,
+      "om_timestamp_seconds": 6084.036291666666
+    },
+    {
+      "label": "90%",
+      "fraction": 0.9,
+      "hdr_frame": 144719,
+      "om_frame": 145886,
+      "hdr_timestamp_seconds": 6035.988291666667,
+      "om_timestamp_seconds": 6084.661916666666
+    }
+  ],
+  "sample_summaries": [
+    {
+      "frame_id": 144640,
+      "timestamp_seconds": 6032.693333333333,
+      "label": "10%",
+      "bin_statistics": [
+        {
+          "label": "<0.01",
+          "low_nits": 0.0,
+          "high_nits": 0.01,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "0.01–0.1",
+          "low_nits": 0.01,
+          "high_nits": 0.1,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "0.1–0.5",
+          "low_nits": 0.1,
+          "high_nits": 0.5,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "0.5–1",
+          "low_nits": 0.5,
+          "high_nits": 1.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "1–2",
+          "low_nits": 1.0,
+          "high_nits": 2.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "2–5",
+          "low_nits": 2.0,
+          "high_nits": 5.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "5–10",
+          "low_nits": 5.0,
+          "high_nits": 10.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "10–20",
+          "low_nits": 10.0,
+          "high_nits": 20.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "20–50",
+          "low_nits": 20.0,
+          "high_nits": 50.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "50–100",
+          "low_nits": 50.0,
+          "high_nits": 100.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "100–200",
+          "low_nits": 100.0,
+          "high_nits": 200.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "200–500",
+          "low_nits": 200.0,
+          "high_nits": 500.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "500–1000",
+          "low_nits": 500.0,
+          "high_nits": 1000.0,
+          "count": 2,
+          "sdr_median": 943.2121240386008,
+          "P10": 24.69324170365193,
+          "P50": 24.69324170365193,
+          "P90": 24.69324170365193,
+          "P90_minus_P10": 0.0
+        },
+        {
+          "label": ">1000",
+          "low_nits": 1000.0,
+          "high_nits": null,
+          "count": 6143998,
+          "sdr_median": 1546.8675348375511,
+          "P10": 28.25998061661704,
+          "P50": 32.341906077818614,
+          "P90": 35.38572619424538,
+          "P90_minus_P10": 7.12574557762834
+        }
+      ],
+      "sample_count": 6144000,
+      "accepted_sample_count": 6144000,
+      "rejection_count": {
+        "nonfinite": 0,
+        "negative": 0,
+        "hard_clipping": 0,
+        "low_sdr_below_0.01_nits": 0
+      },
+      "domain": [
+        943.212123038601,
+        1546.8675338375517
+      ],
+      "coverage": 0.14285714285714285,
+      "chunk_count": 200,
+      "curve": {
+        "name": "Frame-specific CUDA 10%",
+        "kind": "streaming_empirical_log_bin_median",
+        "x_log": [
+          2.974609374539558,
+          3.189453124719243
+        ],
+        "y_log": [
+          1.392578125,
+          1.509765625
+        ],
+        "definition": {
+          "fixed_bins": [
+            "<0.01",
+            "0.01–0.1",
+            "0.1–0.5",
+            "0.5–1",
+            "1–2",
+            "2–5",
+            "5–10",
+            "10–20",
+            "20–50",
+            "50–100",
+            "100–200",
+            "200–500",
+            "500–1000",
+            ">1000"
+          ],
+          "target_statistic": "HDR P50 from fixed log histogram",
+          "spread": [
+            "P10",
+            "P50",
+            "P90"
+          ],
+          "quantile_estimator": "fixed_log_histogram_512_bins",
+          "monotonic_projection": "PAVA",
+          "interpolation": "linear in log10 domain",
+          "outside_domain": "clamp; no extrapolation"
+        }
+      },
+      "curve_diagnostics": {
+        "raw_monotonicity_violations": 0,
+        "post_pava_monotonicity_violations": 0,
+        "pava_adjustment_max_abs_log10": 0.0,
+        "node_count": 2,
+        "raw_sample_count": 6144000,
+        "accepted_sample_count": 6144000,
+        "rejections": {
+          "nonfinite": 0,
+          "negative": 0,
+          "hard_clipping": 0,
+          "low_sdr_below_0.01_nits": 0
+        },
+        "coverage_fraction": 0.14285714285714285,
+        "domain_sdr_nits": [
+          943.212123038601,
+          1546.8675338375517
+        ]
+      },
+      "cuda_luminance": true,
+      "full_luminance_plane_saved": false
+    },
+    {
+      "frame_id": 144655,
+      "timestamp_seconds": 6033.318958333333,
+      "label": "25%",
+      "bin_statistics": [
+        {
+          "label": "<0.01",
+          "low_nits": 0.0,
+          "high_nits": 0.01,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "0.01–0.1",
+          "low_nits": 0.01,
+          "high_nits": 0.1,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "0.1–0.5",
+          "low_nits": 0.1,
+          "high_nits": 0.5,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "0.5–1",
+          "low_nits": 0.5,
+          "high_nits": 1.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "1–2",
+          "low_nits": 1.0,
+          "high_nits": 2.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "2–5",
+          "low_nits": 2.0,
+          "high_nits": 5.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "5–10",
+          "low_nits": 5.0,
+          "high_nits": 10.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "10–20",
+          "low_nits": 10.0,
+          "high_nits": 20.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "20–50",
+          "low_nits": 20.0,
+          "high_nits": 50.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "50–100",
+          "low_nits": 50.0,
+          "high_nits": 100.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "100–200",
+          "low_nits": 100.0,
+          "high_nits": 200.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "200–500",
+          "low_nits": 200.0,
+          "high_nits": 500.0,
+          "count": 2211,
+          "sdr_median": 480.44162154756464,
+          "P10": 9.181012479068942,
+          "P50": 10.507135517231504,
+          "P90": 11.49600217312286,
+          "P90_minus_P10": 2.314989694053919
+        },
+        {
+          "label": "500–1000",
+          "low_nits": 500.0,
+          "high_nits": 1000.0,
+          "count": 89894,
+          "sdr_median": 753.2742546862294,
+          "P10": 13.761692309076789,
+          "P50": 16.473916054569067,
+          "P90": 20.627809117570433,
+          "P90_minus_P10": 6.8661168084936435
+        },
+        {
+          "label": ">1000",
+          "low_nits": 1000.0,
+          "high_nits": null,
+          "count": 6051895,
+          "sdr_median": 1546.8675348375511,
+          "P10": 28.25998061661704,
+          "P50": 32.341906077818614,
+          "P90": 35.38572619424538,
+          "P90_minus_P10": 7.12574557762834
+        }
+      ],
+      "sample_count": 6144000,
+      "accepted_sample_count": 6144000,
+      "rejection_count": {
+        "nonfinite": 0,
+        "negative": 0,
+        "hard_clipping": 0,
+        "low_sdr_below_0.01_nits": 0
+      },
+      "domain": [
+        480.4416205475647,
+        1546.8675338375517
+      ],
+      "coverage": 0.21428571428571427,
+      "chunk_count": 200,
+      "curve": {
+        "name": "Frame-specific CUDA 25%",
+        "kind": "streaming_empirical_log_bin_median",
+        "x_log": [
+          2.6816406240960515,
+          2.8769531244234576,
+          3.189453124719243
+        ],
+        "y_log": [
+          1.021484375,
+          1.216796875,
+          1.509765625
+        ],
+        "definition": {
+          "fixed_bins": [
+            "<0.01",
+            "0.01–0.1",
+            "0.1–0.5",
+            "0.5–1",
+            "1–2",
+            "2–5",
+            "5–10",
+            "10–20",
+            "20–50",
+            "50–100",
+            "100–200",
+            "200–500",
+            "500–1000",
+            ">1000"
+          ],
+          "target_statistic": "HDR P50 from fixed log histogram",
+          "spread": [
+            "P10",
+            "P50",
+            "P90"
+          ],
+          "quantile_estimator": "fixed_log_histogram_512_bins",
+          "monotonic_projection": "PAVA",
+          "interpolation": "linear in log10 domain",
+          "outside_domain": "clamp; no extrapolation"
+        }
+      },
+      "curve_diagnostics": {
+        "raw_monotonicity_violations": 0,
+        "post_pava_monotonicity_violations": 0,
+        "pava_adjustment_max_abs_log10": 0.0,
+        "node_count": 3,
+        "raw_sample_count": 6144000,
+        "accepted_sample_count": 6144000,
+        "rejections": {
+          "nonfinite": 0,
+          "negative": 0,
+          "hard_clipping": 0,
+          "low_sdr_below_0.01_nits": 0
+        },
+        "coverage_fraction": 0.21428571428571427,
+        "domain_sdr_nits": [
+          480.4416205475647,
+          1546.8675338375517
+        ]
+      },
+      "cuda_luminance": true,
+      "full_luminance_plane_saved": false
+    },
+    {
+      "frame_id": 144680,
+      "timestamp_seconds": 6034.361666666667,
+      "label": "50%",
+      "bin_statistics": [
+        {
+          "label": "<0.01",
+          "low_nits": 0.0,
+          "high_nits": 0.01,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "0.01–0.1",
+          "low_nits": 0.01,
+          "high_nits": 0.1,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "0.1–0.5",
+          "low_nits": 0.1,
+          "high_nits": 0.5,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "0.5–1",
+          "low_nits": 0.5,
+          "high_nits": 1.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "1–2",
+          "low_nits": 1.0,
+          "high_nits": 2.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "2–5",
+          "low_nits": 2.0,
+          "high_nits": 5.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "5–10",
+          "low_nits": 5.0,
+          "high_nits": 10.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "10–20",
+          "low_nits": 10.0,
+          "high_nits": 20.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "20–50",
+          "low_nits": 20.0,
+          "high_nits": 50.0,
+          "count": 1,
+          "sdr_median": 44.30822630363296,
+          "P10": 1.3275367360255126,
+          "P50": 1.3275367360255126,
+          "P90": 1.3275367360255126,
+          "P90_minus_P10": 0.0
+        },
+        {
+          "label": "50–100",
+          "low_nits": 50.0,
+          "high_nits": 100.0,
+          "count": 892,
+          "sdr_median": 86.98675299968184,
+          "P10": 1.5891745512143332,
+          "P50": 1.9023772631884783,
+          "P90": 2.3820613507365267,
+          "P90_minus_P10": 0.7928867995221935
+        },
+        {
+          "label": "100–200",
+          "low_nits": 100.0,
+          "high_nits": 200.0,
+          "count": 9475,
+          "sdr_median": 163.26407133118116,
+          "P10": 2.60624631559679,
+          "P50": 3.570542882619261,
+          "P90": 4.470854412416633,
+          "P90_minus_P10": 1.8646080968198433
+        },
+        {
+          "label": "200–500",
+          "low_nits": 200.0,
+          "high_nits": 500.0,
+          "count": 60982,
+          "sdr_median": 439.11484966998086,
+          "P10": 6.406791005704996,
+          "P50": 10.045072642544627,
+          "P90": 10.990452800572953,
+          "P90_minus_P10": 4.583661794867957
+        },
+        {
+          "label": "500–1000",
+          "low_nits": 500.0,
+          "high_nits": 1000.0,
+          "count": 419618,
+          "sdr_median": 720.1481915158132,
+          "P10": 12.024806287717386,
+          "P50": 15.749457448829641,
+          "P90": 19.72067849965294,
+          "P90_minus_P10": 7.695872211935555
+        },
+        {
+          "label": ">1000",
+          "low_nits": 1000.0,
+          "high_nits": null,
+          "count": 5653032,
+          "sdr_median": 1546.8675348375511,
+          "P10": 28.25998061661704,
+          "P50": 32.341906077818614,
+          "P90": 35.38572619424538,
+          "P90_minus_P10": 7.12574557762834
+        }
+      ],
+      "sample_count": 6144000,
+      "accepted_sample_count": 6144000,
+      "rejection_count": {
+        "nonfinite": 0,
+        "negative": 0,
+        "hard_clipping": 0,
+        "low_sdr_below_0.01_nits": 0
+      },
+      "domain": [
+        44.30822530363296,
+        1546.8675338375517
+      ],
+      "coverage": 0.42857142857142855,
+      "chunk_count": 200,
+      "curve": {
+        "name": "Frame-specific CUDA 50%",
+        "kind": "streaming_empirical_log_bin_median",
+        "x_log": [
+          1.646484365198333,
+          1.9394531200073493,
+          2.212890622339926,
+          2.6425781240109774,
+          2.8574218743969375,
+          3.189453124719243
+        ],
+        "y_log": [
+          0.12304687499999999,
+          0.279296875,
+          0.552734375,
+          1.001953125,
+          1.197265625,
+          1.509765625
+        ],
+        "definition": {
+          "fixed_bins": [
+            "<0.01",
+            "0.01–0.1",
+            "0.1–0.5",
+            "0.5–1",
+            "1–2",
+            "2–5",
+            "5–10",
+            "10–20",
+            "20–50",
+            "50–100",
+            "100–200",
+            "200–500",
+            "500–1000",
+            ">1000"
+          ],
+          "target_statistic": "HDR P50 from fixed log histogram",
+          "spread": [
+            "P10",
+            "P50",
+            "P90"
+          ],
+          "quantile_estimator": "fixed_log_histogram_512_bins",
+          "monotonic_projection": "PAVA",
+          "interpolation": "linear in log10 domain",
+          "outside_domain": "clamp; no extrapolation"
+        }
+      },
+      "curve_diagnostics": {
+        "raw_monotonicity_violations": 0,
+        "post_pava_monotonicity_violations": 0,
+        "pava_adjustment_max_abs_log10": 0.0,
+        "node_count": 6,
+        "raw_sample_count": 6144000,
+        "accepted_sample_count": 6144000,
+        "rejections": {
+          "nonfinite": 0,
+          "negative": 0,
+          "hard_clipping": 0,
+          "low_sdr_below_0.01_nits": 0
+        },
+        "coverage_fraction": 0.42857142857142855,
+        "domain_sdr_nits": [
+          44.30822530363296,
+          1546.8675338375517
+        ]
+      },
+      "cuda_luminance": true,
+      "full_luminance_plane_saved": false
+    },
+    {
+      "frame_id": 144704,
+      "timestamp_seconds": 6035.362666666666,
+      "label": "75%",
+      "bin_statistics": [
+        {
+          "label": "<0.01",
+          "low_nits": 0.0,
+          "high_nits": 0.01,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "0.01–0.1",
+          "low_nits": 0.01,
+          "high_nits": 0.1,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "0.1–0.5",
+          "low_nits": 0.1,
+          "high_nits": 0.5,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "0.5–1",
+          "low_nits": 0.5,
+          "high_nits": 1.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "1–2",
+          "low_nits": 1.0,
+          "high_nits": 2.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "2–5",
+          "low_nits": 2.0,
+          "high_nits": 5.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "5–10",
+          "low_nits": 5.0,
+          "high_nits": 10.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "10–20",
+          "low_nits": 10.0,
+          "high_nits": 20.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "20–50",
+          "low_nits": 20.0,
+          "high_nits": 50.0,
+          "count": 7,
+          "sdr_median": 48.47824241509797,
+          "P10": 1.06020589668199,
+          "P50": 1.1089743043488987,
+          "P90": 1.2691568052463433,
+          "P90_minus_P10": 0.20895090856435328
+        },
+        {
+          "label": "50–100",
+          "low_nits": 50.0,
+          "high_nits": 100.0,
+          "count": 2860,
+          "sdr_median": 86.98675299968184,
+          "P10": 1.6622749633871388,
+          "P50": 1.9898846723236119,
+          "P90": 2.3820613507365267,
+          "P90_minus_P10": 0.7197863873493879
+        },
+        {
+          "label": "100–200",
+          "low_nits": 100.0,
+          "high_nits": 200.0,
+          "count": 30652,
+          "sdr_median": 170.7740477911767,
+          "P10": 2.60624631559679,
+          "P50": 3.7347841643965407,
+          "P90": 4.676509082325783,
+          "P90_minus_P10": 2.070262766728993
+        },
+        {
+          "label": "200–500",
+          "low_nits": 200.0,
+          "high_nits": 500.0,
+          "count": 217460,
+          "sdr_median": 335.2668574533902,
+          "P10": 5.598179214514548,
+          "P50": 7.669473803529163,
+          "P90": 10.507135517231504,
+          "P90_minus_P10": 4.908956302716955
+        },
+        {
+          "label": "500–1000",
+          "low_nits": 500.0,
+          "high_nits": 1000.0,
+          "count": 476225,
+          "sdr_median": 720.1481915158132,
+          "P10": 12.024806287717386,
+          "P50": 15.056857706388566,
+          "P90": 19.72067849965294,
+          "P90_minus_P10": 7.695872211935555
+        },
+        {
+          "label": ">1000",
+          "low_nits": 1000.0,
+          "high_nits": null,
+          "count": 5416796,
+          "sdr_median": 1546.8675348375511,
+          "P10": 28.25998061661704,
+          "P50": 32.341906077818614,
+          "P90": 35.38572619424538,
+          "P90_minus_P10": 7.12574557762834
+        }
+      ],
+      "sample_count": 6144000,
+      "accepted_sample_count": 6144000,
+      "rejection_count": {
+        "nonfinite": 0,
+        "negative": 0,
+        "hard_clipping": 0,
+        "low_sdr_below_0.01_nits": 0
+      },
+      "domain": [
+        48.478241415097976,
+        1546.8675338375517
+      ],
+      "coverage": 0.42857142857142855,
+      "chunk_count": 200,
+      "curve": {
+        "name": "Frame-specific CUDA 75%",
+        "kind": "streaming_empirical_log_bin_median",
+        "x_log": [
+          1.6855468660414559,
+          1.9394531200073493,
+          2.232421872456906,
+          2.5253906237046304,
+          2.8574218743969375,
+          3.189453124719243
+        ],
+        "y_log": [
+          0.04492187500000004,
+          0.298828125,
+          0.572265625,
+          0.884765625,
+          1.177734375,
+          1.509765625
+        ],
+        "definition": {
+          "fixed_bins": [
+            "<0.01",
+            "0.01–0.1",
+            "0.1–0.5",
+            "0.5–1",
+            "1–2",
+            "2–5",
+            "5–10",
+            "10–20",
+            "20–50",
+            "50–100",
+            "100–200",
+            "200–500",
+            "500–1000",
+            ">1000"
+          ],
+          "target_statistic": "HDR P50 from fixed log histogram",
+          "spread": [
+            "P10",
+            "P50",
+            "P90"
+          ],
+          "quantile_estimator": "fixed_log_histogram_512_bins",
+          "monotonic_projection": "PAVA",
+          "interpolation": "linear in log10 domain",
+          "outside_domain": "clamp; no extrapolation"
+        }
+      },
+      "curve_diagnostics": {
+        "raw_monotonicity_violations": 0,
+        "post_pava_monotonicity_violations": 0,
+        "pava_adjustment_max_abs_log10": 0.0,
+        "node_count": 6,
+        "raw_sample_count": 6144000,
+        "accepted_sample_count": 6144000,
+        "rejections": {
+          "nonfinite": 0,
+          "negative": 0,
+          "hard_clipping": 0,
+          "low_sdr_below_0.01_nits": 0
+        },
+        "coverage_fraction": 0.42857142857142855,
+        "domain_sdr_nits": [
+          48.478241415097976,
+          1546.8675338375517
+        ]
+      },
+      "cuda_luminance": true,
+      "full_luminance_plane_saved": false
+    },
+    {
+      "frame_id": 144719,
+      "timestamp_seconds": 6035.988291666667,
+      "label": "90%",
+      "bin_statistics": [
+        {
+          "label": "<0.01",
+          "low_nits": 0.0,
+          "high_nits": 0.01,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "0.01–0.1",
+          "low_nits": 0.01,
+          "high_nits": 0.1,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "0.1–0.5",
+          "low_nits": 0.1,
+          "high_nits": 0.5,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "0.5–1",
+          "low_nits": 0.5,
+          "high_nits": 1.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "1–2",
+          "low_nits": 1.0,
+          "high_nits": 2.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "2–5",
+          "low_nits": 2.0,
+          "high_nits": 5.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "5–10",
+          "low_nits": 5.0,
+          "high_nits": 10.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "10–20",
+          "low_nits": 10.0,
+          "high_nits": 20.0,
+          "count": 0,
+          "sdr_median": null,
+          "P10": null,
+          "P50": null,
+          "P90": null,
+          "P90_minus_P10": null
+        },
+        {
+          "label": "20–50",
+          "low_nits": 20.0,
+          "high_nits": 50.0,
+          "count": 36,
+          "sdr_median": 46.34635838794987,
+          "P10": 0.9263954347542263,
+          "P50": 1.1089743043488987,
+          "P90": 1.3275367360255126,
+          "P90_minus_P10": 0.40114130127128633
+        },
+        {
+          "label": "50–100",
+          "low_nits": 50.0,
+          "high_nits": 100.0,
+          "count": 4400,
+          "sdr_median": 86.98675299968184,
+          "P10": 1.5192888099972126,
+          "P50": 1.9898846723236119,
+          "P90": 2.3820613507365267,
+          "P90_minus_P10": 0.8627725407393141
+        },
+        {
+          "label": "100–200",
+          "low_nits": 100.0,
+          "high_nits": 200.0,
+          "count": 46803,
+          "sdr_median": 178.62947530861788,
+          "P10": 2.7261309644946503,
+          "P50": 4.08627902790504,
+          "P90": 4.676509082325783,
+          "P90_minus_P10": 1.9503781178311326
+        },
+        {
+          "label": "200–500",
+          "low_nits": 200.0,
+          "high_nits": 500.0,
+          "count": 357054,
+          "sdr_median": 320.5231289265784,
+          "P10": 5.351993087714765,
+          "P50": 7.332200221022118,
+          "P90": 10.045072642544627,
+          "P90_minus_P10": 4.693079554829862
+        },
+        {
+          "label": "500–1000",
+          "low_nits": 500.0,
+          "high_nits": 1000.0,
+          "count": 501346,
+          "sdr_median": 688.4788833757024,
+          "P10": 12.024806287717386,
+          "P50": 15.056857706388566,
+          "P90": 19.72067849965294,
+          "P90_minus_P10": 7.695872211935555
+        },
+        {
+          "label": ">1000",
+          "low_nits": 1000.0,
+          "high_nits": null,
+          "count": 5234361,
+          "sdr_median": 1546.8675348375511,
+          "P10": 28.25998061661704,
+          "P50": 32.341906077818614,
+          "P90": 35.38572619424538,
+          "P90_minus_P10": 7.12574557762834
+        }
+      ],
+      "sample_count": 6144000,
+      "accepted_sample_count": 6144000,
+      "rejection_count": {
+        "nonfinite": 0,
+        "negative": 0,
+        "hard_clipping": 0,
+        "low_sdr_below_0.01_nits": 0
+      },
+      "domain": [
+        46.34635738794987,
+        1546.8675338375517
+      ],
+      "coverage": 0.42857142857142855,
+      "chunk_count": 200,
+      "curve": {
+        "name": "Frame-specific CUDA 90%",
+        "kind": "streaming_empirical_log_bin_median",
+        "x_log": [
+          1.6660156156293722,
+          1.9394531200073493,
+          2.2519531225687413,
+          2.5058593736450447,
+          2.837890624369197,
+          3.189453124719243
+        ],
+        "y_log": [
+          0.04492187500000004,
+          0.298828125,
+          0.611328125,
+          0.865234375,
+          1.177734375,
+          1.509765625
+        ],
+        "definition": {
+          "fixed_bins": [
+            "<0.01",
+            "0.01–0.1",
+            "0.1–0.5",
+            "0.5–1",
+            "1–2",
+            "2–5",
+            "5–10",
+            "10–20",
+            "20–50",
+            "50–100",
+            "100–200",
+            "200–500",
+            "500–1000",
+            ">1000"
+          ],
+          "target_statistic": "HDR P50 from fixed log histogram",
+          "spread": [
+            "P10",
+            "P50",
+            "P90"
+          ],
+          "quantile_estimator": "fixed_log_histogram_512_bins",
+          "monotonic_projection": "PAVA",
+          "interpolation": "linear in log10 domain",
+          "outside_domain": "clamp; no extrapolation"
+        }
+      },
+      "curve_diagnostics": {
+        "raw_monotonicity_violations": 0,
+        "post_pava_monotonicity_violations": 0,
+        "pava_adjustment_max_abs_log10": 0.0,
+        "node_count": 6,
+        "raw_sample_count": 6144000,
+        "accepted_sample_count": 6144000,
+        "rejections": {
+          "nonfinite": 0,
+          "negative": 0,
+          "hard_clipping": 0,
+          "low_sdr_below_0.01_nits": 0
+        },
+        "coverage_fraction": 0.42857142857142855,
+        "domain_sdr_nits": [
+          46.34635738794987,
+          1546.8675338375517
+        ]
+      },
+      "cuda_luminance": true,
+      "full_luminance_plane_saved": false
+    }
+  ],
+  "pooled_curve": {
+    "curve": {
+      "name": "Shot pooled CUDA br2049_temporal_stratum_13",
+      "kind": "streaming_empirical_log_bin_median",
+      "x_log": [
+        1.6660156156293722,
+        1.9394531200073493,
+        2.232421872456906,
+        2.5058593736450447,
+        2.8574218743969375,
+        3.189453124719243
+      ],
+      "y_log": [
+        0.04492187500000004,
+        0.298828125,
+        0.591796875,
+        0.865234375,
+        1.177734375,
+        1.509765625
+      ],
+      "definition": {
+        "fixed_bins": [
+          "<0.01",
+          "0.01–0.1",
+          "0.1–0.5",
+          "0.5–1",
+          "1–2",
+          "2–5",
+          "5–10",
+          "10–20",
+          "20–50",
+          "50–100",
+          "100–200",
+          "200–500",
+          "500–1000",
+          ">1000"
+        ],
+        "target_statistic": "HDR P50 from fixed log histogram",
+        "spread": [
+          "P10",
+          "P50",
+          "P90"
+        ],
+        "quantile_estimator": "fixed_log_histogram_512_bins",
+        "monotonic_projection": "PAVA",
+        "interpolation": "linear in log10 domain",
+        "outside_domain": "clamp; no extrapolation"
+      }
+    },
+    "bin_statistics": [
+      {
+        "label": "<0.01",
+        "low_nits": 0.0,
+        "high_nits": 0.01,
+        "count": 0,
+        "sdr_median": null,
+        "P10": null,
+        "P50": null,
+        "P90": null,
+        "P90_minus_P10": null
+      },
+      {
+        "label": "0.01–0.1",
+        "low_nits": 0.01,
+        "high_nits": 0.1,
+        "count": 0,
+        "sdr_median": null,
+        "P10": null,
+        "P50": null,
+        "P90": null,
+        "P90_minus_P10": null
+      },
+      {
+        "label": "0.1–0.5",
+        "low_nits": 0.1,
+        "high_nits": 0.5,
+        "count": 0,
+        "sdr_median": null,
+        "P10": null,
+        "P50": null,
+        "P90": null,
+        "P90_minus_P10": null
+      },
+      {
+        "label": "0.5–1",
+        "low_nits": 0.5,
+        "high_nits": 1.0,
+        "count": 0,
+        "sdr_median": null,
+        "P10": null,
+        "P50": null,
+        "P90": null,
+        "P90_minus_P10": null
+      },
+      {
+        "label": "1–2",
+        "low_nits": 1.0,
+        "high_nits": 2.0,
+        "count": 0,
+        "sdr_median": null,
+        "P10": null,
+        "P50": null,
+        "P90": null,
+        "P90_minus_P10": null
+      },
+      {
+        "label": "2–5",
+        "low_nits": 2.0,
+        "high_nits": 5.0,
+        "count": 0,
+        "sdr_median": null,
+        "P10": null,
+        "P50": null,
+        "P90": null,
+        "P90_minus_P10": null
+      },
+      {
+        "label": "5–10",
+        "low_nits": 5.0,
+        "high_nits": 10.0,
+        "count": 0,
+        "sdr_median": null,
+        "P10": null,
+        "P50": null,
+        "P90": null,
+        "P90_minus_P10": null
+      },
+      {
+        "label": "10–20",
+        "low_nits": 10.0,
+        "high_nits": 20.0,
+        "count": 0,
+        "sdr_median": null,
+        "P10": null,
+        "P50": null,
+        "P90": null,
+        "P90_minus_P10": null
+      },
+      {
+        "label": "20–50",
+        "low_nits": 20.0,
+        "high_nits": 50.0,
+        "count": 44,
+        "sdr_median": 46.34635838794987,
+        "P10": 0.9263954347542263,
+        "P50": 1.1089743043488987,
+        "P90": 1.3275367360255126,
+        "P90_minus_P10": 0.40114130127128633
+      },
+      {
+        "label": "50–100",
+        "low_nits": 50.0,
+        "high_nits": 100.0,
+        "count": 8152,
+        "sdr_median": 86.98675299968184,
+        "P10": 1.5891745512143332,
+        "P50": 1.9898846723236119,
+        "P90": 2.3820613507365267,
+        "P90_minus_P10": 0.7928867995221935
+      },
+      {
+        "label": "100–200",
+        "low_nits": 100.0,
+        "high_nits": 200.0,
+        "count": 86930,
+        "sdr_median": 170.7740477911767,
+        "P10": 2.7261309644946503,
+        "P50": 3.9065803732456192,
+        "P90": 4.676509082325783,
+        "P90_minus_P10": 1.9503781178311326
+      },
+      {
+        "label": "200–500",
+        "low_nits": 200.0,
+        "high_nits": 500.0,
+        "count": 637707,
+        "sdr_median": 320.5231289265784,
+        "P10": 5.351993087714765,
+        "P50": 7.332200221022118,
+        "P90": 10.507135517231504,
+        "P90_minus_P10": 5.155142429516739
+      },
+      {
+        "label": "500–1000",
+        "low_nits": 500.0,
+        "high_nits": 1000.0,
+        "count": 1487085,
+        "sdr_median": 720.1481915158132,
+        "P10": 12.024806287717386,
+        "P50": 15.056857706388566,
+        "P90": 19.72067849965294,
+        "P90_minus_P10": 7.695872211935555
+      },
+      {
+        "label": ">1000",
+        "low_nits": 1000.0,
+        "high_nits": null,
+        "count": 28500082,
+        "sdr_median": 1546.8675348375511,
+        "P10": 28.25998061661704,
+        "P50": 32.341906077818614,
+        "P90": 35.38572619424538,
+        "P90_minus_P10": 7.12574557762834
+      }
+    ],
+    "diagnostics": {
+      "raw_monotonicity_violations": 0,
+      "post_pava_monotonicity_violations": 0,
+      "pava_adjustment_max_abs_log10": 0.0,
+      "node_count": 6,
+      "raw_sample_count": 30720000,
+      "accepted_sample_count": 30720000,
+      "rejections": {
+        "nonfinite": 0,
+        "negative": 0,
+        "hard_clipping": 0,
+        "low_sdr_below_0.01_nits": 0
+      },
+      "coverage_fraction": 0.42857142857142855,
+      "domain_sdr_nits": [
+        46.34635738794987,
+        1546.8675338375517
+      ]
+    },
+    "sample_count": 5,
+    "source_arrays_retained": false,
+    "cuda_luminance": true
+  },
+  "error": {
+    "type": "ValueError",
+    "message": "zero-size array to reduction operation CUPY_CUB_MAX which has no identity"
+  },
+  "finite_values": false,
+  "elapsed_seconds": 23.68106180000177,
+  "gpu_memory": {
+    "pool_used_bytes": 4949504,
+    "pool_reserved_bytes": 8879616,
+    "device_free_bytes": 9511632896,
+    "device_total_bytes": 10736893952,
+    "persistent_chunk_buffers_bytes": 4423680,
+    "model_a_lut_device_bytes": 524288,
+    "chunk_buffer_shapes": [
+      [
+        8,
+        1920,
+        3
+      ],
+      [
+        8,
+        3840,
+        3
+      ]
+    ]
+  }
+}

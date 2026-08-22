@@ -1,0 +1,857 @@
+{
+  "status": "COMPLETE",
+  "scope": "Isolated causal color-pipeline diagnostics; no Model G, no production integration, no P2 modification, no full-video decode.",
+  "anchor": {
+    "material": "The Matrix",
+    "case_id": "the_matrix_temporal_stratum_08",
+    "selection_index": 8,
+    "selection_fraction": 0.3741477171313319,
+    "selection_basis": "predeclared evenly spaced temporal strata over 5%..95% of known HDR duration; no performance metric used",
+    "scene_id": "the_matrix_scene_unverified_08",
+    "scene_category": "unverified_temporal_stratum",
+    "scene_independence_verified": false,
+    "hdr_frame": 73367,
+    "om_frame": 73348,
+    "hdr_timestamp_seconds": 3060.0152916666666,
+    "om_timestamp_seconds": 3059.2228333333333,
+    "offset_frames": -19,
+    "offset_seconds": -0.7924583333333333,
+    "known_verified_anchor": true,
+    "hdr_source": "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+    "om_source": "G:\\Filmy\\IMAX format (open matte)\\The Matrix (1999) [OPEN MATTE] [WEB-DL 1080p 10bit DD5.1 x265].mkv",
+    "hdr_resolution": [
+      3840,
+      1600
+    ],
+    "om_resolution": [
+      1920,
+      1080
+    ],
+    "fps": "24000/1001",
+    "fps_float": 23.976023976023978,
+    "hdr_start_pts_seconds": 0.0,
+    "om_start_pts_seconds": 0.005,
+    "sync_confidence": 0.940513,
+    "sync_status": "LOCKED",
+    "sync_method": "previously accepted bounded local image synchronization; fixed offset reused without rerun",
+    "sync_validation_method": "preserved start/middle/end local windows, all offset -19, spread 0",
+    "geometry": {
+      "scale_x": 0.5,
+      "scale_y": 0.5,
+      "offset_x": 0,
+      "offset_y": 140,
+      "overlap": [
+        0,
+        140,
+        1920,
+        940
+      ],
+      "confidence": 1.0,
+      "status": "preserved geometry contract"
+    },
+    "hdr_decode": {
+      "command": [
+        "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\install\\bin\\ffmpeg.exe",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-nostdin",
+        "-ss",
+        "3060.015291667",
+        "-i",
+        "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+        "-map",
+        "0:v:0",
+        "-frames:v",
+        "1",
+        "-pix_fmt",
+        "rgb48le",
+        "-vsync",
+        "0",
+        "-f",
+        "rawvideo",
+        "pipe:1"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 36864000,
+      "expected_bytes": 36864000,
+      "stream": "0:v:0",
+      "pixel_format": "rgb48le"
+    },
+    "om_decode": {
+      "command": [
+        "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\install\\bin\\ffmpeg.exe",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-nostdin",
+        "-ss",
+        "3059.222833333",
+        "-i",
+        "G:\\Filmy\\IMAX format (open matte)\\The Matrix (1999) [OPEN MATTE] [WEB-DL 1080p 10bit DD5.1 x265].mkv",
+        "-map",
+        "0:v:0",
+        "-frames:v",
+        "1",
+        "-pix_fmt",
+        "rgb48le",
+        "-vsync",
+        "0",
+        "-f",
+        "rawvideo",
+        "pipe:1"
+      ],
+      "returncode": 0,
+      "stderr": "[matroska,webm @ 0000021CBF521EC0] Unsupported encoding type\r\n    Last message repeated 1 times\r\n",
+      "stdout_bytes": 12441600,
+      "expected_bytes": 12441600,
+      "stream": "0:v:0",
+      "pixel_format": "rgb48le"
+    },
+    "hdr_rgb_u16_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\raw_rgb_u16\\the_matrix\\the_matrix_temporal_stratum_08_hdr_rgb_u16.npy",
+    "om_rgb_u16_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\raw_rgb_u16\\the_matrix\\the_matrix_temporal_stratum_08_om_rgb_u16.npy",
+    "sdr_luminance_nits_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\luminance_overlap_nits\\the_matrix\\the_matrix_temporal_stratum_08_sdr_luminance_nits.npy",
+    "hdr_luminance_nits_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\luminance_overlap_nits\\the_matrix\\the_matrix_temporal_stratum_08_hdr_luminance_nits.npy",
+    "hdr_rgb_shape": [
+      1600,
+      3840,
+      3
+    ],
+    "om_rgb_shape": [
+      1080,
+      1920,
+      3
+    ],
+    "overlap": {
+      "bbox_open_matte_coordinates": [
+        0,
+        140,
+        1920,
+        940
+      ],
+      "shape": [
+        800,
+        1920,
+        3
+      ],
+      "resize_applied_to_hdr": true
+    },
+    "sample_count": 1536000,
+    "sdr_luminance_stats": {
+      "count": 1536000,
+      "minimum": 0.02334730513393879,
+      "median": 81.5302734375,
+      "P95": 3356.0888671875,
+      "P99": 5032.16845703125,
+      "maximum": 7813.65478515625
+    },
+    "hdr_luminance_stats": {
+      "count": 1536000,
+      "minimum": 0.0,
+      "median": 1.7716362476348877,
+      "P95": 60.884002685546875,
+      "P99": 103.25154113769531,
+      "maximum": 214.76898193359375
+    },
+    "finite": {
+      "hdr_rgb": true,
+      "om_rgb": true,
+      "sdr_luminance": true,
+      "hdr_luminance": true
+    },
+    "extraction_scope": "bounded one-frame source extraction; no full scan"
+  },
+  "input_files": {
+    "hdr_rgb": "G:\\Auto-OpenMatte-Sdr2hdr-converter — kopia\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\raw_rgb_u16\\the_matrix\\the_matrix_temporal_stratum_08_hdr_rgb_u16.npy",
+    "om_rgb": "G:\\Auto-OpenMatte-Sdr2hdr-converter — kopia\\dev\\ffmpeg-build\\validation\\P232_real_material_dataset\\raw_rgb_u16\\the_matrix\\the_matrix_temporal_stratum_08_om_rgb_u16.npy"
+  },
+  "fit_mask": {
+    "definition": "SDR ∩ HDR verified P2.32 overlap only",
+    "bbox_open_matte_coordinates": [
+      0,
+      140,
+      1920,
+      940
+    ],
+    "pixel_count": 1536000
+  },
+  "decode": {
+    "raw_dtypes": {
+      "hdr": "uint16",
+      "om": "uint16"
+    },
+    "sdr_pipeline": "uint16 RGB code -> BT.1886 code**2.4 -> linear BT.709 -> BT.2020",
+    "hdr_pipeline": "uint16 RGB code -> OpenCV INTER_LINEAR 3840x1600 to 1920x800 -> ST.2084 EOTF once -> linear BT.2020",
+    "resize_note": "OpenCV INTER_LINEAR is a documented integrity approximation, not a bit-exact claim about P2.32 FFmpeg bilinear extraction."
+  },
+  "base_color_management_checks": {
+    "white_converted_BT2020": [
+      0.9999996,
+      0.9999982000000001,
+      0.9999998
+    ],
+    "white_neutral_max_error": 1.7999999999407379e-06,
+    "gray_ramp_channel_spread_max": 1.5999999999349868e-06,
+    "conversion": "reshaping_research.utils.color_spaces.bt709_to_bt2020 after bt1886_eotf"
+  },
+  "model_e_luminance_fit": {
+    "parameter_count_reported_by_model": 12,
+    "fit_seconds_cpu": 0.0758019000004424,
+    "fit_input": "overlap luminance only; no RGB/chroma arrays passed",
+    "parameters": {
+      "lut_x": [
+        0.0,
+        0.012402613437829413,
+        0.024805226875658826,
+        0.03720784031348824,
+        0.04961045375131765,
+        0.062013067189147064,
+        0.07441568062697648,
+        0.08681829406480589,
+        0.0992209075026353,
+        0.11162352094046472,
+        0.12402613437829413,
+        0.13642874781612355,
+        0.14883136125395297,
+        0.16123397469178238,
+        0.17363658812961177,
+        0.1860392015674412,
+        0.1984418150052706,
+        0.21084442844310003,
+        0.22324704188092945,
+        0.23564965531875884,
+        0.24805226875658826,
+        0.2604548821944177,
+        0.2728574956322471,
+        0.2852601090700765,
+        0.29766272250790593,
+        0.3100653359457353,
+        0.32246794938356477,
+        0.33487056282139416,
+        0.34727317625922355,
+        0.359675789697053,
+        0.3720784031348824,
+        0.38448101657271183,
+        0.3968836300105412,
+        0.4092862434483706,
+        0.42168885688620006,
+        0.43409147032402945,
+        0.4464940837618589,
+        0.4588966971996883,
+        0.4712993106375177,
+        0.4837019240753471,
+        0.4961045375131765,
+        0.508507150951006,
+        0.5209097643888354,
+        0.5333123778266647,
+        0.5457149912644942,
+        0.5581176047023236,
+        0.570520218140153,
+        0.5829228315779824,
+        0.5953254450158119,
+        0.6077280584536412,
+        0.6201306718914706,
+        0.6325332853293001,
+        0.6449358987671295,
+        0.6573385122049589,
+        0.6697411256427883,
+        0.6821437390806178,
+        0.6945463525184471,
+        0.7069489659562765,
+        0.719351579394106,
+        0.7317541928319353,
+        0.7441568062697648,
+        0.7565594197075942,
+        0.7689620331454237,
+        0.781364646583253
+      ],
+      "lut_y": [
+        8.527843092097824e-05,
+        0.0003401835821403619,
+        0.0005256321956665718,
+        0.0007764759867118574,
+        0.0009318274605128599,
+        0.001162060367919513,
+        0.001353896526656284,
+        0.0015171263274807788,
+        0.0016689045825937013,
+        0.0018105205654919574,
+        0.0019537589195586396,
+        0.002099756424460286,
+        0.0022650159907483,
+        0.0024462892799439855,
+        0.0026287407109195355,
+        0.0028366130824602413,
+        0.003016767366876972,
+        0.0032069226524069658,
+        0.0033919033421048344,
+        0.003592097401715212,
+        0.003811748199287968,
+        0.004036762716955667,
+        0.0042706077717697384,
+        0.00452252561956525,
+        0.0047819097879653145,
+        0.005038466275257451,
+        0.0053011138210458915,
+        0.005551609255101616,
+        0.005807095981292821,
+        0.006071192061076626,
+        0.0063267710179062304,
+        0.006585086928536685,
+        0.00687359901645029,
+        0.007163927088451431,
+        0.0074491990913496215,
+        0.007757577797493846,
+        0.008031033950955054,
+        0.008276743864335625,
+        0.008485664693166266,
+        0.008706958591175635,
+        0.008931604118682206,
+        0.009213264653262316,
+        0.009539759417625856,
+        0.009901200810668592,
+        0.010299821577593887,
+        0.01068601667690008,
+        0.011055337484725515,
+        0.011431967239007064,
+        0.011798192304656003,
+        0.012160902855504231,
+        0.012563811605464787,
+        0.01290475533070109,
+        0.01333587357223581,
+        0.013742421838507289,
+        0.014037647396083137,
+        0.014361407802408018,
+        0.014827407163020844,
+        0.015395121547369866,
+        0.015987674411615076,
+        0.01690026114290408,
+        0.017721107750586704,
+        0.01811204707852267,
+        0.018674774091684398,
+        0.019899122768091436
+      ],
+      "correction_coeffs": [
+        8.63317556942227e-05,
+        -0.0007047344971326098,
+        -0.00041890430914846394,
+        -0.00025119195645854453
+      ],
+      "sigmoid_params": [
+        -0.0002724356658692335,
+        0.33333506607488533,
+        0.10000146064116543,
+        -0.0006432020281241591,
+        0.6666635111452449,
+        0.10000484782650254
+      ],
+      "chroma_gain": 1.0,
+      "chroma_slope": 0.0
+    },
+    "convergence": "Model E does not expose SciPy OptimizeResult"
+  },
+  "fitted_controls": {
+    "T4": {
+      "form": "RGB = Y_new + k * (RGB_ratio - Y_new)",
+      "fit_pixel_count": 1536000,
+      "denominator": 1.9823247059614792,
+      "k_unclamped": 1.1660810608873966,
+      "k_clamped": 1.1660810608873966,
+      "clamp_range": [
+        0.0,
+        4.0
+      ],
+      "RGB_MSE_before_k": 2.8122151108872593e-06,
+      "RGB_MSE_after_k": 2.800332310397351e-06
+    },
+    "T5": {
+      "form": "RGB = Y_new + clip(a + b * normalized(Y_new), 0, 4) * (RGB_ratio - Y_new)",
+      "fit_pixel_count": 1536000,
+      "a_unclamped": 0.8088905762895514,
+      "b_unclamped": 1.2340883305033383,
+      "normalization_max_Y_new": 0.019899122768091436,
+      "clamp_range": [
+        0.0,
+        4.0
+      ],
+      "fraction_clamped_low_common": 0.0,
+      "fraction_clamped_high_common": 0.0,
+      "fallback_identity": false,
+      "RGB_MSE_after_affine_k": 2.7844773248267864e-06,
+      "fraction_clamped_low_full": 0.0,
+      "fraction_clamped_high_full": 0.0
+    }
+  },
+  "stages": {
+    "T1": {
+      "test": "T1",
+      "name": "01_base_sdr709_bt1886_to_bt2020",
+      "notes": "01_base_sdr709_bt1886_to_bt2020",
+      "controls": {},
+      "common_region": {
+        "luminance": {
+          "MAE_nits": 718.3424862396694,
+          "RMSE_nits": 1390.6845904794586,
+          "median_absolute_error_nits": 78.5646581611127,
+          "P95_absolute_error_nits": 3305.9304729494797,
+          "P99_absolute_error_nits": 4971.597190989677,
+          "maximum_absolute_error_nits": 7811.636146654511
+        },
+        "color": {
+          "RGB_MSE_normalized": 0.016859149206511586,
+          "deltaE2000_peak_relative_Rec2020_to_Lab_D65": {
+            "count": 1536000,
+            "mean": 16.72389976791963,
+            "median": 8.12291850797411,
+            "p95": 50.93426021432359
+          },
+          "deltaEICtCp": {
+            "count": 1536000,
+            "mean": 0.3326779110928961,
+            "median": 0.31891631359075323,
+            "p95": 0.5473144150864432
+          },
+          "chroma_error_ICtCp_signed": {
+            "count": 1536000,
+            "mean": 0.048774705545796146,
+            "median": 0.04711878710650971,
+            "p95": 0.11514953741753581
+          },
+          "chroma_error_ICtCp_absolute": {
+            "count": 1536000,
+            "mean": 0.054347719551298336,
+            "median": 0.04791076299926484,
+            "p95": 0.11514953741753581
+          },
+          "hue_error_degrees_signed_non_neutral": {
+            "count": 1535927,
+            "mean": 11.74912452994248,
+            "median": 4.76844359661263,
+            "p95": 86.97307972831469
+          },
+          "hue_error_degrees_absolute_non_neutral": {
+            "count": 1535927,
+            "mean": 20.953592205427864,
+            "median": 10.214016800821383,
+            "p95": 89.83624927633265
+          },
+          "hue_excluded_neutral_reference_pixels": 73
+        }
+      },
+      "seam_proxy": {
+        "definition": "HDR-center composite versus transformed SDR extension; continuity proxy only, not unseen-region ground truth",
+        "boundaries": [
+          {
+            "boundary": "top",
+            "y_coordinate": 140,
+            "luminance_discontinuity_mean_nits": 521.848732485492,
+            "luminance_discontinuity_P95_nits": 1745.5858155373735,
+            "chroma_discontinuity_ICtCp": 0.08193458620477645,
+            "hue_discontinuity_degrees_non_neutral": 7.265037592751381,
+            "gradient_discontinuity_nits_per_pixel": 33.2581127717895
+          },
+          {
+            "boundary": "bottom",
+            "y_coordinate": 940,
+            "luminance_discontinuity_mean_nits": 700.8851035117976,
+            "luminance_discontinuity_P95_nits": 1748.4203970442952,
+            "chroma_discontinuity_ICtCp": 0.05702787067649569,
+            "hue_discontinuity_degrees_non_neutral": 19.61306690455763,
+            "gradient_discontinuity_nits_per_pixel": 0.0
+          }
+        ]
+      },
+      "output_range": {
+        "finite": true,
+        "minimum_normalized": 2.0612423237789993e-08,
+        "maximum_normalized": 0.8937930552783268,
+        "negative_count": 0,
+        "above_peak_count": 0,
+        "above_peak_fraction": 0.0
+      }
+    },
+    "T2": {
+      "test": "T2",
+      "name": "02_model_e_luminance_additive_chroma_unchanged",
+      "notes": "02_model_e_luminance_additive_chroma_unchanged",
+      "controls": {
+        "luminance_source": "Model E overlap-only luminance LUT",
+        "chroma_rule": "C_new = C_old (absolute linear BT.2020 chroma deviation)"
+      },
+      "common_region": {
+        "luminance": {
+          "MAE_nits": 31.87922352843173,
+          "RMSE_nits": 60.771159732020585,
+          "median_absolute_error_nits": 7.056697958736515,
+          "P95_absolute_error_nits": 126.29374368809553,
+          "P99_absolute_error_nits": 243.6598395341391,
+          "maximum_absolute_error_nits": 680.3516234514442
+        },
+        "color": {
+          "RGB_MSE_normalized": 0.0002053736094329139,
+          "deltaE2000_peak_relative_Rec2020_to_Lab_D65": {
+            "count": 1536000,
+            "mean": 10.093827603641632,
+            "median": 5.245645798558568,
+            "p95": 25.3447371444291
+          },
+          "deltaEICtCp": {
+            "count": 1536000,
+            "mean": 0.3160282720816594,
+            "median": 0.3031976456384262,
+            "p95": 0.45436208289576224
+          },
+          "chroma_error_ICtCp_signed": {
+            "count": 1536000,
+            "mean": 0.2675521127407031,
+            "median": 0.26824762246988176,
+            "p95": 0.36813622763385195
+          },
+          "chroma_error_ICtCp_absolute": {
+            "count": 1536000,
+            "mean": 0.26756412527114315,
+            "median": 0.26824762246988176,
+            "p95": 0.36813622763385195
+          },
+          "hue_error_degrees_signed_non_neutral": {
+            "count": 1535927,
+            "mean": -13.331093062204472,
+            "median": -27.655154001104883,
+            "p95": 81.06589663131436
+          },
+          "hue_error_degrees_absolute_non_neutral": {
+            "count": 1535927,
+            "mean": 37.271864587317054,
+            "median": 36.22761612432989,
+            "p95": 84.11499190729971
+          },
+          "hue_excluded_neutral_reference_pixels": 73
+        }
+      },
+      "seam_proxy": {
+        "definition": "HDR-center composite versus transformed SDR extension; continuity proxy only, not unseen-region ground truth",
+        "boundaries": [
+          {
+            "boundary": "top",
+            "y_coordinate": 140,
+            "luminance_discontinuity_mean_nits": 36.06930780998174,
+            "luminance_discontinuity_P95_nits": 111.1442666396323,
+            "chroma_discontinuity_ICtCp": 0.3147488923000524,
+            "hue_discontinuity_degrees_non_neutral": 38.56061888127262,
+            "gradient_discontinuity_nits_per_pixel": 1.9271440757909004
+          },
+          {
+            "boundary": "bottom",
+            "y_coordinate": 940,
+            "luminance_discontinuity_mean_nits": 35.36615515669415,
+            "luminance_discontinuity_P95_nits": 91.80622418859922,
+            "chroma_discontinuity_ICtCp": 0.2763512331042978,
+            "hue_discontinuity_degrees_non_neutral": 50.518808465099674,
+            "gradient_discontinuity_nits_per_pixel": 0.0
+          }
+        ]
+      },
+      "output_range": {
+        "finite": true,
+        "minimum_normalized": 0.0,
+        "maximum_normalized": 0.25907249394252785,
+        "negative_count": 0,
+        "above_peak_count": 0,
+        "above_peak_fraction": 0.0
+      }
+    },
+    "T3": {
+      "test": "T3",
+      "name": "03_model_e_luminance_ratio_scaling",
+      "notes": "03_model_e_luminance_ratio_scaling",
+      "controls": {
+        "luminance_source": "same Model E overlap-only LUT as T2",
+        "chroma_rule": "RGB_new = RGB_old * Y_new / max(Y_old, 1e-8); Y_old<=eps -> neutral Y_new"
+      },
+      "common_region": {
+        "luminance": {
+          "MAE_nits": 8.554623612133987,
+          "RMSE_nits": 17.72270640464349,
+          "median_absolute_error_nits": 1.5602203679237896,
+          "P95_absolute_error_nits": 41.762769766002975,
+          "P99_absolute_error_nits": 73.79220445180066,
+          "maximum_absolute_error_nits": 210.8290705854759
+        },
+        "color": {
+          "RGB_MSE_normalized": 2.8122151108872593e-06,
+          "deltaE2000_peak_relative_Rec2020_to_Lab_D65": {
+            "count": 1536000,
+            "mean": 0.9464170003322566,
+            "median": 0.2897771468022312,
+            "p95": 3.776334483353466
+          },
+          "deltaEICtCp": {
+            "count": 1536000,
+            "mean": 0.08361008896644179,
+            "median": 0.06990855711688299,
+            "p95": 0.20335206206556278
+          },
+          "chroma_error_ICtCp_signed": {
+            "count": 1536000,
+            "mean": 0.016294756089862552,
+            "median": 0.019480572062296087,
+            "p95": 0.05950227740931275
+          },
+          "chroma_error_ICtCp_absolute": {
+            "count": 1536000,
+            "mean": 0.02814790199735387,
+            "median": 0.02463600974339901,
+            "p95": 0.0628778630987783
+          },
+          "hue_error_degrees_signed_non_neutral": {
+            "count": 1535927,
+            "mean": 10.704649069057064,
+            "median": 3.49369603877943,
+            "p95": 86.69966170679265
+          },
+          "hue_error_degrees_absolute_non_neutral": {
+            "count": 1535927,
+            "mean": 20.8047638559891,
+            "median": 10.012679216190007,
+            "p95": 89.4901068885701
+          },
+          "hue_excluded_neutral_reference_pixels": 73
+        }
+      },
+      "seam_proxy": {
+        "definition": "HDR-center composite versus transformed SDR extension; continuity proxy only, not unseen-region ground truth",
+        "boundaries": [
+          {
+            "boundary": "top",
+            "y_coordinate": 140,
+            "luminance_discontinuity_mean_nits": 7.039245801417498,
+            "luminance_discontinuity_P95_nits": 24.868833620566953,
+            "chroma_discontinuity_ICtCp": 0.03438622196506214,
+            "hue_discontinuity_degrees_non_neutral": 7.17321821997252,
+            "gradient_discontinuity_nits_per_pixel": 0.9345594327272891
+          },
+          {
+            "boundary": "bottom",
+            "y_coordinate": 940,
+            "luminance_discontinuity_mean_nits": 5.494013753517481,
+            "luminance_discontinuity_P95_nits": 20.977492964212285,
+            "chroma_discontinuity_ICtCp": 0.022206068248002888,
+            "hue_discontinuity_degrees_non_neutral": 19.858664969699948,
+            "gradient_discontinuity_nits_per_pixel": 0.0
+          }
+        ]
+      },
+      "output_range": {
+        "finite": true,
+        "minimum_normalized": 6.574246502835514e-06,
+        "maximum_normalized": 0.022762352781155584,
+        "negative_count": 0,
+        "above_peak_count": 0,
+        "above_peak_fraction": 0.0
+      }
+    },
+    "T4": {
+      "test": "T4",
+      "name": "04_ratio_scaling_global_chroma_k",
+      "notes": "04_ratio_scaling_global_chroma_k",
+      "controls": {
+        "form": "RGB = Y_new + k * (RGB_ratio - Y_new)",
+        "fit_pixel_count": 1536000,
+        "denominator": 1.9823247059614792,
+        "k_unclamped": 1.1660810608873966,
+        "k_clamped": 1.1660810608873966,
+        "clamp_range": [
+          0.0,
+          4.0
+        ],
+        "RGB_MSE_before_k": 2.8122151108872593e-06,
+        "RGB_MSE_after_k": 2.800332310397351e-06
+      },
+      "common_region": {
+        "luminance": {
+          "MAE_nits": 8.554613404095544,
+          "RMSE_nits": 17.72269273949868,
+          "median_absolute_error_nits": 1.560216906126271,
+          "P95_absolute_error_nits": 41.762769766002975,
+          "P99_absolute_error_nits": 73.79220445180066,
+          "maximum_absolute_error_nits": 210.8290705854759
+        },
+        "color": {
+          "RGB_MSE_normalized": 2.800332310397351e-06,
+          "deltaE2000_peak_relative_Rec2020_to_Lab_D65": {
+            "count": 1536000,
+            "mean": 0.9957441445329662,
+            "median": 0.34056192808403263,
+            "p95": 3.852579591678372
+          },
+          "deltaEICtCp": {
+            "count": 1536000,
+            "mean": 0.09111845092453116,
+            "median": 0.07938924086579795,
+            "p95": 0.20722925984244553
+          },
+          "chroma_error_ICtCp_signed": {
+            "count": 1536000,
+            "mean": 0.033675165590056975,
+            "median": 0.03379787509122817,
+            "p95": 0.08678085574308401
+          },
+          "chroma_error_ICtCp_absolute": {
+            "count": 1536000,
+            "mean": 0.04031834475264596,
+            "median": 0.035858784046772035,
+            "p95": 0.08687412728585726
+          },
+          "hue_error_degrees_signed_non_neutral": {
+            "count": 1535927,
+            "mean": 12.490223540470996,
+            "median": 5.620271683833336,
+            "p95": 87.19001367278996
+          },
+          "hue_error_degrees_absolute_non_neutral": {
+            "count": 1535927,
+            "mean": 21.091995132883262,
+            "median": 10.490106886800394,
+            "p95": 89.94531355936792
+          },
+          "hue_excluded_neutral_reference_pixels": 73
+        }
+      },
+      "seam_proxy": {
+        "definition": "HDR-center composite versus transformed SDR extension; continuity proxy only, not unseen-region ground truth",
+        "boundaries": [
+          {
+            "boundary": "top",
+            "y_coordinate": 140,
+            "luminance_discontinuity_mean_nits": 7.039096811842199,
+            "luminance_discontinuity_P95_nits": 24.868833620566953,
+            "chroma_discontinuity_ICtCp": 0.059464265020706626,
+            "hue_discontinuity_degrees_non_neutral": 7.549657768069917,
+            "gradient_discontinuity_nits_per_pixel": 0.9345341833383436
+          },
+          {
+            "boundary": "bottom",
+            "y_coordinate": 940,
+            "luminance_discontinuity_mean_nits": 5.494004984006795,
+            "luminance_discontinuity_P95_nits": 20.977492964212285,
+            "chroma_discontinuity_ICtCp": 0.046635252613259875,
+            "hue_discontinuity_degrees_non_neutral": 19.481885246176844,
+            "gradient_discontinuity_nits_per_pixel": 0.0
+          }
+        ]
+      },
+      "output_range": {
+        "finite": true,
+        "minimum_normalized": 0.0,
+        "maximum_normalized": 0.02323788105928991,
+        "negative_count": 0,
+        "above_peak_count": 0,
+        "above_peak_fraction": 0.0
+      }
+    },
+    "T5": {
+      "test": "T5",
+      "name": "05_ratio_scaling_affine_chroma_f_y",
+      "notes": "05_ratio_scaling_affine_chroma_f_y",
+      "controls": {
+        "form": "RGB = Y_new + clip(a + b * normalized(Y_new), 0, 4) * (RGB_ratio - Y_new)",
+        "fit_pixel_count": 1536000,
+        "a_unclamped": 0.8088905762895514,
+        "b_unclamped": 1.2340883305033383,
+        "normalization_max_Y_new": 0.019899122768091436,
+        "clamp_range": [
+          0.0,
+          4.0
+        ],
+        "fraction_clamped_low_common": 0.0,
+        "fraction_clamped_high_common": 0.0,
+        "fallback_identity": false,
+        "RGB_MSE_after_affine_k": 2.7844773248267864e-06,
+        "fraction_clamped_low_full": 0.0,
+        "fraction_clamped_high_full": 0.0
+      },
+      "common_region": {
+        "luminance": {
+          "MAE_nits": 8.554623612133986,
+          "RMSE_nits": 17.722706404643493,
+          "median_absolute_error_nits": 1.5602203679237898,
+          "P95_absolute_error_nits": 41.762769766002975,
+          "P99_absolute_error_nits": 73.79220445180066,
+          "maximum_absolute_error_nits": 210.8290705854759
+        },
+        "color": {
+          "RGB_MSE_normalized": 2.7844773248267864e-06,
+          "deltaE2000_peak_relative_Rec2020_to_Lab_D65": {
+            "count": 1536000,
+            "mean": 0.9353918211631185,
+            "median": 0.24247619675273976,
+            "p95": 3.9390537475081615
+          },
+          "deltaEICtCp": {
+            "count": 1536000,
+            "mean": 0.07982074815597134,
+            "median": 0.06566763504933425,
+            "p95": 0.20296536100615847
+          },
+          "chroma_error_ICtCp_signed": {
+            "count": 1536000,
+            "mean": 0.0071543660084179665,
+            "median": 0.010022973181574985,
+            "p95": 0.043332104539472636
+          },
+          "chroma_error_ICtCp_absolute": {
+            "count": 1536000,
+            "mean": 0.02036126327487818,
+            "median": 0.015971693444278956,
+            "p95": 0.054502267506519125
+          },
+          "hue_error_degrees_signed_non_neutral": {
+            "count": 1535927,
+            "mean": 9.425665989230065,
+            "median": 2.4322824074134743,
+            "p95": 86.22361327421363
+          },
+          "hue_error_degrees_absolute_non_neutral": {
+            "count": 1535927,
+            "mean": 20.804948310932982,
+            "median": 10.19924393794317,
+            "p95": 89.02688010011776
+          },
+          "hue_excluded_neutral_reference_pixels": 73
+        }
+      },
+      "seam_proxy": {
+        "definition": "HDR-center composite versus transformed SDR extension; continuity proxy only, not unseen-region ground truth",
+        "boundaries": [
+          {
+            "boundary": "top",
+            "y_coordinate": 140,
+            "luminance_discontinuity_mean_nits": 7.039245801417498,
+            "luminance_discontinuity_P95_nits": 24.868833620566953,
+            "chroma_discontinuity_ICtCp": 0.018710985345247223,
+            "hue_discontinuity_degrees_non_neutral": 7.588436601355598,
+            "gradient_discontinuity_nits_per_pixel": 0.9345594327272891
+          },
+          {
+            "boundary": "bottom",
+            "y_coordinate": 940,
+            "luminance_discontinuity_mean_nits": 5.494013753517481,
+            "luminance_discontinuity_P95_nits": 20.977492964212285,
+            "chroma_discontinuity_ICtCp": 0.013757191705371197,
+            "hue_discontinuity_degrees_non_neutral": 20.142954420708232,
+            "gradient_discontinuity_nits_per_pixel": 0.0
+          }
+        ]
+      },
+      "output_range": {
+        "finite": true,
+        "minimum_normalized": 2.1200106906544246e-05,
+        "maximum_normalized": 0.025748641290077822,
+        "negative_count": 0,
+        "above_peak_count": 0,
+        "above_peak_fraction": 0.0
+      }
+    }
+  }
+}

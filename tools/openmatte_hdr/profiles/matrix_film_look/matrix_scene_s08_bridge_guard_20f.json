@@ -1,0 +1,82 @@
+{
+  "schema": "openmatte-hdr-input-profile/v1",
+  "name": "matrix_scene_s08_bridge_guard_20f",
+  "description": "Twenty-frame Matrix 08 numerical-regression guard window for V5 native bridge performance work. The window lies strictly inside the reviewed actual shot Matrix-08-02 [73295, 73434) and is a centred subset of the already accepted matrix_scene_s08_30f window [73352, 73382), so it never crosses a verified cut.",
+  "hdr": "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+  "om": "G:\\Filmy\\IMAX format (open matte)\\The Matrix (1999) [OPEN MATTE] [WEB-DL 1080p 10bit DD5.1 x265].mkv",
+  "ffmpeg": "dev/ffmpeg-build/install/bin/ffmpeg.exe",
+  "shot_start": 73357,
+  "shot_end": 73377,
+  "expected_frame_count": 20,
+  "om_start_frame": 73338,
+  "offset_frames": -19,
+  "fps": "24000/1001",
+  "hdr_size": [3840, 1600],
+  "om_size": [1920, 1080],
+  "output_size": [3840, 2160],
+  "overlap": [0, 140, 1920, 940],
+  "seam_band": 48,
+  "feather": 24,
+  "cache_root": "tools/openmatte_hdr/cache/matrix_film_look/matrix_scene_s08_bridge_guard_20f",
+  "review_regions": [
+    ["wall_wood", 40],
+    ["dark_clothing", 300],
+    ["skin_head", 780],
+    ["rice_paper_screens", 1400]
+  ],
+  "legacy_sync": {
+    "equation": "om_frame = hdr_frame -19",
+    "frame_offset": -19,
+    "frame_rounding": "inherited from the P2.34 anchor, not recomputed",
+    "frame_locked": true,
+    "status": "LOCKED",
+    "confidence": 0.940513,
+    "offset_seconds_at_24000_1001": -0.7924583333333333,
+    "historical_time_seconds": 3060.0152916666666
+  },
+  "legacy_geometry": {
+    "scale": [0.5, 0.5],
+    "offset": [0, 140],
+    "overlap": [0, 140, 1920, 940],
+    "confidence": 1.0,
+    "status": "preserved geometry contract"
+  },
+  "scene_provenance": {
+    "case_id": "the_matrix_temporal_stratum_08",
+    "selection_index": 8,
+    "anchor_hdr_frame": 73367,
+    "anchor_om_frame": 73348,
+    "anchor_near_cut": false,
+    "shot_status": "LOCAL_SHOT_RESOLVED",
+    "bounded_analysis_interval": [73274, 73460],
+    "reviewed_actual_shot": {
+      "shot_id": "Matrix-08-02",
+      "frames": [73295, 73434],
+      "frame_count": 139,
+      "record": "research/physical_validation/chroma_field_extension/matrix08_verified_segmentation.json"
+    },
+    "reviewed_cuts_avoided": [73295, 73434],
+    "parent_window": {
+      "profile": "tools/openmatte_hdr/profiles/matrix_film_look/matrix_scene_s08_30f.json",
+      "hdr_interval": [73352, 73382]
+    },
+    "p2_32_scene_independence_verified": false
+  },
+  "guard_contract": {
+    "purpose": "before/after P010 plane comparison for the yuv_to_working_rgb performance fix",
+    "frames": 20,
+    "hdr_interval": [73357, 73377],
+    "om_interval": [73338, 73358],
+    "decoders": {"hdr": "hevc_cuvid", "om": "hevc_cuvid"},
+    "comparison_point": "pre-NVENC GPU P010 buffers for every frame, compared in process",
+    "encoded_output": "not produced; the Matrix HDR source exposes no Mastering display or Content light level side data, so the production Phase 2 NVENC/HDR10 remux path refuses this material",
+    "acceptance": "max abs 10-bit code difference 0 across Y, U and V planes; a systematic shift is a regression"
+  },
+  "limitations": [
+    "Synchronization and geometry are inherited from the P2.34 anchor and are not revalidated here.",
+    "Scene independence was never verified for this stratum (p2_32_scene_independence_verified is false).",
+    "The window is a bounded 20-frame guard sample inside one reviewed actual shot, not the whole shot and not a Phase 16 train/holdout benchmark.",
+    "The Open Matte source stream is HEVC, so the h264_cuvid default must be overridden with hevc_cuvid.",
+    "v04 feather remains 24 px."
+  ]
+}

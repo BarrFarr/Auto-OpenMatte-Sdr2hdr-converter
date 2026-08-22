@@ -1,0 +1,35 @@
+{
+  "contact_sheet": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\results\\matrix08_phase16_per_shot\\shots\\Matrix-08-03\\visual\\contact_sheet.png",
+  "highest_chroma_window": {
+    "height": 216,
+    "mean_reference_chroma": 0.09699225498659444,
+    "measurement": "mean sigma-16 ICtCp chroma magnitude",
+    "overlap_x": 961,
+    "overlap_y": 75,
+    "path": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\results\\matrix08_phase16_per_shot\\shots\\Matrix-08-03\\visual\\review_windows\\highest_chroma_hdr_reference_only.png",
+    "selection_tiebreak": "first maximum in row-major overlap order",
+    "source": "HDR reference only",
+    "width": 384
+  },
+  "manual_review_note": "No semantic segmentation or mask was created. The contact sheet and seam maps support manual review of the named material targets; the high-chroma crop is selected only from HDR reference chroma.",
+  "manual_review_targets": [
+    "rice paper",
+    "skin",
+    "walls",
+    "dark clothing",
+    "green and cyan regions",
+    "red regions",
+    "saturated highlights",
+    "top seam",
+    "bottom seam"
+  ],
+  "residual_maps": [
+    "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\results\\matrix08_phase16_per_shot\\shots\\Matrix-08-03\\visual\\residual_maps\\lowpass_chroma_A_overlap.png",
+    "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\results\\matrix08_phase16_per_shot\\shots\\Matrix-08-03\\visual\\residual_maps\\lowpass_chroma_B_overlap.png",
+    "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\results\\matrix08_phase16_per_shot\\shots\\Matrix-08-03\\visual\\residual_maps\\amplified_B_minus_A_composite.png"
+  ],
+  "schema": "openmatte-hdr-phase16-visual-artifacts/v1",
+  "seam_maps": [
+    "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\research\\physical_validation\\chroma_field_extension\\results\\matrix08_phase16_per_shot\\shots\\Matrix-08-03\\visual\\seam_maps\\top_bottom_A_B_context.png"
+  ]
+}

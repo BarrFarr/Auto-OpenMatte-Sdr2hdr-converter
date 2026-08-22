@@ -1,0 +1,598 @@
+{
+  "experiment": {
+    "chroma_threshold": "baseline corrected_rgb OM C >= 0.10 and HDR C > 0",
+    "composite_run": false,
+    "encoder_run": false,
+    "fit_frame_count": 12,
+    "fit_in_memory_only": true,
+    "fit_scale": 0.5,
+    "fit_stride": 1,
+    "fitting_modified": false,
+    "frame_count": 12,
+    "full_render_run": false,
+    "gain_field_modified": false,
+    "hcapm_correction_applied": false,
+    "image_correction_applied": false,
+    "image_modified": false,
+    "overlap": [
+      0,
+      280,
+      3840,
+      1880
+    ],
+    "pq_output_run": false,
+    "production_deployment": false,
+    "profile": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\tools\\openmatte_hdr\\profiles\\br2049_t2714_300f_throughput.json",
+    "remaining_overlap_rows_used": false,
+    "renderer_modified": false,
+    "segment": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\benchmarks\\v05_gpu_native_segmented_test300\\segments\\segment_000004.mkv",
+    "segment_index": 4,
+    "source_frame_interval": [
+      65359,
+      65371
+    ],
+    "spatial_field_modified": false,
+    "zones": {
+      "bottom_0_20": {
+        "distance_from_boundary_px": [
+          0,
+          20
+        ],
+        "hdr_rows": [
+          1580,
+          1600
+        ],
+        "om_rows": [
+          1860,
+          1880
+        ],
+        "side": "bottom"
+      },
+      "bottom_40_60": {
+        "distance_from_boundary_px": [
+          40,
+          60
+        ],
+        "hdr_rows": [
+          1540,
+          1560
+        ],
+        "om_rows": [
+          1820,
+          1840
+        ],
+        "side": "bottom"
+      },
+      "bottom_80_100": {
+        "distance_from_boundary_px": [
+          80,
+          100
+        ],
+        "hdr_rows": [
+          1500,
+          1520
+        ],
+        "om_rows": [
+          1780,
+          1800
+        ],
+        "side": "bottom"
+      },
+      "top_0_20": {
+        "distance_from_boundary_px": [
+          0,
+          20
+        ],
+        "hdr_rows": [
+          0,
+          20
+        ],
+        "om_rows": [
+          280,
+          300
+        ],
+        "side": "top"
+      },
+      "top_40_60": {
+        "distance_from_boundary_px": [
+          40,
+          60
+        ],
+        "hdr_rows": [
+          40,
+          60
+        ],
+        "om_rows": [
+          320,
+          340
+        ],
+        "side": "top"
+      },
+      "top_80_100": {
+        "distance_from_boundary_px": [
+          80,
+          100
+        ],
+        "hdr_rows": [
+          80,
+          100
+        ],
+        "om_rows": [
+          360,
+          380
+        ],
+        "side": "top"
+      }
+    }
+  },
+  "fit": {
+    "baseline_only_for_measurement": true,
+    "fit_source": "native.NativeV4GpuShotFitter.fit_shot",
+    "holdout_frame_count": 3,
+    "render_model": "intensity_joint",
+    "training_frame_count": 9
+  },
+  "measurement_definition": {
+    "circular_absolute_median_delta_h": "median(abs(wrapped delta_h))",
+    "circular_median_delta_h": "circular median of signed wrapped delta_h",
+    "delta_h": "wrap(H_HDR - H_baseline_corrected_rgb_OM) in [-180,180) degrees",
+    "median_delta_log_c": "median(log(C_HDR) - log(C_baseline_corrected_rgb_OM))",
+    "p95_delta_h": "95th percentile of abs(wrapped delta_h), in degrees",
+    "space": "ICtCp polar",
+    "zone_order": "TOP/BOTTOM distance from the corresponding overlap boundary"
+  },
+  "schema": "openmatte-hdr-v05-hcapm-zonal-diagnostic/v1",
+  "status": "DIAGNOSTIC_ONLY",
+  "timing_seconds": {
+    "fit": 4.875010099996871,
+    "total": 6.111701699999685
+  },
+  "zonal_trend": {
+    "by_metric": {
+      "bottom": [
+        {
+          "change_zone_0_20_to_80_100": 0.638995418884198,
+          "direction": "increases with distance from boundary",
+          "field": "circular_median_delta_h_degrees",
+          "fit_values_unwrapped": [
+            0.24764958584578214,
+            0.6429685124844464,
+            0.8866450047299801
+          ],
+          "slope_per_px": 0.007987442736052475,
+          "values": [
+            0.24764958584578214,
+            0.6429685124844464,
+            0.8866450047299801
+          ],
+          "zone_centres_px": [
+            10.0,
+            50.0,
+            90.0
+          ]
+        },
+        {
+          "change_zone_0_20_to_80_100": 0.314447183455165,
+          "direction": "increases with distance from boundary",
+          "field": "circular_absolute_median_delta_h_degrees",
+          "fit_values_unwrapped": [
+            1.0691184524363797,
+            1.212977128684445,
+            1.3835656358915447
+          ],
+          "slope_per_px": 0.003930589793189572,
+          "values": [
+            1.0691184524363797,
+            1.212977128684445,
+            1.3835656358915447
+          ],
+          "zone_centres_px": [
+            10.0,
+            50.0,
+            90.0
+          ]
+        },
+        {
+          "change_zone_0_20_to_80_100": 0.005115465938162034,
+          "direction": "increases with distance from boundary",
+          "field": "median_delta_log_c",
+          "fit_values_unwrapped": [
+            0.01927071145204229,
+            0.022310962693762648,
+            0.024386177390204322
+          ],
+          "slope_per_px": 6.394332422702557e-05,
+          "values": [
+            0.01927071145204229,
+            0.022310962693762648,
+            0.024386177390204322
+          ],
+          "zone_centres_px": [
+            10.0,
+            50.0,
+            90.0
+          ]
+        },
+        {
+          "change_zone_0_20_to_80_100": 0.907162359919198,
+          "direction": "increases with distance from boundary",
+          "field": "p95_delta_h_degrees",
+          "fit_values_unwrapped": [
+            4.189719792855708,
+            4.618589987078627,
+            5.096882152774906
+          ],
+          "slope_per_px": 0.011339529498990015,
+          "values": [
+            4.189719792855708,
+            4.618589987078627,
+            5.096882152774906
+          ],
+          "zone_centres_px": [
+            10.0,
+            50.0,
+            90.0
+          ]
+        }
+      ],
+      "top": [
+        {
+          "change_zone_0_20_to_80_100": 0.5652323332151029,
+          "direction": "increases with distance from boundary",
+          "field": "circular_median_delta_h_degrees",
+          "fit_values_unwrapped": [
+            -0.23931832302345465,
+            0.12475867449407599,
+            0.3259140101916483
+          ],
+          "slope_per_px": 0.007065404165188786,
+          "values": [
+            -0.23931832302345465,
+            0.12475867449407599,
+            0.3259140101916483
+          ],
+          "zone_centres_px": [
+            10.0,
+            50.0,
+            90.0
+          ]
+        },
+        {
+          "change_zone_0_20_to_80_100": 0.26702798878405387,
+          "direction": "increases with distance from boundary",
+          "field": "circular_absolute_median_delta_h_degrees",
+          "fit_values_unwrapped": [
+            0.7944427555611289,
+            0.85130017900972,
+            1.0614707443451827
+          ],
+          "slope_per_px": 0.0033378498598006768,
+          "values": [
+            0.7944427555611289,
+            0.85130017900972,
+            1.0614707443451827
+          ],
+          "zone_centres_px": [
+            10.0,
+            50.0,
+            90.0
+          ]
+        },
+        {
+          "change_zone_0_20_to_80_100": 0.020851544040959347,
+          "direction": "increases with distance from boundary",
+          "field": "median_delta_log_c",
+          "fit_values_unwrapped": [
+            -0.0062912818720390895,
+            0.007090351424399843,
+            0.014560262168920257
+          ],
+          "slope_per_px": 0.00026064430051199184,
+          "values": [
+            -0.0062912818720390895,
+            0.007090351424399843,
+            0.014560262168920257
+          ],
+          "zone_centres_px": [
+            10.0,
+            50.0,
+            90.0
+          ]
+        },
+        {
+          "change_zone_0_20_to_80_100": 0.7491099844224358,
+          "direction": "increases with distance from boundary",
+          "field": "p95_delta_h_degrees",
+          "fit_values_unwrapped": [
+            2.6499721829974616,
+            3.0502274438884185,
+            3.3990821674198974
+          ],
+          "slope_per_px": 0.009363874805280469,
+          "values": [
+            2.6499721829974616,
+            3.0502274438884185,
+            3.3990821674198974
+          ],
+          "zone_centres_px": [
+            10.0,
+            50.0,
+            90.0
+          ]
+        }
+      ]
+    },
+    "by_side": {
+      "bottom": {
+        "active_trends": [
+          "circular_median_delta_h_degrees",
+          "circular_absolute_median_delta_h_degrees",
+          "median_delta_log_c",
+          "p95_delta_h_degrees"
+        ],
+        "classification": "B_systematic_Y_dependence",
+        "decision_thresholds": {
+          "circular_absolute_median_delta_h_degrees": 0.1,
+          "circular_median_delta_h_degrees": 0.1,
+          "median_delta_log_c": 0.001,
+          "p95_delta_h_degrees": 0.1
+        },
+        "zone_count": 3
+      },
+      "top": {
+        "active_trends": [
+          "circular_median_delta_h_degrees",
+          "circular_absolute_median_delta_h_degrees",
+          "median_delta_log_c",
+          "p95_delta_h_degrees"
+        ],
+        "classification": "B_systematic_Y_dependence",
+        "decision_thresholds": {
+          "circular_absolute_median_delta_h_degrees": 0.1,
+          "circular_median_delta_h_degrees": 0.1,
+          "median_delta_log_c": 0.001,
+          "p95_delta_h_degrees": 0.1
+        },
+        "zone_count": 3
+      }
+    },
+    "interpretation": "B means a systematic change across the three Y zones under the stated thresholds; A means approximately constant.",
+    "overall_classification": "B_systematic_Y_dependence"
+  },
+  "zones": {
+    "bottom_0_20": {
+      "absolute_delta_h_stats_degrees": {
+        "max": 15.136880887880189,
+        "mean": 1.4615787786621008,
+        "min": 1.1341358239902912e-05,
+        "p95": 4.189719792855708
+      },
+      "chroma_threshold": "C >= 0.10 using baseline corrected_rgb OM C",
+      "circular_absolute_median_delta_h_degrees": 1.0691184524363797,
+      "circular_median_delta_h_degrees": 0.24764958584578214,
+      "delta_log_c_stats": {
+        "max": 0.4143677412966178,
+        "mean": 0.007423655912669679,
+        "min": -1.4968333201453037,
+        "p95": 0.07077673951678096
+      },
+      "distance_from_boundary_px": [
+        0,
+        20
+      ],
+      "hdr_rows": [
+        1580,
+        1600
+      ],
+      "median_delta_log_c": 0.01927071145204229,
+      "om_rows": [
+        1860,
+        1880
+      ],
+      "p95_delta_h_degrees": 4.189719792855708,
+      "sample_count": 352423,
+      "side": "bottom",
+      "signed_delta_h_stats_degrees": {
+        "max": 15.136880887880189,
+        "mean": 0.0850222864253803,
+        "min": -14.117042430722517,
+        "p95": 2.884187520034659
+      }
+    },
+    "bottom_40_60": {
+      "absolute_delta_h_stats_degrees": {
+        "max": 21.104645259473575,
+        "mean": 1.614863724317718,
+        "min": 7.125127985067664e-06,
+        "p95": 4.618589987078627
+      },
+      "chroma_threshold": "C >= 0.10 using baseline corrected_rgb OM C",
+      "circular_absolute_median_delta_h_degrees": 1.212977128684445,
+      "circular_median_delta_h_degrees": 0.6429685124844464,
+      "delta_log_c_stats": {
+        "max": 0.46793926265579633,
+        "mean": 0.03479927823044814,
+        "min": -1.518373764866698,
+        "p95": 0.3007132125547013
+      },
+      "distance_from_boundary_px": [
+        40,
+        60
+      ],
+      "hdr_rows": [
+        1540,
+        1560
+      ],
+      "median_delta_log_c": 0.022310962693762648,
+      "om_rows": [
+        1820,
+        1840
+      ],
+      "p95_delta_h_degrees": 4.618589987078627,
+      "sample_count": 392564,
+      "side": "bottom",
+      "signed_delta_h_stats_degrees": {
+        "max": 21.104645259473575,
+        "mean": 0.6198874833907568,
+        "min": -15.244649066788854,
+        "p95": 4.020642367020167
+      }
+    },
+    "bottom_80_100": {
+      "absolute_delta_h_stats_degrees": {
+        "max": 16.62805531300022,
+        "mean": 1.81466715387705,
+        "min": 1.798649472355032e-08,
+        "p95": 5.0968821527749055
+      },
+      "chroma_threshold": "C >= 0.10 using baseline corrected_rgb OM C",
+      "circular_absolute_median_delta_h_degrees": 1.3835656358915447,
+      "circular_median_delta_h_degrees": 0.8866450047299801,
+      "delta_log_c_stats": {
+        "max": 0.4157109345405743,
+        "mean": 0.055337025504474044,
+        "min": -1.5233741763251656,
+        "p95": 0.3371508214074227
+      },
+      "distance_from_boundary_px": [
+        80,
+        100
+      ],
+      "hdr_rows": [
+        1500,
+        1520
+      ],
+      "median_delta_log_c": 0.024386177390204322,
+      "om_rows": [
+        1780,
+        1800
+      ],
+      "p95_delta_h_degrees": 5.096882152774906,
+      "sample_count": 434765,
+      "side": "bottom",
+      "signed_delta_h_stats_degrees": {
+        "max": 16.62805531300022,
+        "mean": 0.9570165650691189,
+        "min": -14.918685092576741,
+        "p95": 4.71394491422024
+      }
+    },
+    "top_0_20": {
+      "absolute_delta_h_stats_degrees": {
+        "max": 179.99212395307777,
+        "mean": 1.5637946162682477,
+        "min": 1.3321840812174773e-06,
+        "p95": 2.6499721829974616
+      },
+      "chroma_threshold": "C >= 0.10 using baseline corrected_rgb OM C",
+      "circular_absolute_median_delta_h_degrees": 0.7944427555611289,
+      "circular_median_delta_h_degrees": -0.23931832302345465,
+      "delta_log_c_stats": {
+        "max": 0.19653496431422557,
+        "mean": -0.04134642031634,
+        "min": -18.748296120048856,
+        "p95": 0.04092222424619417
+      },
+      "distance_from_boundary_px": [
+        0,
+        20
+      ],
+      "hdr_rows": [
+        0,
+        20
+      ],
+      "median_delta_log_c": -0.0062912818720390895,
+      "om_rows": [
+        280,
+        300
+      ],
+      "p95_delta_h_degrees": 2.6499721829974616,
+      "sample_count": 587137,
+      "side": "top",
+      "signed_delta_h_stats_degrees": {
+        "max": 179.99212395307777,
+        "mean": -0.7161097094904281,
+        "min": -179.9590453041999,
+        "p95": 1.7207492539533418
+      }
+    },
+    "top_40_60": {
+      "absolute_delta_h_stats_degrees": {
+        "max": 179.58491501513643,
+        "mean": 1.494583308423398,
+        "min": 9.659327519831607e-07,
+        "p95": 3.0502274438884185
+      },
+      "chroma_threshold": "C >= 0.10 using baseline corrected_rgb OM C",
+      "circular_absolute_median_delta_h_degrees": 0.85130017900972,
+      "circular_median_delta_h_degrees": 0.12475867449407599,
+      "delta_log_c_stats": {
+        "max": 0.20624903767158886,
+        "mean": -0.019985547675269704,
+        "min": -18.664893745806907,
+        "p95": 0.07184965724465675
+      },
+      "distance_from_boundary_px": [
+        40,
+        60
+      ],
+      "hdr_rows": [
+        40,
+        60
+      ],
+      "median_delta_log_c": 0.007090351424399843,
+      "om_rows": [
+        320,
+        340
+      ],
+      "p95_delta_h_degrees": 3.0502274438884185,
+      "sample_count": 586792,
+      "side": "top",
+      "signed_delta_h_stats_degrees": {
+        "max": 179.58491501513643,
+        "mean": -0.14160422024565364,
+        "min": -170.57073579899856,
+        "p95": 2.6535000970042075
+      }
+    },
+    "top_80_100": {
+      "absolute_delta_h_stats_degrees": {
+        "max": 169.63361198884354,
+        "mean": 1.584716060079351,
+        "min": 3.899638401619993e-06,
+        "p95": 3.399082167419898
+      },
+      "chroma_threshold": "C >= 0.10 using baseline corrected_rgb OM C",
+      "circular_absolute_median_delta_h_degrees": 1.0614707443451827,
+      "circular_median_delta_h_degrees": 0.3259140101916483,
+      "delta_log_c_stats": {
+        "max": 0.21991279722108503,
+        "mean": -0.0031408333278590238,
+        "min": -17.599893014989064,
+        "p95": 0.07338124799714542
+      },
+      "distance_from_boundary_px": [
+        80,
+        100
+      ],
+      "hdr_rows": [
+        80,
+        100
+      ],
+      "median_delta_log_c": 0.014560262168920257,
+      "om_rows": [
+        360,
+        380
+      ],
+      "p95_delta_h_degrees": 3.3990821674198974,
+      "sample_count": 585728,
+      "side": "top",
+      "signed_delta_h_stats_degrees": {
+        "max": 151.44766983928204,
+        "mean": 0.04140788968335428,
+        "min": -169.63361198884354,
+        "p95": 2.9727692209399756
+      }
+    }
+  }
+}

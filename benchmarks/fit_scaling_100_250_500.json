@@ -1,0 +1,488 @@
+{
+  "guarantees": {
+    "cuda_configuration_modified": false,
+    "image_correction_applied": false,
+    "nvdec_configuration_modified": false,
+    "nvenc_configuration_modified": false,
+    "production_files_modified": false,
+    "renderer_invoked": false
+  },
+  "linearity": {
+    "assessment": "not_confirmed_as_linear",
+    "criterion": "approximately_linear requires R^2 >= 0.99 and max ms/frame deviation <= 10%",
+    "linear_model": {
+      "fit_seconds": {
+        "intercept_seconds": 0.9676594836753261,
+        "slope_seconds_per_frame": 0.03997664146937848
+      },
+      "predicted_seconds": [
+        4.965323630613174,
+        10.961819851019946,
+        20.955980218364566
+      ],
+      "r_squared": 0.9999205391320931,
+      "residual_seconds": [
+        0.05143746938653848,
+        -0.0822999510184772,
+        0.030862481631920957
+      ]
+    },
+    "per_frame_cost": {
+      "maximum_relative_deviation_from_mean": 0.10941711098535382,
+      "mean_ms_per_frame": 45.219791999998655,
+      "values_ms_per_frame": [
+        50.16761099999712,
+        43.518079600005876,
+        41.97368539999297
+      ]
+    }
+  },
+  "methodology": {
+    "excluded": [
+      "rendering",
+      "compositing",
+      "extension",
+      "PQ conversion",
+      "NVENC",
+      "output video",
+      "frame cache"
+    ],
+    "fit_scale": 0.5,
+    "fit_stride": 1,
+    "pipeline": "NativeFrameSource -> NativeV4GpuShotFitter.fit_shot",
+    "resource_scope": "MemoryMonitor samples process RSS and CUDA device/pool usage every 250 ms during each fit-only run",
+    "runs": [
+      100,
+      250,
+      500
+    ],
+    "timing_scope": "wall time from immediately before fit_shot through CUDA stream synchronization after fit_shot; excludes setup and JSON serialization"
+  },
+  "profile": {
+    "cache_root": "benchmarks/forbidden_v04_cache_not_used",
+    "description": "Non-production native V5 fit-only scaling benchmark. This extends the 300-frame throughput window to 500 frames while preserving the source, geometry, sync, and frozen fitting configuration. It is not a quality gate and must not be used for production rendering.",
+    "expected_frame_count": 500,
+    "feather": 24,
+    "ffmpeg": "dev/ffmpeg-build/install/bin/ffmpeg.exe",
+    "fps": "24000/1001",
+    "hdr": "G:\\Filmy\\Blade.Runner.2049.2017.2160p.UHD.Bluray.x265.HDR10.HEVC.DTS-HDMA.5.1-4K4U\\Blade.Runner.2049.2017.UHD.BluRay.2160p.DDP.7.1.DV.HDR.x265-hallowed.mkv",
+    "hdr_size": [
+      3840,
+      1600
+    ],
+    "legacy_geometry": {
+      "confidence": 0.9155,
+      "offset": [
+        0,
+        280
+      ],
+      "overlap": [
+        0,
+        280,
+        3840,
+        1880
+      ],
+      "scale": [
+        1.0,
+        1.0
+      ],
+      "status": "inherited_from_locked_BR2049_contract"
+    },
+    "legacy_sync": {
+      "confidence": 0.9745,
+      "equation": "om_frame = hdr_frame + 1167",
+      "frame_locked": true,
+      "frame_offset": 1167,
+      "historical_time_seconds": 2714.0,
+      "offset_seconds_at_24000_1001": 48.673625,
+      "status": "LOCKED"
+    },
+    "limitations": [
+      "Benchmark-only 500-frame extension of the previous 300-frame throughput window.",
+      "No rendering, encoding, composite, output video, or frame cache is permitted.",
+      "It may cross shot boundaries; no image-quality conclusion may be drawn from it."
+    ],
+    "name": "br2049_t2714_500f_fit_scaling",
+    "offset_frames": 1167,
+    "om": "G:\\Filmy\\Blade.Runner.2049.2017.2160p.UHD.Bluray.x265.HDR10.HEVC.DTS-HDMA.5.1-4K4U\\Blade.Runner.2049.2017.Open.Matte.RUS.SDR.2160p.mkv",
+    "om_size": [
+      3840,
+      2160
+    ],
+    "om_start_frame": 66238,
+    "overlap": [
+      0,
+      280,
+      3840,
+      1880
+    ],
+    "quality_gate": false,
+    "review_regions": [
+      [
+        "left",
+        160
+      ],
+      [
+        "left_mid",
+        960
+      ],
+      [
+        "right_mid",
+        2080
+      ],
+      [
+        "right",
+        3200
+      ]
+    ],
+    "schema": "openmatte-hdr-input-profile/v1",
+    "seam_band": 48,
+    "shot_end": 65571,
+    "shot_start": 65071,
+    "throughput_test": "fit_scaling_100_250_500"
+  },
+  "profile_path": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\benchmarks\\fit_scaling_500f_profile.json",
+  "runs": [
+    {
+      "configuration": {
+        "device_index": 0,
+        "fit_scale": 0.5,
+        "fit_stride": 1,
+        "hdr_decoder": "hevc_cuvid",
+        "hdr_interval": [
+          65071,
+          65171
+        ],
+        "offset_frames": 1167,
+        "om_decoder": "h264_cuvid",
+        "om_interval": [
+          66238,
+          66338
+        ],
+        "ring_size_per_source": 4
+      },
+      "fit_profile": {
+        "architecture": "gpu_shot_fitter_v4_single_pass_feature_tape",
+        "batch_size": 4,
+        "candidate_gpu": 0.10328569999546744,
+        "capture_batches": 25,
+        "capture_gpu": 0.2840308999730041,
+        "d2h": 0.0028119000053266063,
+        "d2h_calls": 4,
+        "decoded_frames": 100,
+        "decoded_pairs": 100,
+        "fit_resize_frames": 100,
+        "fit_resize_seconds": 0.03967780002130894,
+        "fit_source_traversals": 1,
+        "fit_total": 4.902401899998949,
+        "full_frame_d2h": 0,
+        "h2d": 0.03066529999341583,
+        "h2d_calls": 11,
+        "intensity_gpu": 0.22696319998794934,
+        "native_h2d_calls": 0,
+        "peak_vram_bytes": 4128456704,
+        "peak_vram_mib": 3937.203125,
+        "per_frame_d2h": 0,
+        "replay_candidate_batches": 5,
+        "replay_intensity_batches": 20,
+        "replay_pass_names": [
+          "spatial_and_intensity_centre",
+          "intensity_slopes",
+          "candidates"
+        ],
+        "replay_passes": 3,
+        "replay_spatial_batches": 20,
+        "solver_cpu": 0.20299599999998463,
+        "source_pass_names": [
+          "capture"
+        ],
+        "source_passes": 1,
+        "spatial_gpu": 0.1349615000144695
+      },
+      "fit_seconds_reported_by_fitter": 4.902401899998949,
+      "fit_wall_seconds": 5.016761099999712,
+      "frame_count": 100,
+      "guarantees": {
+        "decoded_rgb_host_transport": false,
+        "fit_only": true,
+        "frame_cache_written": false,
+        "native_nvdec_cuda_frames": true,
+        "nvenc_invoked": false,
+        "output_video_written": false,
+        "renderer_invoked": false
+      },
+      "milliseconds_per_frame": 50.16761099999712,
+      "native_source": {
+        "full_frame_cpu_rgb_transport": false,
+        "hdr_decoder": "hevc_cuvid",
+        "hdr_expected_software_format": "P010LE",
+        "hdr_geometry": [
+          3840,
+          1600
+        ],
+        "hdr_software_format": 158,
+        "om_decoder": "h264_cuvid",
+        "om_expected_software_format": "NV12",
+        "om_geometry": [
+          3840,
+          2160
+        ],
+        "om_software_format": 23,
+        "ring_size_per_source": 4
+      },
+      "resources": {
+        "memory_monitor": {
+          "peak": {
+            "gpu_pool_reserved_bytes": 1653046272,
+            "gpu_pool_used_bytes": 787356672,
+            "pinned_bytes": 0,
+            "rss_bytes": 982970368,
+            "vram_used_bytes": 4128456704
+          },
+          "rss_source": "windows_psapi",
+          "sample_count": 21,
+          "sample_policy": "bounded 256-sample tail",
+          "samples_retained": 21
+        },
+        "peak_gpu_pool_reserved_bytes": 1653046272,
+        "peak_gpu_pool_used_bytes": 787356672,
+        "peak_ram_bytes": 982970368,
+        "peak_vram_bytes": 4128456704
+      },
+      "status": "PASS"
+    },
+    {
+      "configuration": {
+        "device_index": 0,
+        "fit_scale": 0.5,
+        "fit_stride": 1,
+        "hdr_decoder": "hevc_cuvid",
+        "hdr_interval": [
+          65071,
+          65321
+        ],
+        "offset_frames": 1167,
+        "om_decoder": "h264_cuvid",
+        "om_interval": [
+          66238,
+          66488
+        ],
+        "ring_size_per_source": 4
+      },
+      "fit_profile": {
+        "architecture": "gpu_shot_fitter_v4_single_pass_feature_tape",
+        "batch_size": 4,
+        "candidate_gpu": 0.08728739999787649,
+        "capture_batches": 63,
+        "capture_gpu": 0.17123530001117615,
+        "d2h": 0.028296100004808977,
+        "d2h_calls": 4,
+        "decoded_frames": 250,
+        "decoded_pairs": 250,
+        "fit_resize_frames": 250,
+        "fit_resize_seconds": 0.06622270002117148,
+        "fit_source_traversals": 1,
+        "fit_total": 10.803736699999718,
+        "full_frame_d2h": 0,
+        "h2d": 0.023090799993951805,
+        "h2d_calls": 11,
+        "intensity_gpu": 0.26638829998410074,
+        "native_h2d_calls": 0,
+        "peak_vram_bytes": 4864557056,
+        "peak_vram_mib": 4639.203125,
+        "per_frame_d2h": 0,
+        "replay_candidate_batches": 13,
+        "replay_intensity_batches": 50,
+        "replay_pass_names": [
+          "spatial_and_intensity_centre",
+          "intensity_slopes",
+          "candidates"
+        ],
+        "replay_passes": 3,
+        "replay_spatial_batches": 50,
+        "solver_cpu": 0.28904379999585217,
+        "source_pass_names": [
+          "capture"
+        ],
+        "source_passes": 1,
+        "spatial_gpu": 0.22664660001464654
+      },
+      "fit_seconds_reported_by_fitter": 10.803736699999718,
+      "fit_wall_seconds": 10.879519900001469,
+      "frame_count": 250,
+      "guarantees": {
+        "decoded_rgb_host_transport": false,
+        "fit_only": true,
+        "frame_cache_written": false,
+        "native_nvdec_cuda_frames": true,
+        "nvenc_invoked": false,
+        "output_video_written": false,
+        "renderer_invoked": false
+      },
+      "milliseconds_per_frame": 43.518079600005876,
+      "native_source": {
+        "full_frame_cpu_rgb_transport": false,
+        "hdr_decoder": "hevc_cuvid",
+        "hdr_expected_software_format": "P010LE",
+        "hdr_geometry": [
+          3840,
+          1600
+        ],
+        "hdr_software_format": 158,
+        "om_decoder": "h264_cuvid",
+        "om_expected_software_format": "NV12",
+        "om_geometry": [
+          3840,
+          2160
+        ],
+        "om_software_format": 23,
+        "ring_size_per_source": 4
+      },
+      "resources": {
+        "memory_monitor": {
+          "peak": {
+            "gpu_pool_reserved_bytes": 2388022272,
+            "gpu_pool_used_bytes": 1877517312,
+            "pinned_bytes": 0,
+            "rss_bytes": 848072704,
+            "vram_used_bytes": 4864557056
+          },
+          "rss_source": "windows_psapi",
+          "sample_count": 44,
+          "sample_policy": "bounded 256-sample tail",
+          "samples_retained": 44
+        },
+        "peak_gpu_pool_reserved_bytes": 2388022272,
+        "peak_gpu_pool_used_bytes": 1877517312,
+        "peak_ram_bytes": 848072704,
+        "peak_vram_bytes": 4864557056
+      },
+      "status": "PASS"
+    },
+    {
+      "configuration": {
+        "device_index": 0,
+        "fit_scale": 0.5,
+        "fit_stride": 1,
+        "hdr_decoder": "hevc_cuvid",
+        "hdr_interval": [
+          65071,
+          65571
+        ],
+        "offset_frames": 1167,
+        "om_decoder": "h264_cuvid",
+        "om_interval": [
+          66238,
+          66738
+        ],
+        "ring_size_per_source": 4
+      },
+      "fit_profile": {
+        "architecture": "gpu_shot_fitter_v4_single_pass_feature_tape",
+        "batch_size": 4,
+        "candidate_gpu": 0.17442299998219823,
+        "capture_batches": 125,
+        "capture_gpu": 0.3178654000366805,
+        "d2h": 0.02447270000266144,
+        "d2h_calls": 4,
+        "decoded_frames": 500,
+        "decoded_pairs": 500,
+        "fit_resize_frames": 500,
+        "fit_resize_seconds": 0.13017559998843353,
+        "fit_source_traversals": 1,
+        "fit_total": 20.909169800004747,
+        "full_frame_d2h": 0,
+        "h2d": 0.022408299999369774,
+        "h2d_calls": 11,
+        "intensity_gpu": 0.5536576000085915,
+        "native_h2d_calls": 0,
+        "peak_vram_bytes": 6089293824,
+        "peak_vram_mib": 5807.203125,
+        "per_frame_d2h": 0,
+        "replay_candidate_batches": 25,
+        "replay_intensity_batches": 100,
+        "replay_pass_names": [
+          "spatial_and_intensity_centre",
+          "intensity_slopes",
+          "candidates"
+        ],
+        "replay_passes": 3,
+        "replay_spatial_batches": 100,
+        "solver_cpu": 0.5353007999947295,
+        "source_pass_names": [
+          "capture"
+        ],
+        "source_passes": 1,
+        "spatial_gpu": 0.46681600002921186
+      },
+      "fit_seconds_reported_by_fitter": 20.909169800004747,
+      "fit_wall_seconds": 20.986842699996487,
+      "frame_count": 500,
+      "guarantees": {
+        "decoded_rgb_host_transport": false,
+        "fit_only": true,
+        "frame_cache_written": false,
+        "native_nvdec_cuda_frames": true,
+        "nvenc_invoked": false,
+        "output_video_written": false,
+        "renderer_invoked": false
+      },
+      "milliseconds_per_frame": 41.97368539999297,
+      "native_source": {
+        "full_frame_cpu_rgb_transport": false,
+        "hdr_decoder": "hevc_cuvid",
+        "hdr_expected_software_format": "P010LE",
+        "hdr_geometry": [
+          3840,
+          1600
+        ],
+        "hdr_software_format": 158,
+        "om_decoder": "h264_cuvid",
+        "om_expected_software_format": "NV12",
+        "om_geometry": [
+          3840,
+          2160
+        ],
+        "om_software_format": 23,
+        "ring_size_per_source": 4
+      },
+      "resources": {
+        "memory_monitor": {
+          "peak": {
+            "gpu_pool_reserved_bytes": 3612982272,
+            "gpu_pool_used_bytes": 2641615872,
+            "pinned_bytes": 0,
+            "rss_bytes": 848838656,
+            "vram_used_bytes": 6089293824
+          },
+          "rss_source": "windows_psapi",
+          "sample_count": 83,
+          "sample_policy": "bounded 256-sample tail",
+          "samples_retained": 83
+        },
+        "peak_gpu_pool_reserved_bytes": 3612982272,
+        "peak_gpu_pool_used_bytes": 2641615872,
+        "peak_ram_bytes": 848838656,
+        "peak_vram_bytes": 6089293824
+      },
+      "status": "PASS"
+    }
+  ],
+  "schema": "openmatte-hdr-v05-native-fit-scaling/v1",
+  "startup": {
+    "bridge": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\dev\\v05-native\\v5_gpu_bridge.dll",
+    "cuda": {
+      "available": true,
+      "compute_capability": "86",
+      "cupy_version": "14.1.1",
+      "device_count": 1,
+      "device_id": 0,
+      "device_name": "NVIDIA GeForce RTX 3080",
+      "free_vram_bytes": 9536798720,
+      "runtime_error": null,
+      "runtime_ready": true,
+      "total_vram_bytes": 10736893952
+    }
+  },
+  "status": "PASS"
+}

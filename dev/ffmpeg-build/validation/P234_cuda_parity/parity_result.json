@@ -1,0 +1,53 @@
+{
+  "phase": "P2.34_CUDA_PARITY",
+  "status": "FAIL",
+  "requirements": {
+    "luminance_max_limit_nits": 0.01,
+    "cpu_reference": "source_luminance_chunk",
+    "full_luminance_planes_saved": false,
+    "cpu_fallback_allowed": false
+  },
+  "hashes": {
+    "dataset_manifest_sha256": "e682ac5aba2128d6b45b2dbbc20b3300ed8df1ff5d46b02a5d0c1109aa85a7ef",
+    "dataset_metrics_sha256": "5fe61b8ea91e64a9168fcb7a41f881db5430a85dd75195388110f64e5f156e8e",
+    "protocol_config_sha256": "90dbdec019b66a8f23bf35e16d32ad52fe30a8fe30f92d880fb6c2e6f3feee78",
+    "harness_sha256": "ccd470b46a669fa417dc950c2e59d500b4c4328377919eeb120cbacc257c7584"
+  },
+  "constraints": {
+    "production_files_modified": false,
+    "dataset_mutated": false,
+    "global_sync_performed": false,
+    "full_film_scan": false,
+    "render_performed": false,
+    "encode_performed": false
+  },
+  "cases": [],
+  "device": {
+    "cupy_version": "14.1.1",
+    "cuda_device_count": 1,
+    "device_id": 0,
+    "device_name": "NVIDIA GeForce RTX 3080",
+    "compute_capability": "86",
+    "cuda_runtime_version": 13020
+  },
+  "error": {
+    "type": "ValueError",
+    "message": "non-scalar numpy.ndarray cannot be used for fill"
+  },
+  "parity_pass": false,
+  "memory_final": {
+    "pool_used_bytes": 1476096,
+    "pool_reserved_bytes": 1476096,
+    "device_free_bytes": 9534701568,
+    "device_total_bytes": 10736893952,
+    "persistent_chunk_buffers_bytes": 1474560,
+    "model_a_lut_device_bytes": 0,
+    "chunk_buffer_shapes": [
+      [
+        8,
+        1920,
+        3
+      ]
+    ]
+  }
+}

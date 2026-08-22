@@ -1,0 +1,12 @@
+{
+  "name": "common_backend_architecture_cuda_v05",
+  "entrypoint": "tools/openmatte_hdr/run_v05_gpu_native.py",
+  "arguments": [
+    "--phase2-zero-copy",
+    "--bridge",
+    "dev/v05-native/v5_gpu_bridge.dll"
+  ],
+  "activation": "explicit-only",
+  "baseline_entrypoint": "tools/openmatte_hdr/run_v05_gpu_native.py",
+  "baseline_default_mode": "phase1"
+}

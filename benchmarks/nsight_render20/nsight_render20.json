@@ -1,0 +1,362 @@
+{
+  "correlate1d_summary": {
+    "average_time_per_instance_ns": 5254311.432432433,
+    "distinct_correlate_kernels": 10,
+    "grouped_by_separable_width": {
+      "width_129": {
+        "avg_ns_per_instance": 8224784.2265625,
+        "instances": 128,
+        "kernels": [
+          "cupyx_scipy_ndimage_correlate_3d_mirror_w129_1_1",
+          "cupyx_scipy_ndimage_correlate_3d_mirror_w1_129_1",
+          "cupyx_scipy_ndimage_correlate_2d_mirror_w129_1",
+          "cupyx_scipy_ndimage_correlate_2d_mirror_w1_129"
+        ],
+        "percent_of_total_gpu_kernel_time": 35.97532183045457,
+        "total_ms": 1052.772381,
+        "total_ns": 1052772381.0
+      },
+      "width_65": {
+        "avg_ns_per_instance": 1235643.0108695652,
+        "instances": 92,
+        "kernels": [
+          "cupyx_scipy_ndimage_correlate_4d_mirror_w1_65_1_1",
+          "cupyx_scipy_ndimage_correlate_4d_mirror_w1_1_65_1",
+          "cupyx_scipy_ndimage_correlate_3d_mirror_w1_65_1",
+          "cupyx_scipy_ndimage_correlate_3d_mirror_w1_1_65"
+        ],
+        "percent_of_total_gpu_kernel_time": 3.8846424282190326,
+        "total_ms": 113.679157,
+        "total_ns": 113679157.0
+      },
+      "width_9": {
+        "avg_ns_per_instance": 2800.0,
+        "instances": 2,
+        "kernels": [
+          "cupyx_scipy_ndimage_correlate_2d_mirror_w9_1",
+          "cupyx_scipy_ndimage_correlate_2d_mirror_w1_9"
+        ],
+        "percent_of_total_gpu_kernel_time": 0.0001913631150345932,
+        "total_ms": 0.0056,
+        "total_ns": 5600.0
+      }
+    },
+    "instances": 222,
+    "kernel_name_prefix": "cupyx_scipy_ndimage_correlate",
+    "per_kernel": [
+      {
+        "avg_ns": 10416842.7,
+        "instances": 44,
+        "max_ns": 13162756.0,
+        "med_ns": 9440959.5,
+        "min_ns": 6292353.0,
+        "name": "cupyx_scipy_ndimage_correlate_3d_mirror_w129_1_1",
+        "percent_of_total_gpu_kernel_time": 15.662424363284547,
+        "separable_kernel_width": 129,
+        "total_ns": 458341078.0
+      },
+      {
+        "avg_ns": 8942926.4,
+        "instances": 44,
+        "max_ns": 11925914.0,
+        "med_ns": 7902102.5,
+        "min_ns": 5225786.0,
+        "name": "cupyx_scipy_ndimage_correlate_3d_mirror_w1_129_1",
+        "percent_of_total_gpu_kernel_time": 13.446291936553472,
+        "separable_kernel_width": 129,
+        "total_ns": 393488760.0
+      },
+      {
+        "avg_ns": 6383369.5,
+        "instances": 20,
+        "max_ns": 7383908.0,
+        "med_ns": 6140863.0,
+        "min_ns": 6130624.0,
+        "name": "cupyx_scipy_ndimage_correlate_2d_mirror_w129_1",
+        "percent_of_total_gpu_kernel_time": 4.362648148232034,
+        "separable_kernel_width": 129,
+        "total_ns": 127667391.0
+      },
+      {
+        "avg_ns": 3663757.6,
+        "instances": 20,
+        "max_ns": 4492759.0,
+        "med_ns": 3479521.5,
+        "min_ns": 3478546.0,
+        "name": "cupyx_scipy_ndimage_correlate_2d_mirror_w1_129",
+        "percent_of_total_gpu_kernel_time": 2.5039573823845185,
+        "separable_kernel_width": 129,
+        "total_ns": 73275152.0
+      },
+      {
+        "avg_ns": 1949505.2,
+        "instances": 28,
+        "max_ns": 7064514.0,
+        "med_ns": 346594.0,
+        "min_ns": 345089.0,
+        "name": "cupyx_scipy_ndimage_correlate_4d_mirror_w1_65_1_1",
+        "percent_of_total_gpu_kernel_time": 1.8653169187374974,
+        "separable_kernel_width": 65,
+        "total_ns": 54586145.0
+      },
+      {
+        "avg_ns": 1867399.6,
+        "instances": 28,
+        "max_ns": 6843360.0,
+        "med_ns": 325281.5,
+        "min_ns": 324769.0,
+        "name": "cupyx_scipy_ndimage_correlate_4d_mirror_w1_1_65_1",
+        "percent_of_total_gpu_kernel_time": 1.7867570291861639,
+        "separable_kernel_width": 65,
+        "total_ns": 52287189.0
+      },
+      {
+        "avg_ns": 220079.4,
+        "instances": 18,
+        "max_ns": 222146.0,
+        "med_ns": 220305.0,
+        "min_ns": 216993.0,
+        "name": "cupyx_scipy_ndimage_correlate_3d_mirror_w1_65_1",
+        "percent_of_total_gpu_kernel_time": 0.13536992585562296,
+        "separable_kernel_width": 65,
+        "total_ns": 3961430.0
+      },
+      {
+        "avg_ns": 158021.8,
+        "instances": 18,
+        "max_ns": 160096.0,
+        "med_ns": 157905.0,
+        "min_ns": 157664.0,
+        "name": "cupyx_scipy_ndimage_correlate_3d_mirror_w1_1_65",
+        "percent_of_total_gpu_kernel_time": 0.09719855443974852,
+        "separable_kernel_width": 65,
+        "total_ns": 2844393.0
+      },
+      {
+        "avg_ns": 2880.0,
+        "instances": 1,
+        "max_ns": 2880.0,
+        "med_ns": 2880.0,
+        "min_ns": 2880.0,
+        "name": "cupyx_scipy_ndimage_correlate_2d_mirror_w9_1",
+        "percent_of_total_gpu_kernel_time": 9.841531630350509e-05,
+        "separable_kernel_width": 9,
+        "total_ns": 2880.0
+      },
+      {
+        "avg_ns": 2720.0,
+        "instances": 1,
+        "max_ns": 2720.0,
+        "med_ns": 2720.0,
+        "min_ns": 2720.0,
+        "name": "cupyx_scipy_ndimage_correlate_2d_mirror_w1_9",
+        "percent_of_total_gpu_kernel_time": 9.294779873108814e-05,
+        "separable_kernel_width": 9,
+        "total_ns": 2720.0
+      }
+    ],
+    "percent_of_total_gpu_kernel_time": 39.860155621788635,
+    "total_time_ms": 1166.457138,
+    "total_time_ns": 1166457138.0,
+    "width_interpretation": {
+      "129": "radius 64 => sigma 16 at full resolution with truncate 4.0 (the sigma=16 Gaussian under investigation)",
+      "65": "radius 32 => sigma 8, i.e. sigma 16 scaled by fit_scale 0.5 during fitting"
+    }
+  },
+  "findings": {
+    "correlate1d_dominates_gpu_time": false,
+    "correlate1d_is_largest_single_kernel": false,
+    "fit_scale_sigma8_share_percent": 3.8846424282190326,
+    "sigma16_full_resolution_share_percent": 35.97532183045457
+  },
+  "gpu_totals": {
+    "distinct_kernel_count": 91,
+    "kernel_time_per_rendered_frame_ms": 146.31868839999998,
+    "total_gpu_kernel_time_ms": 2926.373768,
+    "total_gpu_kernel_time_ns": 2926373768.0,
+    "total_gpu_memory_operation_time_ms": 26.56994,
+    "total_gpu_memory_operation_time_ns": 26569940.0
+  },
+  "largest_single_kernel": {
+    "average_time_per_instance_ns": 15243618.8,
+    "instances": 80,
+    "name": "<unnamed>::yuv_to_working_rgb(const unsigned char *, const unsigned char *, int, int, int, int, int, int, const short *, const int *, int, float *)",
+    "percent_of_total_gpu_kernel_time": 41.67237682811268,
+    "total_time_ms": 1219.489504,
+    "total_time_ns": 1219489504.0
+  },
+  "limitations": [
+    "One 20-frame run on a single profile and GPU; no repetition or variance estimate.",
+    "Nsight adds tracing overhead, so absolute times are not throughput numbers.",
+    "Fit and render kernels are pooled in one process; the report separates them only by kernel width, not by phase.",
+    "No optimization, LUT, CUDA tuning or Gaussian change was implemented or evaluated."
+  ],
+  "memory_operations": [
+    {
+      "avg_ns": 38995.8,
+      "count": 452,
+      "max_ns": 225281.0,
+      "operation": "[CUDA memcpy Device-to-Device]",
+      "total_ns": 17626123.0
+    },
+    {
+      "avg_ns": 33432.7,
+      "count": 263,
+      "max_ns": 2539052.0,
+      "operation": "[CUDA memcpy Host-to-Device]",
+      "total_ns": 8792809.0
+    },
+    {
+      "avg_ns": 1421.9,
+      "count": 83,
+      "max_ns": 8192.0,
+      "operation": "[CUDA memcpy Device-to-Host]",
+      "total_ns": 118016.0
+    },
+    {
+      "avg_ns": 1099.7,
+      "count": 30,
+      "max_ns": 1408.0,
+      "operation": "[CUDA memset]",
+      "total_ns": 32992.0
+    }
+  ],
+  "other_major_kernels": [
+    {
+      "average_time_per_instance_ns": 15243618.8,
+      "instances": 80,
+      "name": "<unnamed>::yuv_to_working_rgb(const unsigned char *, const unsigned char *, int, int, int, int, int, int, const short *, const int *, int, float *)",
+      "percent_of_total_gpu_kernel_time": 41.67237682811268,
+      "total_time_ms": 1219.489504,
+      "total_time_ns": 1219489504.0
+    },
+    {
+      "average_time_per_instance_ns": 141061.5,
+      "instances": 800,
+      "name": "ampere_sgemm_32x128_tn",
+      "percent_of_total_gpu_kernel_time": 3.856282346226936,
+      "total_time_ms": 112.849235,
+      "total_time_ns": 112849235.0
+    },
+    {
+      "average_time_per_instance_ns": 84931.3,
+      "instances": 519,
+      "name": "cupy_multiply__float32_float32_float32",
+      "percent_of_total_gpu_kernel_time": 1.5062788110667618,
+      "total_time_ms": 44.079348,
+      "total_time_ns": 44079348.0
+    },
+    {
+      "average_time_per_instance_ns": 178381.3,
+      "instances": 238,
+      "name": "cupy_clip__float32_float_float_float32",
+      "percent_of_total_gpu_kernel_time": 1.4507629019998787,
+      "total_time_ms": 42.454745,
+      "total_time_ns": 42454745.0
+    },
+    {
+      "average_time_per_instance_ns": 227060.9,
+      "instances": 175,
+      "name": "cupy_power__float32_float_float32",
+      "percent_of_total_gpu_kernel_time": 1.3578462681189534,
+      "total_time_ms": 39.735657,
+      "total_time_ns": 39735657.0
+    },
+    {
+      "average_time_per_instance_ns": 283334.0,
+      "instances": 118,
+      "name": "cupy_true_divide__float32_float32_float32",
+      "percent_of_total_gpu_kernel_time": 1.142486081771083,
+      "total_time_ms": 33.433413,
+      "total_time_ns": 33433413.0
+    },
+    {
+      "average_time_per_instance_ns": 1562793.4,
+      "instances": 20,
+      "name": "rgb_to_p010",
+      "percent_of_total_gpu_kernel_time": 1.0680750128976688,
+      "total_time_ms": 31.255867,
+      "total_time_ns": 31255867.0
+    },
+    {
+      "average_time_per_instance_ns": 210805.1,
+      "instances": 136,
+      "name": "cupy_maximum__float32_float_float32",
+      "percent_of_total_gpu_kernel_time": 0.9796934456391696,
+      "total_time_ms": 28.669492,
+      "total_time_ns": 28669492.0
+    },
+    {
+      "average_time_per_instance_ns": 158224.6,
+      "instances": 170,
+      "name": "cupy_multiply__float_float32_float32",
+      "percent_of_total_gpu_kernel_time": 0.919164062162274,
+      "total_time_ms": 26.898176,
+      "total_time_ns": 26898176.0
+    },
+    {
+      "average_time_per_instance_ns": 108327.3,
+      "instances": 204,
+      "name": "cupy_copy__float32_float32",
+      "percent_of_total_gpu_kernel_time": 0.7551586964608138,
+      "total_time_ms": 22.098766,
+      "total_time_ns": 22098766.0
+    },
+    {
+      "average_time_per_instance_ns": 444852.7,
+      "instances": 40,
+      "name": "cupy_cub_mean_pass1",
+      "percent_of_total_gpu_kernel_time": 0.6080600227687661,
+      "total_time_ms": 17.794109,
+      "total_time_ns": 17794109.0
+    },
+    {
+      "average_time_per_instance_ns": 159431.8,
+      "instances": 110,
+      "name": "cupy_add__float_float32_float32",
+      "percent_of_total_gpu_kernel_time": 0.5992909447102452,
+      "total_time_ms": 17.537493,
+      "total_time_ns": 17537493.0
+    }
+  ],
+  "profiler": {
+    "ascii_path_workaround": "Nsight could not serialize the workspace path containing an em dash; the run used a temporary ASCII junction and the report was copied back. No pipeline code or media was modified.",
+    "cpu_context_switch_trace": "disabled (requires administrative privileges)",
+    "cuda_event_trace": false,
+    "report_file": "render20.nsys-rep",
+    "sampling": "none",
+    "tool": "NVIDIA Nsight Systems",
+    "trace": [
+      "cuda",
+      "nvtx",
+      "nvvideo"
+    ],
+    "version": "2025.1.3.140-251335620677v0"
+  },
+  "purpose": "Determine whether cupyx.scipy.ndimage separable Gaussian correlation (sigma=16) dominates GPU time in the unchanged V5 Native Phase 2 pipeline.",
+  "run": {
+    "code_modified": false,
+    "entry_point": "tools/openmatte_hdr/run_v05_gpu_native_segmented.py",
+    "fit_frame_count_reported_by_runner": 20,
+    "fit_scale": 0.5,
+    "fit_seconds_reported_by_runner": 1.8792696000018623,
+    "fit_stride": 1,
+    "frames_rendered": 20,
+    "frames_requested": 20,
+    "gaussian_implementation_modified": false,
+    "gpu": "NVIDIA GeForce RTX 3080 (10240 MiB, driver 595.79)",
+    "hdr_decoder": "hevc_cuvid",
+    "note": "The profiled process performs both the single fit pass and the 20-frame render, so kernel totals include fit and render together.",
+    "om_decoder": "h264_cuvid",
+    "pipeline": "V5 Native Phase 2 segmented (unchanged)",
+    "profile": "tools/openmatte_hdr/profiles/br2049_t2714_300f_throughput.json",
+    "runner_status": "PASS",
+    "segment_count": 1,
+    "source_frame_interval": [
+      65071,
+      65091
+    ]
+  },
+  "schema": "openmatte-hdr-v05-nsight-render20/v1",
+  "status": "DIAGNOSTIC_ONLY"
+}

@@ -1,0 +1,125 @@
+{
+  "schema": "openmatte-hdr-intensity-conditioned-chroma-field/v1",
+  "status": "saturation_only_accepted_as_bounded_poc_default_pending_visual_hdr_review",
+  "source_checkpoint": "research/physical_validation/openmatte_hdr_chroma_field/matrix08_gpu_milestone.json",
+  "runner": "tools/openmatte_hdr/fast_chroma_field_intensity.py",
+  "source_contract": {
+    "hdr_frame_interval": [73274, 73460],
+    "sdr_offset_frames": -19,
+    "frames": 186,
+    "overlap_xyxy": [0, 140, 1920, 940],
+    "cache_path": "tools/openmatte_hdr/cache/73274_186/",
+    "cache_reused": true,
+    "backend": "cupy/gpu"
+  },
+  "frozen_components": {
+    "spatial_chroma_field_real_parameters": 12,
+    "base_sigma_px": 16,
+    "chroma_sigma_px": 16,
+    "gain_measurement_frames": 186,
+    "hdr_centre_copied": true,
+    "intensity_modified_by_chroma_step": false,
+    "chroma_detail_modified": false,
+    "temporal_state": false,
+    "ai": false,
+    "lut": false,
+    "mmr": false
+  },
+  "new_bounded_controls": {
+    "additional_spatial_parameters": 0,
+    "additional_global_real_parameters": 2,
+    "normalized_intensity": "clip((smoothed predicted ICtCp I - centre) / normalization, -1, 1)",
+    "intensity_centre": 0.2737827739241617,
+    "intensity_normalization": 0.16570554081191413,
+    "log_saturation_slope": 0.17093341556958339,
+    "saturation_factor_at_t_minus_one": 0.8428776941343928,
+    "saturation_factor_at_t_plus_one": 1.1864117498410804,
+    "hue_slope_fitted_degrees": 5.0,
+    "hue_slope_unconstrained_degrees": 5.2470122449511285,
+    "hue_slope_limit_degrees": 5.0,
+    "residual_scale_limit_at_abs_t_one": [0.8, 1.25]
+  },
+  "heldout_protocol": {
+    "training_rule": "frame_index mod 5 != 0",
+    "training_frames": 148,
+    "holdout_rule": "frame_index mod 5 == 0",
+    "holdout_frames": 38,
+    "minimum_chroma_error_improvement_fraction": 0.002,
+    "maximum_hue_step_regression_degrees": 0.02
+  },
+  "heldout_candidates": {
+    "spatial_only": {
+      "lowpass_band_chroma_error": 0.012704957202512619,
+      "lowpass_boundary_hue_step_degrees": 12.6508021706029
+    },
+    "intensity_saturation": {
+      "lowpass_band_chroma_error": 0.012405573437262696,
+      "lowpass_boundary_hue_step_degrees": 12.650802107024612,
+      "chroma_error_reduction_percent": 2.3564326937733804,
+      "accepted_as_default": true
+    },
+    "intensity_hue": {
+      "lowpass_band_chroma_error": 0.012729970361405645,
+      "lowpass_boundary_hue_step_degrees": 12.808854618407132,
+      "accepted_as_default": false
+    },
+    "intensity_joint": {
+      "lowpass_band_chroma_error": 0.012305146795615816,
+      "lowpass_boundary_hue_step_degrees": 12.80885448121188,
+      "chroma_error_reduction_percent": 3.1468851136132403,
+      "accepted_as_default": false,
+      "reason": "Held-out hue step exceeds the preregistered 0.02 degree regression allowance."
+    }
+  },
+  "accepted_default_full_render": {
+    "artifact_directory": "tools/openmatte_hdr/out/chroma_field_intensity_default/",
+    "rendered_model": "intensity_saturation",
+    "timing_seconds": {
+      "gain_pass": 4.322238099997776,
+      "spatial_fit": 3.344876999999542,
+      "intensity_fit": 5.89983989999746,
+      "heldout_gate": 1.67254320000211,
+      "render": 13.07543749999968,
+      "total_with_reused_cache": 28.429069099998742
+    },
+    "lowpass_band_chroma_error": {
+      "spatial_field": 0.012715949601824246,
+      "intensity_saturation": 0.012309279660844514,
+      "reduction_percent": 3.1981090969516734
+    },
+    "instantaneous_hue_step_degrees": {
+      "spatial_top": 0.7020435302488265,
+      "saturation_top": 0.7549411260953514,
+      "spatial_bottom": 0.7505111673826811,
+      "saturation_bottom": 0.7581034014301915
+    },
+    "range_safety": {
+      "negative_rgb_fraction_before_clip": 0.0,
+      "above_peak_rgb_fraction_before_clip": 0.0
+    },
+    "validated_outputs": {
+      "spatial": "tools/openmatte_hdr/out/chroma_field_intensity_default/v02_spatial_chroma_hdr10.mkv",
+      "saturation": "tools/openmatte_hdr/out/chroma_field_intensity_default/v04_intensity_chroma_hdr10.mkv",
+      "comparison": "tools/openmatte_hdr/out/chroma_field_intensity_default/side_by_side_hdr10.mkv",
+      "frames_each": 186,
+      "tags": {
+        "color_range": "tv",
+        "color_space": "bt2020nc",
+        "color_transfer": "smpte2084",
+        "color_primaries": "bt2020"
+      }
+    }
+  },
+  "nondefault_visual_review": {
+    "artifact_directory": "tools/openmatte_hdr/out/chroma_field_intensity/",
+    "rendered_model": "intensity_joint",
+    "full_render_lowpass_band_chroma_error": 0.01224612717276379,
+    "full_render_chroma_error_reduction_percent": 3.6947490653238657,
+    "default_status": "rejected_pending_or_without_visual_override"
+  },
+  "decision": {
+    "adopt_for_next_poc_default": "intensity_saturation",
+    "do_not_adopt": "intensity_hue or intensity_joint",
+    "remaining_limitation": "Open Matte extension pixels have no HDR ground truth; visual HDR review and cross-shot confirmation are required before production promotion."
+  }
+}

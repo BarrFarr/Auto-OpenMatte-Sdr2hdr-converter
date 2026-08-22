@@ -1,0 +1,125 @@
+{
+  "phase": "P2.34",
+  "case_id": "br2049_temporal_stratum_12",
+  "material": "BR2049",
+  "source_metadata": {
+    "hdr_source": "G:\\Filmy\\Blade.Runner.2049.2017.2160p.UHD.Bluray.x265.HDR10.HEVC.DTS-HDMA.5.1-4K4U\\Blade.Runner.2049.2017.UHD.BluRay.2160p.DDP.7.1.DV.HDR.x265-hallowed.mkv",
+    "om_source": "G:\\Filmy\\Blade.Runner.2049.2017.2160p.UHD.Bluray.x265.HDR10.HEVC.DTS-HDMA.5.1-4K4U\\Blade.Runner.2049.2017.Open.Matte.RUS.SDR.2160p.mkv",
+    "hdr_width": 3840,
+    "hdr_height": 1600,
+    "om_width": 3840,
+    "om_height": 2160,
+    "offset_frames": 1167,
+    "offset_seconds": 48.673624999999994,
+    "fps": "24000/1001",
+    "fps_float": 23.976023976023978,
+    "sync_confidence": 0.9745,
+    "sync_status": "LOCKED",
+    "geometry": {
+      "scale_x": 1.0,
+      "scale_y": 1.0,
+      "offset_x": 0,
+      "offset_y": 280,
+      "overlap": [
+        0,
+        280,
+        3840,
+        1880
+      ],
+      "confidence": 0.9155,
+      "status": "preserved geometry warning below 0.95 gate"
+    }
+  },
+  "boundary_result": {
+    "case_id": "br2049_temporal_stratum_12",
+    "material": "BR2049",
+    "anchor_hdr_frame": 133617,
+    "anchor_om_frame": 134784,
+    "anchor_timestamp_seconds": 5572.942375,
+    "window": {
+      "half_window_seconds": 5.0,
+      "start_frame": 133497,
+      "end_frame_exclusive": 133738,
+      "requested_end_frame_exclusive": 133738,
+      "decoded_frame_count": 241
+    },
+    "boundaries": [
+      {
+        "frame": 133523,
+        "timestamp_seconds": 5569.021791666666,
+        "boundary_score": 0.4348003095541843,
+        "threshold": 0.3,
+        "type": "hard",
+        "confidence": 1.0
+      },
+      {
+        "frame": 133736,
+        "timestamp_seconds": 5577.905666666667,
+        "boundary_score": 0.4872569859322158,
+        "threshold": 0.3,
+        "type": "hard",
+        "confidence": 1.0
+      }
+    ],
+    "boundary_count": 2,
+    "anchor_near_cut": false,
+    "anchor_near_cut_guard_frames": 12,
+    "nearest_boundary_distance_frames": 94,
+    "shot_status": "LOCAL_SHOT_RESOLVED",
+    "shot_start_frame": 133523,
+    "shot_end_frame_exclusive": 133736,
+    "shot_duration_frames": 213,
+    "shot_duration_seconds": 8.883875,
+    "anchor_position_in_shot": 0.4413145539906103,
+    "boundary_detection": {
+      "algorithm": "deterministic local frame difference",
+      "weights": {
+        "histogram": 0.4,
+        "mean_luminance": 0.2,
+        "edge_ncc_change": 0.4
+      },
+      "hard_threshold": 0.3,
+      "gradual_threshold": 0.15,
+      "gradual_min_run_frames": 5,
+      "full_film_scan": false
+    },
+    "decode": {
+      "command": [
+        "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\install\\bin\\ffmpeg.exe",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-nostdin",
+        "-ss",
+        "5567.937375",
+        "-i",
+        "G:\\Filmy\\Blade.Runner.2049.2017.2160p.UHD.Bluray.x265.HDR10.HEVC.DTS-HDMA.5.1-4K4U\\Blade.Runner.2049.2017.UHD.BluRay.2160p.DDP.7.1.DV.HDR.x265-hallowed.mkv",
+        "-map",
+        "0:v:0",
+        "-vf",
+        "scale=320:134,format=gray",
+        "-frames:v",
+        "241",
+        "-pix_fmt",
+        "gray",
+        "-vsync",
+        "0",
+        "-f",
+        "rawvideo",
+        "pipe:1"
+      ],
+      "returncode": 0,
+      "stderr": "[matroska,webm @ 0000026245E15000] Unsupported encoding type\r\n    Last message repeated 10 times\r\n",
+      "requested_start_frame": 133497,
+      "requested_end_frame": 133738,
+      "requested_frame_count": 241,
+      "decoded_frame_count": 241,
+      "proxy_shape": [
+        134,
+        320
+      ],
+      "seek_mode": "bounded fast input seek; local diagnostic only",
+      "full_film_scan": false
+    }
+  }
+}

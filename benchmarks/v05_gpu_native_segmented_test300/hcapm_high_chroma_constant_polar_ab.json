@@ -1,0 +1,581 @@
+{
+  "correction": {
+    "A": "current frozen baseline corrected_rgb",
+    "B": "A plus in-memory side-specific constant polar HCAPM",
+    "I_unchanged_by_construction": true,
+    "no_Y_dependent_correction": true,
+    "no_hue_sectors": true,
+    "no_matrix_cdf_or_residual_correction": true
+  },
+  "experiment": {
+    "Y_dependent_correction": false,
+    "application_rule": "C < 0.15: exact zero correction; C >= 0.15: full constant polar correction",
+    "composite_run": false,
+    "encoder_run": false,
+    "equations": [
+      "H_out=H+delta_H_side",
+      "C_out=C*exp(delta_log_C_side)",
+      "Ct_out=C_out*cos(H_out)",
+      "Cp_out=C_out*sin(H_out)",
+      "I_out=I_exact"
+    ],
+    "evaluated_overlap_distance_px": [
+      0,
+      100
+    ],
+    "extension_correction_applied": false,
+    "fit_scale": 0.5,
+    "fit_stride": 1,
+    "fitting_modified": false,
+    "frame_count": 12,
+    "full_render_run": false,
+    "gain_field_modified": false,
+    "hue_sector_count": 0,
+    "nvdec_cuda_nvenc_modified": false,
+    "overlap": [
+      0,
+      280,
+      3840,
+      1880
+    ],
+    "pq_output_run": false,
+    "precomputed_profile_values": [
+      "cos(delta_H)",
+      "sin(delta_H)",
+      "exp(delta_log_C)"
+    ],
+    "production_deployment": false,
+    "profile": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\tools\\openmatte_hdr\\profiles\\br2049_t2714_300f_throughput.json",
+    "renderer_modified": false,
+    "segment": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\benchmarks\\v05_gpu_native_segmented_test300\\segments\\segment_000004.mkv",
+    "segment_index": 4,
+    "side_geometry": {
+      "bottom": {
+        "distance_from_boundary_px": [
+          0,
+          100
+        ],
+        "hdr_rows": [
+          1500,
+          1600
+        ],
+        "om_rows": [
+          1780,
+          1880
+        ]
+      },
+      "top": {
+        "distance_from_boundary_px": [
+          0,
+          100
+        ],
+        "hdr_rows": [
+          0,
+          100
+        ],
+        "om_rows": [
+          280,
+          380
+        ]
+      }
+    },
+    "source_frame_interval": [
+      65359,
+      65371
+    ],
+    "spatial_field_modified": false,
+    "top_bottom_independent": true,
+    "training_rule": "baseline corrected_rgb OM C >= 0.15 and HDR C > 0; one robust constant profile per side"
+  },
+  "fit": {
+    "baseline_only_for_A": true,
+    "fit_source": "native.NativeV4GpuShotFitter.fit_shot",
+    "holdout_frame_count": 3,
+    "render_model": "intensity_joint",
+    "training_frame_count": 9
+  },
+  "invariants": {
+    "I_max_abs_change_applied": 0.0,
+    "I_max_abs_change_roundtrip": 1.5791670193721075e-09,
+    "extension_correction_applied": false,
+    "finite_rgb_and_ictcp": true,
+    "inactive_CtCp_max_abs_change": 0.0,
+    "max_rgb_luminance_change_nits": 0.0172276189641849,
+    "nonfinite_ictcp_count": 0,
+    "nonfinite_rgb_count": 0,
+    "outside_0_100_px_evaluated": false,
+    "preclip_out_of_range_fraction": 0.0
+  },
+  "metrics": {
+    "bottom": {
+      "C_gte_0_15": {
+        "A_to_B": {
+          "CtCp_abs_change": {
+            "count": 1457580,
+            "max": 0.005757300648838282,
+            "mean": 0.005224352236837149,
+            "p95": 0.005646056961268187
+          },
+          "I_abs_change_applied": {
+            "count": 1457580,
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "I_abs_change_roundtrip": {
+            "count": 1457580,
+            "max": 1.4662734360015861e-09,
+            "mean": 1.2366793145091037e-09,
+            "p95": 1.3733492121303925e-09
+          },
+          "chroma_abs_change_ictcp": {
+            "count": 1457580,
+            "max": 0.0050663575530052185,
+            "mean": 0.004581359215080738,
+            "p95": 0.0049576046876609325
+          },
+          "hue_abs_change_degrees": {
+            "count": 1457580,
+            "max": 0.6756331920623779,
+            "mean": 0.6756324172019958,
+            "p95": 0.6756327152252197
+          },
+          "luminance_abs_change_nits": {
+            "count": 1457580,
+            "max": 0.017227619886398315,
+            "mean": 0.007338420953601599,
+            "p95": 0.012602130882441998
+          }
+        },
+        "baseline_A": {
+          "chroma_error_ictcp": {
+            "count": 1457580,
+            "max": 0.0746920257806778,
+            "mean": 0.005565838422626257,
+            "p95": 0.011470580473542213
+          },
+          "hue_error_degrees": {
+            "count": 1457580,
+            "max": 12.37260913848877,
+            "mean": 1.289107084274292,
+            "p95": 3.2235023975372314
+          },
+          "luminance_error_nits": {
+            "count": 1457580,
+            "max": 7.987442970275879,
+            "mean": 0.9534401297569275,
+            "p95": 2.5662946701049805
+          }
+        },
+        "constant_hcapm_B": {
+          "chroma_error_ictcp": {
+            "count": 1457580,
+            "max": 0.07794835418462753,
+            "mean": 0.0031856310088187456,
+            "p95": 0.007616044487804174
+          },
+          "hue_error_degrees": {
+            "count": 1457580,
+            "max": 13.048240661621094,
+            "mean": 1.1648387908935547,
+            "p95": 2.9536592960357666
+          },
+          "luminance_error_nits": {
+            "count": 1457580,
+            "max": 7.984007358551025,
+            "mean": 0.9545609951019287,
+            "p95": 2.5701820850372314
+          }
+        },
+        "improvement_A_minus_B": {
+          "chroma_error_ictcp": {
+            "max": -0.0032563284039497375,
+            "mean": 0.0023802074138075113,
+            "p95": 0.003854535985738039
+          },
+          "hue_error_degrees": {
+            "max": -0.6756315231323242,
+            "mean": 0.1242682933807373,
+            "p95": 0.26984310150146484
+          },
+          "luminance_error_nits": {
+            "max": 0.0034356117248535156,
+            "mean": -0.0011208653450012207,
+            "p95": -0.0038874149322509766
+          }
+        },
+        "pixel_count": 1457580,
+        "qualification_checks": {
+          "I_exact_applied": true,
+          "chroma": true,
+          "hue_p95_not_worse": true,
+          "luminance_max_abs_change_le_0_05_nits": true,
+          "pass": true,
+          "rule": "C >= 0.15 chroma mean and p95 improve"
+        }
+      },
+      "C_lt_0_15": {
+        "A_to_B": {
+          "CtCp_abs_change": {
+            "count": 3150420,
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "I_abs_change_applied": {
+            "count": 3150420,
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "I_abs_change_roundtrip": {
+            "count": 3150420,
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "chroma_abs_change_ictcp": {
+            "count": 3150420,
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "hue_abs_change_degrees": {
+            "count": 3150420,
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "luminance_abs_change_nits": {
+            "count": 3150420,
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          }
+        },
+        "baseline_A": {
+          "chroma_error_ictcp": {
+            "count": 3150420,
+            "max": 0.10885009914636612,
+            "mean": 0.009545606561005116,
+            "p95": 0.039286546409130096
+          },
+          "hue_error_degrees": {
+            "count": 3150420,
+            "max": 179.9998779296875,
+            "mean": 41.421207427978516,
+            "p95": 134.72154235839844
+          },
+          "luminance_error_nits": {
+            "count": 3150420,
+            "max": 8.667135238647461,
+            "mean": 0.2219206541776657,
+            "p95": 1.0604792833328247
+          }
+        },
+        "constant_hcapm_B": {
+          "chroma_error_ictcp": {
+            "count": 3150420,
+            "max": 0.10885009914636612,
+            "mean": 0.009545606561005116,
+            "p95": 0.039286546409130096
+          },
+          "hue_error_degrees": {
+            "count": 3150420,
+            "max": 179.9998779296875,
+            "mean": 41.421207427978516,
+            "p95": 134.72154235839844
+          },
+          "luminance_error_nits": {
+            "count": 3150420,
+            "max": 8.667135238647461,
+            "mean": 0.2219206541776657,
+            "p95": 1.0604792833328247
+          }
+        },
+        "improvement_A_minus_B": {
+          "chroma_error_ictcp": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "hue_error_degrees": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "luminance_error_nits": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          }
+        },
+        "pixel_count": 3150420,
+        "qualification_checks": {
+          "I_exact_applied": true,
+          "chroma": true,
+          "hue_p95_not_worse": true,
+          "luminance_max_abs_change_le_0_05_nits": true,
+          "pass": true,
+          "rule": "C < 0.15 exact unchanged"
+        }
+      }
+    },
+    "top": {
+      "C_gte_0_15": {
+        "A_to_B": {
+          "CtCp_abs_change": {
+            "count": 2896812,
+            "max": 0.0017904711421579123,
+            "mean": 0.0016302481526508927,
+            "p95": 0.0017463149270042777
+          },
+          "I_abs_change_applied": {
+            "count": 2896812,
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "I_abs_change_roundtrip": {
+            "count": 2896812,
+            "max": 1.5791670193721075e-09,
+            "mean": 1.390428439052016e-09,
+            "p95": 1.5024755883885632e-09
+          },
+          "chroma_abs_change_ictcp": {
+            "count": 2896812,
+            "max": 0.0017752834828570485,
+            "mean": 0.0016433714190497994,
+            "p95": 0.0017405383987352252
+          },
+          "hue_abs_change_degrees": {
+            "count": 2896812,
+            "max": 0.08147730678319931,
+            "mean": 0.08147643506526947,
+            "p95": 0.0814766213297844
+          },
+          "luminance_abs_change_nits": {
+            "count": 2896812,
+            "max": 0.00301571493037045,
+            "mean": 0.0009542765910737216,
+            "p95": 0.0019036915618926287
+          }
+        },
+        "baseline_A": {
+          "chroma_error_ictcp": {
+            "count": 2896812,
+            "max": 0.15147776901721954,
+            "mean": 0.006791329011321068,
+            "p95": 0.018578652292490005
+          },
+          "hue_error_degrees": {
+            "count": 2896812,
+            "max": 168.00636291503906,
+            "mean": 1.118678331375122,
+            "p95": 2.9141204357147217
+          },
+          "luminance_error_nits": {
+            "count": 2896812,
+            "max": 27.594606399536133,
+            "mean": 3.055645227432251,
+            "p95": 7.675846099853516
+          }
+        },
+        "constant_hcapm_B": {
+          "chroma_error_ictcp": {
+            "count": 2896812,
+            "max": 0.15252798795700073,
+            "mean": 0.006667294539511204,
+            "p95": 0.01865747570991516
+          },
+          "hue_error_degrees": {
+            "count": 2896812,
+            "max": 168.0878448486328,
+            "mean": 1.1165342330932617,
+            "p95": 2.8961031436920166
+          },
+          "luminance_error_nits": {
+            "count": 2896812,
+            "max": 27.592952728271484,
+            "mean": 3.055582046508789,
+            "p95": 7.6754536628723145
+          }
+        },
+        "improvement_A_minus_B": {
+          "chroma_error_ictcp": {
+            "max": -0.001050218939781189,
+            "mean": 0.00012403447180986404,
+            "p95": -7.882341742515564e-05
+          },
+          "hue_error_degrees": {
+            "max": -0.08148193359375,
+            "mean": 0.0021440982818603516,
+            "p95": 0.018017292022705078
+          },
+          "luminance_error_nits": {
+            "max": 0.0016536712646484375,
+            "mean": 6.318092346191406e-05,
+            "p95": 0.0003924369812011719
+          }
+        },
+        "pixel_count": 2896812,
+        "qualification_checks": {
+          "I_exact_applied": true,
+          "chroma": false,
+          "hue_p95_not_worse": true,
+          "luminance_max_abs_change_le_0_05_nits": true,
+          "pass": false,
+          "rule": "C >= 0.15 chroma mean and p95 improve"
+        }
+      },
+      "C_lt_0_15": {
+        "A_to_B": {
+          "CtCp_abs_change": {
+            "count": 1711188,
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "I_abs_change_applied": {
+            "count": 1711188,
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "I_abs_change_roundtrip": {
+            "count": 1711188,
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "chroma_abs_change_ictcp": {
+            "count": 1711188,
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "hue_abs_change_degrees": {
+            "count": 1711188,
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "luminance_abs_change_nits": {
+            "count": 1711188,
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          }
+        },
+        "baseline_A": {
+          "chroma_error_ictcp": {
+            "count": 1711188,
+            "max": 0.1492619514465332,
+            "mean": 0.009769177995622158,
+            "p95": 0.020860929042100906
+          },
+          "hue_error_degrees": {
+            "count": 1711188,
+            "max": 179.9971160888672,
+            "mean": 38.08707046508789,
+            "p95": 73.319580078125
+          },
+          "luminance_error_nits": {
+            "count": 1711188,
+            "max": 3.8978207111358643,
+            "mean": 0.05045434460043907,
+            "p95": 0.09945464879274368
+          }
+        },
+        "constant_hcapm_B": {
+          "chroma_error_ictcp": {
+            "count": 1711188,
+            "max": 0.1492619514465332,
+            "mean": 0.009769177995622158,
+            "p95": 0.020860929042100906
+          },
+          "hue_error_degrees": {
+            "count": 1711188,
+            "max": 179.9971160888672,
+            "mean": 38.08707046508789,
+            "p95": 73.319580078125
+          },
+          "luminance_error_nits": {
+            "count": 1711188,
+            "max": 3.8978207111358643,
+            "mean": 0.05045434460043907,
+            "p95": 0.09945464879274368
+          }
+        },
+        "improvement_A_minus_B": {
+          "chroma_error_ictcp": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "hue_error_degrees": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          },
+          "luminance_error_nits": {
+            "max": 0.0,
+            "mean": 0.0,
+            "p95": 0.0
+          }
+        },
+        "pixel_count": 1711188,
+        "qualification_checks": {
+          "I_exact_applied": true,
+          "chroma": true,
+          "hue_p95_not_worse": true,
+          "luminance_max_abs_change_le_0_05_nits": true,
+          "pass": true,
+          "rule": "C < 0.15 exact unchanged"
+        }
+      }
+    }
+  },
+  "outputs": {
+    "dashboard_png": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\benchmarks\\v05_gpu_native_segmented_test300\\hcapm_high_chroma_constant_polar_ab.png",
+    "report_json": "G:\\Auto-OpenMatte-Sdr2hdr-converter \u2014 kopia\\benchmarks\\v05_gpu_native_segmented_test300\\hcapm_high_chroma_constant_polar_ab.json"
+  },
+  "profiles": {
+    "bottom": {
+      "delta_h_degrees": 0.6756300364709944,
+      "delta_h_radians": 0.011791968661788221,
+      "delta_log_c": 0.02139638791761811,
+      "precomputed_cos_delta_h": 0.9999304755431629,
+      "precomputed_exp_delta_log_c": 1.0216269319595355,
+      "precomputed_sin_delta_h": 0.011791695383782823,
+      "training_rule": "baseline corrected_rgb OM C >= 0.15 and HDR C > 0",
+      "training_sample_count": 1457580
+    },
+    "top": {
+      "delta_h_degrees": 0.08147424733328681,
+      "delta_h_radians": 0.0014219938715500646,
+      "delta_log_c": 0.006901036621959622,
+      "precomputed_cos_delta_h": 0.999998988966885,
+      "precomputed_exp_delta_log_c": 1.0069249036460026,
+      "precomputed_sin_delta_h": 0.0014219933923224012,
+      "training_rule": "baseline corrected_rgb OM C >= 0.15 and HDR C > 0",
+      "training_sample_count": 2896812
+    }
+  },
+  "qualification": {
+    "group_check_count": 4,
+    "group_pass_count": 3,
+    "production_deployment": false,
+    "reasons": [
+      "one or more TOP/BOTTOM group checks failed"
+    ],
+    "result": "NO-PASS",
+    "rule": "C>=0.15 chroma mean/p95 must improve and hue p95 cannot rise per side; C<0.15 Ct/Cp and applied I must remain exact; RGB luminance change must be <=0.05 nits; all RGB/ICtCp must be finite."
+  },
+  "schema": "openmatte-hdr-v05-hcapm-high-chroma-constant-polar-ab/v1",
+  "status": "NO-PASS",
+  "timing_seconds": {
+    "fit": 1.8460344999984954,
+    "total": 14.21938450000016
+  }
+}

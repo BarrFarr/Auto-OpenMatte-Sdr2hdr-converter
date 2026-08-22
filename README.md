@@ -1,146 +1,86 @@
-# Auto Open-Matte HDR Extender
+# Auto OpenMatte — SDR to HDR Converter
 
-Automatically combine HDR 21:9 reference video with SDR 16:9 Open Matte video to produce a full 16:9 HDR output.
+Automatic HDR Open Matte extension and SDR-to-HDR conversion tool.
 
 ## Overview
 
-Many films are mastered in HDR at a cinema aspect ratio (e.g., 2.39:1) but also have an SDR "Open Matte" version at 16:9 that reveals additional image content above and below the widescreen frame. This tool combines both sources to create a 16:9 HDR output that preserves the HDR quality of the original while extending the frame using the Open Matte's additional content.
+This CLI application combines an HDR (21:9) master with its SDR Open Matte (16:9) counterpart
+to produce a full 16:9 HDR output where:
 
-**Key principle:** HDR is always the master reference. The Open Matte content is adapted to match the HDR, never the reverse.
+- The center HDR region is preserved as-is (MASTER)
+- The extension areas from Open Matte are transformed to match HDR characteristics
+- Synchronization, shot detection, geometry, and color matching are fully automatic
 
-## Features
+## Modes
 
-- **Source Inspection** - Automatically detect video properties, HDR metadata, and frame characteristics
-- **Image-Based Synchronization** - Align sources temporally using visual content analysis (no audio)
-- **Shot Detection** - Identify scene boundaries and transitions
-- **Geometry Alignment** - Sub-pixel alignment of overlapping regions between sources
-- **Luminance Mapping** - Fit monotonic tone curves to map SDR luminance to HDR range
-- **Color Transform** - Match color characteristics between sources per-shot
-- **Seamless Composition** - Blend extended regions with smooth transitions
-- **Preview Generation** - Quick visual previews before committing to full render
-- **Full HDR Render** - Produce final output with proper HDR10/HLG metadata
+### Mode A: Extend HDR
+
+Compose a 16:9 HDR from HDR master + Open Matte extension areas:
+
+```bash
+auto_openmatte analyze --hdr film_hdr.mkv --openmatte film_openmatte.mkv
+auto_openmatte extend --project project.json --output final_extended_hdr.mkv
+```
+
+Or in one step:
+
+```bash
+auto_openmatte extend --hdr film_hdr.mkv --openmatte film_openmatte.mkv --output final.mkv
+```
+
+### Mode B: Convert SDR Open Matte to HDR
+
+Transform the entire Open Matte to HDR using an HDR reference:
+
+```bash
+auto_openmatte convert-hdr --input film_openmatte.mkv --reference film_hdr.mkv --output om_hdr.mkv
+```
+
+## Pipeline
+
+1. **Inspect** — ffprobe metadata, HDR detection, stream selection
+2. **Synchronize** — Frame-offset detection and drift validation
+3. **Shot Detection** — Detect cuts on HDR, map to Open Matte
+4. **Geometry** — Align HDR within Open Matte frame
+5. **Luminance Mapping** — Robust monotonic SDR→HDR luminance transform
+6. **Color Matching** — 3x3 correction matrix per shot
+7. **Compose/Render** — Frame-locked output generation
+
+## Requirements
+
+- Python ≥ 3.10
+- FFmpeg ≥ 5.0 (bundled, from the development tree, or on PATH as a fallback)
+- NumPy, SciPy, OpenCV
 
 ## Installation
 
 ```bash
-pip install -e '.[dev]'
+pip install -e ".[dev]"
 ```
 
-### System Requirements
+## Bundled media-tool packaging contract
 
-- Python 3.10+
-- FFmpeg with HDR support (for video decode/encode)
-- FFprobe (typically bundled with FFmpeg)
+Installable builds must place the matching Windows executables at the application
+root without asking the user to select them:
 
-## Usage
-
-The pipeline runs in three stages: analyze, preview, and render.
-
-### 1. Analyze
-
-Analyze both sources and compute all alignment parameters:
-
-```bash
-auto_openmatte analyze \
-    --hdr /path/to/hdr_master.mkv \
-    --openmatte /path/to/openmatte_sdr.mkv \
-    --sync-search 120 \
-    --samples-per-shot 30 \
-    --alignment-confidence 0.95 \
-    --color-confidence 0.90
+```text
+APP_ROOT/
+  bin/
+    ffmpeg.exe
+    ffprobe.exe
 ```
 
-Options:
-- `--hdr` - Path to HDR 21:9 reference video (required)
-- `--openmatte` - Path to SDR 16:9 Open Matte video (required)
-- `--sync-search` - Frame range to search for sync (default: 120)
-- `--samples-per-shot` - Frames to sample per shot for analysis (default: 30)
-- `--alignment-confidence` - Minimum geometry alignment confidence (default: 0.95)
-- `--color-confidence` - Minimum color match confidence (default: 0.90)
-- `--debug` - Enable debug output
-- `--debug-sync` - Enable sync-specific debug output
+`auto_openmatte` resolves these bundled tools first. During development it checks
+the repository-relative `dev/ffmpeg-build/install/bin` tree, then falls back to
+`PATH`. The resolver reports whether each tool was found, its exact resolved path,
+and its version for diagnostics. No workspace-specific or user-specific path is
+embedded in the application.
 
-### 2. Preview
+## Key Principles
 
-Generate a quick preview of the composited output:
-
-```bash
-auto_openmatte preview --project analysis.json
-```
-
-### 3. Render
-
-Render the final full-resolution HDR output:
-
-```bash
-auto_openmatte render --project analysis.json --output final_output.mkv
-```
-
-## Pipeline Architecture
-
-```
-Source Inspection --> Synchronization --> Shot Detection
-        |                   |                  |
-        v                   v                  v
-   Geometry          Luminance Curve     Color Transform
-   Alignment            Fitting             Analysis
-        |                   |                  |
-        +-------------------+------------------+
-                            |
-                            v
-                      Composition
-                            |
-                            v
-                     HDR Output Render
-```
-
-Each stage produces confidence scores. The pipeline will halt or warn if confidence drops below thresholds.
-
-## Technology Stack
-
-- **Python 3.10+** - Core language
-- **NumPy** - Array operations and image processing math
-- **SciPy** - Curve fitting, optimization, and signal processing
-- **OpenCV** - Frame extraction, geometric transforms, template matching
-- **Pillow** - Image format support and basic operations
-- **FFmpeg** - Video decode/encode via subprocess
-
-## Project Structure
-
-```
-src/auto_openmatte/
-    __init__.py          # Package version
-    __main__.py          # python -m entry point
-    cli.py               # Argument parsing and CLI
-    core/
-        models.py        # Dataclass definitions
-        config.py        # Constants and defaults
-        exceptions.py    # Custom exceptions
-    analysis/            # Source inspection, sync, shot detection
-    processing/          # Geometry, luminance, color, composition
-    pipeline/            # Orchestration logic
-    output/              # Preview and render
-```
-
-## Development
-
-```bash
-# Run tests
-make test
-
-# Run linter
-make lint
-
-# Run type checker
-make typecheck
-
-# Format code
-make format
-
-# Run all checks
-make all
-```
-
-## License
-
-MIT
+- **HDR is MASTER** — never modify the HDR reference pixels
+- **Frame-locked sync** — constant frame offset, validated for drift
+- **No audio** — video processing only
+- **No hard-coded aspect ratios** — geometry derived from actual images
+- **Deterministic** — classical algorithms, no AI/ML color matching
+- **Fail-safe** — confidence scoring, halt on low confidence

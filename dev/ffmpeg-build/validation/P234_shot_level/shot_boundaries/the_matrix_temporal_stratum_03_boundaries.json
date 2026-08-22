@@ -1,0 +1,179 @@
+{
+  "phase": "P2.34",
+  "case_id": "the_matrix_temporal_stratum_03",
+  "material": "The Matrix",
+  "source_metadata": {
+    "hdr_source": "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+    "om_source": "G:\\Filmy\\IMAX format (open matte)\\The Matrix (1999) [OPEN MATTE] [WEB-DL 1080p 10bit DD5.1 x265].mkv",
+    "hdr_width": 3840,
+    "hdr_height": 1600,
+    "om_width": 1920,
+    "om_height": 1080,
+    "offset_frames": -19,
+    "offset_seconds": -0.7924583333333333,
+    "fps": "24000/1001",
+    "fps_float": 23.976023976023978,
+    "sync_confidence": 0.940513,
+    "sync_status": "LOCKED",
+    "geometry": {
+      "scale_x": 0.5,
+      "scale_y": 0.5,
+      "offset_x": 0,
+      "offset_y": 140,
+      "overlap": [
+        0,
+        140,
+        1920,
+        940
+      ],
+      "confidence": 1.0,
+      "status": "preserved geometry contract"
+    }
+  },
+  "boundary_result": {
+    "case_id": "the_matrix_temporal_stratum_03",
+    "material": "The Matrix",
+    "anchor_hdr_frame": 28382,
+    "anchor_om_frame": 28363,
+    "anchor_timestamp_seconds": 1183.7659166666665,
+    "window": {
+      "half_window_seconds": 5.0,
+      "start_frame": 28262,
+      "end_frame_exclusive": 28503,
+      "requested_end_frame_exclusive": 28503,
+      "decoded_frame_count": 241
+    },
+    "boundaries": [
+      {
+        "frame": 28268,
+        "timestamp_seconds": 1179.0111666666667,
+        "boundary_score": 0.17015050197720538,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 28267,
+        "run_end_frame": 28272
+      },
+      {
+        "frame": 28337,
+        "timestamp_seconds": 1181.8890416666666,
+        "boundary_score": 0.5415537040274031,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 28336,
+        "run_end_frame": 28342
+      },
+      {
+        "frame": 28355,
+        "timestamp_seconds": 1182.6397916666665,
+        "boundary_score": 0.2221343624289705,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 28349,
+        "run_end_frame": 28357
+      },
+      {
+        "frame": 28371,
+        "timestamp_seconds": 1183.3071249999998,
+        "boundary_score": 0.2718006717281795,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 28364,
+        "run_end_frame": 28378
+      },
+      {
+        "frame": 28390,
+        "timestamp_seconds": 1184.0995833333332,
+        "boundary_score": 0.23654660618079684,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 28380,
+        "run_end_frame": 28392
+      },
+      {
+        "frame": 28403,
+        "timestamp_seconds": 1184.6417916666667,
+        "boundary_score": 0.19051824542142867,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 28395,
+        "run_end_frame": 28406
+      },
+      {
+        "frame": 28482,
+        "timestamp_seconds": 1187.9367499999998,
+        "boundary_score": 0.5573692121999458,
+        "threshold": 0.15,
+        "type": "gradual",
+        "confidence": 1.0,
+        "run_start_frame": 28428,
+        "run_end_frame": 28482
+      }
+    ],
+    "boundary_count": 7,
+    "anchor_near_cut": true,
+    "anchor_near_cut_guard_frames": 12,
+    "nearest_boundary_distance_frames": 8,
+    "shot_status": "ANCHOR_NEAR_CUT",
+    "shot_start_frame": 28371,
+    "shot_end_frame_exclusive": 28390,
+    "shot_duration_frames": 19,
+    "shot_duration_seconds": 0.7924583333333333,
+    "anchor_position_in_shot": 0.5789473684210527,
+    "boundary_detection": {
+      "algorithm": "deterministic local frame difference",
+      "weights": {
+        "histogram": 0.4,
+        "mean_luminance": 0.2,
+        "edge_ncc_change": 0.4
+      },
+      "hard_threshold": 0.3,
+      "gradual_threshold": 0.15,
+      "gradual_min_run_frames": 5,
+      "full_film_scan": false
+    },
+    "decode": {
+      "command": [
+        "G:\\Auto-OpenMatte-Sdr2hdr-converter\\dev\\ffmpeg-build\\install\\bin\\ffmpeg.exe",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-nostdin",
+        "-ss",
+        "1178.760917",
+        "-i",
+        "G:\\Filmy\\The Matrix UHD\\The Matrix.mkv",
+        "-map",
+        "0:v:0",
+        "-vf",
+        "scale=320:134,format=gray",
+        "-frames:v",
+        "241",
+        "-pix_fmt",
+        "gray",
+        "-vsync",
+        "0",
+        "-f",
+        "rawvideo",
+        "pipe:1"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "requested_start_frame": 28262,
+      "requested_end_frame": 28503,
+      "requested_frame_count": 241,
+      "decoded_frame_count": 241,
+      "proxy_shape": [
+        134,
+        320
+      ],
+      "seek_mode": "bounded fast input seek; local diagnostic only",
+      "full_film_scan": false
+    }
+  }
+}
