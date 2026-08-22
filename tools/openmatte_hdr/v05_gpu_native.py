@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import ctypes
 import json
+import math
 import os
 import queue
 import sys
@@ -210,7 +211,11 @@ class NativeDecoder:
         self.device_index = int(device_index)
         self._dll_handles: list[Any] = []
         self._closed = False
+        self.ring_size = int(ring_size)
         self._outstanding: dict[int, int] = {}
+        self._acquired_count = 0
+        self._released_count = 0
+        self._max_in_flight = 0
         self._error_capacity = 4096
         self._error = ctypes.create_string_buffer(self._error_capacity)
 
@@ -368,6 +373,8 @@ class NativeDecoder:
         slot = int(record.slot)
         sequence = int(record.sequence)
         self._outstanding[slot] = sequence
+        self._acquired_count += 1
+        self._max_in_flight = max(self._max_in_flight, len(self._outstanding))
         try:
             if record.device_ptr == 0 or record.bytes == 0:
                 raise NativeBridgeError("native bridge returned an empty CUDA working frame")
@@ -431,6 +438,17 @@ class NativeDecoder:
         if result != 0:
             raise NativeBridgeError(f"v5_decoder_release failed: {_error_text(self._error)}")
         del self._outstanding[slot]
+        self._released_count += 1
+
+    @property
+    def lifecycle(self) -> dict[str, int]:
+        return {
+            "ring_size": int(self.ring_size),
+            "acquired": int(self._acquired_count),
+            "released": int(self._released_count),
+            "in_flight": int(len(self._outstanding)),
+            "max_in_flight": int(self._max_in_flight),
+        }
 
     def close(self) -> None:
         if self._closed:
@@ -477,6 +495,7 @@ class NativeFrameSource:
         self._pair_om_decoder: NativeDecoder | None = None
         self._pair_decode_stream: Any | None = None
         self._pair_sequence = 0
+        self._lifecycle_passes: list[dict[str, Any]] = []
 
     def hdr_target_size(self) -> tuple[int, int]:
         """Working-RGB geometry the HDR master must have for compositing.
@@ -644,8 +663,17 @@ class NativeFrameSource:
         self,
         profiler: v05.Profiler | None = None,
         include_hashes: bool = False,
+        *,
+        pass_name: str | None = None,
     ) -> Iterator[v05.DecodedFrame]:
         del include_hashes  # Native decode intentionally does not hash/copy RGB on host.
+        pass_record: dict[str, Any] = {
+            "name": str(pass_name or f"pass_{len(self._lifecycle_passes) + 1}"),
+            "decoded_pairs": 0,
+            "hdr": None,
+            "om": None,
+        }
+        self._lifecycle_passes.append(pass_record)
         fps_num, fps_den = _fps_fraction(self.config)
         hdr_decoder: NativeDecoder | None = None
         om_decoder: NativeDecoder | None = None
@@ -707,6 +735,7 @@ class NativeFrameSource:
                     if profiler is not None:
                         profiler.record("native_decode", time.perf_counter() - started)
                         profiler.frame({})
+                    pass_record["decoded_pairs"] += 1
                     yield v05.DecodedFrame(
                         sequence=sequence,
                         hdr=hdr_frame.array,
@@ -719,10 +748,13 @@ class NativeFrameSource:
                     if hdr_frame is not None:
                         hdr_frame.release()
         finally:
+            pass_record["hdr"] = None if hdr_decoder is None else hdr_decoder.lifecycle
+            pass_record["om"] = None if om_decoder is None else om_decoder.lifecycle
             if hdr_decoder is not None:
                 hdr_decoder.close()
             if om_decoder is not None:
                 om_decoder.close()
+            self._last_pair_metadata["lifecycle"] = self.lifecycle
 
     def _validate_geometry(
         self,
@@ -782,12 +814,45 @@ class NativeFrameSource:
         }
 
     @property
+    def lifecycle(self) -> dict[str, Any]:
+        passes = [dict(record) for record in self._lifecycle_passes]
+        total_acquired = sum(
+            int((record.get("hdr") or {}).get("acquired", 0))
+            + int((record.get("om") or {}).get("acquired", 0))
+            for record in passes
+        )
+        total_released = sum(
+            int((record.get("hdr") or {}).get("released", 0))
+            + int((record.get("om") or {}).get("released", 0))
+            for record in passes
+        )
+        max_in_flight = max(
+            [
+                int((record.get(source_name) or {}).get("max_in_flight", 0))
+                for record in passes
+                for source_name in ("hdr", "om")
+            ]
+            or [0]
+        )
+        return {
+            "scope": "NativeFrameSource.iter_frames passes",
+            "passes": passes,
+            "acquired": total_acquired,
+            "released": total_released,
+            "in_flight": total_acquired - total_released,
+            "max_in_flight": max_in_flight,
+            "ring_size": int(self.ring_size),
+        }
+
+    @property
     def metadata(self) -> dict[str, Any]:
-        return dict(self._last_pair_metadata)
+        metadata = dict(self._last_pair_metadata)
+        metadata["lifecycle"] = self.lifecycle
+        return metadata
 
 
-class NativeV4GpuShotFitter(v05.V4GpuShotFitter):
-    """V4 fitter with device-only batch ingest; numerical methods are inherited."""
+class NativeV4GpuTapeShotFitter(v05.V4GpuShotFitter):
+    """Legacy V4 feature-tape fitter retained for coefficient comparison."""
 
     def _resize_device_into(self, source: Any, target: Any, target_size: tuple[int, int]) -> None:
         target_width, target_height = (int(value) for value in target_size)
@@ -818,6 +883,8 @@ class NativeV4GpuShotFitter(v05.V4GpuShotFitter):
         self,
         source: NativeFrameSource,
         indices: Iterable[int],
+        *,
+        pass_name: str | None = None,
     ) -> Iterator[tuple[Any, Any, np.ndarray]]:
         if self.fit_config is None:
             raise NativeBridgeError("V4 fit geometry was not initialized")
@@ -833,7 +900,11 @@ class NativeV4GpuShotFitter(v05.V4GpuShotFitter):
         )
         sequences = np.empty(self.batch_size, dtype=np.int64)
         filled = 0
-        iterator = source.iter_frames(self.source_profiler, include_hashes=False)
+        iterator = source.iter_frames(
+            self.source_profiler,
+            include_hashes=False,
+            pass_name=pass_name,
+        )
         try:
             for frame in iterator:
                 if frame.sequence not in wanted:
@@ -866,6 +937,730 @@ class NativeV4GpuShotFitter(v05.V4GpuShotFitter):
         ) + 1
         self.profile["native_h2d_calls"] = 0
         return sdr_device, hdr_device
+
+
+class NativeV4GpuStreamingShotFitter(NativeV4GpuTapeShotFitter):
+    """Native V4 fitter with bounded multi-pass reductions and no GPU feature tape."""
+
+    def _initialize_stream_geometry(self, config: Any) -> None:
+        height = int(config.om_size[1])
+        _, y1, _, y2 = (int(value) for value in config.overlap)
+        seam_band = int(self.fit_seam_band)
+        if not (0 < y1 < y2 < height) or y2 - seam_band < 0:
+            raise v05.V05Error("V4 requires seam edge rows inside the Open Matte frame")
+        blur_radius = int(
+            max(0.0, 4.0 * float(max(self.fit_chroma_sigma, self.fit_intensity_sigma)) + 0.5)
+        )
+        top = self._patch_geometry(y1 - 1, y1 + seam_band, height, blur_radius)
+        bottom = self._patch_geometry(y2 - seam_band, y2 + 1, height, blur_radius)
+        self.geometry = {
+            "top": {
+                **top,
+                "edge": y1 - 1 - top["source_start"],
+                "band_start": y1 - top["source_start"],
+                "band_end": y1 + seam_band - top["source_start"],
+            },
+            "bottom": {
+                **bottom,
+                "edge": y2 - bottom["source_start"],
+                "band_start": y2 - seam_band - bottom["source_start"],
+                "band_end": y2 - bottom["source_start"],
+            },
+        }
+        self.profile.update(
+            {
+                "feature_tape_device_bytes": 0,
+                "feature_tape_full_frame": False,
+                "feature_tape_frames": 0,
+                "feature_tape_detail_dtype": "streamed_float32_batch",
+                "feature_tape_reference_dtype": "streamed_float32_batch",
+                "feature_tape_gain_dtype": "host_float64_exact_rows",
+                "feature_tape_top_patch_rows": int(top["source_end"] - top["source_start"]),
+                "feature_tape_bottom_patch_rows": int(bottom["source_end"] - bottom["source_start"]),
+                "feature_tape_blur_radius": int(blur_radius),
+                "streaming_accumulator_contract": {
+                    "gain": "exact host rows with median and 5-95 percentile reduction",
+                    "spatial": "fixed-size XTX-style numerator/denominator vectors",
+                    "intensity": "fixed-size scalar normal-equation accumulators",
+                    "candidates": "fixed-size per-model residual and hue accumulators",
+                },
+                "numerical_parity_contract": {
+                    "reference": "NativeV4GpuTapeShotFitter",
+                    "gain_reduction": "GPU-produced float64 rows reduced on host with NumPy median/linear percentile",
+                    "gain_abs_tolerance_stops": 1.0e-10,
+                    "spatial_abs_tolerance": 1.0e-8,
+                    "controls_abs_tolerance": 1.0e-10,
+                    "candidate_selection": "exact model name and candidate ordering",
+                },
+            }
+        )
+        self._sample_vram("stream_geometry_initialized")
+
+    def _gain_stream_pass(
+        self,
+        source: NativeFrameSource,
+        config: Any,
+    ) -> dict[str, Any]:
+        xp = self.backend.xp
+        _, y1, _, y2 = (int(value) for value in config.overlap)
+        seam_band = int(self.fit_seam_band)
+        low, high = config.detail_ratio_clip
+        rows = np.empty(
+            (int(source.count), 2, int(config.om_size[0])),
+            dtype=np.float64,
+        )
+        expected_sequence = 0
+        started = time.perf_counter()
+        for sdr, hdr, sequences in self._iter_batches(
+            source,
+            range(source.count),
+            pass_name="gain",
+        ):
+            if len(sequences) == 0 or int(sequences[0]) != expected_sequence:
+                raise v05.V05Error("V4 gain traversal lost or reordered a decoded frame")
+            gpu_started = time.perf_counter()
+            base = self._blur(self.backend, sdr, config.base_sigma)
+            hdr_y = self.backend.luminance(hdr)
+            base_y = self.backend.luminance(base)
+            top = xp.median(
+                xp.log2(
+                    (hdr_y[:, :seam_band] + v05.fastcore.EPS)
+                    / (base_y[:, y1 : y1 + seam_band] + v05.fastcore.EPS)
+                ),
+                axis=1,
+            )
+            bottom = xp.median(
+                xp.log2(
+                    (hdr_y[:, -seam_band:] + v05.fastcore.EPS)
+                    / (base_y[:, y2 - seam_band : y2] + v05.fastcore.EPS)
+                ),
+                axis=1,
+            )
+            self.profile["capture_gpu"] += time.perf_counter() - gpu_started
+            compact = self._to_host(
+                xp.concatenate((top, bottom), axis=1),
+                "gain_rows",
+            )
+            rows[np.asarray(sequences, dtype=np.int64)] = np.asarray(
+                compact,
+                dtype=np.float64,
+            ).reshape(len(sequences), 2, int(config.om_size[0]))
+            expected_sequence = int(sequences[-1]) + 1
+            self.profile["capture_batches"] += 1
+            self._sample_vram("stream_gain_batch")
+            del sdr, hdr, base, hdr_y, base_y, top, bottom, compact
+        if expected_sequence != source.count:
+            raise v05.V05Error(
+                f"V4 gain traversal decoded {expected_sequence} of {source.count} frames"
+            )
+        self.profile["pass_gain"] = time.perf_counter() - started
+        self.profile["capture_seconds"] = self.profile["pass_gain"]
+        self.profile["exact_gain_rows_host_bytes"] = int(rows.nbytes)
+        return {"rows": rows, "seconds": self.profile["pass_gain"]}
+
+    def _finalize_stream_gain(self, rows: np.ndarray, config: Any) -> dict[str, Any]:
+        started = time.perf_counter()
+        top_median = np.median(rows[:, 0, :], axis=0)
+        bottom_median = np.median(rows[:, 1, :], axis=0)
+        top_spread = np.percentile(rows[:, 0, :], 95) - np.percentile(rows[:, 0, :], 5)
+        shot_stops = float(np.median(np.concatenate((top_median, bottom_median))))
+        limit = config.gain_clamp_stops
+        top_smoothed = v05.om.smooth_profile(top_median, config.gain_smooth_sigma)
+        bottom_smoothed = v05.om.smooth_profile(bottom_median, config.gain_smooth_sigma)
+        top_profile = np.clip(top_smoothed, shot_stops - limit, shot_stops + limit)
+        bottom_profile = np.clip(bottom_smoothed, shot_stops - limit, shot_stops + limit)
+        self.profile["gain_reduce_seconds"] = time.perf_counter() - started
+        return {
+            "shot_gain_stops": shot_stops,
+            "shot_gain_linear": float(np.exp2(shot_stops)),
+            "top_profile_stops": top_profile,
+            "bottom_profile_stops": bottom_profile,
+            "top_profile_range_stops": [float(top_profile.min()), float(top_profile.max())],
+            "bottom_profile_range_stops": [float(bottom_profile.min()), float(bottom_profile.max())],
+            "per_frame_top_median_spread_stops": float(top_spread),
+            "clamped_fraction": float(
+                np.mean(
+                    np.abs(np.concatenate((top_smoothed, bottom_smoothed)) - shot_stops)
+                    > limit
+                )
+            ),
+            "measurement_seconds": self.profile["capture_seconds"],
+            "fit_storage_bytes": int(rows.nbytes),
+            "method": "v04 median over all frame seam measurements; exact host gain rows with bounded multi-pass feature reductions",
+        }
+
+    def _iter_stream_replay_batches(
+        self,
+        source: NativeFrameSource,
+        indices: list[int],
+        pass_name: str,
+    ) -> Iterator[dict[str, Any]]:
+        xp = self.backend.xp
+        top_geometry = self.geometry["top"]
+        bottom_geometry = self.geometry["bottom"]
+        for sdr, hdr, _sequences in self._iter_batches(
+            source,
+            indices,
+            pass_name=pass_name,
+        ):
+            base = self._blur(self.backend, sdr, self.fit_config.base_sigma)
+            ratio = xp.clip(
+                sdr / xp.maximum(base, v05.fastcore.EPS),
+                self.fit_config.detail_ratio_clip[0],
+                self.fit_config.detail_ratio_clip[1],
+            )
+            detail = base * xp.power(ratio, self.fit_config.detail_strength)
+            top_detail = detail[:, top_geometry["source_start"] : top_geometry["source_end"]]
+            bottom_detail = detail[:, bottom_geometry["source_start"] : bottom_geometry["source_end"]]
+            top_gain = self.gain_field_device[
+                top_geometry["source_start"] : top_geometry["source_end"]
+            ]
+            bottom_gain = self.gain_field_device[
+                bottom_geometry["source_start"] : bottom_geometry["source_end"]
+            ]
+            top_predicted = xp.clip(top_detail * top_gain[None, ..., None], 0.0, 1.0)
+            bottom_predicted = xp.clip(bottom_detail * bottom_gain[None, ..., None], 0.0, 1.0)
+            top_ictcp = self.backend.to_ictcp(top_predicted * v05.fastcore.PEAK_NITS)
+            bottom_ictcp = self.backend.to_ictcp(bottom_predicted * v05.fastcore.PEAK_NITS)
+            top_intensity_full = self._blur(
+                self.backend, top_ictcp[..., 0], self.fit_intensity_sigma
+            )
+            bottom_intensity_full = self._blur(
+                self.backend, bottom_ictcp[..., 0], self.fit_intensity_sigma
+            )
+            top_chroma_full = self._blur(
+                self.backend, top_ictcp[..., 1:], self.fit_chroma_sigma
+            )
+            bottom_chroma_full = self._blur(
+                self.backend, bottom_ictcp[..., 1:], self.fit_chroma_sigma
+            )
+            hdr_ictcp = self.backend.to_ictcp(hdr * v05.fastcore.PEAK_NITS)
+            spatial_reference = self._blur(
+                self.backend, hdr_ictcp[..., 1:], self.fit_chroma_sigma
+            )
+            if self.same_reference_sigma:
+                fit_reference = spatial_reference
+            else:
+                fit_reference = self._blur(
+                    self.backend, hdr_ictcp[..., 1:], self.fit_intensity_sigma
+                )
+            self._sample_vram("stream_replay_batch")
+            yield {
+                "top_intensity": top_intensity_full[
+                    :, top_geometry["band_start"] : top_geometry["band_end"]
+                ],
+                "bottom_intensity": bottom_intensity_full[
+                    :, bottom_geometry["band_start"] : bottom_geometry["band_end"]
+                ],
+                "top_chroma": top_chroma_full[
+                    :, top_geometry["band_start"] : top_geometry["band_end"]
+                ],
+                "bottom_chroma": bottom_chroma_full[
+                    :, bottom_geometry["band_start"] : bottom_geometry["band_end"]
+                ],
+                "top_edge_intensity": top_intensity_full[:, top_geometry["edge"]],
+                "bottom_edge_intensity": bottom_intensity_full[:, bottom_geometry["edge"]],
+                "top_edge_chroma": top_chroma_full[:, top_geometry["edge"]],
+                "bottom_edge_chroma": bottom_chroma_full[:, bottom_geometry["edge"]],
+                "top_reference": spatial_reference[:, : self.fit_seam_band],
+                "bottom_reference": spatial_reference[:, -self.fit_seam_band :],
+                "top_edge_reference": spatial_reference[:, 0],
+                "bottom_edge_reference": spatial_reference[:, -1],
+                "top_fit_reference": fit_reference[:, : self.fit_seam_band],
+                "bottom_fit_reference": fit_reference[:, -self.fit_seam_band :],
+                "top_fit_edge_reference": fit_reference[:, 0],
+                "bottom_fit_edge_reference": fit_reference[:, -1],
+            }
+            del sdr, hdr, base, ratio, detail, top_detail, bottom_detail
+            del top_predicted, bottom_predicted, top_ictcp, bottom_ictcp
+            del top_intensity_full, bottom_intensity_full, top_chroma_full, bottom_chroma_full
+            del hdr_ictcp, spatial_reference, fit_reference
+
+    def _spatial_stream_pass(
+        self,
+        source: NativeFrameSource,
+        indices: list[int],
+    ) -> dict[str, Any]:
+        xp = self.backend.xp
+        width = int(self.fit_config.om_size[0])
+        totals = {
+            name: {
+                "num_re": xp.zeros(width, dtype=xp.float64),
+                "num_im": xp.zeros(width, dtype=xp.float64),
+                "den": xp.zeros(width, dtype=xp.float64),
+            }
+            for name in ("top", "bottom")
+        }
+        sum_weight = xp.float64(0.0)
+        sum_intensity = xp.float64(0.0)
+        sum_intensity_squared = xp.float64(0.0)
+        before_sum = xp.float64(0.0)
+        before_count = 0
+        pass_started = time.perf_counter()
+        batch_started = pass_started
+        for feature in self._iter_stream_replay_batches(source, indices, "training_spatial"):
+            bands = {
+                "top": (
+                    feature["top_chroma"],
+                    feature["top_reference"],
+                    feature["top_intensity"],
+                ),
+                "bottom": (
+                    feature["bottom_chroma"],
+                    feature["bottom_reference"],
+                    feature["bottom_intensity"],
+                ),
+            }
+            for name, (predicted_band, hdr_band, intensity_band) in bands.items():
+                p_re, p_im = predicted_band[..., 0], predicted_band[..., 1]
+                h_re, h_im = hdr_band[..., 0], hdr_band[..., 1]
+                totals[name]["num_re"] += xp.sum(p_re * h_re + p_im * h_im, axis=(0, 1))
+                totals[name]["num_im"] += xp.sum(p_re * h_im - p_im * h_re, axis=(0, 1))
+                totals[name]["den"] += xp.sum(p_re * p_re + p_im * p_im, axis=(0, 1))
+                before_sum += xp.sum(xp.abs(hdr_band - predicted_band))
+                before_count += int(hdr_band.size)
+                weight = xp.sum(predicted_band * predicted_band, axis=-1)
+                valid_weight = xp.where(weight > v05.v2.HUE_CHROMA_FLOOR**2, weight, 0.0)
+                sum_weight += xp.sum(valid_weight)
+                sum_intensity += xp.sum(valid_weight * intensity_band)
+                sum_intensity_squared += xp.sum(valid_weight * intensity_band * intensity_band)
+            self.profile["replay_spatial_batches"] += 1
+            self.profile["spatial_gpu"] += time.perf_counter() - batch_started
+            batch_started = time.perf_counter()
+        packed = xp.concatenate(
+            (
+                xp.stack(
+                    (
+                        totals["top"]["num_re"],
+                        totals["top"]["num_im"],
+                        totals["top"]["den"],
+                        totals["bottom"]["num_re"],
+                        totals["bottom"]["num_im"],
+                        totals["bottom"]["den"],
+                    ),
+                    axis=0,
+                ).reshape(-1),
+                xp.stack((sum_weight, sum_intensity, sum_intensity_squared, before_sum)),
+            )
+        )
+        host = self._to_host(packed, "final")
+        self.profile["pass_replay_spatial"] = time.perf_counter() - pass_started
+        return {
+            "totals": {
+                "top": {
+                    "num_re": host[0 * width : 1 * width],
+                    "num_im": host[1 * width : 2 * width],
+                    "den": host[2 * width : 3 * width],
+                },
+                "bottom": {
+                    "num_re": host[3 * width : 4 * width],
+                    "num_im": host[4 * width : 5 * width],
+                    "den": host[5 * width : 6 * width],
+                },
+            },
+            "sum_weight": float(host[6 * width]),
+            "sum_intensity": float(host[6 * width + 1]),
+            "sum_intensity_squared": float(host[6 * width + 2]),
+            "before_sum": float(host[6 * width + 3]),
+            "before_count": before_count,
+        }
+
+    def _intensity_stream_pass(
+        self,
+        source: NativeFrameSource,
+        field_parts: dict[str, tuple[Any, Any]],
+        centre: float,
+        normalization: float,
+        indices: list[int],
+    ) -> dict[str, Any]:
+        xp = self.backend.xp
+        scale_numerator = xp.float64(0.0)
+        hue_numerator = xp.float64(0.0)
+        denominator = xp.float64(0.0)
+        valid_samples = xp.int64(0)
+        pass_started = time.perf_counter()
+        batch_started = pass_started
+        for feature in self._iter_stream_replay_batches(source, indices, "training_intensity"):
+            for name, intensity_band, predicted_band, reference_band in (
+                ("top", feature["top_intensity"], feature["top_chroma"], feature["top_fit_reference"]),
+                ("bottom", feature["bottom_intensity"], feature["bottom_chroma"], feature["bottom_fit_reference"]),
+            ):
+                spatial = v05.v2.complex_transform(
+                    self.backend, predicted_band, *field_parts[name]
+                )
+                predicted_magnitude = xp.hypot(spatial[..., 0], spatial[..., 1])
+                reference_magnitude = xp.hypot(reference_band[..., 0], reference_band[..., 1])
+                valid = (predicted_magnitude > v05.v2.HUE_CHROMA_FLOOR) & (
+                    reference_magnitude > v05.v2.HUE_CHROMA_FLOOR
+                )
+                weight = xp.where(valid, predicted_magnitude * predicted_magnitude, 0.0)
+                t = v05.v4.normalized_intensity(
+                    self.backend, intensity_band, centre, normalization
+                )
+                log_ratio = xp.log(
+                    xp.maximum(reference_magnitude, v05.fastcore.EPS)
+                    / xp.maximum(predicted_magnitude, v05.fastcore.EPS)
+                )
+                phase = xp.arctan2(
+                    spatial[..., 0] * reference_band[..., 1]
+                    - spatial[..., 1] * reference_band[..., 0],
+                    spatial[..., 0] * reference_band[..., 0]
+                    + spatial[..., 1] * reference_band[..., 1],
+                )
+                scale_numerator += xp.sum(weight * t * log_ratio)
+                hue_numerator += xp.sum(weight * t * phase)
+                denominator += xp.sum(weight * t * t)
+                valid_samples += xp.sum(valid)
+            self.profile["replay_intensity_batches"] += 1
+            self.profile["intensity_gpu"] += time.perf_counter() - batch_started
+            batch_started = time.perf_counter()
+        host = self._to_host(
+            xp.stack((scale_numerator, hue_numerator, denominator, valid_samples)),
+            "final",
+        )
+        self.profile["pass_replay_intensity"] = time.perf_counter() - pass_started
+        return {
+            "scale_numerator": float(host[0]),
+            "hue_numerator": float(host[1]),
+            "denominator": float(host[2]),
+            "valid_samples": int(round(float(host[3]))),
+        }
+
+    def _candidate_stream_pass(
+        self,
+        source: NativeFrameSource,
+        field_parts: dict[str, tuple[Any, Any]],
+        controls: dict[str, Any],
+        models: list[dict[str, Any]],
+        indices: list[int],
+    ) -> dict[str, Any]:
+        xp = self.backend.xp
+        scales = self.backend.asarray(
+            np.asarray([model["log_saturation_slope"] for model in models], dtype=np.float32)
+        )
+        hues = self.backend.asarray(
+            np.asarray([model["hue_slope_radians"] for model in models], dtype=np.float32)
+        )
+        self.profile["h2d_calls"] += 2
+        self._sample_vram("candidate_models_allocated")
+        residual_sum = xp.zeros(len(models), dtype=xp.float64)
+        residual_count = xp.zeros(len(models), dtype=xp.int64)
+        hue_sum = xp.zeros(len(models), dtype=xp.float64)
+        hue_count = xp.zeros(len(models), dtype=xp.int64)
+        pass_started = time.perf_counter()
+        batch_started = pass_started
+        for feature in self._iter_stream_replay_batches(source, indices, "holdout_candidates"):
+            for name, intensity_band, predicted_band, reference_band in (
+                ("top", feature["top_intensity"], feature["top_chroma"], feature["top_fit_reference"]),
+                ("bottom", feature["bottom_intensity"], feature["bottom_chroma"], feature["bottom_fit_reference"]),
+            ):
+                real, imag = self._conditioned_batch(
+                    self.backend,
+                    *field_parts[name],
+                    intensity_band,
+                    controls,
+                    scales,
+                    hues,
+                )
+                corrected = self._complex_batch(self.backend, predicted_band, real, imag)
+                residual_sum += xp.sum(
+                    xp.abs(reference_band[None, ...] - corrected),
+                    axis=(1, 2, 3, 4),
+                )
+                residual_count += int(reference_band.size)
+            top_real, top_imag = self._conditioned_batch(
+                self.backend,
+                *field_parts["top_edge"],
+                feature["top_edge_intensity"],
+                controls,
+                scales,
+                hues,
+            )
+            bottom_real, bottom_imag = self._conditioned_batch(
+                self.backend,
+                *field_parts["bottom_edge"],
+                feature["bottom_edge_intensity"],
+                controls,
+                scales,
+                hues,
+            )
+            top_corrected = self._complex_batch(
+                self.backend, feature["top_edge_chroma"], top_real, top_imag
+            )
+            bottom_corrected = self._complex_batch(
+                self.backend, feature["bottom_edge_chroma"], bottom_real, bottom_imag
+            )
+            top_hue, top_valid = self._hue_batch(
+                self.backend, top_corrected, feature["top_fit_edge_reference"]
+            )
+            bottom_hue, bottom_valid = self._hue_batch(
+                self.backend, bottom_corrected, feature["bottom_fit_edge_reference"]
+            )
+            hue_sum += top_hue + bottom_hue
+            hue_count += top_valid + bottom_valid
+            self.profile["replay_candidate_batches"] += 1
+            self.profile["candidate_gpu"] += time.perf_counter() - batch_started
+            batch_started = time.perf_counter()
+        metrics = self._to_host(
+            xp.stack(
+                (
+                    residual_sum,
+                    residual_count.astype(xp.float64),
+                    hue_sum,
+                    hue_count.astype(xp.float64),
+                ),
+                axis=1,
+            ),
+            "final",
+        )
+        self.profile["pass_replay_candidates"] = time.perf_counter() - pass_started
+        return {"metrics": metrics}
+
+    def fit_shot(
+        self,
+        frame_stream: NativeFrameSource,
+        config: Any,
+        fit_scale: float = 1.0,
+    ) -> dict[str, Any]:
+        self.source_config = config
+        self.fit_scale = v05._validate_fit_scale(fit_scale)
+        fit_config, fit_geometry = v05._derive_fit_grid(config, self.fit_scale)
+        self.fit_config = fit_config
+        self.config = fit_config
+        self.fit_seam_band = int(fit_config.seam_band)
+        self.fit_chroma_sigma = float(v05.v1.CHROMA_SIGMA) * self.fit_scale
+        self.fit_intensity_sigma = float(v05.v4.INTENSITY_SIGMA) * self.fit_scale
+        self.same_reference_sigma = bool(
+            np.isclose(self.fit_chroma_sigma, self.fit_intensity_sigma, rtol=0.0, atol=1e-12)
+        )
+        self.source_profiler = v05.Profiler()
+        training, holdout = v05.sampled_split(frame_stream.count, self.fit_stride)
+        started = time.perf_counter()
+        self.profile = {
+            "architecture": "gpu_shot_fitter_v4_streaming_constant_vram",
+            "fit_scale_requested": self.fit_scale,
+            "fit_scale_effective": self.fit_scale,
+            "fit_geometry": fit_geometry,
+            "source_geometry": fit_geometry["source"],
+            "fit_grid": fit_geometry["fit"],
+            "source_passes": 4,
+            "source_pass_names": ["gain", "training_spatial", "training_intensity", "holdout_candidates"],
+            "replay_passes": 3,
+            "replay_pass_names": ["spatial_and_intensity_centre", "intensity_slopes", "candidates"],
+            "ffmpeg_openings": 8,
+            "decoded_pairs": int(frame_stream.count * 4),
+            "decoded_individual_images": int(frame_stream.count * 8),
+            "h2d": 0.0,
+            "h2d_calls": 0,
+            "h2d_batches": 0,
+            "d2h": 0.0,
+            "d2h_calls": 0,
+            "d2h_compact": 0.0,
+            "d2h_compact_calls": 0,
+            "d2h_final": 0.0,
+            "d2h_final_calls": 0,
+            "d2h_gain_rows": 0.0,
+            "d2h_gain_rows_calls": 0,
+            "full_frame_d2h": 0,
+            "per_frame_d2h": 0,
+            "capture_gpu": 0.0,
+            "spatial_gpu": 0.0,
+            "intensity_gpu": 0.0,
+            "candidate_gpu": 0.0,
+            "solver_cpu": 0.0,
+            "capture_batches": 0,
+            "replay_spatial_batches": 0,
+            "replay_intensity_batches": 0,
+            "replay_candidate_batches": 0,
+            "fit_resize_seconds": 0.0,
+            "fit_resize_frames": 0,
+            "fit_resize_images": 0,
+            "fit_prepare_seconds": 0.0,
+            "fit_prepare_frames": 0,
+            "fit_producer_seconds": 0.0,
+            "fit_queue_consumer_wait_seconds": 0.0,
+            "fit_queue_consumer_wait_events": 0,
+            "fit_queue_producer_wait_seconds": 0.0,
+            "fit_queue_producer_wait_events": 0,
+            "fit_queue_depth": 0,
+            "fit_queue_high_water_mark": 0,
+            "fit_direct_fill_batches": 0,
+            "fit_stack_batches": 0,
+            "fit_batch_path": "native_cuda_device_area_batches",
+            "fit_hash_mode": "native_no_host_rgb_hash",
+            "fit_source_traversals": 4,
+            "fit_ffmpeg_openings": 8,
+            "peak_vram_bytes": 0,
+            "peak_vram_mib": 0.0,
+            "vram_telemetry_available": False,
+            "vram_samples": [],
+            "pass_capture": 0.0,
+            "pass_gain": 0.0,
+            "pass_replay_spatial": 0.0,
+            "pass_replay_intensity": 0.0,
+            "pass_replay_candidates": 0.0,
+        }
+        self._sample_vram("fit_start")
+        self.batch_size = self._choose_batch_size(fit_config)
+        self._initialize_stream_geometry(fit_config)
+
+        gain_started = time.perf_counter()
+        gain_rows = self._gain_stream_pass(frame_stream, fit_config)["rows"]
+        gain = self._finalize_stream_gain(gain_rows, fit_config)
+        self.profile["pass_gain"] = time.perf_counter() - gain_started
+        solver_started = time.perf_counter()
+        gain_field_fit = v05.om.gain_field(fit_config, gain)
+        self.gain_field_device = self.backend.asarray(gain_field_fit)
+        self._sample_vram("gain_field_allocated")
+        self.profile["h2d"] += time.perf_counter() - solver_started
+        self.profile["h2d_calls"] += 1
+        training_result = self._spatial_stream_pass(frame_stream, training)
+        spatial = self._solve_spatial(training_result, training)
+        spatial_field_fit = v05.v1.chroma_field(fit_config, spatial)
+        host_weight = float(training_result["sum_weight"])
+        v05.om.require(host_weight > 0.0, "No chroma-energy support for intensity-conditioned fit")
+        centre = training_result["sum_intensity"] / host_weight
+        variance = max(
+            training_result["sum_intensity_squared"] / host_weight - centre * centre,
+            0.0,
+        )
+        normalization = max(2.0 * math.sqrt(variance), v05.v4.MIN_INTENSITY_NORMALIZATION)
+        self.profile["solver_cpu"] += time.perf_counter() - solver_started
+        field_parts = self._make_field_parts(spatial_field_fit)
+        self._sample_vram("field_parts_allocated")
+
+        intensity_result = self._intensity_stream_pass(
+            frame_stream,
+            field_parts,
+            centre,
+            normalization,
+            training,
+        )
+        denominator = intensity_result["denominator"]
+        v05.om.require(denominator > 0.0, "Degenerate intensity-conditioned fit")
+        solver_started = time.perf_counter()
+        unconstrained_scale = intensity_result["scale_numerator"] / denominator
+        unconstrained_hue = intensity_result["hue_numerator"] / denominator
+        scale = float(
+            np.clip(
+                unconstrained_scale,
+                -v05.v4.MAX_LOG_SATURATION_SLOPE,
+                v05.v4.MAX_LOG_SATURATION_SLOPE,
+            )
+        )
+        hue = float(
+            np.clip(
+                unconstrained_hue,
+                -v05.v4.MAX_HUE_SLOPE_RADIANS,
+                v05.v4.MAX_HUE_SLOPE_RADIANS,
+            )
+        )
+        controls = {
+            "intensity_centre": centre,
+            "intensity_normalization": normalization,
+            "log_saturation_slope": scale,
+            "hue_slope_radians": hue,
+            "hue_slope_degrees": math.degrees(hue),
+            "unconstrained_log_saturation_slope": unconstrained_scale,
+            "unconstrained_hue_slope_degrees": math.degrees(unconstrained_hue),
+            "log_saturation_slope_limit": v05.v4.MAX_LOG_SATURATION_SLOPE,
+            "hue_slope_limit_degrees": math.degrees(v05.v4.MAX_HUE_SLOPE_RADIANS),
+            "training_frames": len(training),
+            "valid_samples": intensity_result["valid_samples"],
+            "seconds": self.profile["pass_replay_intensity"],
+        }
+        self.profile["solver_cpu"] += time.perf_counter() - solver_started
+
+        models = v05.v4.candidate_models(controls)
+        candidate_result = self._candidate_stream_pass(
+            frame_stream,
+            field_parts,
+            controls,
+            models,
+            holdout,
+        )
+        selection = self._select_candidates(models, candidate_result["metrics"], len(holdout))
+        selection["seconds"] = self.profile["pass_replay_candidates"]
+        source_stats = self.source_profiler.result()
+        self.profile["io"] = float(source_stats["stages"].get("io", {}).get("total_seconds", 0.0))
+        self.profile["cpu_decode"] = float(
+            source_stats["stages"].get("cpu_decode", {}).get("total_seconds", 0.0)
+        )
+        self.profile["decoded_frames"] = int(frame_stream.count * 4)
+        self.profile["fit_total"] = time.perf_counter() - started
+        self.profile["source_profiler"] = source_stats
+        lifecycle = frame_stream.lifecycle
+        lifecycle_violations = []
+        acquired_equals_released = True
+        in_flight_zero = True
+        max_in_flight_within_ring = True
+        for pass_record in lifecycle["passes"]:
+            for source_name in ("hdr", "om"):
+                counters = pass_record.get(source_name) or {}
+                acquired = int(counters.get("acquired", 0))
+                released = int(counters.get("released", 0))
+                in_flight = int(counters.get("in_flight", 0))
+                max_in_flight = int(counters.get("max_in_flight", 0))
+                acquired_equals_released &= acquired == released
+                in_flight_zero &= in_flight == 0
+                max_in_flight_within_ring &= max_in_flight <= int(lifecycle["ring_size"])
+                if acquired != released or in_flight != 0 or max_in_flight > int(lifecycle["ring_size"]):
+                    lifecycle_violations.append(
+                        {
+                            "pass": pass_record["name"],
+                            "source": source_name,
+                            "counters": counters,
+                        }
+                    )
+        self.profile["ring_lifecycle"] = lifecycle
+        self.profile["ring_lifecycle_invariants"] = {
+            "acquired_equals_released": bool(acquired_equals_released),
+            "in_flight_zero": bool(in_flight_zero),
+            "max_in_flight_within_ring": bool(max_in_flight_within_ring),
+            "surface_capacity_exceeded": not bool(max_in_flight_within_ring),
+            "violations": lifecycle_violations,
+        }
+        default_model = next(
+            model for model in models if model["name"] == selection["default_model"]["name"]
+        )
+        review_model = next(
+            model for model in models if model["name"] == selection["review_candidate"]["name"]
+        )
+        gain_field = self._upsample_scalar_field(gain_field_fit, config.om_size)
+        spatial_field = self._upsample_complex_field(spatial_field_fit, config.om_size)
+        self.profile["returned_gain_field_shape"] = [int(value) for value in gain_field.shape]
+        self.profile["returned_spatial_field_shape"] = [int(value) for value in spatial_field.shape]
+        self.profile["renderer_geometry"] = {
+            "om_size": [int(config.om_size[0]), int(config.om_size[1])],
+            "overlap": [int(value) for value in config.overlap],
+            "fields_upsampled_before_renderer": self.fit_scale != 1.0,
+        }
+        result = {
+            "training_indices": training,
+            "holdout_indices": holdout,
+            "gain": gain,
+            "gain_field": gain_field,
+            "spatial": spatial,
+            "spatial_field": spatial_field,
+            "controls": controls,
+            "selection": selection,
+            "default_model": default_model,
+            "review_model": review_model,
+            "rendered_model": default_model,
+            "fit_seconds": self.profile["fit_total"],
+            "fit_scale": self.fit_scale,
+            "fit_source_passes": 4,
+            "fit_storage_contract": "four sequential native decoder passes, exact host float64 gain rows, fixed-size GPU spatial/intensity/candidate accumulators, bounded CUDA batches only; no shot-sized GPU tape, full-frame D2H, or per-frame D2H",
+            "fit_profile": self.profile,
+        }
+        self.tape.clear()
+        self.gain_field_device = None
+        return result
+
+
+class NativeV4GpuShotFitter(NativeV4GpuStreamingShotFitter):
+    """Default native V4 fitter using the constant-VRAM streaming implementation."""
+
 
 
 def render_native(
