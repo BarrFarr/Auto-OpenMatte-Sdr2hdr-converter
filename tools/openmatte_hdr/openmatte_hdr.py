@@ -77,6 +77,7 @@ class Config:
     max_frames: int | None
     review_hdr10: bool
     review_cq: int
+    output_size: tuple[int, int] | None = None
 
     @property
     def frame_count(self) -> int:
