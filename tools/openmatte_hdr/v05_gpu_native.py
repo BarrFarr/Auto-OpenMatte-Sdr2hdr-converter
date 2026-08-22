@@ -19,11 +19,13 @@ import traceback
 from dataclasses import dataclass, field
 from fractions import Fraction
 from pathlib import Path
-from typing import Any, Iterable, Iterator
+from typing import Any, Callable, Iterable, Iterator
 
 import numpy as np
 import v05_streaming as v05
 from resample_backend import ResampleBackend, ResampleRequest
+
+from auto_openmatte.backends import DecoderBackend, EncoderBackend, FrameBatch
 
 HERE = Path(__file__).resolve().parent
 WORKSPACE = HERE.parents[1]
@@ -76,6 +78,8 @@ def _validate_software_format(source_mode: int, software_format: int) -> None:
 
 _DIAGNOSTIC_LOCK = threading.Lock()
 _DIAGNOSTIC_EVENTS: list[dict[str, Any]] = []
+_ENCODED_FRAME_QUARANTINE_LOCK = threading.Lock()
+_ENCODED_FRAME_QUARANTINE: list[tuple[Any, Any | None, Any, int, str]] = []
 
 
 def diagnostic_marker(marker: str, **fields: Any) -> dict[str, Any]:
@@ -496,11 +500,14 @@ class NativeDecoder:
     def close(self) -> None:
         if self._closed:
             return
-        if self._outstanding:
-            raise NativeBridgeError(
-                f"cannot close native decoder with unreleased slots: {sorted(self._outstanding)}"
-            )
+        outstanding_count = len(self._outstanding)
+        # The native bridge has a close-time fallback that synchronizes the
+        # device and frees consumer-owned slots.  Use it even when Python's
+        # per-slot release path previously failed, rather than discarding the
+        # live handle with outstanding native allocations.
         self._dll.v5_decoder_close(self._handle)
+        self._outstanding.clear()
+        self._released_count += outstanding_count
         self._handle = None
         self._closed = True
         self._dll_handles.clear()
@@ -681,6 +688,11 @@ class NativeFrameSource:
         return pair
 
     def release_pair(self, pair: NativeGpuPair, stream: Any | None = None) -> None:
+        if stream is None:
+            # A rollback or other context-free release must first establish the
+            # producer dependency before returning either native slot.
+            pair.ready_event.synchronize()
+            stream = self._pair_decode_stream
         pair.release(stream)
 
     def close_pairs(self) -> None:
@@ -2241,30 +2253,22 @@ def _extension_contract(
 
 def render_native_phase2(
     config: Any,
-    source: NativeFrameSource,
+    source: DecoderBackend,
     backend: Any,
     fit: dict[str, Any],
     pre_metadata_output: Path,
     rendered_model: dict[str, Any],
     *,
-    bridge_path: Path = DEFAULT_BRIDGE,
-    ring_size: int = 4,
-    device_index: int = 0,
-    hdr_decoder: str = "hevc_cuvid",
-    om_decoder: str = "h264_cuvid",
-    encoder_qp: int = 18,
     diagnostic_stride: int = 6,
     resample_backend: ResampleBackend | None = None,
+    encoder_backend_factory: Callable[[Path, int, int, int, int], EncoderBackend] | None = None,
+    frame_factory: Callable[..., Any] | None = None,
 ) -> dict[str, Any]:
-    """Run native NVDEC/V5/GPU-P010/NVENC with bounded stage overlap."""
+    """Run decode/render/encode through neutral backend contracts."""
 
     import cupy
 
     pre_metadata_output.parent.mkdir(parents=True, exist_ok=True)
-    source.hdr_decoder = str(hdr_decoder)
-    source.om_decoder = str(om_decoder)
-    source.ring_size = int(ring_size)
-    source.device_index = int(device_index)
     profiler = v05.Profiler()
     quality = v05.QualityAccumulator()
     gain = backend.asarray(np.asarray(fit["gain_field"], dtype=np.float32))
@@ -2286,15 +2290,20 @@ def render_native_phase2(
         target_width=output_width,
         target_height=output_height,
     )
+    if resample_request.resample_active and resample_backend is None:
+        raise NativeBridgeError(
+            "an active resample request requires a ResampleBackend implementation"
+        )
+    if frame_factory is None:
+        raise NativeBridgeError("Phase 2 requires a Frame factory for encoded output")
     output_resampler: ResampleBackend | None = (
-        (resample_backend or GpuOutputResampler(cupy))
-        if resample_request.resample_active
-        else None
+        resample_backend if resample_request.resample_active else None
     )
+    ring_capacity = max(1, int(source.lifecycle.get("ring_size", 4)))
     compute_stream = cupy.cuda.Stream(non_blocking=True)
-    decode_queue: queue.Queue[Any] = queue.Queue(maxsize=max(2, int(ring_size) - 1))
-    encode_queue: queue.Queue[Any] = queue.Queue(maxsize=max(2, int(ring_size) - 1))
-    surface_credits = threading.BoundedSemaphore(max(1, int(ring_size)))
+    decode_queue: queue.Queue[Any] = queue.Queue(maxsize=max(2, ring_capacity - 1))
+    encode_queue: queue.Queue[Any] = queue.Queue(maxsize=max(2, ring_capacity - 1))
+    surface_credits = threading.BoundedSemaphore(ring_capacity)
     sentinel = object()
     errors: list[dict[str, Any]] = []
     error_lock = threading.Lock()
@@ -2348,17 +2357,34 @@ def render_native_phase2(
                     f"{stage} stopped after {failure['stage']} failure: {failure['error']}"
                 ) from failure["error"]
 
-    def release_pair_and_credit(pair: NativeGpuPair, stream: Any) -> None:
+    def release_pair_and_credit(pair: FrameBatch, stream: Any) -> None:
+        # Readiness and ownership are backend concerns.  The neutral batch
+        # records the producer dependency and releases its borrowed frames;
+        # this render loop only supplies the consumer context.
         try:
-            # The decode conversion is recorded before ready_event. This wait
-            # also protects exception/early-return cleanup before recording the
-            # consumer_done event on the render stream.
-            with stream:
-                stream.wait_event(pair.ready_event)
-            source.release_pair(pair, stream)
+            pair.wait_ready(stream)
         finally:
-            if pair.fully_released:
-                pair.return_surface_credit()
+            pair.release(stream)
+
+    def resolve_pair_frames(batch: FrameBatch) -> tuple[Any, Any]:
+        """Resolve the required Phase 2 streams by role, not tuple position."""
+        if len(batch.frames) != 2:
+            raise NativeBridgeError(
+                f"Phase 2 requires exactly two decoded frames, got {len(batch.frames)}"
+            )
+        by_role: dict[str, Any] = {}
+        for frame in batch.frames:
+            role = str(frame.metadata.get("source_role", ""))
+            if role not in {"HDR", "OM"} or role in by_role:
+                raise NativeBridgeError(
+                    "Phase 2 decoder batch must contain one HDR and one OM frame"
+                )
+            by_role[role] = frame
+        if set(by_role) != {"HDR", "OM"}:
+            raise NativeBridgeError(
+                "Phase 2 decoder batch must contain one HDR and one OM frame"
+            )
+        return by_role["HDR"], by_role["OM"]
 
     def drain_decode_queue() -> None:
         while True:
@@ -2374,21 +2400,103 @@ def render_native_phase2(
             except BaseException as cleanup_error:
                 record_error("decode_queue_drain", cleanup_error, pair.sequence)
 
+    def quarantine_encoded_frame(
+        encoded_frame: Any,
+        ready_event: Any | None,
+        sequence: int,
+        stage: str,
+        stream: Any,
+    ) -> None:
+        with _ENCODED_FRAME_QUARANTINE_LOCK:
+            _ENCODED_FRAME_QUARANTINE.append(
+                (encoded_frame, ready_event, stream, sequence, stage)
+            )
+        record_error(f"{stage}_quarantined", RuntimeError("GPU output fence failed"), sequence)
+
+    def fence_encoded_frame(
+        ready_event: Any | None,
+        sequence: int,
+        stage: str,
+        stream: Any | None = None,
+    ) -> bool:
+        producer_stream = compute_stream if stream is None else stream
+        if ready_event is not None:
+            try:
+                ready_event.synchronize()
+                return True
+            except BaseException as event_error:
+                record_error(f"{stage}_ready", event_error, sequence)
+        try:
+            producer_stream.synchronize()
+            return True
+        except BaseException as stream_error:
+            record_error(f"{stage}_stream", stream_error, sequence)
+            return False
+
+    def release_encoded_frame(
+        encoded_frame: Any,
+        ready_event: Any | None,
+        sequence: int,
+        stage: str,
+        stream: Any | None = None,
+    ) -> bool:
+        """Fence GPU work before returning an encoded allocation to its owner."""
+        if not fence_encoded_frame(ready_event, sequence, stage, stream):
+            quarantine_encoded_frame(
+                encoded_frame,
+                ready_event,
+                sequence,
+                stage,
+                compute_stream if stream is None else stream,
+            )
+            return False
+        try:
+            encoded_frame.release()
+        except BaseException as cleanup_error:
+            record_error(stage, cleanup_error, sequence)
+            quarantine_encoded_frame(
+                encoded_frame,
+                ready_event,
+                sequence,
+                stage,
+                compute_stream if stream is None else stream,
+            )
+            return False
+        return True
+
+    def drain_quarantined_encoded_frames() -> None:
+        with _ENCODED_FRAME_QUARANTINE_LOCK:
+            pending = list(_ENCODED_FRAME_QUARANTINE)
+            _ENCODED_FRAME_QUARANTINE.clear()
+        for encoded_frame, ready_event, stream, sequence, stage in pending:
+            release_encoded_frame(encoded_frame, ready_event, sequence, stage, stream)
+
+    def drain_encode_queue() -> None:
+        while True:
+            try:
+                item = encode_queue.get_nowait()
+            except queue.Empty:
+                return
+            if item is sentinel:
+                continue
+            _sequence, encoded_frame, ready_event = item
+            release_encoded_frame(encoded_frame, ready_event, _sequence, "encode_queue_drain")
+
     def produce() -> None:
         expected: int | None = None
         try:
-            source.open_pairs()
+            source.open()
             for expected in range(source.count):
-                pair: NativeGpuPair | None = None
+                pair: FrameBatch | None = None
                 credit_held = False
                 try:
                     acquire_surface_credit("surface_credit", expected)
                     credit_held = True
                     started = time.perf_counter()
-                    pair = source.next_pair()
+                    pair = source.read()
                     if pair is None:
                         raise NativeBridgeError(f"native source ended early at pair {expected}")
-                    pair.surface_credit = surface_credits
+                    pair.attach_release_credit(surface_credits.release)
                     credit_held = False
                     if pair.sequence != expected:
                         actual_sequence = pair.sequence
@@ -2418,31 +2526,49 @@ def render_native_phase2(
                 record_error("nvdec_producer_sentinel", sentinel_error, expected)
 
     def encode() -> None:
-        encoder: NativeGpuEncoder | None = None
+        encoder: EncoderBackend | None = None
         sequence: int | None = None
         try:
             fps_num, fps_den = _fps_fraction(config)
-            encoder = NativeGpuEncoder(
+            if encoder_backend_factory is None:
+                raise NativeBridgeError(
+                    "Phase 2 requires an EncoderBackend factory"
+                )
+            encoder = encoder_backend_factory(
                 pre_metadata_output,
                 output_width,
                 output_height,
                 fps_num,
                 fps_den,
-                bridge_path=bridge_path,
-                ffmpeg_bin=config.ffmpeg.parent,
-                device_index=device_index,
-                qp=encoder_qp,
             )
+            encoder.open()
             while True:
                 item = encode_queue.get()
                 if item is sentinel:
                     break
-                sequence, p010, ready_event = item
-                ready_event.synchronize()
-                started = time.perf_counter()
-                encoder.write(p010, sequence)
-                profiler.record("nvenc", time.perf_counter() - started)
-                del p010
+                sequence, encoded_frame, ready_event = item
+                if not fence_encoded_frame(ready_event, sequence, "nvenc_consumer"):
+                    quarantine_encoded_frame(
+                        encoded_frame,
+                        ready_event,
+                        sequence,
+                        "nvenc_consumer",
+                        compute_stream,
+                    )
+                    raise NativeBridgeError(
+                        f"encoded frame {sequence} could not be fenced before NVENC"
+                    )
+                try:
+                    started = time.perf_counter()
+                    encoder.write(encoded_frame, sequence)
+                    profiler.record("nvenc", time.perf_counter() - started)
+                finally:
+                    release_encoded_frame(
+                        encoded_frame,
+                        ready_event,
+                        sequence,
+                        "nvenc_consumer_release",
+                    )
             encoder.close()
             encoder = None
         except BaseException as exc:
@@ -2470,14 +2596,17 @@ def render_native_phase2(
             if item is sentinel:
                 break
             pair = item
+            encoded_frame: Any | None = None
+            ready_event: Any | None = None
             try:
+                hdr_frame, om_frame = resolve_pair_frames(pair)
                 with compute_stream:
-                    compute_stream.wait_event(pair.ready_event)
+                    pair.wait_ready(compute_stream)
                     predicted = v05.v1.predict(
                         backend,
                         config,
-                        pair.sdr.array,
-                        backend.blur(pair.sdr.array, config.base_sigma),
+                        om_frame.view(),
+                        backend.blur(om_frame.view(), config.base_sigma),
                         gain,
                     )
                     rgb, corrected, negative, above_peak = v05.v4.apply_intensity_conditioned(
@@ -2487,13 +2616,13 @@ def render_native_phase2(
                         spatial_angle,
                         rendered_model,
                     )
-                    output_image = v05.v1.composite(backend, config, rgb, pair.hdr.array)
+                    output_image = v05.v1.composite(backend, config, rgb, hdr_frame.view())
                     if extension is None:
                         extension = _extension_contract(
                             backend,
                             config,
                             predicted,
-                            pair.hdr.array,
+                            hdr_frame.view(),
                             output_image,
                         )
                         diagnostic_marker(
@@ -2510,7 +2639,7 @@ def render_native_phase2(
                     }
                     if pair.sequence % max(1, int(diagnostic_stride)) == 0:
                         hdr_chroma = backend.blur(
-                            backend.to_ictcp(pair.hdr.array * v05.fastcore.PEAK_NITS)[..., 1:],
+                            backend.to_ictcp(hdr_frame.view() * v05.fastcore.PEAK_NITS)[..., 1:],
                             v05.v4.INTENSITY_SIGMA,
                         )
                         quality_values["top_lowpass_chroma_residual"] = _gpu_scalar(
@@ -2547,13 +2676,34 @@ def render_native_phase2(
                         )
                     )
                     p010 = converter.convert(encoded_rgb, compute_stream)
+                    encoded_frame = frame_factory(
+                        p010,
+                        output_width,
+                        output_height,
+                        "P010LE",
+                        10,
+                        pair.sequence,
+                    )
                     ready_event = cupy.cuda.Event()
                     ready_event.record(compute_stream)
                 release_pair_and_credit(pair, compute_stream)
-                put_or_raise(encode_queue, (pair.sequence, p010, ready_event), "encode_queue", pair.sequence)
+                put_or_raise(
+                    encode_queue,
+                    (pair.sequence, encoded_frame, ready_event),
+                    "encode_queue",
+                    pair.sequence,
+                )
+                encoded_frame = None
                 profiler.frame({})
                 frames += 1
-            except BaseException as exc:
+            except BaseException:
+                if encoded_frame is not None:
+                    release_encoded_frame(
+                        encoded_frame,
+                        ready_event,
+                        pair.sequence,
+                        "gpu_render_output_release",
+                    )
                 try:
                     release_pair_and_credit(pair, compute_stream)
                 except BaseException as release_error:
@@ -2574,8 +2724,10 @@ def render_native_phase2(
         encoder_thread.join(timeout=120)
         if encoder_thread.is_alive():
             record_error("nvenc_consumer_join_timeout", TimeoutError("NVENC consumer did not stop within 120 seconds"), frames)
+        drain_encode_queue()
+        drain_quarantined_encoded_frames()
         try:
-            source.close_pairs()
+            source.close()
         except BaseException as close_error:
             record_error("decoder_cleanup", close_error, frames)
     render_elapsed = time.perf_counter() - render_started

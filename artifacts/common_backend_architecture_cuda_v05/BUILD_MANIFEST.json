@@ -1,0 +1,32 @@
+{
+  "schema": "openmatte-common-backend-build/v1",
+  "artifact_name": "common_backend_architecture_cuda_v05",
+  "implementation": "portable backend contracts with the existing CUDA V5 implementation",
+  "native_bridge_policy": "The native bridge implementation is unchanged; the existing baseline DLL remains the reference dependency.",
+  "source_files": [
+    "src/auto_openmatte/backends/__init__.py",
+    "src/auto_openmatte/backends/contracts.py",
+    "tests/test_backend_contracts.py",
+    "tools/openmatte_hdr/cuda_backend.py",
+    "tools/openmatte_hdr/resample_backend.py",
+    "tools/openmatte_hdr/run_v05_gpu_native.py",
+    "tools/openmatte_hdr/run_v05_gpu_native_segmented.py",
+    "tools/openmatte_hdr/v05_gpu_native.py"
+  ],
+  "explicit_activation": {
+    "entrypoint": "tools/openmatte_hdr/run_v05_gpu_native.py",
+    "required_flag": "--phase2-zero-copy",
+    "required_bridge_argument": "--bridge",
+    "example_bridge": "dev/v05-native/v5_gpu_bridge.dll",
+    "baseline_phase1_default_unchanged": true
+  },
+  "baseline_artifacts": {
+    "dev/v05-native/v5_gpu_bridge.dll": {
+      "sha256": "A46941C13BAD5E4A3AD68A10223006EC3D1F21094B03F818C25DCF2D7A0569D1"
+    },
+    "dev/v05-native/v5_gpu_bridge_resample.dll": {
+      "sha256": "9E6E7DBCEBFC42F221D9CC442595E611043FF27C87479E2D109B41335526207B"
+    }
+  },
+  "baseline_preservation": "No baseline DLL is replaced, renamed, or modified by this artifact."
+}
