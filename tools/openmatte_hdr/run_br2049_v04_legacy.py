@@ -95,7 +95,6 @@ def build_config(profile: dict[str, Any], output_dir: Path) -> Any:
         "--fps", str(profile["fps"]),
         "--seam-band", str(profile["seam_band"]),
         "--feather", str(profile["feather"]),
-        "--ffmpeg", str(workspace_path(profile["ffmpeg"])),
     ]
     config = om.build_config(argv)
     om.require(config.frame_count == int(profile["expected_frame_count"]), "Unexpected profile frame count")

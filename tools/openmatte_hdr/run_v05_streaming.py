@@ -77,7 +77,6 @@ def build_config(profile: dict[str, Any], output: Path, max_frames: int | None) 
         "--fps", str(profile["fps"]),
         "--seam-band", str(profile["seam_band"]),
         "--feather", str(profile["feather"]),
-        "--ffmpeg", str(workspace_path(profile["ffmpeg"])),
     ]
     config = v05.om.build_config(argv)
     output_size = profile.get("output_size")

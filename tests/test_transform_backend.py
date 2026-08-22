@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import shutil
 import subprocess
 from pathlib import Path
 
@@ -20,6 +19,7 @@ from auto_openmatte.processing.transform_backend import (
     GPUTransformBackend,
     create_transform_backend,
 )
+from auto_openmatte.utils.ffmpeg import get_media_tool_config
 
 CURVE = [
     [-2.0, -1.5],
@@ -44,12 +44,13 @@ def _load_real_material_roi() -> np.ndarray:
     source = next((path for path in _REAL_OM_SOURCES if path.exists()), None)
     if source is None:
         pytest.skip("configured real-material Open Matte source is unavailable")
-    if shutil.which("ffmpeg") is None:
-        pytest.skip("ffmpeg is unavailable for the real-material ROI test")
+    ffmpeg = get_media_tool_config().ffmpeg_path
+    if ffmpeg is None:
+        pytest.skip("ffmpeg is unavailable through the media-tool resolver")
 
     om_time = 2715.0 + 1167.0 / 23.976
     command = [
-        "ffmpeg",
+        str(ffmpeg),
         "-v",
         "quiet",
         "-nostdin",

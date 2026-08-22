@@ -23,6 +23,7 @@ from typing import Any, Iterable, Iterator
 
 import numpy as np
 import v05_streaming as v05
+from resample_backend import ResampleBackend, ResampleRequest
 
 HERE = Path(__file__).resolve().parent
 WORKSPACE = HERE.parents[1]
@@ -36,6 +37,42 @@ DEFAULT_CUDA_BIN = Path(
 
 HDR_MODE = 0
 SDR_MODE = 1
+
+# libavutil AVPixelFormat enum values used by the bridge ABI. These constants
+# are a format-contract boundary only; the bridge remains authoritative for
+# decoding and rejects any mode/format combination outside this set.
+AV_PIX_FMT_NV12 = 23
+AV_PIX_FMT_P010LE = 158
+_SOFTWARE_FORMAT_NAMES = {
+    AV_PIX_FMT_NV12: "NV12",
+    AV_PIX_FMT_P010LE: "P010LE",
+}
+_ALLOWED_SOFTWARE_FORMATS = {
+    HDR_MODE: (AV_PIX_FMT_P010LE,),
+    SDR_MODE: (AV_PIX_FMT_P010LE, AV_PIX_FMT_NV12),
+}
+
+
+def _software_format_name(software_format: int) -> str:
+    return _SOFTWARE_FORMAT_NAMES.get(
+        int(software_format), f"AVPixelFormat({int(software_format)})"
+    )
+
+
+def _allowed_software_format_names(source_mode: int) -> list[str]:
+    return [_software_format_name(value) for value in _ALLOWED_SOFTWARE_FORMATS[int(source_mode)]]
+
+
+def _validate_software_format(source_mode: int, software_format: int) -> None:
+    allowed = _ALLOWED_SOFTWARE_FORMATS[int(source_mode)]
+    if int(software_format) not in allowed:
+        expected = ", ".join(_allowed_software_format_names(source_mode))
+        mode_name = "HDR" if int(source_mode) == HDR_MODE else "OM"
+        raise NativeBridgeError(
+            "native CUDA surface format violates the V5 source contract: "
+            f"mode={mode_name}, expected one of [{expected}], "
+            f"got {_software_format_name(software_format)}"
+        )
 
 _DIAGNOSTIC_LOCK = threading.Lock()
 _DIAGNOSTIC_EVENTS: list[dict[str, Any]] = []
@@ -247,8 +284,8 @@ class NativeDecoder:
                 f"v5_decoder_open({self.decoder_name}, {self.path}) failed: {_error_text(self._error)}"
             )
         self.resample_active = False
-        self.source_width = int(self._dll.v5_decoder_width(self._handle))
-        self.source_height = int(self._dll.v5_decoder_height(self._handle))
+        self.source_width = int(self._dll.v5_decoder_source_width(self._handle))
+        self.source_height = int(self._dll.v5_decoder_source_height(self._handle))
         if target_size is not None:
             self._apply_target_size(target_size)
         self.width = int(self._dll.v5_decoder_width(self._handle))
@@ -277,34 +314,26 @@ class NativeDecoder:
 
         width, height = (int(value) for value in target_size)
         if (width, height) == (self.source_width, self.source_height):
-            self.resample_active = False
-            return
-        entry = getattr(self._dll, "v5_decoder_set_target_size", None)
-        if entry is None:
-            raise NativeBridgeError(
-                "this bridge build cannot resample the HDR source; decoded "
-                f"{self.source_width}x{self.source_height} but {width}x{height} was requested"
+            self.resample_active = bool(
+                int(self._dll.v5_decoder_resample_active(self._handle))
             )
-        entry.argtypes = [
-            ctypes.c_void_p,
-            ctypes.c_int,
-            ctypes.c_int,
-            ctypes.POINTER(ctypes.c_char),
-            ctypes.c_int,
-        ]
-        entry.restype = ctypes.c_int
-        status = int(entry(self._handle, width, height, self._error, self._error_capacity))
+            return
+        status = int(
+            self._dll.v5_decoder_set_target_size(
+                self._handle,
+                width,
+                height,
+                self._error,
+                self._error_capacity,
+            )
+        )
         if status != 0:
             raise NativeBridgeError(
                 f"v5_decoder_set_target_size({width}x{height}) failed: {_error_text(self._error)}"
             )
-        probe = getattr(self._dll, "v5_decoder_resample_active", None)
-        if probe is not None:
-            probe.argtypes = [ctypes.c_void_p]
-            probe.restype = ctypes.c_int
-            self.resample_active = bool(int(probe(self._handle)))
-        else:
-            self.resample_active = True
+        self.resample_active = bool(
+            int(self._dll.v5_decoder_resample_active(self._handle))
+        )
 
     def _configure_abi(self) -> None:
         c_char_pointer = ctypes.POINTER(ctypes.c_char)
@@ -341,10 +370,21 @@ class NativeDecoder:
         for name in (
             "v5_decoder_width",
             "v5_decoder_height",
+            "v5_decoder_source_width",
+            "v5_decoder_source_height",
+            "v5_decoder_resample_active",
             "v5_decoder_software_format",
         ):
             getattr(self._dll, name).argtypes = [ctypes.c_void_p]
             getattr(self._dll, name).restype = ctypes.c_int
+        self._dll.v5_decoder_set_target_size.argtypes = [
+            ctypes.c_void_p,
+            ctypes.c_int,
+            ctypes.c_int,
+            c_char_pointer,
+            ctypes.c_int,
+        ]
+        self._dll.v5_decoder_set_target_size.restype = ctypes.c_int
         self._dll.v5_decoder_frame_bytes.argtypes = [ctypes.c_void_p]
         self._dll.v5_decoder_frame_bytes.restype = ctypes.c_uint64
         self._dll.v5_decoder_close.argtypes = [ctypes.c_void_p]
@@ -376,6 +416,9 @@ class NativeDecoder:
         self._acquired_count += 1
         self._max_in_flight = max(self._max_in_flight, len(self._outstanding))
         try:
+            software_format = int(record.software_format)
+            _validate_software_format(self.source_mode, software_format)
+            self.software_format = software_format
             if record.device_ptr == 0 or record.bytes == 0:
                 raise NativeBridgeError("native bridge returned an empty CUDA working frame")
             if record.width != self.width or record.height != self.height:
@@ -400,7 +443,7 @@ class NativeDecoder:
                 array=array,
                 sequence=sequence,
                 slot=slot,
-                software_format=int(record.software_format),
+                software_format=software_format,
             )
         except BaseException as original_error:
             try:
@@ -617,7 +660,9 @@ class NativeFrameSource:
             self._last_pair_metadata.update(
                 {
                     "hdr_software_format": hdr_frame.software_format,
+                    "hdr_software_format_name": _software_format_name(hdr_frame.software_format),
                     "om_software_format": om_frame.software_format,
+                    "om_software_format_name": _software_format_name(om_frame.software_format),
                 }
             )
             diagnostic_marker(
@@ -625,7 +670,9 @@ class NativeFrameSource:
                 stage="render_decode_pair",
                 sequence=0,
                 hdr_software_format=hdr_frame.software_format,
+                hdr_software_format_name=_software_format_name(hdr_frame.software_format),
                 om_software_format=om_frame.software_format,
+                om_software_format_name=_software_format_name(om_frame.software_format),
                 hdr_device_ptr=int(hdr_frame.array.data.ptr),
                 om_device_ptr=int(om_frame.array.data.ptr),
             )
@@ -719,7 +766,9 @@ class NativeFrameSource:
                         self._last_pair_metadata.update(
                             {
                                 "hdr_software_format": hdr_frame.software_format,
+                                "hdr_software_format_name": _software_format_name(hdr_frame.software_format),
                                 "om_software_format": om_frame.software_format,
+                                "om_software_format_name": _software_format_name(om_frame.software_format),
                             }
                         )
                     if sequence == 0:
@@ -728,7 +777,9 @@ class NativeFrameSource:
                             stage="fit_decode_pair",
                             sequence=0,
                             hdr_software_format=hdr_frame.software_format,
+                            hdr_software_format_name=_software_format_name(hdr_frame.software_format),
                             om_software_format=om_frame.software_format,
+                            om_software_format_name=_software_format_name(om_frame.software_format),
                             hdr_device_ptr=int(hdr_frame.array.data.ptr),
                             om_device_ptr=int(om_frame.array.data.ptr),
                         )
@@ -797,9 +848,17 @@ class NativeFrameSource:
             "hdr_decoder": self.hdr_decoder,
             "om_decoder": self.om_decoder,
             "hdr_expected_software_format": "P010LE",
-            "om_expected_software_format": "NV12",
+            "hdr_allowed_software_formats": ["P010LE"],
+            "om_expected_software_format": "P010LE or NV12",
+            "om_allowed_software_formats": ["P010LE", "NV12"],
+            "software_format_contract": (
+                "runtime CUDA AVHWFramesContext sw_format; HDR=P010LE, "
+                "OM=P010LE or NV12; no decoded-frame host conversion"
+            ),
             "hdr_software_format": None,
+            "hdr_software_format_name": None,
             "om_software_format": None,
+            "om_software_format_name": None,
             "hdr_geometry": actual["hdr"],
             "om_geometry": actual["om"],
             "hdr_decoded_geometry": decoded["hdr"],
@@ -1822,6 +1881,25 @@ class GpuOutputResampler:
                 "resize_linear_rgb",
             )
 
+    def process(self, rgb: Any, request: ResampleRequest, stream: Any) -> Any:
+        """Adapt the existing CUDA bilinear implementation to the backend contract."""
+        if request.source_format != "RGB32F" or request.target_format != "RGB32F":
+            raise NativeBridgeError(
+                "GPU output resampler expects normalized RGB32F input/output: "
+                f"{request.source_format}->{request.target_format}"
+            )
+        source_height, source_width, channels = (int(value) for value in rgb.shape)
+        if (source_width, source_height) != request.source_geometry:
+            raise NativeBridgeError(
+                "GPU output resampler source geometry does not match the request: "
+                f"actual={(source_width, source_height)}, expected={request.source_geometry}"
+            )
+        if request.method != "INTER_LINEAR":
+            raise NativeBridgeError(
+                f"unsupported GPU output resample method: {request.method}"
+            )
+        return self.resize(rgb, request.target_geometry, stream)
+
     def resize(self, rgb: Any, target_size: tuple[int, int], stream: Any) -> Any:
         target_width, target_height = (int(value) for value in target_size)
         source_height, source_width, channels = (int(value) for value in rgb.shape)
@@ -2176,6 +2254,7 @@ def render_native_phase2(
     om_decoder: str = "h264_cuvid",
     encoder_qp: int = 18,
     diagnostic_stride: int = 6,
+    resample_backend: ResampleBackend | None = None,
 ) -> dict[str, Any]:
     """Run native NVDEC/V5/GPU-P010/NVENC with bounded stage overlap."""
 
@@ -2201,9 +2280,15 @@ def render_native_phase2(
     )
     if output_width % 2 or output_height % 2:
         raise NativeBridgeError(f"native output geometry must be even: {(output_width, output_height)}")
-    output_resampler = (
-        GpuOutputResampler(cupy)
-        if (output_width, output_height) != (processing_width, processing_height)
+    resample_request = ResampleRequest(
+        source_width=processing_width,
+        source_height=processing_height,
+        target_width=output_width,
+        target_height=output_height,
+    )
+    output_resampler: ResampleBackend | None = (
+        (resample_backend or GpuOutputResampler(cupy))
+        if resample_request.resample_active
         else None
     )
     compute_stream = cupy.cuda.Stream(non_blocking=True)
@@ -2455,9 +2540,9 @@ def render_native_phase2(
                     encoded_rgb = (
                         output_image
                         if output_resampler is None
-                        else output_resampler.resize(
+                        else output_resampler.process(
                             output_image,
-                            (output_width, output_height),
+                            resample_request,
                             compute_stream,
                         )
                     )
@@ -2519,10 +2604,15 @@ def render_native_phase2(
         "output_boundary": {
             "mode": "CUDA P010 AVHWFramesContext -> hevc_nvenc -> Matroska",
             "zero_copy_nvenc": True,
-            "gpu_output_resize_active": output_resampler is not None,
+            "gpu_output_resize_active": resample_request.resample_active,
+            "resample_active": resample_request.resample_active,
+            "resample_backend": (
+                type(output_resampler).__name__ if output_resampler is not None else None
+            ),
+            "resample_request": resample_request.as_dict(),
             "gpu_output_resize_contract": (
                 "INTER_LINEAR-equivalent bilinear on normalized working RGB before PQ/P010"
-                if output_resampler is not None
+                if resample_request.resample_active
                 else "no-op; configured output geometry equals processing geometry"
             ),
             "decoded_frame_d2h_bytes": 0,

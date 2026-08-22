@@ -8,7 +8,11 @@ from pathlib import Path
 import numpy as np
 from numpy.typing import NDArray
 
-from auto_openmatte.utils.ffmpeg import extract_frame_at_time, extract_frame_to_numpy
+from auto_openmatte.utils.ffmpeg import (
+    extract_frame_at_time,
+    extract_frame_to_numpy,
+    get_media_tool_config,
+)
 
 
 def frame_to_array(
@@ -180,7 +184,7 @@ def extract_segment_grayscale(
     ]
 
     cmd = [
-        "ffmpeg",
+        get_media_tool_config().ffmpeg_command,
         "-v", "quiet",
         "-nostdin",
         "-i", str(file_path),
@@ -281,7 +285,7 @@ def extract_segment_at_time_grayscale(
         return []
 
     cmd = [
-        "ffmpeg",
+        get_media_tool_config().ffmpeg_command,
         "-v", "quiet",
         "-nostdin",
         "-ss", f"{start_seconds:.6f}",

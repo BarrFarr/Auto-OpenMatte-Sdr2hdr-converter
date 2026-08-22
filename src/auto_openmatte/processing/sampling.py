@@ -27,6 +27,7 @@ from numpy.typing import NDArray
 from auto_openmatte.core.config import ColorConfig
 from auto_openmatte.core.models import GeometryModel, Shot, SourceInfo, SyncModel
 from auto_openmatte.core.transfer_functions import linearize
+from auto_openmatte.utils.ffmpeg import get_media_tool_config
 from auto_openmatte.utils.frames import extract_segment_at_time_grayscale
 
 logger = logging.getLogger(__name__)
@@ -123,7 +124,7 @@ def _extract_frame_rgb(
     stream_index = stream.index if stream else 0
 
     cmd = [
-        "ffmpeg", "-v", "quiet", "-nostdin",
+        get_media_tool_config().ffmpeg_command, "-v", "quiet", "-nostdin",
         "-ss", f"{time_seconds:.6f}",
         "-i", str(source.path),
         "-map", f"0:v:{stream_index}",

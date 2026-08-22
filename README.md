@@ -49,7 +49,7 @@ auto_openmatte convert-hdr --input film_openmatte.mkv --reference film_hdr.mkv -
 ## Requirements
 
 - Python ≥ 3.10
-- FFmpeg ≥ 5.0 (on PATH)
+- FFmpeg ≥ 5.0 (bundled, from the development tree, or on PATH as a fallback)
 - NumPy, SciPy, OpenCV
 
 ## Installation
@@ -57,6 +57,24 @@ auto_openmatte convert-hdr --input film_openmatte.mkv --reference film_hdr.mkv -
 ```bash
 pip install -e ".[dev]"
 ```
+
+## Bundled media-tool packaging contract
+
+Installable builds must place the matching Windows executables at the application
+root without asking the user to select them:
+
+```text
+APP_ROOT/
+  bin/
+    ffmpeg.exe
+    ffprobe.exe
+```
+
+`auto_openmatte` resolves these bundled tools first. During development it checks
+the repository-relative `dev/ffmpeg-build/install/bin` tree, then falls back to
+`PATH`. The resolver reports whether each tool was found, its exact resolved path,
+and its version for diagnostics. No workspace-specific or user-specific path is
+embedded in the application.
 
 ## Key Principles
 

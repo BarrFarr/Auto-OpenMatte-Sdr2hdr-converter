@@ -28,6 +28,9 @@ import cv2
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
+PACKAGE_SRC = ROOT / "src"
+if str(PACKAGE_SRC) not in sys.path:
+    sys.path.insert(0, str(PACKAGE_SRC))
 RESEARCH_SRC = ROOT / "research" / "src"
 if str(RESEARCH_SRC) not in sys.path:
     sys.path.insert(0, str(RESEARCH_SRC))
@@ -35,10 +38,11 @@ if str(RESEARCH_SRC) not in sys.path:
 from reshaping_research.utils.color_spaces import bt709_to_bt2020, compute_luminance  # noqa: E402
 from reshaping_research.utils.transfer_functions import bt1886_eotf, pq_eotf, pq_oetf  # noqa: E402
 
+from auto_openmatte.utils.ffmpeg import get_media_tool_config  # noqa: E402
+
 RGB16_MAX = 65535.0
 PEAK_NITS = 10000.0
 EPS = 1e-6
-DEFAULT_FFMPEG = ROOT / "dev" / "ffmpeg-build" / "install" / "bin" / "ffmpeg.exe"
 
 
 class ToolError(RuntimeError):
@@ -77,6 +81,7 @@ class Config:
     max_frames: int | None
     review_hdr10: bool
     review_cq: int
+    ffprobe: Path
     output_size: tuple[int, int] | None = None
 
     @property
@@ -111,7 +116,6 @@ def build_config(argv: list[str] | None = None) -> Config:
     parser.add_argument("--gain-smooth-sigma", type=float, default=128.0, help="Horizontal smoothing sigma of the gain profile in pixels")
     parser.add_argument("--gain-clamp-stops", type=float, default=1.5, help="Maximum deviation of the gain profile from the shot median, in stops")
     parser.add_argument("--feather", type=int, default=24, help="Feather rows inside the HDR centre at each seam")
-    parser.add_argument("--ffmpeg", type=Path, default=DEFAULT_FFMPEG, help="FFmpeg executable")
     parser.add_argument("--comparison", type=Path, default=None, help="Optional side-by-side reference/output video")
     parser.add_argument("--qc-json", type=Path, default=None, help="Optional QC metrics JSON path")
     parser.add_argument("--contact-sheet", type=Path, default=None, help="Optional representative-frame contact sheet PNG")
@@ -132,7 +136,12 @@ def build_config(argv: list[str] | None = None) -> Config:
     require(args.max_frames is None or args.max_frames > 0, "--max-frames must be positive")
     require(args.hdr.is_file(), f"HDR source not found: {args.hdr}")
     require(args.om.is_file(), f"Open Matte source not found: {args.om}")
-    require(args.ffmpeg.is_file(), f"FFmpeg not found: {args.ffmpeg}")
+    tools = get_media_tool_config()
+    try:
+        ffmpeg_path = tools.require("ffmpeg")
+        ffprobe_path = tools.require("ffprobe")
+    except FileNotFoundError as exc:
+        raise ToolError(str(exc)) from exc
     return Config(
         hdr_source=args.hdr, om_source=args.om, output=args.output,
         shot_start=int(args.shot_start), shot_end=int(args.shot_end), offset_frames=int(args.offset_frames),
@@ -140,9 +149,10 @@ def build_config(argv: list[str] | None = None) -> Config:
         fps=parse_fps(args.fps), fps_text=str(args.fps), base_sigma=float(args.base_sigma),
         detail_strength=float(args.detail_strength), detail_ratio_clip=(float(args.detail_ratio_clip[0]), float(args.detail_ratio_clip[1])),
         seam_band=int(args.seam_band), gain_smooth_sigma=float(args.gain_smooth_sigma), gain_clamp_stops=float(args.gain_clamp_stops),
-        feather=int(args.feather), ffmpeg=args.ffmpeg, comparison=args.comparison, qc_json=args.qc_json,
+        feather=int(args.feather), ffmpeg=ffmpeg_path, comparison=args.comparison, qc_json=args.qc_json,
         contact_sheet=args.contact_sheet, max_frames=args.max_frames,
         review_hdr10=bool(args.review_hdr10), review_cq=int(args.review_cq),
+        ffprobe=ffprobe_path,
     )
 
 
@@ -165,7 +175,7 @@ def review_command(config: Config, source: Path, destination: Path) -> list[str]
 
 
 def verify_hdr_tags(config: Config, path: Path) -> dict[str, str]:
-    command = [str(config.ffmpeg.with_name("ffprobe.exe")), "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=color_space,color_transfer,color_primaries,color_range", "-of", "json", str(path)]
+    command = [str(config.ffprobe), "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=color_space,color_transfer,color_primaries,color_range", "-of", "json", str(path)]
     completed = subprocess.run(command, capture_output=True, timeout=300, check=False)
     require(completed.returncode == 0, f"Cannot probe {path}: {completed.stderr.decode(errors='replace')}")
     stream = json.loads(completed.stdout.decode("utf-8"))["streams"][0]
